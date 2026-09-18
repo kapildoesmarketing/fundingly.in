@@ -1,0 +1,6 @@
+# robots.txt for https://fundingly.in
+User-agent: *
+Allow: /
+
+# Canonical Sitemap
+Sitemap: https://fundingly.in/sitemap.xml
