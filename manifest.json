@@ -18,9 +18,9 @@
       "type": "image/png"
     },
     {
-      "src": "assets/favicon.svg",
-      "sizes": "any",
-      "type": "image/svg+xml"
+      "src": "assets/fundingly_hello.png",
+      "sizes": "512x512",
+      "type": "image/png"
     }
   ]
 }
