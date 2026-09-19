@@ -727,12 +727,34 @@ let rawDataset = [];
             return '$' + n.toLocaleString('en-US');
         }
 
+        // Deisgned by Kapil Pidhwani: Standardizes date string to YYYY-MM-DD regardless of ISO timestamps or UTC offsets.
+        function formatFundingDateDisplay(dateStr) {
+            if (!dateStr || dateStr === 'N/A') return 'N/A';
+            if (typeof dateStr === 'string') {
+                const trimmed = dateStr.trim();
+                const match = trimmed.match(/^(\d{4})[-/](\d{1,2})[-/](\d{1,2})/);
+                if (match) {
+                    return `${match[1]}-${match[2].padStart(2, '0')}-${match[3].padStart(2, '0')}`;
+                }
+                const d = new Date(trimmed);
+                if (!isNaN(d.getTime())) {
+                    const year = d.getFullYear();
+                    const month = String(d.getMonth() + 1).padStart(2, '0');
+                    const day = String(d.getDate()).padStart(2, '0');
+                    return `${year}-${month}-${day}`;
+                }
+            }
+            return String(dateStr);
+        }
+
         // Deisgned by Kapil Pidhwani: ISO week calculation, Monday-to-Sunday date range formatter, and Quarter identifier. Ceiling: Assumes Gregorian calendar. Upgrade path: Temporal API.
         function getWeekInfo(dateStr) {
-            if (!dateStr || typeof dateStr !== 'string' || !/^\d{4}-\d{2}-\d{2}/.test(dateStr.trim())) {
+            if (!dateStr) return null;
+            const cleanDate = formatFundingDateDisplay(dateStr);
+            if (!/^\d{4}-\d{2}-\d{2}$/.test(cleanDate)) {
                 return null;
             }
-            const parts = dateStr.trim().split('-');
+            const parts = cleanDate.split('-');
             const year = parseInt(parts[0], 10);
             const month = parseInt(parts[1], 10) - 1;
             const day = parseInt(parts[2], 10);
@@ -1103,7 +1125,7 @@ let rawDataset = [];
                 const fundingRound = company.funding_round || 'Funding';
                 const amountFormatted = formatUSD(company.funding_amount_usd);
                 const location = company.company_headquarters || 'N/A';
-                const date = company.date_of_funding || 'N/A';
+                const date = formatFundingDateDisplay(company.date_of_funding);
                 const description = company.company_description || 'No description available.';
                 const leadInvestor = company.lead_investor ? 'Led by ' + company.lead_investor : '';
 
@@ -1701,7 +1723,7 @@ let rawDataset = [];
             const rowsHTML = sortedData.map((company, idx) => {
                 const avatar = renderCompanyAvatarHTML(company, false);
                 const name = escapeHtml(company.company_name || 'Enterprise');
-                const date = escapeHtml(company.date_of_funding || 'N/A');
+                const date = escapeHtml(formatFundingDateDisplay(company.date_of_funding));
                 const stage = escapeHtml(company.funding_round || 'Round');
                 const amountUsd = formatUSD(company.funding_amount_usd);
                 const amountInr = company.funding_amount_inr ? `• ₹${(Number(company.funding_amount_inr) / 10000000).toFixed(1)} Cr` : '';
@@ -1996,10 +2018,16 @@ let rawDataset = [];
 
             const modalBody = document.getElementById('modalBody');
             const companyDomain = extractDomain(company.company_website);
+            const dateFormatted = escapeHtml(formatFundingDateDisplay(company.date_of_funding));
+            const companyName = company.company_name || '';
 
-            const decisionMakerLink = company.key_decision_maker_linkedin
-                ? `<div class="inspector-row" style="grid-column: span 2;"><span class="inspector-label">Decision Maker Profile</span><div class="inspector-val"><a href="${encodeURI(company.key_decision_maker_linkedin)}" target="_blank" rel="noopener noreferrer">View LinkedIn</a></div></div>`
-                : '';
+            // 1. Google LinkedIn C-Level Search URL
+            const linkedinQuery = `site:linkedin.com/in/ "${companyName}" ("CEO" OR "CFO" OR "COO" OR "CTO" OR "CMO" OR "CHRO" OR "CIO" OR "CISO" OR "CRO" OR "Chief" OR "President" OR "Managing Director")`;
+            const linkedinSearchUrl = `https://www.google.com/search?q=${encodeURIComponent(linkedinQuery)}`;
+
+            // 2. ChatGPT Leadership Research Pre-Prompt URL
+            const chatgptPrompt = `Research the current C-level and senior executive leadership of ${companyName}. Identify the CEO, CTO, CFO, COO, CMO, founders, and other key decision-makers where publicly verifiable. For each person, provide their name, current title, responsibilities, professional background, and LinkedIn profile if publicly available. Prioritize current and authoritative sources, distinguish confirmed C-suite roles from board/director positions, and flag any information that cannot be independently verified. Include the sources used and the date the information was verified.`;
+            const chatgptPromptUrl = `https://chatgpt.com/?q=${encodeURIComponent(chatgptPrompt)}`;
 
             const rawSources = company.sources || company.source_url || '';
             let sourceLink = '';
@@ -2070,7 +2098,7 @@ let rawDataset = [];
             </div>
             <div class="stat-pill-block">
               <span class="stat-pill-label">Funding Date</span>
-              <span class="stat-pill-value">${escapeHtml(company.date_of_funding || 'N/A')}</span>
+              <span class="stat-pill-value">${dateFormatted}</span>
             </div>
             <div class="stat-pill-block">
               <span class="stat-pill-label">Headquarters</span>
@@ -2095,7 +2123,7 @@ let rawDataset = [];
           <div class="inspector-grid">
             <div class="inspector-row"><span class="inspector-label">Funding Round</span><div class="inspector-val highlight">${escapeHtml(company.funding_round || 'N/A')}</div></div>
             <div class="inspector-row"><span class="inspector-label">Amount Raised (USD)</span><div class="inspector-val highlight">${formatUSD(company.funding_amount_usd)}</div></div>
-            <div class="inspector-row"><span class="inspector-label">Date of Funding</span><div class="inspector-val">${escapeHtml(company.date_of_funding || 'N/A')}</div></div>
+            <div class="inspector-row"><span class="inspector-label">Date of Funding</span><div class="inspector-val">${dateFormatted}</div></div>
             <div class="inspector-row"><span class="inspector-label">Lead Investor</span><div class="inspector-val highlight">${escapeHtml(company.lead_investor || 'N/A')}</div></div>
             <div class="inspector-row" style="grid-column: span 2;"><span class="inspector-label">Syndicate / All Investors</span><div class="inspector-val">${escapeHtml(company.funded_by || 'N/A')}</div></div>
           </div>
@@ -2120,12 +2148,35 @@ let rawDataset = [];
         <div class="modal-section-card">
           <div class="modal-section-title">
             <span class="material-symbols-outlined" style="font-size: 15px;">groups</span>
-            <span>Leadership & Contacts</span>
+            <span>Leadership & Executive Intelligence</span>
           </div>
           <div class="inspector-grid">
-            <div class="inspector-row" style="grid-column: span 2;"><span class="inspector-label">Founders</span><div class="inspector-val highlight">${renderPersonListWithSearch(company.founders, company.company_name)}</div></div>
-            <div class="inspector-row" style="grid-column: span 2;"><span class="inspector-label">Key Decision Maker</span><div class="inspector-val">${renderPersonListWithSearch(company.key_decision_maker_name, company.company_name)}</div></div>
-            ${decisionMakerLink}
+            <div class="inspector-row" style="grid-column: span 2;">
+              <span class="inspector-label">Founders</span>
+              <div class="inspector-val highlight">${renderPersonListWithSearch(company.founders, company.company_name)}</div>
+            </div>
+          </div>
+          <div class="executive-intel-actions">
+            <a href="${linkedinSearchUrl}" target="_blank" rel="noopener noreferrer" class="executive-intel-btn" title="Search Google for C-Level LinkedIn Profiles">
+              <div class="executive-intel-icon-wrap" style="background: rgba(10, 102, 194, 0.12); color: #0a66c2;">
+                <span class="material-symbols-outlined" style="font-size: 20px;">person_search</span>
+              </div>
+              <div class="executive-intel-btn-text">
+                <span class="executive-intel-btn-title">Search C-Suite on LinkedIn</span>
+                <span class="executive-intel-btn-sub">Find verified executive profiles</span>
+              </div>
+              <span class="material-symbols-outlined" style="font-size: 14px; opacity: 0.5; margin-left: auto;">open_in_new</span>
+            </a>
+            <a href="${chatgptPromptUrl}" target="_blank" rel="noopener noreferrer" class="executive-intel-btn" title="Research Leadership Dossier with ChatGPT">
+              <div class="executive-intel-icon-wrap" style="background: rgba(16, 163, 127, 0.12); color: #10a37f;">
+                <span class="material-symbols-outlined" style="font-size: 20px;">smart_toy</span>
+              </div>
+              <div class="executive-intel-btn-text">
+                <span class="executive-intel-btn-title">Research Leadership on ChatGPT</span>
+                <span class="executive-intel-btn-sub">Generate full executive dossier</span>
+              </div>
+              <span class="material-symbols-outlined" style="font-size: 14px; opacity: 0.5; margin-left: auto;">open_in_new</span>
+            </a>
           </div>
         </div>
 

@@ -4197,3 +4197,69 @@
                 display: none;
             }
         }
+
+        /* Executive Leadership Intelligence Buttons in Modal */
+        .executive-intel-actions {
+            margin-top: 14px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 10px;
+        }
+
+        .executive-intel-btn {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 14px;
+            background: var(--color-surface-secondary);
+            border: 1px solid var(--color-hairline);
+            border-radius: var(--radius-md, 12px);
+            text-decoration: none;
+            color: var(--color-text-primary);
+            transition: background-color 0.16s ease, border-color 0.16s ease, transform 0.12s ease, box-shadow 0.16s ease;
+        }
+
+        .executive-intel-btn:hover {
+            background: var(--color-surface);
+            border-color: var(--color-primary);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+        }
+
+        .executive-intel-btn:active {
+            transform: scale(0.98);
+        }
+
+        .executive-intel-icon-wrap {
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .executive-intel-btn-text {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+            min-width: 0;
+        }
+
+        .executive-intel-btn-title {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .executive-intel-btn-sub {
+            font-size: 11px;
+            color: var(--color-text-secondary);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
