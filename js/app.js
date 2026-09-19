@@ -560,10 +560,10 @@ let rawDataset = [];
                 return;
             }
 
-            const cacheBuster = '?t=' + Math.floor(Date.now() / 900000);
-            fetch('data/manifest.json' + cacheBuster)
+            const manifestCacheBuster = '?t=' + Date.now();
+            fetch('data/manifest.json' + manifestCacheBuster, { cache: 'no-cache' })
                 .then(response => {
-                    if (!response.ok) return fetch('./data/manifest.json' + cacheBuster);
+                    if (!response.ok) return fetch('./data/manifest.json' + manifestCacheBuster, { cache: 'no-cache' });
                     return response;
                 })
                 .then(response => {
@@ -577,9 +577,10 @@ let rawDataset = [];
                     quarterManifest = manifest;
                     const latestQuarterFile = manifest.latest_quarter || manifest.quarters[0].file;
                     loadedQuarterFiles.add(latestQuarterFile);
-                    return fetch('data/' + latestQuarterFile + cacheBuster)
+                    const quarterBuster = '?v=' + encodeURIComponent(manifest.updated_at || Date.now());
+                    return fetch('data/' + latestQuarterFile + quarterBuster)
                         .then(res => {
-                            if (!res.ok) return fetch('./data/' + latestQuarterFile + cacheBuster);
+                            if (!res.ok) return fetch('./data/' + latestQuarterFile + quarterBuster);
                             return res;
                         })
                         .then(res => {
@@ -1497,10 +1498,10 @@ let rawDataset = [];
                     if (bgText) bgText.textContent = `Loading ${nextQuarter.label || nextQuarter.file}...`;
                 }
 
-                const cacheBuster = '?t=' + Math.floor(Date.now() / 900000);
-                fetch('data/' + nextQuarter.file + cacheBuster)
+                const quarterBuster = '?v=' + encodeURIComponent((quarterManifest && quarterManifest.updated_at) || Date.now());
+                fetch('data/' + nextQuarter.file + quarterBuster)
                     .then(res => {
-                        if (!res.ok) return fetch('./data/' + nextQuarter.file + cacheBuster);
+                        if (!res.ok) return fetch('./data/' + nextQuarter.file + quarterBuster);
                         return res;
                     })
                     .then(res => {

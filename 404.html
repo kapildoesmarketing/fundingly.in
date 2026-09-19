@@ -178,7 +178,7 @@
             const cleanDomainQuery = rawPath.replace(/^https?:\/\//, '').replace(/^www\./, '').split('/')[0];
 
             try {
-                const manifestRes = await fetch('data/manifest.json');
+                const manifestRes = await fetch('data/manifest.json?t=' + Date.now(), { cache: 'no-cache' });
                 if (!manifestRes.ok) return;
                 const manifest = await manifestRes.json();
                 const quarters = Array.isArray(manifest.quarters) ? manifest.quarters : [];
@@ -186,7 +186,7 @@
                 let match = null;
                 for (const q of quarters) {
                     try {
-                        const qRes = await fetch('data/' + q.file);
+                        const qRes = await fetch('data/' + q.file + '?v=' + encodeURIComponent(manifest.updated_at || Date.now()));
                         if (!qRes.ok) continue;
                         const records = await qRes.json();
                         const list = Array.isArray(records) ? records : (records && Array.isArray(records.records) ? records.records : []);
