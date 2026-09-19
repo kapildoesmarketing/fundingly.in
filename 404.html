@@ -210,22 +210,35 @@
             const cleanDomainQuery = rawPath.replace(/^https?:\/\//, '').replace(/^www\./, '').split('/')[0];
 
             try {
-                const res = await fetch('data/data.json');
-                if (!res.ok) return;
-                const data = await res.json();
-                const records = Array.isArray(data) ? data : (data && Array.isArray(data.records) ? data.records : []);
+                const manifestRes = await fetch('data/manifest.json');
+                if (!manifestRes.ok) return;
+                const manifest = await manifestRes.json();
+                const quarters = Array.isArray(manifest.quarters) ? manifest.quarters : [];
 
-                // Strict Domain Matching: Only match against extractDomain(company_website)
-                const match = records.find(item => {
-                    if (!item || !item.company_website) return false;
+                let match = null;
+                for (const q of quarters) {
                     try {
-                        const url = item.company_website.trim().startsWith('http') ? item.company_website.trim() : 'https://' + item.company_website.trim();
-                        const hostname = new URL(url).hostname.replace(/^www\./, '').toLowerCase();
-                        return hostname === cleanDomainQuery;
-                    } catch (e) {
-                        return false;
+                        const qRes = await fetch('data/' + q.file);
+                        if (!qRes.ok) continue;
+                        const records = await qRes.json();
+                        const list = Array.isArray(records) ? records : (records && Array.isArray(records.records) ? records.records : []);
+
+                        // Strict Domain Matching: Only match against extractDomain(company_website)
+                        match = list.find(item => {
+                            if (!item || !item.company_website) return false;
+                            try {
+                                const url = item.company_website.trim().startsWith('http') ? item.company_website.trim() : 'https://' + item.company_website.trim();
+                                const hostname = new URL(url).hostname.replace(/^www\./, '').toLowerCase();
+                                return hostname === cleanDomainQuery;
+                            } catch (e) {
+                                return false;
+                            }
+                        });
+                        if (match) break;
+                    } catch (err) {
+                        console.warn('Error reading quarter in 404 router:', q.file, err);
                     }
-                });
+                }
 
                 if (match) {
                     window.location.replace('/?domain=' + encodeURIComponent(cleanDomainQuery));

@@ -1,0 +1,19 @@
+{
+  "latest_quarter": "2026_q3.json",
+  "quarters": [
+    {
+      "id": "2026_q3",
+      "file": "2026_q3.json",
+      "label": "Q3 2026 (Jul – Sep)",
+      "year": 2026,
+      "quarter": 3
+    },
+    {
+      "id": "2026_q2",
+      "file": "2026_q2.json",
+      "label": "Q2 2026 (Apr – Jun)",
+      "year": 2026,
+      "quarter": 2
+    }
+  ]
+}

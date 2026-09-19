@@ -7,6 +7,10 @@ let rawDataset = [];
         let bgIdleCallbackId = null;
         const INITIAL_WEEKS_TO_RENDER = 2;
         const collapsedWeekKeys = new Set(); // Item 4.2: Accordion state
+        const initializedWeekKeys = new Set(); // Tracks weeks that have received initial default collapse state
+        let quarterManifest = null;
+        const loadedQuarterFiles = new Set();
+        let isFetchingQuarter = false;
 
         // User Session Tracking (persisted across tab reloads via sessionStorage)
         let sessionId = '';
@@ -518,41 +522,53 @@ let rawDataset = [];
             applyFilters();
         }
 
-        // Deisgned by Kapil Pidhwani: Two-stage non-blocking data loader. Stage 1 fetches the latest 2 ISO weeks for instant initial render; Stage 2 fetches remaining historical records in background. Ceiling: Apps Script 6-min execution / 50MB payload limit. Upgrade path: IndexedDB client cache + delta sync.
+        // Deisgned by Kapil Pidhwani: Quarter-wise dynamic data loader. Fetches latest quarter via manifest with rolling 15-minute cache-busting. Ceiling: Sequential quarter pagination. Upgrade path: Concurrent multi-quarter prefetching on idle.
         function fetchMasterData() {
             if (typeof google !== 'undefined' && google.script && google.script.run && google.script.run.getFundingData) {
                 google.script.run
                     .withSuccessHandler(renderApp)
                     .withFailureHandler(handleError)
                     .getFundingData({ mode: 'initial', weeks: INITIAL_WEEKS_TO_RENDER });
-            } else {
-                fetch('data/data.json')
-                    .then(response => {
-                        if (!response.ok) {
-                            return fetch('./data/data.json');
-                        }
-                        return response;
-                    })
-                    .then(response => {
-                        if (!response.ok) {
-                            return fetch('data.json');
-                        }
-                        return response;
-                    })
-                    .then(response => {
-                        if (!response.ok) {
-                            throw new Error(`Failed to load dataset: ${response.status} ${response.statusText}`);
-                        }
-                        return response.json();
-                    })
-                    .then(data => {
-                        renderApp(data);
-                    })
-                    .catch(err => {
-                        console.error('Data fetch error:', err);
-                        handleError(err);
-                    });
+                return;
             }
+
+            const cacheBuster = '?t=' + Math.floor(Date.now() / 900000);
+            fetch('data/manifest.json' + cacheBuster)
+                .then(response => {
+                    if (!response.ok) return fetch('./data/manifest.json' + cacheBuster);
+                    return response;
+                })
+                .then(response => {
+                    if (!response.ok) throw new Error(`Failed to load manifest: ${response.status} ${response.statusText}`);
+                    return response.json();
+                })
+                .then(manifest => {
+                    if (!manifest || (!manifest.latest_quarter && (!manifest.quarters || manifest.quarters.length === 0))) {
+                        throw new Error('Invalid manifest: No quarters defined');
+                    }
+                    quarterManifest = manifest;
+                    const latestQuarterFile = manifest.latest_quarter || manifest.quarters[0].file;
+                    loadedQuarterFiles.add(latestQuarterFile);
+                    return fetch('data/' + latestQuarterFile + cacheBuster)
+                        .then(res => {
+                            if (!res.ok) return fetch('./data/' + latestQuarterFile + cacheBuster);
+                            return res;
+                        })
+                        .then(res => {
+                            if (!res.ok) throw new Error(`Could not load quarter file: ${latestQuarterFile}`);
+                            return res.json();
+                        });
+                })
+                .then(data => {
+                    if (data) {
+                        renderApp(data);
+                        updateQuarterPaginationUI();
+                    }
+                })
+                .catch(err => {
+                    console.error('Data fetch error:', err);
+                    handleError(err);
+                });
         }
 
         function handleError(error) {
@@ -581,6 +597,7 @@ let rawDataset = [];
 
             applyFilters(false);
             handleDomainDeepLink();
+            updateQuarterPaginationUI();
 
             if (hasMoreFromBackend && typeof google !== 'undefined' && google.script && google.script.run) {
                 const nextOffset = typeof data.nextOffset === 'number' ? data.nextOffset : dataset.length;
@@ -1141,6 +1158,22 @@ let rawDataset = [];
             emptyState.style.display = 'none';
             const allWeekGroups = groupDealsByWeek(data);
 
+            // Deisgned by Kapil Pidhwani: Initialize default collapse state. Only the single latest week across the whole dataset remains expanded by default (collapsed = false); all older weeks start collapsed unless explicitly toggled by the user. Ceiling: In-memory session state. Upgrade path: LocalStorage persistence.
+            if (allWeekGroups.length > 0) {
+                const latestWeekKey = allWeekGroups[0].key;
+                if (!initializedWeekKeys.has(latestWeekKey)) {
+                    collapsedWeekKeys.delete(latestWeekKey); // Latest week is open
+                    initializedWeekKeys.add(latestWeekKey);
+                }
+                for (let i = 1; i < allWeekGroups.length; i++) {
+                    const olderWeekKey = allWeekGroups[i].key;
+                    if (!initializedWeekKeys.has(olderWeekKey)) {
+                        collapsedWeekKeys.add(olderWeekKey); // Older weeks start collapsed
+                        initializedWeekKeys.add(olderWeekKey);
+                    }
+                }
+            }
+
             if (preserveExistingDOM === true) {
                 const unrenderedGroups = [];
                 allWeekGroups.forEach(group => {
@@ -1224,8 +1257,91 @@ let rawDataset = [];
             }
         }
 
-        // Item 1.3: Fallback manual loader (flushes all remaining weeks immediately if triggered)
+        function getNextAvailableQuarter() {
+            if (!quarterManifest || !Array.isArray(quarterManifest.quarters)) return null;
+            return quarterManifest.quarters.find(q => !loadedQuarterFiles.has(q.file)) || null;
+        }
+
+        function updateQuarterPaginationUI() {
+            const container = document.getElementById('loadMoreContainer');
+            const btn = document.getElementById('loadMoreBtn');
+            const bgIndicator = document.getElementById('bgLoadingIndicator');
+            if (!container || !btn) return;
+
+            const nextQuarter = getNextAvailableQuarter();
+            if (nextQuarter) {
+                container.style.display = 'flex';
+                btn.style.display = 'inline-flex';
+                btn.disabled = false;
+                btn.innerHTML = `
+                    <span class="material-symbols-outlined">expand_circle_down</span>
+                    <span>Load Earlier Deals (${escapeHtml(nextQuarter.label || nextQuarter.file)})</span>
+                `;
+                if (bgIndicator) bgIndicator.style.display = 'none';
+            } else if (quarterManifest && quarterManifest.quarters && quarterManifest.quarters.length > 1) {
+                container.style.display = 'flex';
+                btn.style.display = 'inline-flex';
+                btn.disabled = true;
+                btn.innerHTML = `
+                    <span class="material-symbols-outlined">check_circle</span>
+                    <span>All Historical Quarters Loaded</span>
+                `;
+                if (bgIndicator) bgIndicator.style.display = 'none';
+            } else {
+                container.style.display = 'none';
+                btn.style.display = 'none';
+            }
+        }
+
+        // Deisgned by Kapil Pidhwani: Quarter-wise pagination loader. Fetches next historical quarter JSON and merges non-duplicate records into feed. Ceiling: Sequential fetch. Upgrade path: Service Worker background cache.
         function loadMoreDeals() {
+            const nextQuarter = getNextAvailableQuarter();
+            if (nextQuarter && !isFetchingQuarter) {
+                isFetchingQuarter = true;
+                const bgIndicator = document.getElementById('bgLoadingIndicator');
+                const bgText = document.getElementById('bgLoadingText');
+                const btn = document.getElementById('loadMoreBtn');
+                if (btn) btn.disabled = true;
+                if (bgIndicator) {
+                    bgIndicator.style.display = 'inline-flex';
+                    if (bgText) bgText.textContent = `Loading ${nextQuarter.label || nextQuarter.file}...`;
+                }
+
+                const cacheBuster = '?t=' + Math.floor(Date.now() / 900000);
+                fetch('data/' + nextQuarter.file + cacheBuster)
+                    .then(res => {
+                        if (!res.ok) return fetch('./data/' + nextQuarter.file + cacheBuster);
+                        return res;
+                    })
+                    .then(res => {
+                        if (!res.ok) throw new Error(`Could not load quarter file: ${nextQuarter.file}`);
+                        return res.json();
+                    })
+                    .then(newRecords => {
+                        isFetchingQuarter = false;
+                        loadedQuarterFiles.add(nextQuarter.file);
+                        const recordsToAdd = Array.isArray(newRecords) ? newRecords : (newRecords && Array.isArray(newRecords.records) ? newRecords.records : []);
+                        
+                        const existingSignatures = new Set(rawDataset.map(d => `${(d.company_name||'').trim().toLowerCase()}_${d.date_of_funding||''}`));
+                        const filteredNew = recordsToAdd.filter(d => !existingSignatures.has(`${(d.company_name||'').trim().toLowerCase()}_${d.date_of_funding||''}`));
+                        
+                        rawDataset = rawDataset.concat(filteredNew);
+                        populateSectorDropdown(rawDataset);
+                        applyFilters(false);
+                        updateQuarterPaginationUI();
+                        console.log(`[Fundingly] Loaded quarter ${nextQuarter.file}: added ${filteredNew.length} deals. Total deals: ${rawDataset.length}`);
+                    })
+                    .catch(err => {
+                        console.error('Error loading previous quarter:', err);
+                        isFetchingQuarter = false;
+                        if (btn) btn.disabled = false;
+                        if (bgIndicator) bgIndicator.style.display = 'none';
+                        alert(`Unable to load ${nextQuarter.label || nextQuarter.file}. Please check your connection.`);
+                    });
+                return;
+            }
+
+            // Fallback manual loader for unrendered weeks
             cancelBackgroundWeekRender();
             const container = document.getElementById('gridContainer');
             if (!container) return;
@@ -1624,8 +1740,6 @@ let rawDataset = [];
           <div class="inspector-grid">
             <div class="inspector-row"><span class="inspector-label">Industry</span><div class="inspector-val highlight">${escapeHtml(company.industry || 'N/A')}</div></div>
             <div class="inspector-row"><span class="inspector-label">Sub-Industry</span><div class="inspector-val">${escapeHtml(company.sub_industry || 'N/A')}</div></div>
-            <div class="inspector-row"><span class="inspector-label">CS Vertical</span><div class="inspector-val">${escapeHtml(company.cs_vertical || 'N/A')}</div></div>
-            <div class="inspector-row"><span class="inspector-label">CS Sub-Vertical</span><div class="inspector-val">${escapeHtml(company.cs_sub_vertical || 'N/A')}</div></div>
             <div class="inspector-row"><span class="inspector-label">Business Model</span><div class="inspector-val">${escapeHtml(company.business_model || 'N/A')}</div></div>
             <div class="inspector-row"><span class="inspector-label">Year Founded</span><div class="inspector-val">${escapeHtml(company.year_founded || 'N/A')}</div></div>
             <div class="inspector-row"><span class="inspector-label">Team Size Range</span><div class="inspector-val">${escapeHtml(company.employee_count_range || 'N/A')}</div></div>
@@ -1953,9 +2067,8 @@ let rawDataset = [];
                 st.pct = baseForStagePct > 0 ? Math.round(((totalCapital > 0 ? st.amount : st.count) / baseForStagePct) * 100) : 0;
             });
 
-            // 5. Module C: Industry Hotspots & CS Verticals (3-Tier Hierarchical Drilldown)
-            // Deisgned by Kapil Pidhwani: 3-tier venture hierarchy aggregation (Vertical -> Sub-Vertical -> Companies). Ceiling: O(N) single-pass Map grouping. Upgrade path: Pre-aggregated weekly cube.
-            // Industry Breakdown
+            // 5. Module C: Industry Hotspots (3-Tier Hierarchical Drilldown)
+            // Deisgned by Kapil Pidhwani: 3-tier venture hierarchy aggregation (Industry -> Sub-Industry -> Companies). Ceiling: O(N) single-pass Map grouping. Upgrade path: Pre-aggregated weekly cube.
             const indMap = new Map();
             weekDeals.forEach(c => {
                 const ind = (c.industry && c.industry.trim()) || 'General / Other';
@@ -1987,42 +2100,6 @@ let rawDataset = [];
                             amount: sub.amount,
                             count: sub.count,
                             pctOfParent: ind.amount > 0 ? Math.round((sub.amount / ind.amount) * 100) : (ind.count > 0 ? Math.round((sub.count / ind.count) * 100) : 0),
-                            companies: [...sub.companies].sort((a, b) => (Number(b.funding_amount_usd) || 0) - (Number(a.funding_amount_usd) || 0))
-                        }))
-                }));
-
-            // CS Vertical Breakdown
-            const csMap = new Map();
-            weekDeals.forEach(c => {
-                const vert = (c.cs_vertical && c.cs_vertical.trim()) || 'Google CS: General';
-                const subVert = (c.cs_sub_vertical && c.cs_sub_vertical.trim()) || 'Core / General';
-                const amt = Number(c.funding_amount_usd) || 0;
-                const rawIdx = rawDataset.indexOf(c);
-                if (!csMap.has(vert)) csMap.set(vert, { name: vert, amount: 0, count: 0, subMap: new Map() });
-                const item = csMap.get(vert);
-                item.amount += amt;
-                item.count += 1;
-                if (!item.subMap.has(subVert)) item.subMap.set(subVert, { name: subVert, amount: 0, count: 0, companies: [] });
-                const subItem = item.subMap.get(subVert);
-                subItem.amount += amt;
-                subItem.count += 1;
-                subItem.companies.push({ ...c, rawIdx });
-            });
-            const topCsVerticals = Array.from(csMap.values())
-                .sort((a, b) => b.amount - a.amount || b.count - a.count)
-                .slice(0, 5)
-                .map(v => ({
-                    name: v.name,
-                    amount: v.amount,
-                    count: v.count,
-                    pct: totalCapital > 0 ? Math.round((v.amount / totalCapital) * 100) : (dealCount > 0 ? Math.round((v.count / dealCount) * 100) : 0),
-                    subCategories: Array.from(v.subMap.values())
-                        .sort((a, b) => b.amount - a.amount || b.count - a.count)
-                        .map(sub => ({
-                            name: sub.name,
-                            amount: sub.amount,
-                            count: sub.count,
-                            pctOfParent: v.amount > 0 ? Math.round((sub.amount / v.amount) * 100) : (v.count > 0 ? Math.round((sub.count / v.count) * 100) : 0),
                             companies: [...sub.companies].sort((a, b) => (Number(b.funding_amount_usd) || 0) - (Number(a.funding_amount_usd) || 0))
                         }))
                 }));
@@ -2079,7 +2156,6 @@ let rawDataset = [];
                 topDeal,
                 stageStats,
                 topIndustries,
-                topCsVerticals,
                 topHubs,
                 topInvestors,
                 showcaseDeals
@@ -2282,19 +2358,12 @@ let rawDataset = [];
           </div>
         </div>
 
-        <!-- Module C: Sector Hotspots & CS Verticals with Segmented Toggle (CS Vertical Default) -->
+        <!-- Module C: Industry Hotspots (3-Tier Hierarchical Drilldown) -->
         <div class="trends-section-card">
           <div class="trends-section-title">
-            <span>Concentration Breakdown</span>
-            <div class="trends-tab-group" role="tablist">
-              <button type="button" class="trends-tab-btn active" id="tabTrendsCsVertical" onclick="switchTrendsSectorTab('cs_vertical')">CS Vertical</button>
-              <button type="button" class="trends-tab-btn" id="tabTrendsIndustry" onclick="switchTrendsSectorTab('industry')">Industry</button>
-            </div>
+            <span>Industry Hotspots</span>
           </div>
-          <div id="trendsCsVerticalView" class="trends-progress-list">
-            ${renderDrilldownList(trends.topCsVerticals, true)}
-          </div>
-          <div id="trendsIndustryView" class="trends-progress-list" style="display: none;">
+          <div id="trendsIndustryView" class="trends-progress-list">
             ${renderDrilldownList(trends.topIndustries, false)}
           </div>
         </div>
@@ -2354,26 +2423,6 @@ let rawDataset = [];
       `;
         }
 
-        function switchTrendsSectorTab(tabType) {
-            const indTab = document.getElementById('tabTrendsIndustry');
-            const csTab = document.getElementById('tabTrendsCsVertical');
-            const indView = document.getElementById('trendsIndustryView');
-            const csView = document.getElementById('trendsCsVerticalView');
-            if (!indTab || !csTab || !indView || !csView) return;
-
-            if (tabType === 'industry') {
-                indTab.classList.add('active');
-                csTab.classList.remove('active');
-                indView.style.display = 'flex';
-                csView.style.display = 'none';
-            } else {
-                csTab.classList.add('active');
-                indTab.classList.remove('active');
-                csView.style.display = 'flex';
-                indView.style.display = 'none';
-            }
-        }
-
         // Deisgned by Kapil Pidhwani: Formats executive markdown digest for Slack/Teams/Email. Ceiling: Plain text clipboard copy. Upgrade path: Rich HTML formatted clipboard payload.
         function copyWeeklyTrendsDigest(weekKey, weekTitle) {
             const trends = calculateWeekTrends(weekKey);
@@ -2389,9 +2438,6 @@ let rawDataset = [];
                 '',
                 `💼 *Capital Allocation by Stage:*`,
                 ...trends.stageStats.filter(s => s.count > 0).map(s => `• ${s.label}: ${formatUSD(s.amount)} (${s.count} deals • ${s.pct}%)`),
-                '',
-                `🏢 *Google CS Verticals:*`,
-                ...trends.topCsVerticals.map((v, idx) => `${idx + 1}. ${v.name}: ${formatUSD(v.amount)} (${v.count} deals)`),
                 '',
                 `🚀 *Industry Hotspots:*`,
                 ...trends.topIndustries.map((ind, idx) => `${idx + 1}. ${ind.name}: ${formatUSD(ind.amount)} (${ind.count} deals)`),
