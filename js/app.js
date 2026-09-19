@@ -1067,14 +1067,16 @@ let rawDataset = [];
             headerDiv.setAttribute('title', 'Click to toggle week view');
             headerDiv.innerHTML = `
         <div class="week-title-row">
-          <span class="material-symbols-outlined week-chevron" aria-hidden="true">expand_more</span>
-          <h2 class="week-number">${escapeHtml(headerTitle)}</h2>
-          ${headerRange}
+          <div class="week-title-heading-wrap">
+            <span class="material-symbols-outlined week-chevron" aria-hidden="true">expand_more</span>
+            <h2 class="week-number">${escapeHtml(headerTitle)}</h2>
+            ${headerRange}
+          </div>
           <span class="week-metrics-pill">${dealCountText}${totalCapitalText}</span>
         </div>
         <button type="button" class="btn-week-trends" title="View Trends for ${escapeHtml(headerTitle)}">
           <span class="material-symbols-outlined trends-icon">trending_up</span>
-          <span>View Trends</span>
+          <span class="trends-btn-label">View Trends</span>
         </button>
       `;
 
