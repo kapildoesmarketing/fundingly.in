@@ -11,6 +11,10 @@ let rawDataset = [];
         let quarterManifest = null;
         const loadedQuarterFiles = new Set();
         let isFetchingQuarter = false;
+        let activeViewMode = 'cards'; // 'cards' | 'table'
+        let tableSortColumn = 'date'; // 'date' | 'amount' | 'company'
+        let tableSortDirection = 'desc'; // 'asc' | 'desc'
+        let searchDebounceTimer = null;
 
         // User Session Tracking (persisted across tab reloads via sessionStorage)
         let sessionId = '';
@@ -30,12 +34,12 @@ let rawDataset = [];
             initTheme();
             initSidebar();
             initFilterDimensionBar();
-            initDriverTour();
             initDatePopover();
             initSessionLogging();
+            initViewSwitcher();
             fetchMasterData();
 
-            document.getElementById('searchInput').addEventListener('input', applyFilters);
+            document.getElementById('searchInput').addEventListener('input', handleSearchDebounced);
             document.getElementById('bulkAccordionBtn').addEventListener('click', toggleBulkAccordion);
             document.getElementById('loadMoreBtn').addEventListener('click', loadMoreDeals);
             document.getElementById('emptyStateClearBtn').addEventListener('click', clearAllFilters);
@@ -91,7 +95,7 @@ let rawDataset = [];
                 });
             }
 
-            // Global Keyboard Shortcuts (Apple Spotlight Cmd+K / / to search & Escape)
+            // Global Keyboard Shortcuts (⌘K search, Esc close, G grid, T table, D dark mode)
             document.addEventListener('keydown', (e) => {
                 if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
                     e.preventDefault();
@@ -112,6 +116,20 @@ let rawDataset = [];
                     closeDatePopover();
                     closeAboutModal();
                     closeTrendsModal();
+                    if (document.activeElement && document.activeElement.id === 'searchInput') {
+                        document.activeElement.blur();
+                    }
+                } else if (document.activeElement.tagName !== 'INPUT' && document.activeElement.tagName !== 'TEXTAREA') {
+                    if (e.key === 'g' || e.key === 'G') {
+                        e.preventDefault();
+                        setViewMode('cards');
+                    } else if (e.key === 't' || e.key === 'T') {
+                        e.preventDefault();
+                        setViewMode('table');
+                    } else if (e.key === 'd' || e.key === 'D') {
+                        e.preventDefault();
+                        toggleTheme();
+                    }
                 }
             });
         });
@@ -182,11 +200,13 @@ let rawDataset = [];
         let activeAmount = 'all';
         let activeGeo = 'all';
 
-        // Deisgned by Kapil Pidhwani: Collapsible sidebar controller with edge toggle button and localStorage persistence. Ceiling: Static binary state. Upgrade path: Gesture swipe for mobile drawer.
+        // Deisgned by Kapil Pidhwani: Collapsible sidebar controller with edge rail toggle, header collapse button, and localStorage persistence. Ceiling: Static binary state. Upgrade path: Gesture swipe for mobile drawer.
         function initSidebar() {
             const sidebar = document.getElementById('appSidebar');
             const edgeToggleBtn = document.getElementById('sidebarEdgeToggleBtn');
             const edgeToggleIcon = document.getElementById('sidebarEdgeToggleIcon');
+            const headerCollapseBtn = document.getElementById('sidebarHeaderCollapseBtn');
+            const mobileToggleBtn = document.getElementById('mobileFilterToggleBtn');
             if (!sidebar) return;
 
             const updateToggleUI = (collapsed) => {
@@ -197,6 +217,10 @@ let rawDataset = [];
                     edgeToggleBtn.setAttribute('title', collapsed ? 'Expand Filters' : 'Collapse Filters');
                     edgeToggleBtn.setAttribute('aria-label', collapsed ? 'Expand Filters' : 'Collapse Filters');
                 }
+                if (headerCollapseBtn) {
+                    headerCollapseBtn.setAttribute('title', collapsed ? 'Expand Filters' : 'Collapse Filters');
+                    headerCollapseBtn.setAttribute('aria-label', collapsed ? 'Expand Filters' : 'Collapse Filters');
+                }
             };
 
             const isCollapsed = localStorage.getItem('fundingly_sidebar_collapsed') === 'true';
@@ -205,14 +229,18 @@ let rawDataset = [];
             }
             updateToggleUI(isCollapsed);
 
-            const toggleSidebar = () => {
+            const toggleSidebar = (e) => {
+                if (e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                }
                 const currentlyCollapsed = sidebar.classList.toggle('collapsed');
                 localStorage.setItem('fundingly_sidebar_collapsed', String(currentlyCollapsed));
                 updateToggleUI(currentlyCollapsed);
             };
 
             if (edgeToggleBtn) edgeToggleBtn.addEventListener('click', toggleSidebar);
-            const mobileToggleBtn = document.getElementById('mobileFilterToggleBtn');
+            if (headerCollapseBtn) headerCollapseBtn.addEventListener('click', toggleSidebar);
             if (mobileToggleBtn) mobileToggleBtn.addEventListener('click', toggleSidebar);
         }
 
@@ -699,7 +727,7 @@ let rawDataset = [];
             return '$' + n.toLocaleString('en-US');
         }
 
-        // Deisgned by Kapil Pidhwani: ISO week calculation and Monday-to-Sunday date range formatter. Ceiling: Assumes standard Gregorian calendar and Monday as first day of week; dates before 1970 or invalid strings default to undated. Upgrade path: Temporal API when universally available.
+        // Deisgned by Kapil Pidhwani: ISO week calculation, Monday-to-Sunday date range formatter, and Quarter identifier. Ceiling: Assumes Gregorian calendar. Upgrade path: Temporal API.
         function getWeekInfo(dateStr) {
             if (!dateStr || typeof dateStr !== 'string' || !/^\d{4}-\d{2}-\d{2}/.test(dateStr.trim())) {
                 return null;
@@ -729,10 +757,20 @@ let rawDataset = [];
             const sunStr = `${monthNames[sunday.getUTCMonth()]} ${sunday.getUTCDate()}, ${sunday.getUTCFullYear()}`;
             const rangeStr = `${monStr} – ${sunStr}`;
 
+            const qNum = Math.floor(monday.getUTCMonth() / 3) + 1;
+            const qKey = `${isoYear}_q${qNum}`;
+            const qTitle = `${isoYear} Q${qNum}`;
+            const qRanges = ['Jan – Mar', 'Apr – Jun', 'Jul – Sep', 'Oct – Dec'];
+            const qDateRange = `${qRanges[qNum - 1]} ${isoYear}`;
+
             return {
                 key: `${isoYear}-W${String(weekNo).padStart(2, '0')}`,
                 weekNo: weekNo,
                 year: isoYear,
+                quarterNum: qNum,
+                quarterKey: qKey,
+                quarterTitle: qTitle,
+                quarterDateRange: qDateRange,
                 title: `Week ${weekNo} of ${isoYear}`,
                 rangeStr: rangeStr,
                 timestamp: monday.getTime()
@@ -1075,6 +1113,47 @@ let rawDataset = [];
             return weekSection;
         }
 
+        function updateQuarterToolbarBadge(allWeekGroups) {
+            const titleEl = document.getElementById('toolbarQuarterTitle');
+            const subEl = document.getElementById('toolbarQuarterSub');
+            const metricsEl = document.getElementById('toolbarQuarterMetrics');
+            if (!titleEl || !subEl) return;
+
+            let totalDeals = 0;
+            let totalUSD = 0;
+            if (allWeekGroups && allWeekGroups.length > 0) {
+                allWeekGroups.forEach(g => {
+                    totalDeals += g.items.length;
+                    totalUSD += g.totalUSD;
+                });
+            }
+
+            if (allWeekGroups && allWeekGroups.length > 0 && allWeekGroups[0].weekInfo) {
+                const info = allWeekGroups[0].weekInfo;
+                titleEl.textContent = info.quarterTitle;
+                const parts = info.quarterDateRange.split(' ');
+                subEl.textContent = `${parts[0]} ${parts[1]} ${parts[2]}`;
+            } else if (quarterManifest && quarterManifest.quarters && quarterManifest.quarters.length > 0) {
+                const latest = quarterManifest.quarters[0];
+                titleEl.textContent = `${latest.year} Q${latest.quarter}`;
+                subEl.textContent = latest.label ? latest.label.replace(/^Q\d \d{4}\s*\((.+)\)$/, '$1') : 'Jul – Sep';
+            } else {
+                titleEl.textContent = '2026 Q3';
+                subEl.textContent = 'Jul – Sep';
+            }
+
+            if (metricsEl) {
+                if (totalDeals > 0) {
+                    const metricsText = `${totalDeals} ${totalDeals === 1 ? 'deal' : 'deals'}` + (totalUSD > 0 ? ` • ${formatUSD(totalUSD)} total` : '');
+                    metricsEl.textContent = metricsText;
+                    metricsEl.style.display = 'inline-block';
+                } else {
+                    metricsEl.textContent = '';
+                    metricsEl.style.display = 'none';
+                }
+            }
+        }
+
         // Deisgned by Kapil Pidhwani: Idle-slice progressive DOM renderer. Appends 1 week section per idle frame after initial 2 weeks render so main thread stays 60fps. Ceiling: DOM node count for >5,000 deals. Upgrade path: Virtualized viewport windowing.
         function scheduleBackgroundWeekRender(groupsQueue) {
             cancelBackgroundWeekRender();
@@ -1152,11 +1231,13 @@ let rawDataset = [];
                 container.innerHTML = '';
                 emptyState.style.display = 'block';
                 updateBackgroundLoadingUI(0);
+                updateQuarterToolbarBadge([]);
                 return;
             }
 
             emptyState.style.display = 'none';
             const allWeekGroups = groupDealsByWeek(data);
+            updateQuarterToolbarBadge(allWeekGroups);
 
             // Deisgned by Kapil Pidhwani: Initialize default collapse state. Only the single latest week across the whole dataset remains expanded by default (collapsed = false); all older weeks start collapsed unless explicitly toggled by the user. Ceiling: In-memory session state. Upgrade path: LocalStorage persistence.
             if (allWeekGroups.length > 0) {
@@ -1440,7 +1521,196 @@ let rawDataset = [];
             renderActiveFiltersBar(search, startDate, endDate);
 
             activeFilteredDataset = filtered;
-            renderGrid(filtered, shouldPreserveDOM);
+            if (activeViewMode === 'table') {
+                renderTableView(filtered);
+            } else {
+                renderGrid(filtered, shouldPreserveDOM);
+            }
+        }
+
+        function handleSearchDebounced() {
+            clearTimeout(searchDebounceTimer);
+            searchDebounceTimer = setTimeout(() => {
+                applyFilters();
+            }, 100);
+        }
+
+        function initViewSwitcher() {
+            const cardsBtn = document.getElementById('viewCardsBtn');
+            const tableBtn = document.getElementById('viewTableBtn');
+            if (cardsBtn) {
+                cardsBtn.addEventListener('click', () => setViewMode('cards'));
+            }
+            if (tableBtn) {
+                tableBtn.addEventListener('click', () => setViewMode('table'));
+            }
+        }
+
+        function setViewMode(mode) {
+            if (activeViewMode === mode) return;
+            activeViewMode = mode;
+            const cardsBtn = document.getElementById('viewCardsBtn');
+            const tableBtn = document.getElementById('viewTableBtn');
+            if (cardsBtn) {
+                cardsBtn.classList.toggle('active', mode === 'cards');
+                cardsBtn.setAttribute('aria-checked', mode === 'cards' ? 'true' : 'false');
+            }
+            if (tableBtn) {
+                tableBtn.classList.toggle('active', mode === 'table');
+                tableBtn.setAttribute('aria-checked', mode === 'table' ? 'true' : 'false');
+            }
+
+            const gridContainer = document.getElementById('gridContainer');
+            const tableContainer = document.getElementById('tableContainer');
+
+            if (mode === 'table') {
+                if (gridContainer) gridContainer.style.display = 'none';
+                if (tableContainer) tableContainer.style.display = 'block';
+                renderTableView(activeFilteredDataset);
+            } else {
+                if (tableContainer) tableContainer.style.display = 'none';
+                if (gridContainer) gridContainer.style.display = 'flex';
+                renderGrid(activeFilteredDataset, false);
+            }
+        }
+
+        function renderTableView(data) {
+            const container = document.getElementById('tableContainer');
+            const emptyState = document.getElementById('emptyState');
+            if (!container) return;
+
+            if (!data || data.length === 0) {
+                container.innerHTML = '';
+                if (emptyState) emptyState.style.display = 'block';
+                return;
+            }
+
+            if (emptyState) emptyState.style.display = 'none';
+
+            const sortedData = [...data].sort((a, b) => {
+                let valA, valB;
+                if (tableSortColumn === 'amount') {
+                    valA = Number(a.funding_amount_usd) || 0;
+                    valB = Number(b.funding_amount_usd) || 0;
+                    return tableSortDirection === 'asc' ? valA - valB : valB - valA;
+                } else if (tableSortColumn === 'company') {
+                    valA = (a.company_name || '').toLowerCase();
+                    valB = (b.company_name || '').toLowerCase();
+                    return tableSortDirection === 'asc' ? valA.localeCompare(valB) : valB.localeCompare(valA);
+                } else {
+                    valA = a.date_of_funding || '1970-01-01';
+                    valB = b.date_of_funding || '1970-01-01';
+                    return tableSortDirection === 'asc' ? valA.localeCompare(valB) : valB.localeCompare(valA);
+                }
+            });
+
+            const getSortIcon = (col) => {
+                if (tableSortColumn !== col) return '<span class="material-symbols-outlined sort-icon">unfold_more</span>';
+                return tableSortDirection === 'asc'
+                    ? '<span class="material-symbols-outlined sort-icon">expand_less</span>'
+                    : '<span class="material-symbols-outlined sort-icon">expand_more</span>';
+            };
+
+            const rowsHTML = sortedData.map((company, idx) => {
+                const avatar = renderCompanyAvatarHTML(company, false);
+                const name = escapeHtml(company.company_name || 'Enterprise');
+                const date = escapeHtml(company.date_of_funding || 'N/A');
+                const stage = escapeHtml(company.funding_round || 'Round');
+                const amountUsd = formatUSD(company.funding_amount_usd);
+                const amountInr = company.funding_amount_inr ? `• ₹${(Number(company.funding_amount_inr) / 10000000).toFixed(1)} Cr` : '';
+                const lead = escapeHtml(company.lead_investor || company.funded_by || 'Undisclosed');
+                const sector = escapeHtml(company.industry || 'General');
+                const hq = escapeHtml(company.company_headquarters || 'N/A');
+
+                return `
+                    <tr class="table-row-deal" data-row-index="${idx}">
+                        <td>
+                            <div class="table-company-cell">
+                                ${avatar}
+                                <span class="table-company-name">${name}</span>
+                            </div>
+                        </td>
+                        <td>${date}</td>
+                        <td><span class="table-stage-pill">${stage}</span></td>
+                        <td>
+                            <span class="table-amount-val">${amountUsd}</span>
+                            <span class="table-amount-inr">${amountInr}</span>
+                        </td>
+                        <td title="${lead}">${lead}</td>
+                        <td>${sector}</td>
+                        <td>${hq}</td>
+                        <td style="text-align: right;">
+                            <button type="button" class="btn-table-action" data-btn-index="${idx}">
+                                View
+                            </button>
+                        </td>
+                    </tr>
+                `;
+            }).join('');
+
+            container.innerHTML = `
+                <div class="table-responsive-wrapper">
+                    <table class="dense-deals-table">
+                        <thead>
+                            <tr>
+                                <th class="th-sortable ${tableSortColumn === 'company' ? 'sorted' : ''}" id="thSortCompany">
+                                    Company ${getSortIcon('company')}
+                                </th>
+                                <th class="th-sortable ${tableSortColumn === 'date' ? 'sorted' : ''}" id="thSortDate">
+                                    Date ${getSortIcon('date')}
+                                </th>
+                                <th>Stage</th>
+                                <th class="th-sortable ${tableSortColumn === 'amount' ? 'sorted' : ''}" id="thSortAmount">
+                                    Amount ${getSortIcon('amount')}
+                                </th>
+                                <th>Lead / Backers</th>
+                                <th>Sector</th>
+                                <th>HQ</th>
+                                <th style="text-align: right;">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${rowsHTML}
+                        </tbody>
+                    </table>
+                </div>
+            `;
+
+            const thComp = document.getElementById('thSortCompany');
+            if (thComp) thComp.addEventListener('click', () => toggleTableSort('company'));
+            const thDate = document.getElementById('thSortDate');
+            if (thDate) thDate.addEventListener('click', () => toggleTableSort('date'));
+            const thAmt = document.getElementById('thSortAmount');
+            if (thAmt) thAmt.addEventListener('click', () => toggleTableSort('amount'));
+
+            container.querySelectorAll('.table-row-deal').forEach(tr => {
+                const idx = Number(tr.dataset.rowIndex);
+                const company = sortedData[idx];
+                if (company) {
+                    tr.addEventListener('click', () => openModal(company));
+                }
+            });
+
+            container.querySelectorAll('.btn-table-action').forEach(btn => {
+                const idx = Number(btn.dataset.btnIndex);
+                const company = sortedData[idx];
+                if (company) {
+                    btn.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        openModal(company);
+                    });
+                }
+            });
+        }
+
+        function toggleTableSort(col) {
+            if (tableSortColumn === col) {
+                tableSortDirection = tableSortDirection === 'asc' ? 'desc' : 'asc';
+            } else {
+                tableSortColumn = col;
+                tableSortDirection = col === 'amount' || col === 'date' ? 'desc' : 'asc';
+            }
+            renderTableView(activeFilteredDataset);
         }
 
         // UX Polish: Active Filter Chips Bar Renderer
@@ -1761,6 +2031,17 @@ let rawDataset = [];
         </div>
 
         ${sourceLink}
+
+        <div class="modal-action-bar" style="display: flex; justify-content: space-between; align-items: center; margin-top: 24px; padding-top: 16px; border-top: 1px solid var(--color-hairline); flex-wrap: wrap; gap: 12px;">
+            <a href="mailto:connectkapilpidhwani@gmail.com?subject=Data%20Correction%3A%20${encodeURIComponent(company.company_name || 'Company')}%20(${encodeURIComponent(company.date_of_funding || '')})&body=${encodeURIComponent('Hello Kapil,\n\nI noticed an inaccuracy regarding ' + (company.company_name || 'this company') + ':\n- Date: ' + (company.date_of_funding || 'N/A') + '\n- Amount: ' + formatUSD(company.funding_amount_usd) + '\n- Round: ' + (company.funding_round || 'N/A') + '\n\nSuggested Correction:\n[Please describe corrected information and press link here]\n\nThank you!')}" class="btn-suggest-correction" title="Report an inaccuracy or suggest updated deal information">
+                <span class="material-symbols-outlined" style="font-size: 16px;">edit_note</span>
+                <span>Suggest Correction</span>
+            </a>
+            <button type="button" class="btn-detail" onclick="copyDealSummary()" style="background: var(--color-surface-secondary); color: var(--color-text-primary); border: 1px solid var(--color-hairline);" title="Copy markdown deal memo">
+                <span class="material-symbols-outlined" style="font-size: 16px;">content_copy</span>
+                <span>Copy Memo</span>
+            </button>
+        </div>
       `;
 
             const overlay = document.getElementById('modalOverlay');

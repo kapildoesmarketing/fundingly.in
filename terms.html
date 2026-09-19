@@ -105,6 +105,25 @@
             color: var(--color-primary-hover);
         }
 
+        .page-mascot-wrapper {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 16px;
+        }
+
+        .page-mascot-img {
+            width: 72px;
+            height: 72px;
+            object-fit: contain;
+            filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.08));
+            transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .page-mascot-img:hover {
+            transform: scale(1.08) translateY(-2px);
+        }
+
         @media (max-width: 640px) {
             .policy-card {
                 padding: 24px 20px;
@@ -112,6 +131,11 @@
 
             .policy-title {
                 font-size: 24px;
+            }
+
+            .page-mascot-img {
+                width: 60px;
+                height: 60px;
             }
         }
     </style>
@@ -159,8 +183,11 @@
 
         <article class="policy-card">
             <header class="policy-header">
+                <div class="page-mascot-wrapper">
+                    <img src="assets/fundingly_idea.png" alt="Fundingly Mascot" class="page-mascot-img" width="72" height="72">
+                </div>
                 <h1 class="policy-title">Terms of Service</h1>
-                <div class="policy-meta">Last Updated: September 18, 2026 • fundingly.in</div>
+                <div class="policy-meta">Last Updated: September 19, 2026 • fundingly.in</div>
             </header>
 
             <div class="policy-content">
@@ -178,8 +205,8 @@
                 <h2>4. Intellectual Property & Fair Use</h2>
                 <p>The layout, design system, search and filter algorithms, and derived analytical summaries on fundingly.in are the property of Fundingly. Company names, trademarks, logos, and news headlines referenced on this site remain the intellectual property of their respective owners and are referenced under fair dealing and editorial reporting doctrines.</p>
 
-                <h2>5. Corrections & Takedown Requests</h2>
-                <p>If you are a founder, investor, or journalist and notice an inaccuracy or wish to submit an official correction for a funding round, please contact our team at <a href="mailto:corrections@fundingly.in">corrections@fundingly.in</a> and we will review and update the dataset in our scheduled refresh cycle.</p>
+                <h2>5. Corrections & Contact</h2>
+                <p>If you are a founder, investor, or journalist and notice an inaccuracy or wish to submit an official correction for a funding round, please contact creator Kapil Pidhwani at <a href="mailto:connectkapilpidhwani@gmail.com">connectkapilpidhwani@gmail.com</a> or visit our <a href="contact.html">Contact Us</a> page.</p>
 
                 <h2>6. Limitation of Liability</h2>
                 <p>Fundingly is provided on an "as-is" and "as-available" basis without warranties of any kind. Under no circumstances shall Fundingly be liable for any direct, indirect, incidental, or consequential damages resulting from the use or inability to use this platform.</p>

@@ -19,6 +19,8 @@
     <link rel="icon" type="image/png" href="assets/fundingly_hello.png">
     <link rel="apple-touch-icon" href="assets/fundingly_hello.png">
     <link rel="manifest" href="manifest.json">
+    <link rel="preload" href="data/manifest.json" as="fetch" crossorigin="anonymous">
+    <link rel="preload" href="assets/fundingly_logo.png" as="image">
 
     <!-- Open Graph / Facebook / LinkedIn -->
     <meta property="og:type" content="website">
@@ -90,13 +92,6 @@
                 <span class="material-symbols-outlined" id="themeIcon">dark_mode</span>
             </button>
 
-            <!-- About Fundingly Button -->
-            <button type="button" class="btn-nav-about" id="aboutBtn" title="About Fundingly"
-                aria-label="About Fundingly">
-                <span class="material-symbols-outlined">badge</span>
-                <span>About</span>
-            </button>
-
             <!-- Compact Date Range Selector with Apple Popover -->
             <div class="date-popover-anchor" id="tourDateFilter">
                 <button type="button" class="btn-date-trigger" id="dateTriggerBtn" aria-expanded="false"
@@ -161,6 +156,10 @@
                     <span class="material-symbols-outlined sidebar-icon">tune</span>
                     <span class="sidebar-title">Filters</span>
                 </div>
+                <button type="button" class="sidebar-header-collapse-btn" id="sidebarHeaderCollapseBtn" title="Collapse Filters"
+                    aria-label="Collapse Filters">
+                    <span class="material-symbols-outlined">first_page</span>
+                </button>
             </div>
 
             <div class="sidebar-scrollable-body">
@@ -239,20 +238,44 @@
 
         <!-- Main Content Layout -->
         <main class="app-main" id="appMain">
-            <!-- Timeline Control Bar: Bulk Accordion & Mobile Filter Trigger -->
+            <!-- Timeline Control Bar: Quarter Indicator, View Mode Switcher & Bulk Accordion -->
             <div class="timeline-toolbar" id="timelineToolbar" style="display: none;">
                 <div class="toolbar-left">
-                    <button type="button" class="btn-accordion-bulk" id="bulkAccordionBtn"
-                        title="Collapse or Expand all weeks">
-                        <span class="material-symbols-outlined" id="bulkAccordionIcon">unfold_less</span>
-                        <span id="bulkAccordionLabel">Collapse All</span>
-                    </button>
+                    <div class="toolbar-quarter-badge" id="toolbarQuarterBadge" title="Active dataset quarter">
+                        <span class="material-symbols-outlined quarter-badge-icon">calendar_month</span>
+                        <span class="quarter-badge-title" id="toolbarQuarterTitle">2026 Q3</span>
+                        <span class="quarter-badge-sub" id="toolbarQuarterSub">Jul – Sep</span>
+                        <span class="quarter-badge-metrics" id="toolbarQuarterMetrics"></span>
+                    </div>
                     <button type="button" class="btn-mobile-filter-toggle" id="mobileFilterToggleBtn"
                         title="Toggle Filters Sidebar" aria-label="Toggle Filters Sidebar">
                         <span class="material-symbols-outlined">tune</span>
                         <span>Filters</span>
                     </button>
                 </div>
+                <div class="toolbar-right">
+                    <div class="view-switcher-group" role="radiogroup" aria-label="View layout mode">
+                        <button type="button" class="btn-view-toggle active" id="viewCardsBtn" role="radio" aria-checked="true" title="Card stream view (Press G)">
+                            <span class="material-symbols-outlined">grid_view</span>
+                            <span class="view-toggle-text">Cards</span>
+                        </button>
+                        <button type="button" class="btn-view-toggle" id="viewTableBtn" role="radio" aria-checked="false" title="Dense Table view (Press T)">
+                            <span class="material-symbols-outlined">table_rows</span>
+                            <span class="view-toggle-text">Table</span>
+                        </button>
+                    </div>
+                    <button type="button" class="btn-accordion-bulk" id="bulkAccordionBtn"
+                        title="Collapse or Expand all weeks">
+                        <span class="material-symbols-outlined" id="bulkAccordionIcon">unfold_less</span>
+                        <span id="bulkAccordionLabel">Collapse All</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Pre-allocated AdSense Container (Zero CLS) -->
+            <div class="ad-slot-leaderboard" id="adSlotLeaderboard" aria-hidden="true" style="display: none;">
+                <div class="ad-slot-label">Advertisement</div>
+                <div class="ad-slot-placeholder"></div>
             </div>
             <!-- Active Filter Chips Bar -->
             <div class="active-filter-bar" id="activeFilterBar" style="display: none;"></div>
@@ -311,6 +334,9 @@
             <!-- Weekly Grouped Timeline Container -->
             <div class="timeline-container" id="gridContainer"></div>
 
+            <!-- Dense Sortable Table View Container -->
+            <div class="table-view-container" id="tableContainer" style="display: none;"></div>
+
             <!-- Incremental / Background Loading Trigger & Status -->
             <div class="load-more-container" id="loadMoreContainer" style="display: none;">
                 <div class="bg-loading-pill" id="bgLoadingIndicator" style="display: none;" role="status"
@@ -325,6 +351,45 @@
                     <span class="load-more-badge" id="loadMoreCount"></span>
                 </button>
             </div>
+
+            <!-- Main Content Area Global Semantic Footer -->
+            <footer class="app-main-footer" role="contentinfo">
+                <div class="main-footer-top">
+                    <div class="main-footer-brand">
+                        <img src="assets/fundingly_logo.png" alt="Fundingly" class="main-footer-logo" width="28" height="28">
+                        <span class="main-footer-brand-name">Fundingly</span>
+                        <span class="main-footer-tagline">Indian Startup Funding Intelligence</span>
+                    </div>
+                    <div class="main-footer-social">
+                        <a href="https://www.linkedin.com/company/fundingly-in" target="_blank" rel="noopener noreferrer" class="footer-social-link" title="Fundingly on LinkedIn" aria-label="LinkedIn">
+                            <svg class="social-svg-icon" viewBox="0 0 24 24" fill="currentColor" width="16" height="16">
+                                <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.2V10.9H6.46M7.83 6.64a1.64 1.64 0 1 0 1.63 1.64 1.63 1.63 0 0 0-1.63-1.64Z"/>
+                            </svg>
+                            <span>LinkedIn</span>
+                        </a>
+                        <a href="https://www.instagram.com/fundingly.in/" target="_blank" rel="noopener noreferrer" class="footer-social-link" title="Fundingly on Instagram" aria-label="Instagram">
+                            <svg class="social-svg-icon" viewBox="0 0 24 24" fill="currentColor" width="16" height="16">
+                                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zm0 10.162a3.999 3.999 0 1 1 0-7.998 3.999 3.999 0 0 1 0 7.998zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/>
+                            </svg>
+                            <span>Instagram</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="main-footer-bottom">
+                    <nav class="main-footer-nav" aria-label="Legal & Information">
+                        <a href="privacy-policy.html" class="main-footer-link">Privacy Policy</a>
+                        <span class="main-footer-dot">•</span>
+                        <a href="terms.html" class="main-footer-link">Terms of Service</a>
+                        <span class="main-footer-dot">•</span>
+                        <a href="about.html" class="main-footer-link">About Us</a>
+                        <span class="main-footer-dot">•</span>
+                        <a href="contact.html" class="main-footer-link">Contact</a>
+                    </nav>
+                    <div class="main-footer-copy">
+                        <span>© 2026 Fundingly.in • Created by <a href="mailto:connectkapilpidhwani@gmail.com" class="footer-creator-link">Kapil Pidhwani</a></span>
+                    </div>
+                </div>
+            </footer>
         </main>
     </div>
 

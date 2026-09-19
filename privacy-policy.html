@@ -105,6 +105,25 @@
             color: var(--color-primary-hover);
         }
 
+        .page-mascot-wrapper {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 16px;
+        }
+
+        .page-mascot-img {
+            width: 72px;
+            height: 72px;
+            object-fit: contain;
+            filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.08));
+            transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .page-mascot-img:hover {
+            transform: scale(1.08) translateY(-2px);
+        }
+
         @media (max-width: 640px) {
             .policy-card {
                 padding: 24px 20px;
@@ -113,8 +132,24 @@
             .policy-title {
                 font-size: 24px;
             }
+
+            .page-mascot-img {
+                width: 60px;
+                height: 60px;
+            }
         }
     </style>
+    <script>
+        (function() {
+            try {
+                const saved = localStorage.getItem('fundingly_theme') || 'auto';
+                const isDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+                if (saved === 'dark' || (saved === 'auto' && isDark)) {
+                    document.documentElement.setAttribute('data-theme', 'dark');
+                }
+            } catch (e) {}
+        })();
+    </script>
 </head>
 
 <body>
@@ -148,8 +183,11 @@
 
         <article class="policy-card">
             <header class="policy-header">
+                <div class="page-mascot-wrapper">
+                    <img src="assets/fundingly_analyzing.png" alt="Fundingly Mascot" class="page-mascot-img" width="72" height="72">
+                </div>
                 <h1 class="policy-title">Privacy Policy</h1>
-                <div class="policy-meta">Last Updated: September 18, 2026 • fundingly.in</div>
+                <div class="policy-meta">Last Updated: September 19, 2026 • fundingly.in</div>
             </header>
 
             <div class="policy-content">
@@ -174,7 +212,7 @@
                 <p>Our dashboard links directly to source news publishers, press releases, and external websites for fact verification. We are not responsible for the privacy practices or content of third-party websites.</p>
 
                 <h2>5. Contact Us</h2>
-                <p>If you have questions about this Privacy Policy, wish to request data correction, or want to report inaccurate public deal data, please reach out to us at <a href="mailto:support@fundingly.in">support@fundingly.in</a>.</p>
+                <p>If you have questions about this Privacy Policy, wish to request data correction, or want to report inaccurate public deal data, please reach out to Kapil Pidhwani at <a href="mailto:connectkapilpidhwani@gmail.com">connectkapilpidhwani@gmail.com</a> or visit our <a href="contact.html">Contact Us</a> page.</p>
             </div>
         </article>
     </main>
