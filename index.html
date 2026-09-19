@@ -74,16 +74,17 @@
     <!-- Navigation Header (Frosted Glass) -->
     <header class="app-header">
         <div class="header-left">
-            <div class="brand-title">
+            <h1 class="brand-title">
                 <img src="assets/fundingly_logo.png" alt="Fundingly.in" class="brand-logo" width="46" height="46">
                 <span>Fundingly.in</span>
-            </div>
+            </h1>
         </div>
 
         <!-- Global Search Bar (Pill CTA) -->
         <div class="nav-search" id="tourSearch">
             <span class="material-symbols-outlined search-icon">search</span>
             <input type="search" id="searchInput" placeholder="Search companies, founders, investors, sectors..."
+                aria-label="Search companies, founders, investors, sectors"
                 autocomplete="off" spellcheck="false">
             <kbd class="search-kbd-badge" id="searchKbdBadge" title="Press ⌘K or / to search">⌘K</kbd>
         </div>
@@ -247,12 +248,12 @@
         <!-- Main Content Layout -->
         <main class="app-main" id="appMain">
             <!-- Timeline Control Bar: Quarter Indicator, View Mode Switcher & Bulk Accordion -->
-            <div class="timeline-toolbar" id="timelineToolbar" style="display: none;">
+            <div class="timeline-toolbar" id="timelineToolbar">
                 <div class="toolbar-left">
                     <div class="toolbar-quarter-badge" id="toolbarQuarterBadge" title="Active dataset quarter">
                         <span class="material-symbols-outlined quarter-badge-icon">calendar_month</span>
-                        <span class="quarter-badge-title" id="toolbarQuarterTitle">2026 Q3</span>
-                        <span class="quarter-badge-sub" id="toolbarQuarterSub">Jul – Sep</span>
+                        <span class="quarter-badge-title" id="toolbarQuarterTitle">Loading...</span>
+                        <span class="quarter-badge-sub" id="toolbarQuarterSub"></span>
                         <span class="quarter-badge-metrics" id="toolbarQuarterMetrics"></span>
                     </div>
                     <button type="button" class="btn-mobile-filter-toggle" id="mobileFilterToggleBtn"
@@ -275,7 +276,7 @@
                         </button>
                     </div>
                     <button type="button" class="btn-accordion-bulk" id="bulkAccordionBtn"
-                        title="Collapse or Expand all weeks">
+                        title="Collapse or Expand all weeks" aria-label="Collapse or expand all weeks" aria-expanded="true">
                         <span class="material-symbols-outlined" id="bulkAccordionIcon">unfold_less</span>
                         <span id="bulkAccordionLabel">Collapse All</span>
                     </button>
@@ -412,7 +413,7 @@
     </div>
 
     <!-- Apple-Style Detail Sheet / Modal Dialog -->
-    <div class="modal-overlay" id="modalOverlay" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="modal-overlay" id="modalOverlay" role="dialog" aria-modal="true" aria-label="Funding Deal Dossier">
         <div class="modal-content" id="modalContent">
             <button class="close-btn" id="closeModal" aria-label="Close dialog">
                 <span class="material-symbols-outlined">close</span>
@@ -422,7 +423,7 @@
     </div>
 
     <!-- Executive-Grade Weekly Trends Modal -->
-    <div class="modal-overlay" id="trendsModal" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="modal-overlay" id="trendsModal" role="dialog" aria-modal="true" aria-labelledby="trendsModalTitle">
         <div class="modal-content trends-modal-content">
             <button class="close-btn" id="closeTrendsModalBtn" aria-label="Close trends dialog">
                 <span class="material-symbols-outlined">close</span>
@@ -446,7 +447,7 @@
     </div>
 
     <!-- About Fundingly Modal -->
-    <div class="modal-overlay" id="aboutModal" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="modal-overlay" id="aboutModal" role="dialog" aria-modal="true" aria-label="About Fundingly.in">
         <div class="modal-content about-modal-content">
             <button class="close-btn" id="closeAboutModalBtn" aria-label="Close about dialog">
                 <span class="material-symbols-outlined">close</span>

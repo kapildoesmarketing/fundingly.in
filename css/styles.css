@@ -178,11 +178,15 @@
             letter-spacing: -0.015em;
             white-space: nowrap;
             user-select: none;
+            margin: 0;
+            padding: 0;
+            line-height: 1;
         }
 
         .brand-title .brand-logo {
             width: 46px;
             height: 46px;
+            aspect-ratio: 1 / 1;
             border-radius: 9px;
             object-fit: contain;
             display: block;
@@ -892,6 +896,7 @@
         .main-footer-logo {
             width: 28px;
             height: 28px;
+            aspect-ratio: 1 / 1;
             object-fit: contain;
         }
 
@@ -1232,6 +1237,7 @@
             margin-bottom: 14px;
             gap: 12px;
             flex-wrap: wrap;
+            min-height: 38px;
         }
 
         .toolbar-left,
@@ -1703,6 +1709,7 @@
         .company-avatar {
             width: 30px;
             height: 30px;
+            aspect-ratio: 1 / 1;
             border-radius: 8px;
             object-fit: contain;
             flex-shrink: 0;
@@ -1727,6 +1734,7 @@
         .company-monogram {
             width: 30px;
             height: 30px;
+            aspect-ratio: 1 / 1;
             border-radius: 8px;
             flex-shrink: 0;
             display: inline-flex;
@@ -2062,6 +2070,7 @@
         .modal-hero-avatar {
             width: 44px;
             height: 44px;
+            aspect-ratio: 1 / 1;
             border-radius: 10px;
             object-fit: contain;
             flex-shrink: 0;
@@ -2075,6 +2084,7 @@
         .modal-hero-monogram {
             width: 44px;
             height: 44px;
+            aspect-ratio: 1 / 1;
             border-radius: 10px;
             flex-shrink: 0;
             display: inline-flex;
