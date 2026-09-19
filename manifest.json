@@ -1,6 +1,6 @@
 {
-  "name": "Fundingly — Indian Startup Funding Intelligence",
-  "short_name": "Fundingly",
+  "name": "Fundingly.in — Indian Startup Funding Intelligence",
+  "short_name": "Fundingly.in",
   "description": "Live tracker for Indian startup funding rounds, venture trends, and investor syndicates.",
   "start_url": "index.html",
   "display": "standalone",

@@ -831,6 +831,58 @@ let rawDataset = [];
             return palettes[index];
         }
 
+        // Deisgned by Kapil Pidhwani: Dynamic brand logo luminance detection. Samples 16x16 canvas to check if transparent logo is predominantly light or dark. Ceiling: CORS restriction on foreign canvas reads (gracefully falls back to pedestal). Upgrade path: Backend pre-extracted color luminance metadata.
+        function detectLogoLuminance(img) {
+            if (!img || !img.complete || img.naturalWidth === 0) return;
+            try {
+                const canvas = document.createElement('canvas');
+                canvas.width = 16;
+                canvas.height = 16;
+                const ctx = canvas.getContext('2d', { willReadFrequently: true });
+                ctx.drawImage(img, 0, 0, 16, 16);
+                const data = ctx.getImageData(0, 0, 16, 16).data;
+                let rSum = 0, gSum = 0, bSum = 0, count = 0;
+                for (let i = 0; i < data.length; i += 4) {
+                    const alpha = data[i + 3];
+                    if (alpha > 40) {
+                        rSum += data[i];
+                        gSum += data[i + 1];
+                        bSum += data[i + 2];
+                        count++;
+                    }
+                }
+                if (count > 0) {
+                    const avgLuminance = (rSum * 0.299 + gSum * 0.587 + bSum * 0.114) / count;
+                    if (avgLuminance > 210) {
+                        img.classList.add('logo-light-mark');
+                    } else if (avgLuminance < 50) {
+                        img.classList.add('logo-dark-mark');
+                    }
+                }
+            } catch (e) {
+                // Cross-origin image read restriction - pedestal handles contrast cleanly
+            }
+        }
+
+        // Deisgned by Kapil Pidhwani: Visual Deal Stage Color Coding System. Maps funding rounds to Apple-calibrated stage classes. Ceiling: 4 discrete stage buckets. Upgrade path: User-configurable color mapping.
+        function getStageBadgeClass(stage) {
+            if (!stage || typeof stage !== 'string') return 'stage-early';
+            const s = stage.toLowerCase().trim();
+            if (s.includes('seed') || s.includes('angel') || s.includes('grant') || s.includes('incub') || s.includes('pre-series a')) {
+                return 'stage-early';
+            }
+            if (s === 'series a' || s === 'series b' || s.includes('venture')) {
+                return 'stage-venture';
+            }
+            if (s.includes('series c') || s.includes('series d') || s.includes('series e') || s.includes('series f') || s.includes('growth') || s.includes('late')) {
+                return 'stage-growth';
+            }
+            if (s.includes('debt') || s.includes('bridge') || s.includes('non-equity')) {
+                return 'stage-debt';
+            }
+            return 'stage-venture';
+        }
+
         // Deisgned by Kapil Pidhwani: Domain favicon with instant squircle monogram fallback. Ceiling: Google Favicon API sz=128 cache. Upgrade path: Dedicated SVG avatar sprite caching.
         function renderCompanyAvatarHTML(company, isLarge = false) {
             const domain = extractDomain(company && company.company_website);
@@ -844,7 +896,7 @@ let rawDataset = [];
             if (domain) {
                 const faviconUrl = 'https://www.google.com/s2/favicons?domain=' + encodeURIComponent(domain) + '&sz=128';
                 const escapedName = escapeHtml(name);
-                const imgTag = '<img src="' + faviconUrl + '" alt="' + escapedName + '" class="' + avatarClass + '" width="' + size + '" height="' + size + '" loading="lazy" onerror="this.style.display=\'none\';var n=this.nextElementSibling;if(n)n.style.display=\'inline-flex\';">';
+                const imgTag = '<img src="' + faviconUrl + '" alt="' + escapedName + '" class="' + avatarClass + '" width="' + size + '" height="' + size + '" loading="lazy" onload="detectLogoLuminance(this)" onerror="this.style.display=\'none\';var n=this.nextElementSibling;if(n)n.style.display=\'inline-flex\';">';
                 const fallbackTag = '<div class="' + monoClass + '" style="display:none;background-color:' + color.bg + ';color:' + color.text + ';">' + escapeHtml(monogram) + '</div>';
                 return imgTag + fallbackTag;
             }
@@ -1061,7 +1113,7 @@ let rawDataset = [];
           <div>
             <div class="card-top-bar">
               ${avatarHTML}
-              <span class="badge-round">${escapeHtml(fundingRound)}</span>
+              <span class="badge-round ${getStageBadgeClass(fundingRound)}">${escapeHtml(fundingRound)}</span>
             </div>
             <div class="company-name-wrap">
               <span class="company-name">${escapeHtml(titleText)}</span>
@@ -1113,6 +1165,48 @@ let rawDataset = [];
             return weekSection;
         }
 
+        // Deisgned by Kapil Pidhwani: Smooth animated odometer ticker for numerical metrics. Ceiling: Micro-animation for aggregate counters. Upgrade path: Canvas/SVG odometer reels.
+        function animateOdometerMetrics(metricsEl, totalDeals, totalUSD, duration = 280) {
+            if (!metricsEl) return;
+            if (totalDeals <= 0) {
+                metricsEl.textContent = '';
+                metricsEl.style.display = 'none';
+                metricsEl.dataset.prevDeals = '0';
+                metricsEl.dataset.prevUSD = '0';
+                return;
+            }
+
+            metricsEl.style.display = 'inline-block';
+            const prevDeals = Number(metricsEl.dataset.prevDeals) || 0;
+            const prevUSD = Number(metricsEl.dataset.prevUSD) || 0;
+            metricsEl.dataset.prevDeals = String(totalDeals);
+            metricsEl.dataset.prevUSD = String(totalUSD);
+
+            if (prevDeals === 0 && prevUSD === 0) {
+                metricsEl.textContent = `${totalDeals} ${totalDeals === 1 ? 'deal' : 'deals'}` + (totalUSD > 0 ? ` • ${formatUSD(totalUSD)} total` : '');
+                return;
+            }
+
+            const startTime = performance.now();
+            const tick = (now) => {
+                const elapsed = now - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                const ease = 1 - Math.pow(1 - progress, 3);
+                const currentDeals = Math.round(prevDeals + (totalDeals - prevDeals) * ease);
+                const currentUSD = prevUSD + (totalUSD - prevUSD) * ease;
+
+                const text = `${currentDeals} ${currentDeals === 1 ? 'deal' : 'deals'}` + (currentUSD > 0 ? ` • ${formatUSD(currentUSD)} total` : '');
+                metricsEl.textContent = text;
+
+                if (progress < 1) {
+                    requestAnimationFrame(tick);
+                } else {
+                    metricsEl.textContent = `${totalDeals} ${totalDeals === 1 ? 'deal' : 'deals'}` + (totalUSD > 0 ? ` • ${formatUSD(totalUSD)} total` : '');
+                }
+            };
+            requestAnimationFrame(tick);
+        }
+
         function updateQuarterToolbarBadge(allWeekGroups) {
             const titleEl = document.getElementById('toolbarQuarterTitle');
             const subEl = document.getElementById('toolbarQuarterSub');
@@ -1143,14 +1237,7 @@ let rawDataset = [];
             }
 
             if (metricsEl) {
-                if (totalDeals > 0) {
-                    const metricsText = `${totalDeals} ${totalDeals === 1 ? 'deal' : 'deals'}` + (totalUSD > 0 ? ` • ${formatUSD(totalUSD)} total` : '');
-                    metricsEl.textContent = metricsText;
-                    metricsEl.style.display = 'inline-block';
-                } else {
-                    metricsEl.textContent = '';
-                    metricsEl.style.display = 'none';
-                }
+                animateOdometerMetrics(metricsEl, totalDeals, totalUSD);
             }
         }
 
@@ -1631,7 +1718,7 @@ let rawDataset = [];
                             </div>
                         </td>
                         <td>${date}</td>
-                        <td><span class="table-stage-pill">${stage}</span></td>
+                        <td><span class="table-stage-pill ${getStageBadgeClass(stage)}">${stage}</span></td>
                         <td>
                             <span class="table-amount-val">${amountUsd}</span>
                             <span class="table-amount-inr">${amountInr}</span>
@@ -1914,9 +2001,21 @@ let rawDataset = [];
                 ? `<div class="inspector-row" style="grid-column: span 2;"><span class="inspector-label">Decision Maker Profile</span><div class="inspector-val"><a href="${encodeURI(company.key_decision_maker_linkedin)}" target="_blank" rel="noopener noreferrer">View LinkedIn</a></div></div>`
                 : '';
 
-            const sourceLink = company.source_url
-                ? `<div class="modal-source-footer">Source: <a href="${encodeURI(company.source_url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(company.source_url)}</a></div>`
-                : '';
+            const rawSources = company.sources || company.source_url || '';
+            let sourceLink = '';
+            if (rawSources) {
+                const links = (Array.isArray(rawSources) ? rawSources : String(rawSources).split(/[,|\n]/))
+                    .map(s => s.trim())
+                    .filter(Boolean);
+                if (links.length > 0) {
+                    const linksAnchors = links.map((link) => {
+                        const cleanDisplay = link.replace(/^https?:\/\//, '').replace(/^www\./, '').replace(/\/+$/, '');
+                        const host = cleanDisplay.split('/')[0];
+                        return `<a href="${encodeURI(link)}" target="_blank" rel="noopener noreferrer" style="color: var(--accent-color); text-decoration: underline; margin-right: 8px;">[${escapeHtml(host)}]</a>`;
+                    }).join(' ');
+                    sourceLink = `<div class="modal-source-footer" style="display:flex; flex-wrap:wrap; align-items:center; gap:6px; font-size:12px; color:var(--text-muted); padding-top:12px; border-top:1px solid var(--border-subtle);"><strong>Sources:</strong> ${linksAnchors}</div>`;
+                }
+            }
 
             const modalAvatarHTML = renderCompanyAvatarHTML(company, true);
 
@@ -1925,7 +2024,7 @@ let rawDataset = [];
           <!-- Tier 1: Top Bar (Avatar on Left, Round Pill Badge on Right) matching closed card -->
           <div class="modal-hero-top-bar">
             ${modalAvatarHTML}
-            <span class="modal-hero-badge">${escapeHtml(company.funding_round || 'Funding')}</span>
+            <span class="modal-hero-badge ${getStageBadgeClass(company.funding_round)}">${escapeHtml(company.funding_round || 'Funding')}</span>
           </div>
 
           <!-- Tier 2: 100% Full-Width Identity Block -->

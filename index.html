@@ -3,16 +3,20 @@
 
 <head>
     <!-- Google Tag Manager -->
-    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-M5MPWNCX');</script>
+    <script>(function (w, d, s, l, i) {
+            w[l] = w[l] || []; w[l].push({
+                'gtm.start':
+                    new Date().getTime(), event: 'gtm.js'
+            }); var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-M5MPWNCX');</script>
     <!-- End Google Tag Manager -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fundingly — Indian Startup Funding Intelligence</title>
-    <meta name="description" content="Track live Indian startup funding rounds, venture trends, active investors, and stage metrics aggregated automatically.">
+    <title>Fundingly.in — Indian Startup Funding Intelligence</title>
+    <meta name="description"
+        content="Track Indian startup funding rounds, investments, seed stages, venture capital, and market trends in real-time. Live venture intelligence.">
     <meta name="theme-color" content="#0066cc">
 
     <!-- Favicons & App Icons -->
@@ -21,19 +25,24 @@
     <link rel="manifest" href="manifest.json">
     <link rel="preload" href="data/manifest.json" as="fetch" crossorigin="anonymous">
     <link rel="preload" href="assets/fundingly_logo.png" as="image">
+    <meta name="keywords"
+        content="Indian startup funding, venture capital India, startup investment tracker, Seed funding, Series A, VC deals India, Startup India intelligence, fundingly">
+    <meta name="author" content="Fundingly.in">
+    <link rel="canonical" href="https://fundingly.in/">
 
-    <!-- Open Graph / Facebook / LinkedIn -->
+    <!-- Open Graph / Social Meta -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://fundingly.in/">
-    <meta property="og:title" content="Fundingly — Indian Startup Funding Intelligence">
-    <meta property="og:description" content="Track live Indian startup funding rounds, venture trends, active investors, and stage metrics aggregated automatically.">
-    <meta property="og:image" content="https://fundingly.in/assets/og-preview.png">
+    <meta property="og:title" content="Fundingly.in — Indian Startup Funding Intelligence">
+    <meta property="og:description"
+        content="Live intelligence on Indian startup funding rounds, venture capital investments, and market trends. Free, instant, and updated continuously.">
+    <meta property="og:image" content="https://fundingly.in/assets/fundingly_logo.png">
 
-    <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:url" content="https://fundingly.in/">
-    <meta name="twitter:title" content="Fundingly — Indian Startup Funding Intelligence">
-    <meta name="twitter:description" content="Track live Indian startup funding rounds, venture trends, active investors, and stage metrics aggregated automatically.">
+    <!-- Twitter Card Meta -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Fundingly.in — Indian Startup Funding Intelligence">
+    <meta name="twitter:description"
+        content="Track live Indian startup funding rounds, venture trends, active investors, and stage metrics aggregated automatically.">
     <meta name="twitter:image" content="https://fundingly.in/assets/og-preview.png">
 
     <!-- Fonts & Material Symbols (Google Sans & Roboto) -->
@@ -58,17 +67,16 @@
 
 <body>
     <!-- Google Tag Manager (noscript) -->
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M5MPWNCX"
-    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M5MPWNCX" height="0" width="0"
+            style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
 
     <!-- Navigation Header (Frosted Glass) -->
     <header class="app-header">
         <div class="header-left">
             <div class="brand-title">
-                <img src="assets/fundingly_logo.png" alt="Fundingly" class="brand-logo"
-                    width="46" height="46">
-                <span>Fundingly</span>
+                <img src="assets/fundingly_logo.png" alt="Fundingly.in" class="brand-logo" width="46" height="46">
+                <span>Fundingly.in</span>
             </div>
         </div>
 
@@ -156,8 +164,8 @@
                     <span class="material-symbols-outlined sidebar-icon">tune</span>
                     <span class="sidebar-title">Filters</span>
                 </div>
-                <button type="button" class="sidebar-header-collapse-btn" id="sidebarHeaderCollapseBtn" title="Collapse Filters"
-                    aria-label="Collapse Filters">
+                <button type="button" class="sidebar-header-collapse-btn" id="sidebarHeaderCollapseBtn"
+                    title="Collapse Filters" aria-label="Collapse Filters">
                     <span class="material-symbols-outlined">first_page</span>
                 </button>
             </div>
@@ -255,11 +263,13 @@
                 </div>
                 <div class="toolbar-right">
                     <div class="view-switcher-group" role="radiogroup" aria-label="View layout mode">
-                        <button type="button" class="btn-view-toggle active" id="viewCardsBtn" role="radio" aria-checked="true" title="Card stream view (Press G)">
+                        <button type="button" class="btn-view-toggle active" id="viewCardsBtn" role="radio"
+                            aria-checked="true" title="Card stream view (Press G)">
                             <span class="material-symbols-outlined">grid_view</span>
                             <span class="view-toggle-text">Cards</span>
                         </button>
-                        <button type="button" class="btn-view-toggle" id="viewTableBtn" role="radio" aria-checked="false" title="Dense Table view (Press T)">
+                        <button type="button" class="btn-view-toggle" id="viewTableBtn" role="radio"
+                            aria-checked="false" title="Dense Table view (Press T)">
                             <span class="material-symbols-outlined">table_rows</span>
                             <span class="view-toggle-text">Table</span>
                         </button>
@@ -356,20 +366,26 @@
             <footer class="app-main-footer" role="contentinfo">
                 <div class="main-footer-top">
                     <div class="main-footer-brand">
-                        <img src="assets/fundingly_logo.png" alt="Fundingly" class="main-footer-logo" width="28" height="28">
-                        <span class="main-footer-brand-name">Fundingly</span>
+                        <img src="assets/fundingly_logo.png" alt="Fundingly.in" class="main-footer-logo" width="28"
+                            height="28">
+                        <span class="main-footer-brand-name">Fundingly.in</span>
                         <span class="main-footer-tagline">Indian Startup Funding Intelligence</span>
                     </div>
                     <div class="main-footer-social">
-                        <a href="https://www.linkedin.com/company/fundingly-in" target="_blank" rel="noopener noreferrer" class="footer-social-link" title="Fundingly on LinkedIn" aria-label="LinkedIn">
+                        <a href="https://www.linkedin.com/company/fundingly-in" target="_blank"
+                            rel="noopener noreferrer" class="footer-social-link" title="Fundingly.in on LinkedIn"
+                            aria-label="LinkedIn">
                             <svg class="social-svg-icon" viewBox="0 0 24 24" fill="currentColor" width="16" height="16">
-                                <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.2V10.9H6.46M7.83 6.64a1.64 1.64 0 1 0 1.63 1.64 1.63 1.63 0 0 0-1.63-1.64Z"/>
+                                <path
+                                    d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.2V10.9H6.46M7.83 6.64a1.64 1.64 0 1 0 1.63 1.64 1.63 1.63 0 0 0-1.63-1.64Z" />
                             </svg>
                             <span>LinkedIn</span>
                         </a>
-                        <a href="https://www.instagram.com/fundingly.in/" target="_blank" rel="noopener noreferrer" class="footer-social-link" title="Fundingly on Instagram" aria-label="Instagram">
+                        <a href="https://www.instagram.com/fundingly.in/" target="_blank" rel="noopener noreferrer"
+                            class="footer-social-link" title="Fundingly.in on Instagram" aria-label="Instagram">
                             <svg class="social-svg-icon" viewBox="0 0 24 24" fill="currentColor" width="16" height="16">
-                                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zm0 10.162a3.999 3.999 0 1 1 0-7.998 3.999 3.999 0 0 1 0 7.998zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/>
+                                <path
+                                    d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zm0 10.162a3.999 3.999 0 1 1 0-7.998 3.999 3.999 0 0 1 0 7.998zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z" />
                             </svg>
                             <span>Instagram</span>
                         </a>
@@ -386,7 +402,8 @@
                         <a href="contact.html" class="main-footer-link">Contact</a>
                     </nav>
                     <div class="main-footer-copy">
-                        <span>© 2026 Fundingly.in • Created by <a href="mailto:connectkapilpidhwani@gmail.com" class="footer-creator-link">Kapil Pidhwani</a></span>
+                        <span>© 2026 Fundingly.in • Created by <a href="mailto:connectkapilpidhwani@gmail.com"
+                                class="footer-creator-link">Kapil Pidhwani</a></span>
                     </div>
                 </div>
             </footer>

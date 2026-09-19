@@ -1699,19 +1699,29 @@
             margin-bottom: 8px;
         }
 
-        /* Deisgned by Kapil Pidhwani: Contrasting squircle pedestal with alpha silhouette drop-shadow for white/transparent logos. Ceiling: Static alpha drop-shadow filter. Upgrade path: Dynamic canvas luminance detection. */
+        /* Deisgned by Kapil Pidhwani: Adaptive contrasting squircle pedestal for brand logos. Ceiling: Static backdrop with luminance detection. Upgrade path: Canvas palette extraction. */
         .company-avatar {
             width: 30px;
             height: 30px;
             border-radius: 8px;
-            /* Continuous squircle */
             object-fit: contain;
             flex-shrink: 0;
-            background: var(--color-surface-secondary);
-            border: 1px solid var(--color-hairline);
-            padding: 3px;
+            background: #ffffff;
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            padding: 2.5px;
             box-sizing: border-box;
-            filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.14));
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+            transition: background-color 0.2s ease, border-color 0.2s ease;
+        }
+
+        [data-theme="dark"] .company-avatar {
+            background: #ffffff;
+            border-color: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.35);
+        }
+
+        .company-avatar.logo-light-mark {
+            background: var(--color-surface-secondary) !important;
         }
 
         .company-monogram {
@@ -1739,9 +1749,61 @@
             /* Rule 4: 600 semiBold */
             padding: 3px 8px;
             border-radius: var(--radius-pill);
+            border: 1px solid transparent;
             white-space: nowrap;
             letter-spacing: -0.01em;
             flex-shrink: 0;
+            transition: all 0.15s ease;
+        }
+
+        /* Deisgned by Kapil Pidhwani: Visual Deal Stage Color Coding System (Apple-grade pastel tints). Ceiling: 4 discrete stage buckets. Upgrade path: Custom user-defined color themes. */
+        .stage-early {
+            background-color: rgba(50, 173, 230, 0.12) !important;
+            color: #0077b6 !important;
+            border-color: rgba(50, 173, 230, 0.28) !important;
+        }
+
+        .stage-venture {
+            background-color: rgba(0, 113, 227, 0.12) !important;
+            color: #005bb5 !important;
+            border-color: rgba(0, 113, 227, 0.28) !important;
+        }
+
+        .stage-growth {
+            background-color: rgba(88, 86, 214, 0.12) !important;
+            color: #5856d6 !important;
+            border-color: rgba(88, 86, 214, 0.28) !important;
+        }
+
+        .stage-debt {
+            background-color: rgba(255, 149, 0, 0.12) !important;
+            color: #b25e00 !important;
+            border-color: rgba(255, 149, 0, 0.28) !important;
+        }
+
+        /* Dark Mode Stage Color Overrides */
+        [data-theme="dark"] .stage-early {
+            background-color: rgba(50, 173, 230, 0.18) !important;
+            color: #5ac8fa !important;
+            border-color: rgba(50, 173, 230, 0.35) !important;
+        }
+
+        [data-theme="dark"] .stage-venture {
+            background-color: rgba(0, 113, 227, 0.22) !important;
+            color: #64d2ff !important;
+            border-color: rgba(0, 113, 227, 0.4) !important;
+        }
+
+        [data-theme="dark"] .stage-growth {
+            background-color: rgba(175, 82, 222, 0.2) !important;
+            color: #af52de !important;
+            border-color: rgba(175, 82, 222, 0.4) !important;
+        }
+
+        [data-theme="dark"] .stage-debt {
+            background-color: rgba(255, 159, 10, 0.2) !important;
+            color: #ffd60a !important;
+            border-color: rgba(255, 159, 10, 0.4) !important;
         }
 
         /* Tier 2: 100% Full-Width Identity Block */
@@ -3890,7 +3952,8 @@
             box-shadow: none !important;
             border: none !important;
             cursor: pointer !important;
-            text-shadow: none !important; /* Fixes Driver.js default white shadow rendering glitch */
+            text-shadow: none !important;
+            /* Fixes Driver.js default white shadow rendering glitch */
             letter-spacing: normal !important;
             line-height: 1.4 !important;
             display: inline-flex !important;
