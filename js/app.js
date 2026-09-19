@@ -37,6 +37,7 @@ let rawDataset = [];
             initDatePopover();
             initSessionLogging();
             initViewSwitcher();
+            initMobileDock();
             fetchMasterData();
 
             document.getElementById('searchInput').addEventListener('input', handleSearchDebounced);
@@ -95,6 +96,11 @@ let rawDataset = [];
                 });
             }
 
+            // Native Touch Swipe-Down Dismiss Handlers (Pillar 7.2)
+            initTouchSwipeToDismiss(document.getElementById('modalOverlay'), document.getElementById('modalContent'), closeModal);
+            initTouchSwipeToDismiss(document.getElementById('trendsModal'), document.querySelector('.trends-modal-content'), closeTrendsModal);
+            initTouchSwipeToDismiss(document.getElementById('aboutModal'), document.querySelector('.about-modal-content'), closeAboutModal);
+
             // Global Keyboard Shortcuts (⌘K search, Esc close, G grid, T table, D dark mode)
             document.addEventListener('keydown', (e) => {
                 if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
@@ -116,6 +122,12 @@ let rawDataset = [];
                     closeDatePopover();
                     closeAboutModal();
                     closeTrendsModal();
+                    const sidebar = document.getElementById('appSidebar');
+                    const backdrop = document.getElementById('mobileFilterBackdrop');
+                    if (sidebar && sidebar.classList.contains('mobile-open')) {
+                        sidebar.classList.remove('mobile-open');
+                        if (backdrop) backdrop.classList.remove('active');
+                    }
                     if (document.activeElement && document.activeElement.id === 'searchInput') {
                         document.activeElement.blur();
                     }
@@ -1627,8 +1639,9 @@ let rawDataset = [];
                 return (a.company_name || '').localeCompare(b.company_name || '');
             });
 
-            // UX Polish: Update active filter chips bar
+            // UX Polish: Update active filter chips bar & mobile filter badge
             renderActiveFiltersBar(search, startDate, endDate);
+            updateMobileFilterBadge();
 
             activeFilteredDataset = filtered;
             if (activeViewMode === 'table') {
@@ -1659,6 +1672,9 @@ let rawDataset = [];
         function setViewMode(mode) {
             if (activeViewMode === mode) return;
             activeViewMode = mode;
+            triggerHaptic('light');
+            updateMobileDockViewButton(mode);
+
             const cardsBtn = document.getElementById('viewCardsBtn');
             const tableBtn = document.getElementById('viewTableBtn');
             if (cardsBtn) {
@@ -3013,5 +3029,201 @@ let rawDataset = [];
                 } else {
                     modal.classList.remove('active');
                 }
+            }
+        }
+
+        /* ==========================================================================
+           Pillar 7: Mobile & Touch Experience Engine (7.1, 7.2, 7.3)
+           ========================================================================== */
+
+        // Deisgned by Kapil Pidhwani: Unified haptic feedback driver with browser feature-detection. Ceiling: Mobile vibration hardware availability. Upgrade path: Web Audio synth clicks.
+        function triggerHaptic(type = 'light') {
+            if (!('vibrate' in navigator)) return;
+            try {
+                if (type === 'light') navigator.vibrate(10);
+                else if (type === 'medium') navigator.vibrate(22);
+                else if (type === 'success') navigator.vibrate([12, 35, 18]);
+                else if (type === 'error') navigator.vibrate([30, 40, 30]);
+            } catch (e) {}
+        }
+
+        // Deisgned by Kapil Pidhwani: Native iOS/Android swipe-down sheet dismissal with spring physics. Ceiling: Touch device viewport. Upgrade path: Inertial fling momentum.
+        function initTouchSwipeToDismiss(overlayEl, contentEl, closeFn) {
+            if (!overlayEl || !contentEl) return;
+
+            let startY = 0;
+            let currentY = 0;
+            let isDragging = false;
+            let startTime = 0;
+
+            contentEl.addEventListener('touchstart', (e) => {
+                if (contentEl.scrollTop > 5) return;
+                const touch = e.touches[0];
+                startY = touch.clientY;
+                currentY = startY;
+                startTime = Date.now();
+                isDragging = true;
+            }, { passive: true });
+
+            contentEl.addEventListener('touchmove', (e) => {
+                if (!isDragging) return;
+                const touch = e.touches[0];
+                currentY = touch.clientY;
+                const deltaY = currentY - startY;
+
+                if (deltaY > 0) {
+                    contentEl.style.transition = 'none';
+                    contentEl.style.transform = `translateY(${deltaY * 0.85}px)`;
+                } else {
+                    contentEl.style.transform = '';
+                }
+            }, { passive: true });
+
+            contentEl.addEventListener('touchend', () => {
+                if (!isDragging) return;
+                isDragging = false;
+                const deltaY = currentY - startY;
+                const elapsedTime = Date.now() - startTime;
+                const velocity = deltaY / Math.max(elapsedTime, 1);
+
+                contentEl.style.transition = 'transform 0.24s cubic-bezier(0.34, 1.56, 0.64, 1)';
+
+                if (deltaY > 85 || (deltaY > 35 && velocity > 0.45)) {
+                    triggerHaptic('medium');
+                    contentEl.style.transform = 'translateY(100%)';
+                    setTimeout(() => {
+                        contentEl.style.transform = '';
+                        contentEl.style.transition = '';
+                        if (typeof closeFn === 'function') closeFn();
+                    }, 180);
+                } else {
+                    contentEl.style.transform = 'translateY(0)';
+                    setTimeout(() => {
+                        contentEl.style.transform = '';
+                        contentEl.style.transition = '';
+                    }, 240);
+                }
+            }, { passive: true });
+        }
+
+        // Mobile Floating Glass Bottom Dock Controller (Pillar 7.1)
+        function initMobileDock() {
+            const searchBtn = document.getElementById('dockSearchBtn');
+            const filterBtn = document.getElementById('dockFilterBtn');
+            const viewBtn = document.getElementById('dockViewToggleBtn');
+            const topBtn = document.getElementById('dockTopBtn');
+            const sidebar = document.getElementById('appSidebar');
+            const backdrop = document.getElementById('mobileFilterBackdrop');
+
+            if (searchBtn) {
+                searchBtn.addEventListener('click', () => {
+                    triggerHaptic('light');
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                    const searchInput = document.getElementById('searchInput');
+                    if (searchInput) {
+                        setTimeout(() => searchInput.focus(), 250);
+                    }
+                });
+            }
+
+            if (filterBtn) {
+                filterBtn.addEventListener('click', () => {
+                    triggerHaptic('medium');
+                    if (sidebar) {
+                        const isOpen = sidebar.classList.contains('mobile-open');
+                        if (isOpen) {
+                            sidebar.classList.remove('mobile-open');
+                            if (backdrop) backdrop.classList.remove('active');
+                            filterBtn.classList.remove('active');
+                        } else {
+                            sidebar.classList.remove('collapsed');
+                            sidebar.classList.add('mobile-open');
+                            if (backdrop) backdrop.classList.add('active');
+                            filterBtn.classList.add('active');
+                        }
+                    }
+                });
+            }
+
+            if (backdrop) {
+                backdrop.addEventListener('click', () => {
+                    if (sidebar) sidebar.classList.remove('mobile-open');
+                    backdrop.classList.remove('active');
+                    if (filterBtn) filterBtn.classList.remove('active');
+                    triggerHaptic('light');
+                });
+            }
+
+            if (viewBtn) {
+                viewBtn.addEventListener('click', () => {
+                    triggerHaptic('light');
+                    const targetMode = activeViewMode === 'cards' ? 'table' : 'cards';
+                    setViewMode(targetMode);
+                });
+            }
+
+            if (topBtn) {
+                topBtn.addEventListener('click', () => {
+                    triggerHaptic('light');
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+            }
+
+            const applyBtn = document.getElementById('sidebarApplyMobileBtn');
+            if (applyBtn) {
+                applyBtn.addEventListener('click', () => {
+                    triggerHaptic('success');
+                    if (sidebar) sidebar.classList.remove('mobile-open');
+                    if (backdrop) backdrop.classList.remove('active');
+                    if (filterBtn) filterBtn.classList.remove('active');
+                    applyFilters();
+                });
+            }
+
+            // Swipe-down to dismiss mobile filter sheet
+            if (backdrop && sidebar) {
+                initTouchSwipeToDismiss(backdrop, sidebar, () => {
+                    if (sidebar) sidebar.classList.remove('mobile-open');
+                    if (backdrop) backdrop.classList.remove('active');
+                    if (filterBtn) filterBtn.classList.remove('active');
+                });
+            }
+        }
+
+        function updateMobileDockViewButton(mode) {
+            const iconEl = document.getElementById('dockViewIcon');
+            const labelEl = document.getElementById('dockViewLabel');
+            if (!iconEl || !labelEl) return;
+            if (mode === 'table') {
+                iconEl.textContent = 'view_agenda';
+                labelEl.textContent = 'Cards';
+            } else {
+                iconEl.textContent = 'table_chart';
+                labelEl.textContent = 'Table';
+            }
+        }
+
+        function updateMobileFilterBadge() {
+            const badgeEl = document.getElementById('dockFilterBadge');
+            if (!badgeEl) return;
+
+            let activeFilterCount = 0;
+            if (typeof activeStage !== 'undefined' && activeStage !== 'all') activeFilterCount++;
+            if (typeof activeSector !== 'undefined' && activeSector !== 'all') activeFilterCount++;
+            if (typeof activeAmount !== 'undefined' && activeAmount !== 'all') activeFilterCount++;
+            if (typeof activeGeo !== 'undefined' && activeGeo !== 'all') activeFilterCount++;
+            
+            const searchInput = document.getElementById('searchInput');
+            if (searchInput && searchInput.value.trim().length > 0) activeFilterCount++;
+
+            const startDate = document.getElementById('startDateInput');
+            const endDate = document.getElementById('endDateInput');
+            if ((startDate && startDate.value) || (endDate && endDate.value)) activeFilterCount++;
+
+            if (activeFilterCount > 0) {
+                badgeEl.textContent = activeFilterCount;
+                badgeEl.style.display = 'flex';
+            } else {
+                badgeEl.style.display = 'none';
             }
         }

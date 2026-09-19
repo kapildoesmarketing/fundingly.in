@@ -4017,15 +4017,34 @@
                 flex-direction: column;
             }
 
+            /* Deisgned by Kapil Pidhwani: Hide sidebar filter block by default on mobile/tablet viewports. Ceiling: max-width 900px. Upgrade path: Drawer overlay. */
             .app-sidebar {
-                position: static;
+                display: none !important;
+                position: fixed !important;
+                bottom: 0 !important;
+                left: 0 !important;
+                right: 0 !important;
                 width: 100% !important;
                 max-width: 100% !important;
-                height: auto;
-                border-right: none;
-                border-bottom: 1px solid var(--color-hairline);
-                transition: max-height 0.25s ease, opacity 0.2s ease;
-                overflow: hidden;
+                height: auto !important;
+                max-height: 85dvh !important;
+                z-index: 995 !important;
+                background: var(--color-surface) !important;
+                border-radius: 24px 24px 0 0 !important;
+                border-top: 1px solid var(--color-hairline) !important;
+                border-bottom: none !important;
+                box-shadow: 0 -8px 32px rgba(0, 0, 0, 0.25) !important;
+                padding: 12px 18px calc(24px + env(safe-area-inset-bottom, 0px)) 18px !important;
+                overflow-y: auto !important;
+                touch-action: pan-y;
+                overscroll-behavior-y: contain;
+            }
+
+            .app-sidebar.mobile-open {
+                display: flex !important;
+                flex-direction: column !important;
+                transform: translateY(0) !important;
+                animation: slideUpSheet 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
             }
 
             .app-sidebar .sidebar-edge-toggle {
@@ -4048,11 +4067,11 @@
             }
 
             .app-main {
-                padding: 16px;
+                padding: 14px 12px;
             }
 
             .btn-mobile-filter-toggle {
-                display: inline-flex;
+                display: none !important;
             }
         }
 
@@ -4272,4 +4291,353 @@
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
+        }
+
+        /* ==========================================================================
+           Pillar 7: Mobile & Touch Native Experience (7.1, 7.2, 7.3)
+           ========================================================================== */
+
+        /* 1. Global Touch Polish & Tap Highlight Removal */
+        button, a, .deal-card, .stage-pill, .chip-btn, .btn-view-toggle, .dock-btn, .btn-date-trigger, .btn-theme-toggle {
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+        }
+
+        button:active, .deal-card:active {
+            transform: scale(0.985);
+        }
+
+        /* 2. Modal Drag Handle for Native Bottom Sheet Feel (Pillar 7.2) */
+        .modal-drag-handle {
+            width: 40px;
+            height: 5px;
+            background: var(--color-hairline);
+            border-radius: 3px;
+            margin: 0 auto 14px auto;
+            cursor: grab;
+            display: none;
+            flex-shrink: 0;
+            transition: background-color 0.2s ease;
+        }
+
+        .modal-drag-handle:active {
+            background: var(--color-text-secondary);
+            cursor: grabbing;
+        }
+
+        /* 3. Apple-Style Mobile Floating Glass Bottom Dock (Pillar 7.1) */
+        .mobile-bottom-dock {
+            display: none;
+            position: fixed;
+            bottom: calc(14px + env(safe-area-inset-bottom, 0px));
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 998;
+            background: rgba(255, 255, 255, 0.84);
+            backdrop-filter: blur(24px) saturate(190%);
+            -webkit-backdrop-filter: blur(24px) saturate(190%);
+            border: 1px solid var(--color-hairline);
+            border-radius: var(--radius-pill);
+            padding: 4px 6px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.14), 0 2px 8px rgba(0, 0, 0, 0.06);
+            gap: 3px;
+            align-items: center;
+            max-width: calc(100vw - 24px);
+            touch-action: manipulation;
+        }
+
+        [data-theme="dark"] .mobile-bottom-dock {
+            background: rgba(22, 22, 28, 0.88);
+            border-color: rgba(255, 255, 255, 0.14);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5), 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .dock-btn {
+            background: transparent;
+            border: none;
+            outline: none;
+            border-radius: var(--radius-pill);
+            padding: 7px 12px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 2px;
+            color: var(--color-text-secondary);
+            cursor: pointer;
+            position: relative;
+            min-width: 54px;
+            min-height: 44px;
+            -webkit-tap-highlight-color: transparent;
+            transition: transform 0.15s cubic-bezier(0.34, 1.56, 0.64, 1), background-color 0.15s ease, color 0.15s ease;
+        }
+
+        .dock-btn:active {
+            transform: scale(0.90);
+            background: var(--color-surface-secondary);
+        }
+
+        .dock-btn .material-symbols-outlined {
+            font-size: 21px;
+            line-height: 1;
+        }
+
+        .dock-btn:hover .material-symbols-outlined {
+            color: var(--color-primary);
+        }
+
+        .dock-btn.active {
+            color: var(--color-primary);
+            background: var(--color-primary-subtle);
+        }
+
+        .dock-label {
+            font-size: 10px;
+            font-weight: 600;
+            line-height: 1;
+            letter-spacing: -0.01em;
+        }
+
+        .dock-badge {
+            position: absolute;
+            top: 2px;
+            right: 6px;
+            background: var(--color-primary);
+            color: #ffffff;
+            font-size: 10px;
+            font-weight: 700;
+            min-width: 16px;
+            height: 16px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 3px;
+            box-shadow: 0 2px 6px rgba(0, 102, 204, 0.4);
+            animation: dockBadgePop 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        @keyframes dockBadgePop {
+            0% { transform: scale(0); }
+            100% { transform: scale(1); }
+        }
+
+        /* 4. Mobile Backdrop & Drawer */
+        .mobile-filter-backdrop {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.45);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            z-index: 990;
+            opacity: 0;
+            transition: opacity 0.25s ease;
+        }
+
+        .mobile-filter-backdrop.active {
+            display: block;
+            opacity: 1;
+        }
+
+        .sidebar-mobile-actions {
+            display: none;
+            padding-top: 14px;
+            margin-top: 14px;
+            border-top: 1px solid var(--color-hairline);
+            flex-shrink: 0;
+        }
+
+        .btn-sidebar-apply {
+            width: 100%;
+            padding: 12px 18px;
+            background: var(--color-primary);
+            color: #ffffff;
+            border: none;
+            border-radius: var(--radius-md, 12px);
+            font-size: 14px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            cursor: pointer;
+            box-shadow: 0 4px 14px rgba(0, 102, 204, 0.3);
+            transition: transform 0.15s ease, background-color 0.15s ease;
+        }
+
+        .btn-sidebar-apply:active {
+            transform: scale(0.98);
+            background: var(--color-primary-hover);
+        }
+
+        /* Mobile Viewport Optimizations (≤ 680px) */
+        @media (max-width: 680px) {
+            .mobile-bottom-dock {
+                display: flex;
+            }
+
+            .sidebar-mobile-actions {
+                display: block;
+            }
+
+            .modal-drag-handle {
+                display: block;
+            }
+
+            .modal-overlay {
+                align-items: flex-end !important;
+                padding: 0 !important;
+            }
+
+            .modal-content,
+            .trends-modal-content,
+            .about-modal-content {
+                border-bottom-left-radius: 0 !important;
+                border-bottom-right-radius: 0 !important;
+                border-top-left-radius: 24px !important;
+                border-top-right-radius: 24px !important;
+                max-height: 88dvh !important;
+                width: 100% !important;
+                max-width: 100% !important;
+                padding: 16px 18px calc(24px + env(safe-area-inset-bottom, 0px)) 18px !important;
+                touch-action: pan-y;
+                overscroll-behavior-y: contain;
+            }
+
+            .timeline-stream,
+            .table-view-container,
+            .main-footer {
+                padding-bottom: calc(88px + env(safe-area-inset-bottom, 0px)) !important;
+            }
+
+            .btn-back-to-top {
+                display: none !important;
+            }
+
+            /* Single-row mobile toolbar without awkward wrapping */
+            .timeline-toolbar {
+                display: flex;
+                flex-direction: row;
+                flex-wrap: nowrap;
+                align-items: center;
+                justify-content: space-between;
+                gap: 8px;
+                padding: 8px 10px;
+                margin-bottom: 12px;
+            }
+
+            .toolbar-left {
+                flex: 1 1 auto;
+                min-width: 0;
+            }
+
+            .toolbar-quarter-badge {
+                max-width: 100%;
+                padding: 4px 8px;
+                font-size: 11.5px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+
+            .toolbar-right {
+                flex-shrink: 0;
+            }
+
+            .view-switcher-group {
+                gap: 2px;
+            }
+
+            .btn-view-toggle {
+                padding: 4px 8px;
+                font-size: 11.5px;
+            }
+
+            /* Compact Sticky Week Section Header */
+            .week-header {
+                top: 96px;
+                padding: 8px 10px;
+                gap: 8px;
+                border-radius: 12px;
+            }
+
+            .week-title-row {
+                gap: 6px;
+            }
+
+            .week-number {
+                font-size: 13.5px;
+            }
+
+            .week-date-range {
+                font-size: 10.5px;
+                padding: 1px 6px;
+            }
+
+            .week-metrics-pill {
+                font-size: 10px;
+                padding: 2px 6px;
+            }
+
+            .btn-week-trends {
+                padding: 3px 8px;
+                font-size: 11px;
+            }
+
+            /* Single-column Mobile Deal Cards */
+            .company-card {
+                padding: 13px 14px;
+                border-radius: 14px;
+                gap: 8px;
+            }
+
+            .card-top-bar {
+                margin-bottom: 4px;
+            }
+
+            .company-name {
+                font-size: 14.5px;
+            }
+
+            .company-desc {
+                font-size: 12px;
+                line-height: 1.4;
+                -webkit-line-clamp: 2;
+            }
+
+            .deal-card-tags {
+                gap: 4px;
+            }
+
+            .tag-pill {
+                font-size: 10.5px;
+                padding: 2px 6px;
+            }
+
+            .app-sidebar.mobile-open {
+                position: fixed !important;
+                bottom: 0 !important;
+                left: 0 !important;
+                right: 0 !important;
+                width: 100% !important;
+                max-width: 100% !important;
+                max-height: 82dvh !important;
+                z-index: 995 !important;
+                background: var(--color-surface) !important;
+                border-radius: 24px 24px 0 0 !important;
+                border-top: 1px solid var(--color-hairline) !important;
+                border-bottom: none !important;
+                box-shadow: 0 -8px 32px rgba(0, 0, 0, 0.2) !important;
+                display: flex !important;
+                flex-direction: column !important;
+                transform: translateY(0) !important;
+                animation: slideUpSheet 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+                padding-bottom: calc(20px + env(safe-area-inset-bottom, 0px)) !important;
+            }
+        }
+
+        @keyframes slideUpSheet {
+            from { transform: translateY(100%); }
+            to { transform: translateY(0); }
         }

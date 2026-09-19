@@ -154,6 +154,7 @@
     <div class="app-layout">
         <!-- Deisgned by Kapil Pidhwani: Collapsible filter sidebar (15-20% width). Ceiling: Desktop clamp width 220-280px. Upgrade path: Drawer overlay on mobile viewports. -->
         <aside class="app-sidebar" id="appSidebar" aria-label="Filter sidebar">
+            <div class="modal-drag-handle" aria-hidden="true"></div>
             <!-- Deisgned by Kapil Pidhwani: Sticky center-edge rail toggle button. Ceiling: Absolute rail alignment. Upgrade path: Draggable resizing rail. -->
             <button type="button" class="sidebar-edge-toggle" id="sidebarEdgeToggleBtn" title="Collapse Filters"
                 aria-label="Collapse Filters">
@@ -243,6 +244,14 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Mobile Drawer Bottom Actions -->
+            <div class="sidebar-mobile-actions">
+                <button type="button" class="btn-sidebar-apply" id="sidebarApplyMobileBtn">
+                    <span class="material-symbols-outlined" style="font-size: 18px;">check</span>
+                    <span>Apply Filters</span>
+                </button>
+            </div>
         </aside>
 
         <!-- Main Content Layout -->
@@ -256,11 +265,6 @@
                         <span class="quarter-badge-sub" id="toolbarQuarterSub"></span>
                         <span class="quarter-badge-metrics" id="toolbarQuarterMetrics"></span>
                     </div>
-                    <button type="button" class="btn-mobile-filter-toggle" id="mobileFilterToggleBtn"
-                        title="Toggle Filters Sidebar" aria-label="Toggle Filters Sidebar">
-                        <span class="material-symbols-outlined">tune</span>
-                        <span>Filters</span>
-                    </button>
                 </div>
                 <div class="toolbar-right">
                     <div class="view-switcher-group" role="radiogroup" aria-label="View layout mode">
@@ -415,6 +419,7 @@
     <!-- Apple-Style Detail Sheet / Modal Dialog -->
     <div class="modal-overlay" id="modalOverlay" role="dialog" aria-modal="true" aria-label="Funding Deal Dossier">
         <div class="modal-content" id="modalContent">
+            <div class="modal-drag-handle" aria-hidden="true"></div>
             <button class="close-btn" id="closeModal" aria-label="Close dialog">
                 <span class="material-symbols-outlined">close</span>
             </button>
@@ -425,6 +430,7 @@
     <!-- Executive-Grade Weekly Trends Modal -->
     <div class="modal-overlay" id="trendsModal" role="dialog" aria-modal="true" aria-labelledby="trendsModalTitle">
         <div class="modal-content trends-modal-content">
+            <div class="modal-drag-handle" aria-hidden="true"></div>
             <button class="close-btn" id="closeTrendsModalBtn" aria-label="Close trends dialog">
                 <span class="material-symbols-outlined">close</span>
             </button>
@@ -449,6 +455,7 @@
     <!-- About Fundingly Modal -->
     <div class="modal-overlay" id="aboutModal" role="dialog" aria-modal="true" aria-label="About Fundingly.in">
         <div class="modal-content about-modal-content">
+            <div class="modal-drag-handle" aria-hidden="true"></div>
             <button class="close-btn" id="closeAboutModalBtn" aria-label="Close about dialog">
                 <span class="material-symbols-outlined">close</span>
             </button>
@@ -458,12 +465,36 @@
         </div>
     </div>
 
-    <!-- Floating Back-to-Top Button (Apple Frosted Pill) -->
+    <!-- Floating Back-to-Top Button (Apple Frosted Pill for Desktop) -->
     <button type="button" class="btn-back-to-top" id="backToTopBtn" aria-label="Back to top" title="Back to top"
         style="display: none;">
         <span class="material-symbols-outlined">arrow_upward</span>
         <span>Top</span>
     </button>
+
+    <!-- Mobile Bottom Floating Glass Dock (Pillar 7.1) -->
+    <nav class="mobile-bottom-dock" id="mobileBottomDock" aria-label="Mobile Quick Navigation">
+        <button type="button" class="dock-btn" id="dockSearchBtn" aria-label="Search" title="Search">
+            <span class="material-symbols-outlined">search</span>
+            <span class="dock-label">Search</span>
+        </button>
+        <button type="button" class="dock-btn" id="dockFilterBtn" aria-label="Filters" title="Open Filters">
+            <span class="material-symbols-outlined">tune</span>
+            <span class="dock-label">Filters</span>
+            <span class="dock-badge" id="dockFilterBadge" style="display: none;">0</span>
+        </button>
+        <button type="button" class="dock-btn" id="dockViewToggleBtn" aria-label="Toggle View" title="Toggle Table/Cards View">
+            <span class="material-symbols-outlined" id="dockViewIcon">table_chart</span>
+            <span class="dock-label" id="dockViewLabel">Table</span>
+        </button>
+        <button type="button" class="dock-btn" id="dockTopBtn" aria-label="Scroll to top" title="Scroll to top">
+            <span class="material-symbols-outlined">arrow_upward</span>
+            <span class="dock-label">Top</span>
+        </button>
+    </nav>
+
+    <!-- Mobile Filter Backdrop -->
+    <div class="mobile-filter-backdrop" id="mobileFilterBackdrop" aria-hidden="true"></div>
 
     <!-- Application Script -->
     <script src="js/app.js"></script>
