@@ -4801,6 +4801,7 @@
                 grid-column: 1 !important;
                 grid-row: 2 !important;
                 justify-self: start !important;
+                margin-left: 21px !important;
                 font-size: 9.5px !important;
                 padding: 1px 6px !important;
                 white-space: nowrap !important;
