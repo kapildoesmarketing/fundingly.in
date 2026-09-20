@@ -38,6 +38,7 @@ companies.forEach(comp => {
     // AdSense placeholders
     assert(html.includes('class="ad-container-wrapper"'), `Missing AdSense container in ${comp}`);
     assert(html.includes('class="adsbygoogle"'), `Missing adsbygoogle tag in ${comp}`);
+    assert(html.includes('ca-pub-6148655095183291'), `Missing AdSense client ca-pub-6148655095183291 in ${comp}`);
 
     // Extract and parse JSON-LD
     const jsonLdMatch = html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/);

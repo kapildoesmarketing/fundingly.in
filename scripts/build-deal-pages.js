@@ -481,7 +481,7 @@ function generateCompanyPageHtml(compData, deal, totalRaisedUsd, relatedDeals) {
     <meta name="twitter:image" content="https://fundingly.in/assets/og-preview.png">
 
     <!-- Google AdSense Script -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-0000000000000000" crossorigin="anonymous"></script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6148655095183291" crossorigin="anonymous"></script>
 
     <!-- Structured Data (JSON-LD) for Google Rich Snippets -->
     <script type="application/ld+json">
@@ -1185,7 +1185,7 @@ ${jsonLdString}
                     <span class="ad-label">Sponsored</span>
                     <ins class="adsbygoogle"
                          style="display:block"
-                         data-ad-client="ca-pub-0000000000000000"
+                         data-ad-client="ca-pub-6148655095183291"
                          data-ad-slot="0000000000"
                          data-ad-format="auto"
                          data-full-width-responsive="true"></ins>
@@ -1258,7 +1258,7 @@ ${jsonLdString}
             <span class="ad-label">Sponsored Intelligence</span>
             <ins class="adsbygoogle"
                  style="display:block"
-                 data-ad-client="ca-pub-0000000000000000"
+                 data-ad-client="ca-pub-6148655095183291"
                  data-ad-slot="0000000000"
                  data-ad-format="horizontal"
                  data-full-width-responsive="true"></ins>
