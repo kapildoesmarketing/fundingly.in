@@ -1683,6 +1683,7 @@
             font-size: 12px;
             font-weight: 600;
             color: var(--color-primary);
+            text-decoration: none;
             cursor: pointer;
             box-shadow: none;
             transition: background-color 0.15s ease, border-color 0.15s ease, transform 0.1s ease;

@@ -25,9 +25,10 @@ Last Updated: September 2026
 [✓] 11. Redesigned 404 Error Page with interactive mascot animation and deep-link domain routing.
 [✓] 12. 61 Pre-Rendered Static Company Dossier Pages (/company/<domain>/) with full dataset parity.
 [✓] 13. Rich Multi-Channel Sharing Suite (WhatsApp, LinkedIn, X/Twitter, 1-Click Link Copy).
-[✓] 14. Automated sitemap.xml generator with 67 fully indexed URLs.
-[✓] 15. Google AdSense Integration (Publisher ca-pub-6148655095183291 + ads.txt crawler authorization).
-[✓] 16. Mobile Touch Optimizations: Floating glass bottom dock, view switcher, and haptic feedback.
+[✓] 14. Dedicated Static Weekly Trend Report Pages (/trends/week-<N>-<YYYY>/) with 1:1 modal layout parity, Google AdSense units, weekly reports archive, and social sharing suite.
+[✓] 15. Automated sitemap.xml generator with 71 fully indexed URLs.
+[✓] 16. Google AdSense Integration (Publisher ca-pub-6148655095183291 + ads.txt crawler authorization).
+[✓] 17. Mobile Touch Optimizations: Floating glass bottom dock, view switcher, and haptic feedback.
 
 
 ================================================================================

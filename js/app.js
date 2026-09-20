@@ -1121,10 +1121,12 @@ let rawDataset = [];
           <span class="material-symbols-outlined week-chevron" aria-hidden="true">expand_more</span>
           <h2 class="week-number">${escapeHtml(headerTitle)}</h2>
         </div>
-        <button type="button" class="btn-week-trends" title="View Trends for ${escapeHtml(headerTitle)}">
+        ${group.weekInfo && group.weekInfo.weekNo && group.weekInfo.year ? `
+        <a href="trends/week-${group.weekInfo.weekNo}-${group.weekInfo.year}/" class="btn-week-trends" title="View Trends Report for ${escapeHtml(headerTitle)}">
           <span class="material-symbols-outlined trends-icon">trending_up</span>
           <span class="trends-btn-label">View Trends</span>
-        </button>
+        </a>
+        ` : ''}
         ${headerRange}
         <span class="week-metrics-pill">${dealCountText}${totalCapitalText}</span>
       `;
@@ -1133,7 +1135,6 @@ let rawDataset = [];
             if (trendsBtn) {
                 trendsBtn.addEventListener('click', (e) => {
                     e.stopPropagation();
-                    openTrendsModal(key, headerTitle);
                 });
             }
 
@@ -2874,6 +2875,15 @@ let rawDataset = [];
         }
 
         function openTrendsModal(weekKey, weekTitle) {
+            if (weekKey && weekKey.includes('-W')) {
+                const parts = weekKey.split('-W');
+                const year = parts[0];
+                const weekNo = parseInt(parts[1], 10);
+                if (year && weekNo) {
+                    window.location.href = `trends/week-${weekNo}-${year}/`;
+                    return;
+                }
+            }
             renderTrendsModal(weekKey, weekTitle);
             const modal = document.getElementById('trendsModal');
             if (modal) {

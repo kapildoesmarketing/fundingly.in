@@ -1484,7 +1484,21 @@ function generateSitemap(companyUrls, nowISO) {
         { url: 'https://fundingly.in/founders-note/', priority: '0.8', changefreq: 'weekly' }
     ];
 
-    const allUrls = [...staticPages, ...companyUrls];
+    const trendsUrls = [];
+    const trendsDir = path.join(REPO_ROOT, 'trends');
+    if (fs.existsSync(trendsDir)) {
+        const trendFolders = fs.readdirSync(trendsDir).filter(f => fs.statSync(path.join(trendsDir, f)).isDirectory());
+        trendFolders.forEach(folder => {
+            trendsUrls.push({
+                url: `https://fundingly.in/trends/${folder}/`,
+                lastmod: nowISO,
+                priority: '0.9',
+                changefreq: 'weekly'
+            });
+        });
+    }
+
+    const allUrls = [...staticPages, ...trendsUrls, ...companyUrls];
 
     const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">

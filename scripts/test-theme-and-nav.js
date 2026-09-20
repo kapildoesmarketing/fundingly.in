@@ -25,6 +25,15 @@ if (fs.existsSync(companyDir)) {
     });
 }
 
+// Also sample generated trend pages
+const trendsDir = path.join(REPO_ROOT, 'trends');
+if (fs.existsSync(trendsDir)) {
+    const trendFolders = fs.readdirSync(trendsDir).filter(f => fs.statSync(path.join(trendsDir, f)).isDirectory());
+    trendFolders.forEach(folder => {
+        pagesToCheck.push(path.join(trendsDir, folder, 'index.html'));
+    });
+}
+
 let verifiedPages = 0;
 
 pagesToCheck.forEach(filePath => {
