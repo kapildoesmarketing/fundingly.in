@@ -1,0 +1,17 @@
+{
+  "name": "fundingly.in",
+  "version": "1.0.0",
+  "description": "Indian Startup Funding Intelligence Platform",
+  "main": "js/app.js",
+  "scripts": {
+    "build:pages": "node scripts/build-deal-pages.js"
+  },
+  "keywords": [
+    "venture-capital",
+    "indian-startups",
+    "funding-data",
+    "seo"
+  ],
+  "author": "Kapil Pidhwani",
+  "license": "MIT"
+}

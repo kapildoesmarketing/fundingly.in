@@ -1,3 +1,10 @@
+# OS metadata
 .DS_Store
 */.DS_Store
 Thumbs.db
+
+# Dependencies
+node_modules/
+
+# Generated Static Deal Pages (built automatically during GitHub Actions deployment)
+company/

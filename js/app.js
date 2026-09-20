@@ -844,6 +844,14 @@ let rawDataset = [];
             }
         }
 
+        // Clean slug generator for company static URLs
+        function slugify(text) {
+            return String(text || '')
+                .toLowerCase()
+                .replace(/[^a-z0-9]+/g, '-')
+                .replace(/(^-|-$)+/g, '') || 'startup';
+        }
+
         // Deisgned by Kapil Pidhwani: Deterministic 2-letter uppercase monogram generator. Ceiling: English alphanumeric parsing. Upgrade path: Unicode grapheme cluster segmentation for global scripts.
         function getMonogram(name) {
             if (!name) return '•';
@@ -2196,6 +2204,8 @@ let rawDataset = [];
 
             const modalBody = document.getElementById('modalBody');
             const companyDomain = extractDomain(company.company_website);
+            const pageSlug = companyDomain || slugify(company.company_name);
+            const dedicatedPageUrl = 'company/' + encodeURIComponent(pageSlug) + '/';
             const dateFormatted = escapeHtml(formatFundingDateDisplay(company.date_of_funding));
             const companyName = company.company_name || '';
 
@@ -2259,6 +2269,9 @@ let rawDataset = [];
               ` : ''}
             </div>
             <div class="modal-hero-utility-row">
+              <a href="${dedicatedPageUrl}" target="_blank" rel="noopener noreferrer" class="modal-micro-btn" title="Open Dedicated SEO Page" aria-label="Open Dedicated SEO Page">
+                <span class="material-symbols-outlined">open_in_new</span>
+              </a>
               <button type="button" class="modal-micro-btn" id="copySummaryBtn" onclick="copyDealSummary()" title="Copy Markdown deal summary for Slack/Email" aria-label="Copy Deal Summary">
                 <span class="material-symbols-outlined" id="copySummaryIcon">assignment</span>
               </button>
@@ -2365,10 +2378,16 @@ let rawDataset = [];
                 <span class="material-symbols-outlined" style="font-size: 16px;">edit_note</span>
                 <span>Suggest Correction</span>
             </a>
-            <button type="button" class="btn-detail" onclick="copyDealSummary()" style="background: var(--color-surface-secondary); color: var(--color-text-primary); border: 1px solid var(--color-hairline);" title="Copy markdown deal memo">
-                <span class="material-symbols-outlined" style="font-size: 16px;">content_copy</span>
-                <span>Copy Memo</span>
-            </button>
+            <div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;">
+                <button type="button" class="btn-detail" onclick="copyDealSummary()" style="background: var(--color-surface-secondary); color: var(--color-text-primary); border: 1px solid var(--color-hairline);" title="Copy markdown deal memo">
+                    <span class="material-symbols-outlined" style="font-size: 16px;">content_copy</span>
+                    <span>Copy Memo</span>
+                </button>
+                <a href="${dedicatedPageUrl}" target="_blank" rel="noopener noreferrer" class="btn-detail" style="background: var(--color-primary); color: #ffffff; text-decoration: none; border: 1px solid var(--color-primary); display: inline-flex; align-items: center; gap: 6px; padding: 6px 14px; border-radius: var(--radius-pill); font-size: 13px; font-weight: 600;" title="Open dedicated static dossier page">
+                    <span>Open Page</span>
+                    <span class="material-symbols-outlined" style="font-size: 15px;">open_in_new</span>
+                </a>
+            </div>
         </div>
       `;
 
