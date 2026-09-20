@@ -1957,6 +1957,24 @@
             letter-spacing: -0.01em;
         }
 
+        .meta-value-amount {
+            font-size: 15px;
+            font-weight: 800;
+            color: var(--color-primary);
+            letter-spacing: -0.02em;
+            font-variant-numeric: tabular-nums lining-nums;
+        }
+
+        .meta-value-secondary {
+            font-size: 11.5px;
+            font-weight: 600;
+            color: var(--color-text-secondary);
+        }
+
+        [data-theme="dark"] .meta-value-amount {
+            color: #5ac8fa;
+        }
+
         .card-footer {
             display: flex;
             justify-content: space-between;
@@ -3827,12 +3845,37 @@
 
         .empty-state {
             text-align: center;
-            padding: 80px 20px;
+            padding: 60px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
         }
 
-        .empty-icon {
-            font-size: 44px;
-            color: var(--color-text-tertiary);
+        .empty-state-avatar-wrap {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: var(--color-surface-secondary);
+            border: 1px solid var(--color-hairline);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 16px auto;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+            animation: emptyMascotFloat 3s ease-in-out infinite alternate;
+        }
+
+        .empty-state-mascot {
+            width: 90px;
+            height: 90px;
+            object-fit: contain;
+            display: block;
+        }
+
+        @keyframes emptyMascotFloat {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-6px); }
         }
 
         .empty-title {
@@ -4758,6 +4801,71 @@
             .tag-pill {
                 font-size: 10.5px;
                 padding: 2px 6px;
+            }
+
+            /* Mobile Optimized Table View */
+            .dense-deals-table th,
+            .dense-deals-table td {
+                padding: 10px 10px;
+                font-size: 12px;
+            }
+
+            .dense-deals-table th:first-child,
+            .dense-deals-table td:first-child {
+                position: sticky;
+                left: 0;
+                background: var(--color-surface);
+                z-index: 5;
+                box-shadow: 2px 0 6px rgba(0, 0, 0, 0.04);
+            }
+
+            .dense-deals-table th:first-child {
+                background: var(--color-surface-secondary);
+                z-index: 15;
+            }
+
+            [data-theme="dark"] .dense-deals-table td:first-child {
+                background: #111116;
+                box-shadow: 2px 0 8px rgba(0, 0, 0, 0.35);
+            }
+
+            [data-theme="dark"] .dense-deals-table th:first-child {
+                background: #181820;
+                box-shadow: 2px 0 8px rgba(0, 0, 0, 0.35);
+            }
+
+            .table-company-cell {
+                min-width: 135px;
+                gap: 6px;
+            }
+
+            .table-company-cell .company-avatar,
+            .table-company-cell .company-monogram {
+                width: 24px;
+                height: 24px;
+                font-size: 10px;
+            }
+
+            .table-company-name {
+                font-size: 12px;
+            }
+
+            .table-amount-val {
+                font-size: 12px;
+            }
+
+            .table-amount-inr {
+                display: none;
+            }
+
+            .table-stage-pill {
+                padding: 2px 6px;
+                font-size: 10px;
+            }
+
+            .btn-table-action {
+                padding: 4px 8px;
+                font-size: 11px;
             }
 
             .app-sidebar.mobile-open {

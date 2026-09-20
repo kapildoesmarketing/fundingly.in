@@ -206,11 +206,12 @@ let rawDataset = [];
             applyTheme(newTheme, true);
         }
 
-        // Suggestion 3.1: Multi-Dimensional Filter State
+        // Suggestion 3.1: Multi-Dimensional Filter State & In-Week Sort
         let activeStage = 'all';
         let activeSector = 'all';
         let activeAmount = 'all';
         let activeGeo = 'all';
+        let activeDealSort = 'latest';
 
         // Deisgned by Kapil Pidhwani: Collapsible sidebar controller with edge rail toggle, header collapse button, and localStorage persistence. Ceiling: Static binary state. Upgrade path: Gesture swipe for mobile drawer.
         function initSidebar() {
@@ -257,7 +258,7 @@ let rawDataset = [];
         }
 
 
-        // Deisgned by Kapil Pidhwani: Multi-Dimensional Filter Controller. Ceiling: 4 dimensions (Stage, Sector, Amount, Geo). Upgrade path: Multi-select checkboxes per dimension.
+        // Deisgned by Kapil Pidhwani: Multi-Dimensional Filter & Sort Controller. Ceiling: 4 dimensions + 1 sort order. Upgrade path: Multi-select checkboxes per dimension.
         function initFilterDimensionBar() {
             const stageTrack = document.getElementById('stagePillTrack');
             if (stageTrack) {
@@ -298,6 +299,15 @@ let rawDataset = [];
                 geoSelect.addEventListener('change', () => {
                     activeGeo = geoSelect.value;
                     geoSelect.classList.toggle('has-value', activeGeo !== 'all');
+                    applyFilters();
+                });
+            }
+
+            const sortSelect = document.getElementById('dealSortSelect');
+            if (sortSelect) {
+                sortSelect.addEventListener('change', () => {
+                    activeDealSort = sortSelect.value;
+                    triggerHaptic('light');
                     applyFilters();
                 });
             }
@@ -1049,6 +1059,33 @@ let rawDataset = [];
                 return b.localeCompare(a);
             });
 
+            // Deisgned by Kapil Pidhwani: In-week deal reshuffle engine based on active sort criteria.
+            groupsMap.forEach(group => {
+                group.items.sort((itemA, itemB) => {
+                    const a = itemA.company;
+                    const b = itemB.company;
+                    if (activeDealSort === 'amount-desc') {
+                        const amtA = Number(a.funding_amount_usd) || 0;
+                        const amtB = Number(b.funding_amount_usd) || 0;
+                        if (amtB !== amtA) return amtB - amtA;
+                        return (a.company_name || '').localeCompare(b.company_name || '');
+                    } else if (activeDealSort === 'amount-asc') {
+                        const amtA = Number(a.funding_amount_usd) || 0;
+                        const amtB = Number(b.funding_amount_usd) || 0;
+                        if (amtA !== amtB) return amtA - amtB;
+                        return (a.company_name || '').localeCompare(b.company_name || '');
+                    } else if (activeDealSort === 'company-asc') {
+                        return (a.company_name || '').localeCompare(b.company_name || '');
+                    } else {
+                        // default: latest date first
+                        const dateA = a.date_of_funding || '1970-01-01';
+                        const dateB = b.date_of_funding || '1970-01-01';
+                        if (dateB !== dateA) return dateB.localeCompare(dateA);
+                        return (Number(b.funding_amount_usd) || 0) - (Number(a.funding_amount_usd) || 0);
+                    }
+                });
+            });
+
             return sortedKeys.map(key => groupsMap.get(key));
         }
 
@@ -1169,15 +1206,15 @@ let rawDataset = [];
             <div class="card-meta-box">
               <div class="meta-block">
                 <span class="meta-label">Amount</span>
-                <span class="meta-value">${amountFormatted}</span>
+                <span class="meta-value meta-value-amount">${amountFormatted}</span>
               </div>
               <div class="meta-block">
                 <span class="meta-label">Date</span>
-                <span class="meta-value">${escapeHtml(date)}</span>
+                <span class="meta-value meta-value-secondary">${escapeHtml(date)}</span>
               </div>
               <div class="meta-block" style="grid-column: span 2;">
                 <span class="meta-label">Headquarters</span>
-                <span class="meta-value">${escapeHtml(location)}</span>
+                <span class="meta-value meta-value-secondary">${escapeHtml(location)}</span>
               </div>
             </div>
 
@@ -1639,8 +1676,19 @@ let rawDataset = [];
                 return matchesSearch && matchesDate && matchesStage && matchesSector && matchesAmount && matchesGeo;
             });
 
-            // Deisgned by Kapil Pidhwani: Default chronological sorting (latest funding first) with name secondary fallback. Ceiling: O(N log N) client-side sort.
+            // Deisgned by Kapil Pidhwani: Multi-criteria deal sort engine (Amount, Company, or Chronological Date).
             filtered.sort((a, b) => {
+                if (activeDealSort === 'amount-desc') {
+                    const amtA = Number(a.funding_amount_usd) || 0;
+                    const amtB = Number(b.funding_amount_usd) || 0;
+                    if (amtB !== amtA) return amtB - amtA;
+                } else if (activeDealSort === 'amount-asc') {
+                    const amtA = Number(a.funding_amount_usd) || 0;
+                    const amtB = Number(b.funding_amount_usd) || 0;
+                    if (amtA !== amtB) return amtA - amtB;
+                } else if (activeDealSort === 'company-asc') {
+                    return (a.company_name || '').localeCompare(b.company_name || '');
+                }
                 const dateA = a.date_of_funding || '1970-01-01';
                 const dateB = b.date_of_funding || '1970-01-01';
                 if (dateB !== dateA) return dateB.localeCompare(dateA);
@@ -1923,7 +1971,7 @@ let rawDataset = [];
         `);
             }
 
-            // Suggestion 3.1: Active Geo Chip
+            // Active Geo Chip
             if (activeGeo !== 'all') {
                 const geoLabels = {
                     'india': 'India',
@@ -1935,6 +1983,24 @@ let rawDataset = [];
             <span class="material-symbols-outlined" style="font-size: 14px; color: var(--color-primary);">public</span>
             <span>Geo: ${escapeHtml(geoLabels[activeGeo] || activeGeo)}</span>
             <button type="button" class="filter-chip-remove" onclick="resetGeoFilter()" aria-label="Remove geography filter" title="Remove geography filter">
+              <span class="material-symbols-outlined">close</span>
+            </button>
+          </div>
+        `);
+            }
+
+            // Active Sort Chip
+            if (activeDealSort !== 'latest') {
+                const sortLabels = {
+                    'amount-desc': 'Amount: High to Low',
+                    'amount-asc': 'Amount: Low to High',
+                    'company-asc': 'Company: A to Z'
+                };
+                chips.push(`
+          <div class="filter-chip-pill">
+            <span class="material-symbols-outlined" style="font-size: 14px; color: var(--color-primary);">swap_vert</span>
+            <span>Sort: ${escapeHtml(sortLabels[activeDealSort] || activeDealSort)}</span>
+            <button type="button" class="filter-chip-remove" onclick="resetSortFilter()" aria-label="Reset sort order" title="Reset sort order">
               <span class="material-symbols-outlined">close</span>
             </button>
           </div>
@@ -1992,6 +2058,13 @@ let rawDataset = [];
             applyFilters();
         }
 
+        function resetSortFilter() {
+            activeDealSort = 'latest';
+            const s = document.getElementById('dealSortSelect');
+            if (s) { s.value = 'latest'; s.classList.remove('has-value'); }
+            applyFilters();
+        }
+
         function clearAllFilters() {
             document.getElementById('searchInput').value = '';
             activeStage = 'all';
@@ -2013,6 +2086,10 @@ let rawDataset = [];
             activeGeo = 'all';
             const g = document.getElementById('geoFilterSelect');
             if (g) { g.value = 'all'; g.classList.remove('has-value'); }
+
+            activeDealSort = 'latest';
+            const sortSelect = document.getElementById('dealSortSelect');
+            if (sortSelect) { sortSelect.value = 'latest'; sortSelect.classList.remove('has-value'); }
 
             clearDateFilter();
         }
@@ -3220,6 +3297,7 @@ let rawDataset = [];
             if (typeof activeSector !== 'undefined' && activeSector !== 'all') activeFilterCount++;
             if (typeof activeAmount !== 'undefined' && activeAmount !== 'all') activeFilterCount++;
             if (typeof activeGeo !== 'undefined' && activeGeo !== 'all') activeFilterCount++;
+            if (typeof activeDealSort !== 'undefined' && activeDealSort !== 'latest') activeFilterCount++;
             
             const searchInput = document.getElementById('searchInput');
             if (searchInput && searchInput.value.trim().length > 0) activeFilterCount++;

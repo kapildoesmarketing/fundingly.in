@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-M5MPWNCX');</script>
+    <!-- End Google Tag Manager -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Founder's Note — The Story Behind Fundingly.in | Kapil Pidhwani</title>
+    <meta name="description" content="A personal note from Kapil Pidhwani on why he built Fundingly.in — open, paywall-free Indian startup funding intelligence and venture deals tracking.">
+    <link rel="icon" type="image/png" href="/assets/fundingly_hello.png">
+    <link rel="apple-touch-icon" href="/assets/fundingly_hello.png">
+    <link rel="canonical" href="https://fundingly.in/founders-note/">
+
+    <!-- Open Graph & Twitter Meta Tags -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://fundingly.in/founders-note/">
+    <meta property="og:title" content="Founder's Note — The Story Behind Fundingly.in">
+    <meta property="og:description" content="A personal note from Kapil Pidhwani on why he built Fundingly.in — open, paywall-free Indian startup funding intelligence.">
+    <meta property="og:image" content="https://fundingly.in/assets/og-preview.png">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <!-- Fonts & Material Symbols -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;600;700&family=Roboto:wght@400;500;700&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..24,400,0,0"
+        rel="stylesheet" />
+
+    <link rel="stylesheet" href="/css/styles.css">
+    <style>
+        .page-container {
+            max-width: 840px;
+            margin: 40px auto 80px auto;
+            padding: 0 24px;
+        }
+
+        .page-card {
+            background: var(--color-surface);
+            border: 1px solid var(--color-hairline);
+            border-radius: var(--radius-sheet);
+            padding: 44px 48px;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.04);
+        }
+
+        .page-nav-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--color-primary);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            margin-bottom: 24px;
+            transition: color 0.15s ease;
+        }
+
+        .page-nav-back:hover {
+            color: var(--color-primary-hover);
+        }
+
+        .page-mascot-wrapper {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 16px;
+        }
+
+        .page-header {
+            margin-bottom: 32px;
+            border-bottom: 1px solid var(--color-hairline);
+            padding-bottom: 24px;
+        }
+
+        .page-title {
+            font-size: 32px;
+            font-weight: 700;
+            letter-spacing: -0.025em;
+            color: var(--color-text-primary);
+            margin: 0 0 10px 0;
+            line-height: 1.25;
+        }
+
+        .page-meta {
+            font-size: 14px;
+            color: var(--color-text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .page-meta-badge {
+            background: var(--color-primary-subtle);
+            color: var(--color-primary);
+            font-size: 12px;
+            font-weight: 600;
+            padding: 3px 10px;
+            border-radius: var(--radius-pill);
+        }
+
+        .page-content p {
+            font-size: 16px;
+            line-height: 1.75;
+            color: var(--color-text-primary);
+            margin-bottom: 20px;
+        }
+
+        .page-content h2 {
+            font-size: 22px;
+            font-weight: 700;
+            letter-spacing: -0.015em;
+            color: var(--color-text-primary);
+            margin: 36px 0 14px 0;
+        }
+
+        .quote-callout {
+            background: var(--color-surface-secondary);
+            border-left: 4px solid var(--color-primary);
+            border-radius: 0 12px 12px 0;
+            padding: 18px 22px;
+            margin: 28px 0;
+            font-style: italic;
+            color: var(--color-text-primary);
+            font-size: 16.5px;
+            line-height: 1.6;
+        }
+
+        .founder-profile-card {
+            background: var(--color-surface-secondary);
+            border: 1px solid var(--color-hairline);
+            border-radius: 18px;
+            padding: 24px;
+            margin-top: 36px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .founder-avatar {
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            background: var(--color-surface);
+            border: 2px solid var(--color-primary);
+            object-fit: contain;
+            padding: 4px;
+            flex-shrink: 0;
+        }
+
+        .founder-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .founder-name {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            margin: 0 0 4px 0;
+        }
+
+        .founder-role {
+            font-size: 13.5px;
+            color: var(--color-text-secondary);
+            margin: 0 0 12px 0;
+        }
+
+        .founder-links {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .founder-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 14px;
+            border-radius: var(--radius-pill);
+            font-size: 12.5px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: transform 0.12s ease, background-color 0.15s ease;
+        }
+
+        .founder-btn-primary {
+            background: var(--color-primary);
+            color: #ffffff;
+        }
+
+        .founder-btn-primary:hover {
+            background: var(--color-primary-hover);
+            transform: translateY(-1px);
+        }
+
+        .founder-btn-secondary {
+            background: var(--color-surface);
+            border: 1px solid var(--color-hairline);
+            color: var(--color-text-primary);
+        }
+
+        .founder-btn-secondary:hover {
+            border-color: var(--color-primary);
+            color: var(--color-primary);
+            transform: translateY(-1px);
+        }
+
+        @media (max-width: 680px) {
+            .page-container {
+                margin: 20px auto 60px auto;
+                padding: 0 16px;
+            }
+
+            .page-card {
+                padding: 28px 20px;
+                border-radius: 20px;
+            }
+
+            .page-title {
+                font-size: 24px;
+            }
+
+            .founder-profile-card {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M5MPWNCX" height="0" width="0"
+            style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <!-- Navigation Header -->
+    <header class="app-header">
+        <div class="header-left">
+            <a href="/" style="text-decoration: none; display: flex; align-items: center;">
+                <h1 class="brand-title">
+                    <img src="/assets/fundingly_logo.png" alt="Fundingly.in" class="brand-logo" width="38" height="38">
+                    <span>Fundingly.in</span>
+                </h1>
+            </a>
+        </div>
+        <div class="nav-controls">
+            <button type="button" class="btn-theme-toggle" id="themeToggleBtn" title="Toggle Appearance">
+                <span class="material-symbols-outlined" id="themeIcon">dark_mode</span>
+            </button>
+            <a href="/" class="btn-primary" style="padding: 6px 14px; font-size: 13px; text-decoration: none; font-weight: 600; border-radius: var(--radius-pill); background: var(--color-primary); color: #fff; display: inline-flex; align-items: center; gap: 4px;">
+                <span class="material-symbols-outlined" style="font-size: 16px;">explore</span>
+                <span>Feed</span>
+            </a>
+        </div>
+    </header>
+
+    <main class="page-container">
+        <a href="/" class="page-nav-back">
+            <span class="material-symbols-outlined">arrow_back</span>
+            <span>Back to Funding Feed</span>
+        </a>
+
+        <article class="page-card">
+            <div class="page-mascot-wrapper">
+                <img src="/assets/fundingly_hello.png" alt="Fundingly Mascot" width="76" height="76">
+            </div>
+
+            <header class="page-header">
+                <h1 class="page-title">Founder's Note: The Story Behind Fundingly.in</h1>
+                <div class="page-meta">
+                    <span class="page-meta-badge">Letter from the Creator</span>
+                    <span>By Kapil Pidhwani</span>
+                    <span>•</span>
+                    <span>September 2026</span>
+                </div>
+            </header>
+
+            <div class="page-content">
+                <p>
+                    Hey there! I'm <strong>Kapil Pidhwani</strong>, the creator and builder of <strong>Fundingly.in</strong>.
+                </p>
+
+                <p>
+                    If you’ve ever tried tracking Indian startup funding deals, venture rounds, and angel investments across the web, you've probably faced the same frustration I did: scattered press releases, messy spreadsheets, ad-cluttered news blogs, and expensive corporate database paywalls that lock away public market knowledge.
+                </p>
+
+                <div class="quote-callout">
+                    "I believe venture intelligence in India shouldn't be locked behind enterprise paywalls or buried under clickbait news. It should be fast, transparent, beautifully designed, and freely accessible to everyone building the future."
+                </div>
+
+                <h2>Why I Built Fundingly.in</h2>
+                <p>
+                    India has the world's most vibrant startup ecosystem — from AI and DeepTech in Bengaluru to Fintech in Mumbai and QuickCommerce across Gurugram. Yet, discovering who raised what, which VC led the round, and which sectors are accelerating has always required navigating dozens of separate media portals.
+                </p>
+                <p>
+                    I built Fundingly.in with a single guiding mission: <strong>to create the cleanest, fastest, and most delightful home for Indian startup funding data on the internet.</strong>
+                </p>
+
+                <h2>The Product Philosophy</h2>
+                <p>
+                    Every pixel in Fundingly.in is crafted with care:
+                </p>
+                <p>
+                    • <strong>Zero Paywalls & 100% Free:</strong> Knowledge belongs to founders, operators, students, and angels alike.<br>
+                    • <strong>Apple-Grade Craftsmanship:</strong> Subtle frosted glass, tactile haptic feedback, fluid swipe gestures, and OLED dark mode.<br>
+                    • <strong>Extreme Speed ($0 Server Architecture):</strong> Engineered on modern static delivery, loading millions in venture deals in under 300 milliseconds.<br>
+                    • <strong>Deep Interconnectivity:</strong> Filter by stage, sector, geography, or investment bracket with instantaneous in-memory search.
+                </p>
+
+                <h2>Join the Journey & Root for Us</h2>
+                <p>
+                    Fundingly.in is an independent, founder-led project built in public. If this tool saves you time, helps you prepare for investor meetings, or inspires your next startup idea, that is the greatest reward.
+                </p>
+                <p>
+                    I read and reply to every single message. If you have feedback, feature ideas, data corrections, or just want to chat about Indian tech, please reach out!
+                </p>
+
+                <div class="founder-profile-card">
+                    <img src="/assets/fundingly_idea.png" alt="Kapil Pidhwani" class="founder-avatar">
+                    <div class="founder-info">
+                        <div class="founder-name">Kapil Pidhwani</div>
+                        <div class="founder-role">Creator & Builder of Fundingly.in • Marketing & Product Enthusiast</div>
+                        <div class="founder-links">
+                            <a href="mailto:hello@fundingly.in" class="founder-btn founder-btn-primary">
+                                <span class="material-symbols-outlined" style="font-size: 16px;">mail</span>
+                                <span>hello@fundingly.in</span>
+                            </a>
+                            <a href="https://www.linkedin.com/in/kapilpidhwani/" target="_blank" rel="noopener noreferrer" class="founder-btn founder-btn-secondary">
+                                <span>LinkedIn</span>
+                            </a>
+                            <a href="https://www.instagram.com/kapilpidhwani/" target="_blank" rel="noopener noreferrer" class="founder-btn founder-btn-secondary">
+                                <span>Instagram</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </main>
+
+    <!-- Footer -->
+    <footer class="app-main-footer" role="contentinfo" style="margin-top: 40px;">
+        <div class="main-footer-top">
+            <div class="main-footer-brand">
+                <img src="/assets/fundingly_logo.png" alt="Fundingly.in" class="main-footer-logo" width="28" height="28">
+                <span class="main-footer-brand-name">Fundingly.in</span>
+                <span class="main-footer-tagline">Indian Startup Funding Intelligence</span>
+            </div>
+        </div>
+        <div class="main-footer-bottom">
+            <nav class="main-footer-nav" aria-label="Footer Navigation">
+                <a href="/founders-note/" class="main-footer-link" style="color: var(--color-primary); font-weight: 600;">Founder's Note</a>
+                <span class="main-footer-dot">•</span>
+                <a href="/about/" class="main-footer-link">About Us</a>
+                <span class="main-footer-dot">•</span>
+                <a href="/contact/" class="main-footer-link">Contact</a>
+                <span class="main-footer-dot">•</span>
+                <a href="/privacy-policy/" class="main-footer-link">Privacy Policy</a>
+                <span class="main-footer-dot">•</span>
+                <a href="/terms/" class="main-footer-link">Terms of Service</a>
+            </nav>
+            <div class="main-footer-copy">
+                <span>© 2026 Fundingly.in. Built with care by <a href="https://www.linkedin.com/in/kapilpidhwani/" target="_blank" rel="noopener noreferrer" class="footer-creator-link">Kapil Pidhwani</a>.</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Minimal Dark Mode Controller
+        (function () {
+            const btn = document.getElementById('themeToggleBtn');
+            const icon = document.getElementById('themeIcon');
+            const saved = localStorage.getItem('fundingly_theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+            document.documentElement.setAttribute('data-theme', saved);
+            if (icon) icon.textContent = saved === 'dark' ? 'light_mode' : 'dark_mode';
+
+            if (btn) {
+                btn.addEventListener('click', () => {
+                    const cur = document.documentElement.getAttribute('data-theme');
+                    const next = cur === 'dark' ? 'light' : 'dark';
+                    document.documentElement.setAttribute('data-theme', next);
+                    localStorage.setItem('fundingly_theme', next);
+                    if (icon) icon.textContent = next === 'dark' ? 'light_mode' : 'dark_mode';
+                });
+            }
+        })();
+    </script>
+</body>
+
+</html>

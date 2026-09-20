@@ -243,6 +243,23 @@
                         <span class="material-symbols-outlined dim-chevron">unfold_more</span>
                     </div>
                 </div>
+
+                <!-- Sort Order -->
+                <div class="sidebar-filter-section">
+                    <label for="dealSortSelect" class="sidebar-section-title">
+                        <span class="material-symbols-outlined dim-icon">swap_vert</span>
+                        <span>Sort Order</span>
+                    </label>
+                    <div class="dimension-select-inner">
+                        <select id="dealSortSelect" class="apple-dimension-select" aria-label="Sort deals inside weeks">
+                            <option value="latest">Latest First (Default)</option>
+                            <option value="amount-desc">Amount: High to Low</option>
+                            <option value="amount-asc">Amount: Low to High</option>
+                            <option value="company-asc">Company: A to Z</option>
+                        </select>
+                        <span class="material-symbols-outlined dim-chevron">unfold_more</span>
+                    </div>
+                </div>
             </div>
 
             <!-- Mobile Drawer Bottom Actions -->
@@ -337,9 +354,11 @@
 
             <!-- Empty State with One-Click Recovery -->
             <div id="emptyState" class="empty-state" style="display: none;">
-                <span class="material-symbols-outlined empty-icon">search_off</span>
+                <div class="empty-state-avatar-wrap">
+                    <img src="assets/fundingly_look.png" alt="No matching deals" class="empty-state-mascot" width="90" height="90">
+                </div>
                 <p class="empty-title">No matching investments found</p>
-                <p class="empty-subtitle">Try adjusting your keywords or clearing the date filter.</p>
+                <p class="empty-subtitle">Try adjusting your keywords, stage, or clearing filters.</p>
                 <button type="button" class="btn-clear-all-filters" id="emptyStateClearBtn">
                     <span class="material-symbols-outlined">filter_alt_off</span>
                     <span>Clear All Filters</span>
@@ -396,18 +415,19 @@
                         </a>
                     </div>
                 </div>
-                <div class="main-footer-bottom">
                     <nav class="main-footer-nav" aria-label="Legal & Information">
-                        <a href="/privacy-policy/" class="main-footer-link">Privacy Policy</a>
-                        <span class="main-footer-dot">•</span>
-                        <a href="/terms/" class="main-footer-link">Terms of Service</a>
+                        <a href="/founders-note/" class="main-footer-link" style="color: var(--color-primary); font-weight: 600;">Founder's Note</a>
                         <span class="main-footer-dot">•</span>
                         <a href="/about/" class="main-footer-link">About Us</a>
                         <span class="main-footer-dot">•</span>
                         <a href="/contact/" class="main-footer-link">Contact</a>
+                        <span class="main-footer-dot">•</span>
+                        <a href="/privacy-policy/" class="main-footer-link">Privacy Policy</a>
+                        <span class="main-footer-dot">•</span>
+                        <a href="/terms/" class="main-footer-link">Terms of Service</a>
                     </nav>
                     <div class="main-footer-copy">
-                        <span>© 2026 Fundingly.in • Created by <a href="/about/"
+                        <span>© 2026 Fundingly.in • Created by <a href="/founders-note/"
                                 class="footer-creator-link">Kapil Pidhwani</a> • <a href="mailto:hello@fundingly.in"
                                 class="footer-creator-link">hello@fundingly.in</a></span>
                     </div>
