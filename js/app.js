@@ -63,11 +63,6 @@ let rawDataset = [];
                 }
             });
 
-            document.getElementById('closeModal').addEventListener('click', closeModal);
-            document.getElementById('modalOverlay').addEventListener('click', (e) => {
-                if (e.target.id === 'modalOverlay') closeModal();
-            });
-
             // About Modal Handlers
             const aboutBtn = document.getElementById('aboutBtn');
             if (aboutBtn) {
@@ -97,7 +92,6 @@ let rawDataset = [];
             }
 
             // Native Touch Swipe-Down Dismiss Handlers (Pillar 7.2)
-            initTouchSwipeToDismiss(document.getElementById('modalOverlay'), document.getElementById('modalContent'), closeModal);
             initTouchSwipeToDismiss(document.getElementById('trendsModal'), document.querySelector('.trends-modal-content'), closeTrendsModal);
             initTouchSwipeToDismiss(document.getElementById('aboutModal'), document.querySelector('.about-modal-content'), closeAboutModal);
 
@@ -679,11 +673,9 @@ let rawDataset = [];
             });
 
             if (match) {
-                openModal(match);
-                try {
-                    window.history.replaceState({}, '', '/' + cleanDomainQuery);
-                } catch (e) {
-                    console.warn('History replaceState warning:', e);
+                const url = getCompanyUrl(match);
+                if (url && url !== '#') {
+                    window.location.href = url;
                 }
             }
         }
@@ -850,6 +842,14 @@ let rawDataset = [];
                 .toLowerCase()
                 .replace(/[^a-z0-9]+/g, '-')
                 .replace(/(^-|-$)+/g, '') || 'startup';
+        }
+
+        // Direct static page URL generator for deal routing
+        function getCompanyUrl(company) {
+            if (!company) return '#';
+            const domain = extractDomain(company.company_website);
+            const slug = domain || slugify(company.company_name);
+            return 'company/' + encodeURIComponent(slug) + '/';
         }
 
         // Deisgned by Kapil Pidhwani: Deterministic 2-letter uppercase monogram generator. Ceiling: English alphanumeric parsing. Upgrade path: Unicode grapheme cluster segmentation for global scripts.
@@ -1171,15 +1171,18 @@ let rawDataset = [];
                 card.setAttribute('role', 'button');
                 card.setAttribute('tabindex', '0');
                 card.setAttribute('aria-label', `View details for ${company.company_name || 'Enterprise'}`);
+                
+                const companyUrl = getCompanyUrl(company);
+
                 card.addEventListener('click', (e) => {
                     if (e.target.closest('a') || e.target.closest('button')) return;
-                    openModal(company);
+                    window.location.href = companyUrl;
                 });
                 card.addEventListener('keydown', (e) => {
                     if (e.key === 'Enter' || e.key === ' ') {
                         if (e.target.closest('a') || e.target.closest('button')) return;
                         e.preventDefault();
-                        openModal(company);
+                        window.location.href = companyUrl;
                     }
                 });
 
@@ -1198,11 +1201,11 @@ let rawDataset = [];
                 card.innerHTML = `
           <div>
             <div class="card-top-bar">
-              ${avatarHTML}
+              <a href="${companyUrl}" class="avatar-link" aria-label="View ${escapeHtml(titleText)} deal details">${avatarHTML}</a>
               <span class="badge-round ${getStageBadgeClass(fundingRound)}">${escapeHtml(fundingRound)}</span>
             </div>
             <div class="company-name-wrap">
-              <span class="company-name">${escapeHtml(titleText)}</span>
+              <a href="${companyUrl}" class="company-title-link"><span class="company-name">${escapeHtml(titleText)}</span></a>
               <div class="industry-subtitle">${escapeHtml(industry)}${escapeHtml(subIndustry)}</div>
             </div>
             <p class="description">${escapeHtml(description)}</p>
@@ -1228,21 +1231,13 @@ let rawDataset = [];
               <span class="lead-investor-text" title="${escapeHtml(leadInvestor)}">
                 ${escapeHtml(leadInvestor)}
               </span>
-              <button type="button" class="btn-detail" aria-label="View details for ${escapeHtml(titleText)}">
+              <a href="${companyUrl}" class="btn-detail" aria-label="View details for ${escapeHtml(titleText)}">
                 <span>Details</span>
                 <span class="material-symbols-outlined">arrow_forward</span>
-              </button>
+              </a>
             </div>
           </div>
         `;
-
-                const detailBtn = card.querySelector('.btn-detail');
-                if (detailBtn) {
-                    detailBtn.addEventListener('click', (e) => {
-                        e.stopPropagation();
-                        openModal(company);
-                    });
-                }
 
                 gridDiv.appendChild(card);
             });
@@ -1263,13 +1258,14 @@ let rawDataset = [];
                 const lead = escapeHtml(company.lead_investor || company.funded_by || 'Undisclosed');
                 const sector = escapeHtml(company.industry || 'General');
                 const hq = escapeHtml(company.company_headquarters || 'N/A');
+                const companyUrl = getCompanyUrl(company);
 
                 return `
-                    <tr class="table-row-deal" data-item-index="${idx}">
+                    <tr class="table-row-deal" data-url="${companyUrl}">
                         <td>
                             <div class="table-company-cell">
-                                ${avatar}
-                                <span class="table-company-name">${name}</span>
+                                <a href="${companyUrl}" class="avatar-link" aria-label="View ${name} deal">${avatar}</a>
+                                <a href="${companyUrl}" class="table-company-name-link"><span class="table-company-name">${name}</span></a>
                             </div>
                         </td>
                         <td>${date}</td>
@@ -1282,9 +1278,9 @@ let rawDataset = [];
                         <td>${sector}</td>
                         <td>${hq}</td>
                         <td style="text-align: right;">
-                            <button type="button" class="btn-table-action" data-btn-index="${idx}" aria-label="View details for ${name}">
+                            <a href="${companyUrl}" class="btn-table-action" aria-label="View details for ${name}">
                                 View
-                            </button>
+                            </a>
                         </td>
                     </tr>
                 `;
@@ -1313,20 +1309,11 @@ let rawDataset = [];
             `;
 
             tableDiv.querySelectorAll('.table-row-deal').forEach(tr => {
-                const idx = Number(tr.dataset.itemIndex);
-                const item = group.items[idx];
-                if (item && item.company) {
-                    tr.addEventListener('click', () => openModal(item.company));
-                }
-            });
-
-            tableDiv.querySelectorAll('.btn-table-action').forEach(btn => {
-                const idx = Number(btn.dataset.btnIndex);
-                const item = group.items[idx];
-                if (item && item.company) {
-                    btn.addEventListener('click', (e) => {
-                        e.stopPropagation();
-                        openModal(item.company);
+                const url = tr.dataset.url;
+                if (url) {
+                    tr.addEventListener('click', (e) => {
+                        if (e.target.closest('a') || e.target.closest('button')) return;
+                        window.location.href = url;
                     });
                 }
             });
@@ -1888,12 +1875,14 @@ let rawDataset = [];
                 const sector = escapeHtml(company.industry || 'General');
                 const hq = escapeHtml(company.company_headquarters || 'N/A');
 
+                const companyUrl = getCompanyUrl(company);
+
                 return `
-                    <tr class="table-row-deal" data-row-index="${idx}">
+                    <tr class="table-row-deal" data-url="${companyUrl}">
                         <td>
                             <div class="table-company-cell">
-                                ${avatar}
-                                <span class="table-company-name">${name}</span>
+                                <a href="${companyUrl}" class="avatar-link" aria-label="View ${name} deal">${avatar}</a>
+                                <a href="${companyUrl}" class="table-company-name-link"><span class="table-company-name">${name}</span></a>
                             </div>
                         </td>
                         <td>${date}</td>
@@ -1906,9 +1895,9 @@ let rawDataset = [];
                         <td>${sector}</td>
                         <td>${hq}</td>
                         <td style="text-align: right;">
-                            <button type="button" class="btn-table-action" data-btn-index="${idx}">
+                            <a href="${companyUrl}" class="btn-table-action" aria-label="View details for ${name}">
                                 View
-                            </button>
+                            </a>
                         </td>
                     </tr>
                 `;
@@ -1950,20 +1939,11 @@ let rawDataset = [];
             if (thAmt) thAmt.addEventListener('click', () => toggleTableSort('amount'));
 
             container.querySelectorAll('.table-row-deal').forEach(tr => {
-                const idx = Number(tr.dataset.rowIndex);
-                const company = sortedData[idx];
-                if (company) {
-                    tr.addEventListener('click', () => openModal(company));
-                }
-            });
-
-            container.querySelectorAll('.btn-table-action').forEach(btn => {
-                const idx = Number(btn.dataset.btnIndex);
-                const company = sortedData[idx];
-                if (company) {
-                    btn.addEventListener('click', (e) => {
-                        e.stopPropagation();
-                        openModal(company);
+                const url = tr.dataset.url;
+                if (url) {
+                    tr.addEventListener('click', (e) => {
+                        if (e.target.closest('a') || e.target.closest('button')) return;
+                        window.location.href = url;
                     });
                 }
             });
@@ -2178,19 +2158,15 @@ let rawDataset = [];
             clearDateFilter();
         }
 
-        // Enhanced Apple Sheet Modal with Shareable Deal Snippet (Item 5.3), Print (Item 5.2) & Session Logging
+        // Deisgned by Kapil Pidhwani: Direct static deal page navigation with fallback support.
         let currentModalCompany = null;
 
         function openModal(indexOrCompany) {
             let company;
-            let index = -1;
             if (typeof indexOrCompany === 'object' && indexOrCompany !== null) {
                 company = indexOrCompany;
-                index = activeFilteredDataset.indexOf(company);
-                if (index === -1) index = rawDataset.indexOf(company);
-            } else {
-                index = indexOrCompany;
-                company = activeFilteredDataset[index] || rawDataset[index];
+            } else if (typeof indexOrCompany === 'number' && indexOrCompany >= 0) {
+                company = activeFilteredDataset[indexOrCompany] || rawDataset[indexOrCompany];
             }
             if (!company) return;
             currentModalCompany = company;
@@ -2202,216 +2178,9 @@ let rawDataset = [];
                     .logCompanyView(sessionId, company.company_name);
             }
 
-            const modalBody = document.getElementById('modalBody');
-            const companyDomain = extractDomain(company.company_website);
-            const pageSlug = companyDomain || slugify(company.company_name);
-            const dedicatedPageUrl = 'company/' + encodeURIComponent(pageSlug) + '/';
-            const dateFormatted = escapeHtml(formatFundingDateDisplay(company.date_of_funding));
-            const companyName = company.company_name || '';
-
-            // 1. Google LinkedIn C-Level Search URL
-            const linkedinQuery = `site:linkedin.com/in/ "${companyName}" ("CEO" OR "CFO" OR "COO" OR "CTO" OR "CMO" OR "CHRO" OR "CIO" OR "CISO" OR "CRO" OR "Chief" OR "President" OR "Managing Director")`;
-            const linkedinSearchUrl = `https://www.google.com/search?q=${encodeURIComponent(linkedinQuery)}`;
-
-            // 2. ChatGPT Leadership Research Pre-Prompt URL
-            const chatgptPrompt = `Research the current C-level and senior executive leadership of ${companyName}. Identify the CEO, CTO, CFO, COO, CMO, founders, and other key decision-makers where publicly verifiable. For each person, provide their name, current title, responsibilities, professional background, and LinkedIn profile if publicly available. Prioritize current and authoritative sources, distinguish confirmed C-suite roles from board/director positions, and flag any information that cannot be independently verified. Include the sources used and the date the information was verified.`;
-            const chatgptPromptUrl = `https://chatgpt.com/?q=${encodeURIComponent(chatgptPrompt)}`;
-
-            const rawSources = company.sources || company.source_url || '';
-            let sourceLink = '';
-            if (rawSources) {
-                const links = (Array.isArray(rawSources) ? rawSources : String(rawSources).split(/[,|\n]/))
-                    .map(s => s.trim())
-                    .filter(Boolean);
-                if (links.length > 0) {
-                    const linksAnchors = links.map((link) => {
-                        const cleanDisplay = link.replace(/^https?:\/\//, '').replace(/^www\./, '').replace(/\/+$/, '');
-                        const host = cleanDisplay.split('/')[0];
-                        return `<a href="${encodeURI(link)}" target="_blank" rel="noopener noreferrer" style="color: var(--accent-color); text-decoration: underline; margin-right: 8px;">[${escapeHtml(host)}]</a>`;
-                    }).join(' ');
-                    sourceLink = `<div class="modal-source-footer" style="display:flex; flex-wrap:wrap; align-items:center; gap:6px; font-size:12px; color:var(--text-muted); padding-top:12px; border-top:1px solid var(--border-subtle);"><strong>Sources:</strong> ${linksAnchors}</div>`;
-                }
-            }
-
-            const modalAvatarHTML = renderCompanyAvatarHTML(company, true);
-
-            modalBody.innerHTML = `
-        <div class="modal-hero">
-          <!-- Tier 1: Top Bar (Avatar on Left, Round Pill Badge on Right) matching closed card -->
-          <div class="modal-hero-top-bar">
-            ${modalAvatarHTML}
-            <span class="modal-hero-badge ${getStageBadgeClass(company.funding_round)}">${escapeHtml(company.funding_round || 'Funding')}</span>
-          </div>
-
-          <!-- Tier 2: 100% Full-Width Identity Block -->
-          <div class="modal-hero-identity">
-            <div class="modal-hero-title-wrap">
-              <h2 class="modal-hero-title">${escapeHtml(company.company_name || 'Enterprise Details')}</h2>
-              ${company.company_name ? renderSearchMicroButtons(company.company_name, 'Search ' + company.company_name) : ''}
-            </div>
-            <div class="modal-hero-subtitle">
-              ${escapeHtml(company.industry || 'General')}${company.sub_industry ? ' • ' + escapeHtml(company.sub_industry) : ''}
-            </div>
-          </div>
-
-          <!-- Tier 3: Unified Actions Toolbar -->
-          <div class="modal-hero-toolbar">
-            <div class="modal-hero-action-row">
-              ${companyDomain ? `
-                <a href="${encodeURI(company.company_website)}" target="_blank" rel="noopener noreferrer" class="modal-domain-chip" title="Visit: ${escapeHtml(company.company_website)}">
-                  <span class="material-symbols-outlined">language</span>
-                  <span>${escapeHtml(companyDomain)}</span>
-                  <span class="material-symbols-outlined" style="font-size: 12px; opacity: 0.75;">open_in_new</span>
-                </a>
-                <button type="button" class="modal-micro-btn" onclick="copyDomainText('${escapeHtml(companyDomain)}', this)" title="Copy domain: ${escapeHtml(companyDomain)}" aria-label="Copy domain ${escapeHtml(companyDomain)}">
-                  <span class="material-symbols-outlined">content_copy</span>
-                </button>
-              ` : ''}
-            </div>
-            <div class="modal-hero-utility-row">
-              <a href="${dedicatedPageUrl}" target="_blank" rel="noopener noreferrer" class="modal-micro-btn" title="Open Dedicated SEO Page" aria-label="Open Dedicated SEO Page">
-                <span class="material-symbols-outlined">open_in_new</span>
-              </a>
-              <button type="button" class="modal-micro-btn" id="copySummaryBtn" onclick="copyDealSummary()" title="Copy Markdown deal summary for Slack/Email" aria-label="Copy Deal Summary">
-                <span class="material-symbols-outlined" id="copySummaryIcon">assignment</span>
-              </button>
-              <button type="button" class="modal-micro-btn" onclick="window.print()" title="Print One-Pager Deal Memo" aria-label="Print One-Pager Deal Memo">
-                <span class="material-symbols-outlined">print</span>
-              </button>
-            </div>
-          </div>
-
-          <!-- Tier 4: Deal Snapshot Meta Tile (Matching .card-meta-box in closed card) -->
-          <div class="modal-stats-strip">
-            <div class="stat-pill-block">
-              <span class="stat-pill-label">Amount Raised</span>
-              <span class="stat-pill-value">${formatUSD(company.funding_amount_usd)}</span>
-            </div>
-            <div class="stat-pill-block">
-              <span class="stat-pill-label">Funding Date</span>
-              <span class="stat-pill-value">${dateFormatted}</span>
-            </div>
-            <div class="stat-pill-block">
-              <span class="stat-pill-label">Headquarters</span>
-              <span class="stat-pill-value">${escapeHtml(company.company_headquarters || 'N/A')}</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="modal-section-card">
-          <div class="modal-section-title">
-            <span class="material-symbols-outlined" style="font-size: 15px;">info</span>
-            <span>Overview & Mission</span>
-          </div>
-          <p class="modal-desc-body">${escapeHtml(company.company_description || 'No description available for this entity.')}</p>
-        </div>
-
-        <div class="modal-section-card">
-          <div class="modal-section-title">
-            <span class="material-symbols-outlined" style="font-size: 15px;">paid</span>
-            <span>Deal Terms & Syndicate</span>
-          </div>
-          <div class="inspector-grid">
-            <div class="inspector-row"><span class="inspector-label">Funding Round</span><div class="inspector-val highlight">${escapeHtml(company.funding_round || 'N/A')}</div></div>
-            <div class="inspector-row"><span class="inspector-label">Amount Raised (USD)</span><div class="inspector-val highlight">${formatUSD(company.funding_amount_usd)}</div></div>
-            <div class="inspector-row"><span class="inspector-label">Date of Funding</span><div class="inspector-val">${dateFormatted}</div></div>
-            <div class="inspector-row"><span class="inspector-label">Lead Investor</span><div class="inspector-val highlight">${escapeHtml(company.lead_investor || 'N/A')}</div></div>
-            <div class="inspector-row" style="grid-column: span 2;"><span class="inspector-label">Syndicate / All Investors</span><div class="inspector-val">${escapeHtml(company.funded_by || 'N/A')}</div></div>
-          </div>
-        </div>
-
-        <div class="modal-section-card">
-          <div class="modal-section-title">
-            <span class="material-symbols-outlined" style="font-size: 15px;">business</span>
-            <span>Company & Market Profile</span>
-          </div>
-          <div class="inspector-grid">
-            <div class="inspector-row"><span class="inspector-label">Industry</span><div class="inspector-val highlight">${escapeHtml(company.industry || 'N/A')}</div></div>
-            <div class="inspector-row"><span class="inspector-label">Sub-Industry</span><div class="inspector-val">${escapeHtml(company.sub_industry || 'N/A')}</div></div>
-            <div class="inspector-row"><span class="inspector-label">Business Model</span><div class="inspector-val">${escapeHtml(company.business_model || 'N/A')}</div></div>
-            <div class="inspector-row"><span class="inspector-label">Year Founded</span><div class="inspector-val">${escapeHtml(company.year_founded || 'N/A')}</div></div>
-            <div class="inspector-row"><span class="inspector-label">Team Size Range</span><div class="inspector-val">${escapeHtml(company.employee_count_range || 'N/A')}</div></div>
-            <div class="inspector-row"><span class="inspector-label">Headquarters</span><div class="inspector-val">${escapeHtml(company.company_headquarters || 'N/A')}</div></div>
-            <div class="inspector-row" style="grid-column: span 2;"><span class="inspector-label">India Offices</span><div class="inspector-val">${escapeHtml(company.company_india_offices || 'N/A')}</div></div>
-          </div>
-        </div>
-
-        <div class="modal-section-card">
-          <div class="modal-section-title">
-            <span class="material-symbols-outlined" style="font-size: 15px;">groups</span>
-            <span>Leadership & Executive Intelligence</span>
-          </div>
-          <div class="inspector-grid">
-            <div class="inspector-row" style="grid-column: span 2;">
-              <span class="inspector-label">Founders</span>
-              <div class="inspector-val highlight">${renderPersonListWithSearch(company.founders, company.company_name)}</div>
-            </div>
-          </div>
-          <div class="executive-intel-actions">
-            <a href="${linkedinSearchUrl}" target="_blank" rel="noopener noreferrer" class="executive-intel-btn" title="Search Google for C-Level LinkedIn Profiles">
-              <div class="executive-intel-icon-wrap" style="background: rgba(10, 102, 194, 0.12); color: #0a66c2;">
-                <span class="material-symbols-outlined" style="font-size: 20px;">person_search</span>
-              </div>
-              <div class="executive-intel-btn-text">
-                <span class="executive-intel-btn-title">Search C-Suite on LinkedIn</span>
-                <span class="executive-intel-btn-sub">Find verified executive profiles</span>
-              </div>
-              <span class="material-symbols-outlined" style="font-size: 14px; opacity: 0.5; margin-left: auto;">open_in_new</span>
-            </a>
-            <a href="${chatgptPromptUrl}" target="_blank" rel="noopener noreferrer" class="executive-intel-btn" title="Research Leadership Dossier with ChatGPT">
-              <div class="executive-intel-icon-wrap" style="background: rgba(16, 163, 127, 0.12); color: #10a37f;">
-                <span class="material-symbols-outlined" style="font-size: 20px;">smart_toy</span>
-              </div>
-              <div class="executive-intel-btn-text">
-                <span class="executive-intel-btn-title">Research Leadership on ChatGPT</span>
-                <span class="executive-intel-btn-sub">Generate full executive dossier</span>
-              </div>
-              <span class="material-symbols-outlined" style="font-size: 14px; opacity: 0.5; margin-left: auto;">open_in_new</span>
-            </a>
-          </div>
-        </div>
-
-        ${sourceLink}
-
-        <div class="modal-action-bar" style="display: flex; justify-content: space-between; align-items: center; margin-top: 24px; padding-top: 16px; border-top: 1px solid var(--color-hairline); flex-wrap: wrap; gap: 12px;">
-            <a href="mailto:hello@fundingly.in?subject=Data%20Correction%3A%20${encodeURIComponent(company.company_name || 'Company')}%20(${encodeURIComponent(company.date_of_funding || '')})&body=${encodeURIComponent('Hello Fundingly Team,\n\nI noticed an inaccuracy regarding ' + (company.company_name || 'this company') + ':\n- Date: ' + (company.date_of_funding || 'N/A') + '\n- Amount: ' + formatUSD(company.funding_amount_usd) + '\n- Round: ' + (company.funding_round || 'N/A') + '\n\nSuggested Correction:\n[Please describe corrected information and press link here]\n\nThank you!')}" class="btn-suggest-correction" title="Report an inaccuracy or suggest updated deal information">
-                <span class="material-symbols-outlined" style="font-size: 16px;">edit_note</span>
-                <span>Suggest Correction</span>
-            </a>
-            <div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;">
-                <button type="button" class="btn-detail" onclick="copyDealSummary()" style="background: var(--color-surface-secondary); color: var(--color-text-primary); border: 1px solid var(--color-hairline);" title="Copy markdown deal memo">
-                    <span class="material-symbols-outlined" style="font-size: 16px;">content_copy</span>
-                    <span>Copy Memo</span>
-                </button>
-                <a href="${dedicatedPageUrl}" target="_blank" rel="noopener noreferrer" class="btn-detail" style="background: var(--color-primary); color: #ffffff; text-decoration: none; border: 1px solid var(--color-primary); display: inline-flex; align-items: center; gap: 6px; padding: 6px 14px; border-radius: var(--radius-pill); font-size: 13px; font-weight: 600;" title="Open dedicated static dossier page">
-                    <span>Open Page</span>
-                    <span class="material-symbols-outlined" style="font-size: 15px;">open_in_new</span>
-                </a>
-            </div>
-        </div>
-      `;
-
-            const overlay = document.getElementById('modalOverlay');
-            overlay.classList.add('active');
-            overlay.setAttribute('aria-hidden', 'false');
-
-            // Apple Sheet entrance animation (180ms ease-out)
-            if (typeof anime !== 'undefined') {
-                anime({
-                    targets: '#modalOverlay',
-                    opacity: [0, 1],
-                    duration: 180,
-                    easing: 'easeOutQuad'
-                });
-                anime({
-                    targets: '#modalContent',
-                    scale: [0.96, 1],
-                    opacity: [0, 1],
-                    duration: 220,
-                    easing: 'easeOutCubic'
-                });
-            } else {
-                overlay.style.opacity = '1';
+            const url = getCompanyUrl(company);
+            if (url && url !== '#') {
+                window.location.href = url;
             }
         }
 
@@ -2534,35 +2303,7 @@ let rawDataset = [];
         }
 
         function closeModal() {
-            const overlay = document.getElementById('modalOverlay');
-            if (!overlay) return;
-            currentModalCompany = null;
-            overlay.setAttribute('aria-hidden', 'true');
-
-            const resetDeepLinkUrl = () => {
-                try {
-                    const currentPath = window.location.pathname.replace(/^\/+|\/+$/g, '');
-                    if (currentPath && currentPath !== 'index.html') {
-                        window.history.replaceState({}, '', '/');
-                    }
-                } catch (e) {}
-            };
-
-            if (typeof anime !== 'undefined') {
-                anime({
-                    targets: '#modalOverlay',
-                    opacity: [1, 0],
-                    duration: 140,
-                    easing: 'easeInQuad',
-                    complete: () => {
-                        overlay.classList.remove('active');
-                        resetDeepLinkUrl();
-                    }
-                });
-            } else {
-                overlay.classList.remove('active');
-                resetDeepLinkUrl();
-            }
+            // Modal retired: deal interactions route directly to static deal pages
         }
 
         // Deisgned by Kapil Pidhwani: Weekly Venture Intelligence aggregation engine. Ceiling: In-memory single-week aggregation of rawDataset. Upgrade path: Multi-week comparative cohort analysis.
@@ -3027,21 +2768,22 @@ let rawDataset = [];
           <div class="trends-deal-roster">
             ${trends.showcaseDeals.map((deal, dealIdx) => {
                 const avatarHtml = renderCompanyAvatarHTML(deal, false);
+                const companyUrl = getCompanyUrl(deal);
                 return `
                 <div class="trends-deal-row">
                   <div class="trends-deal-left">
-                    ${avatarHtml}
+                    <a href="${companyUrl}" class="avatar-link" aria-label="View ${escapeHtml(deal.company_name || 'Enterprise')}">${avatarHtml}</a>
                     <div style="min-width: 0;">
-                      <div class="trends-deal-title">${escapeHtml(deal.company_name || 'Enterprise')}</div>
+                      <a href="${companyUrl}" class="company-title-link"><div class="trends-deal-title">${escapeHtml(deal.company_name || 'Enterprise')}</div></a>
                       <div class="trends-deal-meta">${escapeHtml(deal.funding_round || 'Round')}${deal.lead_investor ? ' • ' + escapeHtml(deal.lead_investor) : ''}</div>
                     </div>
                   </div>
                   <div class="trends-deal-right">
                     <div class="trends-deal-amount">${formatUSD(deal.funding_amount_usd)}</div>
-                    <button type="button" class="btn-trends-memo" onclick="viewDetailsFromTrends(${dealIdx})" aria-label="View details for ${escapeHtml(deal.company_name)}">
+                    <a href="${companyUrl}" class="btn-trends-memo" aria-label="View details for ${escapeHtml(deal.company_name)}">
                       <span>View Details</span>
                       <span class="material-symbols-outlined" style="font-size: 13px;">arrow_outward</span>
-                    </button>
+                    </a>
                   </div>
                 </div>
               `;
@@ -3107,9 +2849,10 @@ let rawDataset = [];
             closeTrendsModal();
             if (currentWeekTrends && currentWeekTrends.showcaseDeals && currentWeekTrends.showcaseDeals[dealIdx]) {
                 const targetCompany = currentWeekTrends.showcaseDeals[dealIdx];
-                setTimeout(() => {
-                    openModal(targetCompany);
-                }, 160);
+                const url = getCompanyUrl(targetCompany);
+                if (url && url !== '#') {
+                    window.location.href = url;
+                }
             }
         }
 
@@ -3123,9 +2866,10 @@ let rawDataset = [];
             closeTrendsModal();
             if (typeof rawIdx === 'number' && rawIdx >= 0 && rawIdx < rawDataset.length) {
                 const targetCompany = rawDataset[rawIdx];
-                setTimeout(() => {
-                    openModal(targetCompany);
-                }, 160);
+                const url = getCompanyUrl(targetCompany);
+                if (url && url !== '#') {
+                    window.location.href = url;
+                }
             }
         }
 
