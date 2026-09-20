@@ -130,14 +130,14 @@
             }
         }
     </style>
+    <!-- Instant Theme Synchronization (Anti-Flicker) -->
     <script>
         (function() {
             try {
-                const saved = localStorage.getItem('fundingly_theme') || 'auto';
-                const isDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-                if (saved === 'dark' || (saved === 'auto' && isDark)) {
-                    document.documentElement.setAttribute('data-theme', 'dark');
-                }
+                const saved = localStorage.getItem('fundingly_theme');
+                const isSystemDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+                const theme = (saved === 'dark' || saved === 'light') ? saved : (isSystemDark ? 'dark' : 'light');
+                document.documentElement.setAttribute('data-theme', theme);
             } catch (e) {}
         })();
     </script>
@@ -149,8 +149,8 @@
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
 
-    <!-- Navigation Header -->
-    <header class="app-header">
+    <!-- Navigation Header (Frosted Glass) -->
+    <header class="app-header" role="banner">
         <div class="header-left">
             <a href="../" class="brand-title" style="text-decoration: none; color: inherit;">
                 <img src="../assets/fundingly_logo.png" alt="Fundingly.in" class="brand-logo"
@@ -159,17 +159,24 @@
             </a>
         </div>
         <div class="nav-controls">
-            <a href="../" class="btn-nav-about" style="text-decoration: none;">
+            <a href="../" class="btn-nav-about" style="text-decoration: none;" title="Venture Deals Feed">
                 <span class="material-symbols-outlined">dashboard</span>
-                <span>Dashboard</span>
+                <span class="btn-nav-text">Live Feed</span>
             </a>
+            <a href="../founders-note/" class="btn-nav-about" style="text-decoration: none;" title="Founder's Note">
+                <span class="material-symbols-outlined">edit_note</span>
+                <span class="btn-nav-text">Founder's Note</span>
+            </a>
+            <button type="button" class="btn-theme-toggle" id="themeToggleBtn" title="Toggle Appearance" aria-label="Toggle theme appearance">
+                <span class="material-symbols-outlined" id="themeIcon">dark_mode</span>
+            </button>
         </div>
     </header>
 
     <div class="page-container">
         <a href="../" class="page-nav-back">
             <span class="material-symbols-outlined" style="font-size: 18px;">arrow_back</span>
-            <span>Back to Dashboard</span>
+            <span>Back to Funding Feed</span>
         </a>
 
         <main class="page-card">
@@ -221,6 +228,85 @@
             </div>
         </main>
     </div>
+
+    <!-- Semantic Footer -->
+    <footer class="app-main-footer" role="contentinfo" style="margin-top: 40px;">
+        <div class="main-footer-top">
+            <div class="main-footer-brand">
+                <img src="../assets/fundingly_logo.png" alt="Fundingly.in" class="main-footer-logo" width="28" height="28">
+                <span class="main-footer-brand-name">Fundingly.in</span>
+                <span class="main-footer-tagline">Indian Startup Funding Intelligence</span>
+            </div>
+            <div class="main-footer-social">
+                <a href="https://www.linkedin.com/company/fundingly-in" target="_blank"
+                    rel="noopener noreferrer" class="footer-social-link" title="Fundingly.in on LinkedIn"
+                    aria-label="LinkedIn">
+                    <svg class="social-svg-icon" viewBox="0 0 24 24" fill="currentColor" width="16" height="16">
+                        <path
+                            d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.2V10.9H6.46M7.83 6.64a1.64 1.64 0 1 0 1.63 1.64 1.63 1.63 0 0 0-1.63-1.64Z" />
+                    </svg>
+                    <span>LinkedIn</span>
+                </a>
+                <a href="https://www.instagram.com/fundingly.in/" target="_blank" rel="noopener noreferrer"
+                    class="footer-social-link" title="Fundingly.in on Instagram" aria-label="Instagram">
+                    <svg class="social-svg-icon" viewBox="0 0 24 24" fill="currentColor" width="16" height="16">
+                        <path
+                            d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zm0 10.162a3.999 3.999 0 1 1 0-7.998 3.999 3.999 0 0 1 0 7.998zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z" />
+                    </svg>
+                    <span>Instagram</span>
+                </a>
+            </div>
+        </div>
+        <div class="main-footer-bottom">
+            <nav class="main-footer-nav" aria-label="Footer Navigation">
+                <a href="../founders-note/" class="main-footer-link">Founder's Note</a>
+                <span class="main-footer-dot">•</span>
+                <a href="./" class="main-footer-link" style="color: var(--color-primary); font-weight: 600;">About Us</a>
+                <span class="main-footer-dot">•</span>
+                <a href="../contact/" class="main-footer-link">Contact</a>
+                <span class="main-footer-dot">•</span>
+                <a href="../privacy-policy/" class="main-footer-link">Privacy Policy</a>
+                <span class="main-footer-dot">•</span>
+                <a href="../terms/" class="main-footer-link">Terms of Service</a>
+            </nav>
+            <div class="main-footer-copy">
+                <span>© 2026 Fundingly.in • Created by <a href="../founders-note/" class="footer-creator-link">Kapil Pidhwani</a> • <a href="mailto:hello@fundingly.in" class="footer-creator-link">hello@fundingly.in</a></span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Deisgned by Kapil Pidhwani: Unified Theme Switcher & Persistence Controller
+        (function () {
+            const btn = document.getElementById('themeToggleBtn');
+            const icon = document.getElementById('themeIcon');
+            function updateIcon(theme) {
+                if (icon) icon.textContent = theme === 'dark' ? 'light_mode' : 'dark_mode';
+            }
+            const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+            updateIcon(currentTheme);
+
+            if (btn) {
+                btn.addEventListener('click', () => {
+                    const cur = document.documentElement.getAttribute('data-theme') || 'light';
+                    const next = cur === 'dark' ? 'light' : 'dark';
+                    document.documentElement.setAttribute('data-theme', next);
+                    localStorage.setItem('fundingly_theme', next);
+                    updateIcon(next);
+                });
+            }
+
+            try {
+                window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+                    if (!localStorage.getItem('fundingly_theme')) {
+                        const next = e.matches ? 'dark' : 'light';
+                        document.documentElement.setAttribute('data-theme', next);
+                        updateIcon(next);
+                    }
+                });
+            } catch (err) {}
+        })();
+    </script>
 </body>
 
 </html>

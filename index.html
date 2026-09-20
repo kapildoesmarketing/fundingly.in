@@ -14,6 +14,17 @@
     <!-- End Google Tag Manager -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Instant Theme Synchronization (Anti-Flicker) -->
+    <script>
+        (function() {
+            try {
+                const saved = localStorage.getItem('fundingly_theme');
+                const isSystemDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+                const theme = (saved === 'dark' || saved === 'light') ? saved : (isSystemDark ? 'dark' : 'light');
+                document.documentElement.setAttribute('data-theme', theme);
+            } catch (e) {}
+        })();
+    </script>
     <title>Fundingly.in — Indian Startup Funding Intelligence</title>
     <meta name="description"
         content="Track Indian startup funding rounds, investments, seed stages, venture capital, and market trends in real-time. Live venture intelligence.">

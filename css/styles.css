@@ -2983,9 +2983,17 @@
             border-color: #d1d1d6;
         }
 
+        .btn-nav-about.active {
+            background: var(--color-primary-subtle);
+            border-color: var(--color-primary);
+            color: var(--color-primary);
+        }
+
         .btn-nav-about .material-symbols-outlined {
             font-size: 17px;
             color: var(--color-primary);
+            display: inline-flex;
+            align-items: center;
         }
 
         /* Deisgned by Kapil Pidhwani: Executive-grade Weekly Venture Intelligence Modal (#trendsModal) with 100% native platform micro-visualizers. Ceiling: In-memory dataset aggregation. Upgrade path: Canvas-based time-series charts. */
@@ -4363,12 +4371,15 @@
                 justify-content: center;
             }
 
-            .btn-nav-about span {
+            .btn-nav-about .btn-nav-text {
                 display: none;
             }
 
             .btn-nav-about {
-                padding: 6px 8px;
+                padding: 6px 10px;
+                min-width: 34px;
+                height: 34px;
+                justify-content: center;
             }
 
             /* Trends Modal Responsive Adjustments */
