@@ -1109,18 +1109,16 @@ let rawDataset = [];
             headerDiv.setAttribute('aria-expanded', isCollapsed ? 'false' : 'true');
             headerDiv.setAttribute('title', 'Click to toggle week view');
             headerDiv.innerHTML = `
-        <div class="week-title-row">
-          <div class="week-title-heading-wrap">
-            <span class="material-symbols-outlined week-chevron" aria-hidden="true">expand_more</span>
-            <h2 class="week-number">${escapeHtml(headerTitle)}</h2>
-            ${headerRange}
-          </div>
-          <span class="week-metrics-pill">${dealCountText}${totalCapitalText}</span>
+        <div class="week-title-heading-wrap">
+          <span class="material-symbols-outlined week-chevron" aria-hidden="true">expand_more</span>
+          <h2 class="week-number">${escapeHtml(headerTitle)}</h2>
         </div>
         <button type="button" class="btn-week-trends" title="View Trends for ${escapeHtml(headerTitle)}">
           <span class="material-symbols-outlined trends-icon">trending_up</span>
           <span class="trends-btn-label">View Trends</span>
         </button>
+        ${headerRange}
+        <span class="week-metrics-pill">${dealCountText}${totalCapitalText}</span>
       `;
 
             const trendsBtn = headerDiv.querySelector('.btn-week-trends');

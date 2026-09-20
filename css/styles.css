@@ -1561,8 +1561,8 @@
         /* Deisgned by Kapil Pidhwani: Sticky floating week section banner with frosted glass. Ceiling: Desktop sticky offset 64px. Upgrade path: Scroll-spy timeline indicator. */
         .week-header {
             display: flex;
-            justify-content: space-between;
             align-items: center;
+            justify-content: flex-start;
             background: var(--color-surface);
             border: 1px solid var(--color-hairline);
             border-radius: 14px;
@@ -1584,18 +1584,10 @@
             background: var(--color-surface-secondary);
         }
 
-        .week-title-row {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
-
         .week-title-heading-wrap {
             display: flex;
             align-items: center;
             gap: 8px;
-            flex-wrap: wrap;
         }
 
         .week-chevron {
@@ -4680,14 +4672,15 @@
 
             /* Single-row mobile toolbar: Clean Quarter Pill on Left, Bulk Accordion on Right */
             .timeline-toolbar {
-                display: flex;
-                flex-direction: row;
-                flex-wrap: nowrap;
-                align-items: center;
-                justify-content: space-between;
-                gap: 8px;
-                padding: 6px 10px;
-                margin-bottom: 12px;
+                display: flex !important;
+                flex-direction: row !important;
+                flex-wrap: nowrap !important;
+                align-items: center !important;
+                justify-content: space-between !important;
+                gap: 8px !important;
+                padding: 4px 0 !important;
+                margin-bottom: 10px !important;
+                width: 100% !important;
             }
 
             .timeline-toolbar .view-switcher-group {
@@ -4695,113 +4688,132 @@
             }
 
             .toolbar-left {
-                flex: 0 1 auto;
-                min-width: 0;
+                flex: 0 1 auto !important;
+                min-width: 0 !important;
             }
 
             .toolbar-quarter-badge {
-                display: inline-flex;
-                align-items: center;
-                gap: 6px;
-                background: var(--color-surface);
-                border: 1px solid var(--color-hairline);
-                padding: 5px 11px;
-                border-radius: var(--radius-pill);
-                font-size: 12px;
-                font-weight: 600;
-                color: var(--color-text-primary);
-                white-space: nowrap;
-                overflow: visible;
-                max-width: none;
-                box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+                display: inline-flex !important;
+                align-items: center !important;
+                gap: 5px !important;
+                background: var(--color-surface) !important;
+                border: 1px solid var(--color-hairline) !important;
+                padding: 4px 9px !important;
+                border-radius: var(--radius-pill) !important;
+                font-size: 11px !important;
+                font-weight: 600 !important;
+                color: var(--color-text-primary) !important;
+                white-space: nowrap !important;
+                box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02) !important;
             }
 
             .toolbar-quarter-badge .quarter-badge-icon {
-                font-size: 15px;
-                color: var(--color-primary);
+                font-size: 14px !important;
+                color: var(--color-primary) !important;
+            }
+
+            .quarter-badge-title {
+                font-size: 11.5px !important;
+                font-weight: 700 !important;
+            }
+
+            .quarter-badge-sub {
+                font-size: 10.5px !important;
+                padding-left: 5px !important;
+            }
+
+            .quarter-badge-metrics {
+                display: none !important;
             }
 
             .toolbar-right {
-                flex-shrink: 0;
+                flex-shrink: 0 !important;
             }
 
             .btn-accordion-bulk {
-                padding: 5px 11px;
-                font-size: 11.5px;
-                gap: 5px;
-                border-radius: var(--radius-pill);
+                padding: 4px 9px !important;
+                font-size: 10.5px !important;
+                gap: 4px !important;
+                border-radius: var(--radius-pill) !important;
+                white-space: nowrap !important;
             }
 
-            /* Compact Sticky Week Section Header */
+            .btn-accordion-bulk .material-symbols-outlined {
+                font-size: 14px !important;
+            }
+
+            /* Compact 2-Row Grid Week Section Header for Mobile */
             .week-header {
-                top: 96px;
-                padding: 8px 10px;
-                gap: 6px;
-                border-radius: 12px;
-                display: flex;
-                flex-direction: row;
-                justify-content: space-between;
-                align-items: center;
-            }
-
-            .week-title-row {
-                display: flex;
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 3px;
-                min-width: 0;
-                flex: 1 1 auto;
+                top: 96px !important;
+                display: grid !important;
+                grid-template-columns: 1fr auto !important;
+                grid-template-rows: auto auto !important;
+                row-gap: 5px !important;
+                column-gap: 8px !important;
+                align-items: center !important;
+                padding: 8px 10px !important;
+                border-radius: 12px !important;
             }
 
             .week-title-heading-wrap {
-                display: flex;
-                align-items: center;
-                gap: 5px;
-                flex-wrap: nowrap;
-                min-width: 0;
+                grid-column: 1 !important;
+                grid-row: 1 !important;
+                justify-self: start !important;
+                display: flex !important;
+                align-items: center !important;
+                gap: 5px !important;
+                min-width: 0 !important;
             }
 
             .week-chevron {
-                font-size: 18px;
-                flex-shrink: 0;
+                font-size: 16px !important;
+                flex-shrink: 0 !important;
             }
 
             .week-number {
-                font-size: 13.5px;
-                font-weight: 700;
-                white-space: nowrap;
-            }
-
-            .week-date-range {
-                font-size: 10px;
-                padding: 1px 6px;
-                white-space: nowrap;
-                max-width: 130px;
-                overflow: hidden;
-                text-overflow: ellipsis;
-            }
-
-            .week-metrics-pill {
-                font-size: 10px;
-                padding: 2px 6px;
-                align-self: flex-start;
-                white-space: nowrap;
+                font-size: 13px !important;
+                font-weight: 700 !important;
+                white-space: nowrap !important;
+                letter-spacing: -0.01em !important;
             }
 
             .btn-week-trends {
-                padding: 3px 8px;
-                font-size: 10.5px;
-                gap: 3px;
-                flex-shrink: 0;
-                border-radius: var(--radius-pill);
+                grid-column: 2 !important;
+                grid-row: 1 !important;
+                justify-self: end !important;
+                margin-left: 0 !important;
+                padding: 3px 8px !important;
+                font-size: 10px !important;
+                gap: 3px !important;
+                flex-shrink: 0 !important;
+                border-radius: var(--radius-pill) !important;
             }
 
             .btn-week-trends .trends-icon {
-                font-size: 14px;
+                font-size: 13px !important;
             }
 
             .trends-btn-label {
-                font-size: 10.5px;
+                font-size: 10px !important;
+            }
+
+            .week-date-range {
+                grid-column: 1 !important;
+                grid-row: 2 !important;
+                justify-self: start !important;
+                font-size: 9.5px !important;
+                padding: 1px 6px !important;
+                white-space: nowrap !important;
+                max-width: 100% !important;
+            }
+
+            .week-metrics-pill {
+                grid-column: 2 !important;
+                grid-row: 2 !important;
+                justify-self: end !important;
+                font-size: 9.5px !important;
+                padding: 2px 6px !important;
+                white-space: nowrap !important;
             }
 
             /* Single-column Mobile Deal Cards */
