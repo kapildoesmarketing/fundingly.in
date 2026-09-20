@@ -217,6 +217,7 @@ let rawDataset = [];
             if (!sidebar) return;
 
             const updateToggleUI = (collapsed) => {
+                document.body.classList.toggle('sidebar-collapsed', collapsed);
                 if (edgeToggleIcon) {
                     edgeToggleIcon.textContent = collapsed ? 'chevron_right' : 'chevron_left';
                 }
@@ -3091,7 +3092,8 @@ let rawDataset = [];
             if (filterBtn) {
                 filterBtn.addEventListener('click', () => {
                     triggerHaptic('medium');
-                    if (sidebar) {
+                    if (!sidebar) return;
+                    if (window.innerWidth <= 900) {
                         const isOpen = sidebar.classList.contains('mobile-open');
                         if (isOpen) {
                             sidebar.classList.remove('mobile-open');
@@ -3102,6 +3104,23 @@ let rawDataset = [];
                             sidebar.classList.add('mobile-open');
                             if (backdrop) backdrop.classList.add('active');
                             filterBtn.classList.add('active');
+                        }
+                    } else {
+                        // Desktop: expand sidebar and update UI
+                        sidebar.classList.remove('collapsed');
+                        localStorage.setItem('fundingly_sidebar_collapsed', 'false');
+                        const edgeToggleIcon = document.getElementById('sidebarEdgeToggleIcon');
+                        const edgeToggleBtn = document.getElementById('sidebarEdgeToggleBtn');
+                        const headerCollapseBtn = document.getElementById('sidebarHeaderCollapseBtn');
+                        document.body.classList.remove('sidebar-collapsed');
+                        if (edgeToggleIcon) edgeToggleIcon.textContent = 'chevron_left';
+                        if (edgeToggleBtn) {
+                            edgeToggleBtn.setAttribute('title', 'Collapse Filters');
+                            edgeToggleBtn.setAttribute('aria-label', 'Collapse Filters');
+                        }
+                        if (headerCollapseBtn) {
+                            headerCollapseBtn.setAttribute('title', 'Collapse Filters');
+                            headerCollapseBtn.setAttribute('aria-label', 'Collapse Filters');
                         }
                     }
                 });

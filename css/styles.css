@@ -4533,7 +4533,7 @@
             cursor: grabbing;
         }
 
-        /* 3. Apple-Style Mobile Floating Glass Bottom Dock (Pillar 7.1) */
+        /* 3. Apple-Style Floating Glass Bottom Dock (Pillar 7.1) */
         .mobile-bottom-dock {
             display: none;
             position: fixed;
@@ -4552,6 +4552,21 @@
             align-items: center;
             max-width: calc(100vw - 24px);
             touch-action: manipulation;
+        }
+
+        /* Show floating bottom dock on desktop whenever sidebar is collapsed */
+        body.sidebar-collapsed .mobile-bottom-dock {
+            display: flex !important;
+        }
+
+        body.sidebar-collapsed .timeline-stream,
+        body.sidebar-collapsed .table-view-container,
+        body.sidebar-collapsed .main-footer {
+            padding-bottom: calc(88px + env(safe-area-inset-bottom, 0px)) !important;
+        }
+
+        body.sidebar-collapsed .btn-back-to-top {
+            display: none !important;
         }
 
         [data-theme="dark"] .mobile-bottom-dock {
