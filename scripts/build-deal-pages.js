@@ -2,11 +2,11 @@
  * ============================================================================
  * FUNDINGLY.IN — STATIC DEAL & COMPANY PAGE GENERATOR (SEO & ADSENSE SUITE)
  * ============================================================================
- * Target: Generates 100% pre-rendered, static HTML pages for every startup deal
- * in the Fundingly.in intelligence dataset, complete with:
+ * Target: Generates 100% pre-rendered, static HTML pages matching the exact
+ * 1:1 Apple-style modal dossier UI, complete with:
  * - Dynamic SEO meta tags, title tags, OpenGraph & Twitter Cards
  * - Schema.org JSON-LD Structured Data (Organization, InvestmentOrGrant, BreadcrumbList)
- * - Compliant Google AdSense responsive ad slots
+ * - Sidebar & Bottom Google AdSense ad slots (content remains pure & unscattered)
  * - Apple-grade responsive design & Dark/Light mode support
  * - Automatic sitemap.xml generation
  * - 100% $0 serverless deployment on GitHub Pages
@@ -156,20 +156,19 @@ function parseSourcesList(sources) {
     });
 }
 
-// Helper: Format Person List with Google/LinkedIn Search
+// Helper: Format Person List with Google/LinkedIn Search (matching app.js modal)
 function renderFoundersMarkup(foundersStr, companyName) {
-    if (!foundersStr) return '<span class="val-empty">Undisclosed</span>';
+    if (!foundersStr) return '<span style="color: var(--color-text-tertiary);">Undisclosed</span>';
     const names = foundersStr.split(/[,&|]/).map(n => n.trim()).filter(Boolean);
-    if (names.length === 0) return '<span class="val-empty">Undisclosed</span>';
+    if (names.length === 0) return '<span style="color: var(--color-text-tertiary);">Undisclosed</span>';
 
     return names.map(name => {
         const query = `${name} ${companyName} founder LinkedIn`;
         const searchUrl = `https://www.google.com/search?q=${encodeURIComponent(query)}`;
-        return `<span class="founder-tag">
-            <span class="material-symbols-outlined founder-icon">person</span>
-            <span class="founder-name">${escapeHtml(name)}</span>
-            <a href="${searchUrl}" target="_blank" rel="noopener noreferrer" class="founder-search-link" title="Search ${escapeHtml(name)} on Google / LinkedIn" aria-label="Search ${escapeHtml(name)} on Google">
-                <span class="material-symbols-outlined">search</span>
+        return `<span class="person-tag" style="display:inline-flex; align-items:center; gap:4px; margin-right:8px; margin-bottom:4px;">
+            <span>${escapeHtml(name)}</span>
+            <a href="${searchUrl}" target="_blank" rel="noopener noreferrer" class="micro-search-btn" title="Search ${escapeHtml(name)} on Google" aria-label="Search ${escapeHtml(name)} on Google">
+                <span class="material-symbols-outlined" style="font-size: 13px;">search</span>
             </a>
         </span>`;
     }).join(' ');
@@ -177,7 +176,7 @@ function renderFoundersMarkup(foundersStr, companyName) {
 
 // Main Build Function
 function buildStaticDealPages() {
-    console.log('🚀 Starting Fundingly.in Static Deal Page Generation...');
+    console.log('🚀 Starting Fundingly.in Static Deal Page Generation (Modal Parity & Sidebar Ads)...');
 
     if (!fs.existsSync(DATA_DIR)) {
         console.error('❌ Data directory does not exist:', DATA_DIR);
@@ -259,10 +258,11 @@ function buildStaticDealPages() {
     console.log(`✅ Successfully generated ${companyMap.size} static company dossier pages & updated sitemap.xml!`);
 }
 
-// Generate HTML for a single company
+// Generate HTML for a single company matching the 1:1 modal layout
 function generateCompanyPageHtml(compData, deal, totalRaisedUsd, relatedDeals) {
     const companyName = deal.company_name || 'Startup';
     const domain = compData.domain;
+    const companyDomain = extractDomain(deal.company_website);
     const roundName = deal.funding_round || 'Funding Round';
     const amountUsdFormatted = formatUSD(deal.funding_amount_usd);
     const amountInrFormatted = formatINR(deal.funding_amount_usd);
@@ -276,6 +276,29 @@ function generateCompanyPageHtml(compData, deal, totalRaisedUsd, relatedDeals) {
     const pageTitle = `${companyName} Raises ${amountUsdFormatted} in ${roundName} | Fundingly.in`;
     const pageDescription = `${companyName} (${deal.company_headquarters || 'India'}) raised ${amountUsdFormatted}${amountInrFormatted ? ' (' + amountInrFormatted + ')' : ''} in ${roundName} led by ${deal.lead_investor || 'top investors'}. Explore complete cap table, founders, and intelligence dossier on Fundingly.in.`;
     const canonicalUrl = `https://fundingly.in/company/${domain}/`;
+
+    // 1. Google LinkedIn C-Level Search URL
+    const linkedinQuery = `site:linkedin.com/in/ "${companyName}" ("CEO" OR "CFO" OR "COO" OR "CTO" OR "CMO" OR "CHRO" OR "CIO" OR "CISO" OR "CRO" OR "Chief" OR "President" OR "Managing Director")`;
+    const linkedinSearchUrl = `https://www.google.com/search?q=${encodeURIComponent(linkedinQuery)}`;
+
+    // 2. ChatGPT Leadership Research Pre-Prompt URL
+    const chatgptPrompt = `Research the current C-level and senior executive leadership of ${companyName}. Identify the CEO, CTO, CFO, COO, CMO, founders, and other key decision-makers where publicly verifiable. For each person, provide their name, current title, responsibilities, professional background, and LinkedIn profile if publicly available. Prioritize current and authoritative sources, distinguish confirmed C-suite roles from board/director positions, and flag any information that cannot be independently verified. Include the sources used and the date the information was verified.`;
+    const chatgptPromptUrl = `https://chatgpt.com/?q=${encodeURIComponent(chatgptPrompt)}`;
+
+    // Avatar HTML (matches app.js)
+    let avatarHTML = '';
+    if (companyDomain) {
+        avatarHTML = `<img src="https://www.google.com/s2/favicons?domain=${encodeURIComponent(companyDomain)}&sz=128" alt="${escapeHtml(companyName)}" class="modal-hero-avatar" onerror="this.outerHTML='<div class=\\'modal-hero-monogram\\' style=\\'background:${monoStyle.bg}; color:${monoStyle.color}; border:1px solid ${monoStyle.border};\\'>${mono}</div>'">`;
+    } else {
+        avatarHTML = `<div class="modal-hero-monogram" style="background:${monoStyle.bg}; color:${monoStyle.color}; border:1px solid ${monoStyle.border};">${mono}</div>`;
+    }
+
+    // Sources footer string
+    let sourceLink = '';
+    if (sourcesList.length > 0) {
+        const linksAnchors = sourcesList.map(s => `<a href="${encodeURI(s.url)}" target="_blank" rel="noopener noreferrer" style="color: var(--color-primary); text-decoration: underline; margin-right: 8px;">[${escapeHtml(s.host)}]</a>`).join(' ');
+        sourceLink = `<div class="modal-source-footer" style="display:flex; flex-wrap:wrap; align-items:center; gap:6px; font-size:12px; color:var(--color-text-tertiary); padding-top:12px; border-top:1px solid var(--color-divider-soft); margin-top:16px;"><strong>Sources:</strong> ${linksAnchors}</div>`;
+    }
 
     // JSON-LD Schemas
     const foundersArray = (deal.founders || '')
@@ -350,7 +373,6 @@ function generateCompanyPageHtml(compData, deal, totalRaisedUsd, relatedDeals) {
         ]
     };
 
-    // Clean JSON-LD string
     const jsonLdString = JSON.stringify(structuredData, null, 2);
 
     return `<!DOCTYPE html>
@@ -385,7 +407,7 @@ function generateCompanyPageHtml(compData, deal, totalRaisedUsd, relatedDeals) {
     <meta name="twitter:description" content="${escapeHtml(pageDescription)}">
     <meta name="twitter:image" content="https://fundingly.in/assets/og-preview.png">
 
-    <!-- Google AdSense Script (Placeholder ready for Publisher ID) -->
+    <!-- Google AdSense Script -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-0000000000000000" crossorigin="anonymous"></script>
 
     <!-- Structured Data (JSON-LD) for Google Rich Snippets -->
@@ -402,371 +424,170 @@ ${jsonLdString}
     <link rel="stylesheet" href="../../css/styles.css">
 
     <style>
-        .dossier-wrapper {
-            max-width: 920px;
-            margin: 32px auto 80px auto;
-            padding: 0 20px;
+        .dossier-page-wrapper {
+            max-width: 1080px;
+            margin: 24px auto 80px auto;
+            padding: 0 16px;
         }
 
-        .breadcrumb-nav {
+        .breadcrumb-bar {
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
             font-size: 13px;
             color: var(--color-text-tertiary);
             margin-bottom: 20px;
             flex-wrap: wrap;
         }
 
-        .breadcrumb-nav a {
+        .breadcrumb-bar a {
             color: var(--color-text-secondary);
             text-decoration: none;
             transition: color 0.15s ease;
         }
 
-        .breadcrumb-nav a:hover {
+        .breadcrumb-bar a:hover {
             color: var(--color-primary);
         }
 
-        .dossier-hero-card {
+        /* 2-Column Desktop Grid (Main Card + Side Rail) */
+        .dossier-layout-grid {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) 300px;
+            gap: 24px;
+            align-items: start;
+        }
+
+        /* Main Dossier Sheet Card (1:1 Modal Parity) */
+        .dossier-standalone-card {
             background: var(--color-surface);
             border: 1px solid var(--color-hairline);
             border-radius: var(--radius-sheet);
-            padding: 36px 36px 28px 36px;
-            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.03);
-            margin-bottom: 24px;
+            padding: 32px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
             position: relative;
-            overflow: hidden;
         }
 
-        .dossier-hero-header {
-            display: flex;
-            align-items: flex-start;
-            justify-content: space-between;
-            gap: 20px;
-            margin-bottom: 24px;
-            flex-wrap: wrap;
-        }
-
-        .dossier-brand-wrap {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-        }
-
-        .dossier-avatar-box {
-            width: 64px;
-            height: 64px;
-            border-radius: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            font-size: 22px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-            flex-shrink: 0;
-        }
-
-        .dossier-title-area h1 {
-            font-size: 28px;
-            font-weight: 700;
-            letter-spacing: -0.025em;
-            color: var(--color-text-primary);
-            margin: 0 0 6px 0;
-            line-height: 1.2;
-        }
-
-        .dossier-subtitle {
-            font-size: 14px;
-            color: var(--color-text-secondary);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            flex-wrap: wrap;
-        }
-
-        .dossier-hero-metrics {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 16px;
-            background: var(--color-surface-secondary);
-            border: 1px solid var(--color-hairline);
-            border-radius: var(--radius-card);
-            padding: 20px;
-            margin-top: 24px;
-        }
-
-        .hero-metric-item {
+        /* Side Rail (Sticky Ad + Related Deals) */
+        .dossier-sidebar {
             display: flex;
             flex-direction: column;
-            gap: 4px;
+            gap: 20px;
+            position: sticky;
+            top: 76px;
         }
 
-        .hero-metric-label {
-            font-size: 12px;
-            font-weight: 600;
-            color: var(--color-text-tertiary);
-            text-transform: uppercase;
-            letter-spacing: 0.03em;
-        }
-
-        .hero-metric-value {
-            font-size: 24px;
-            font-weight: 700;
-            color: var(--color-text-primary);
-            letter-spacing: -0.02em;
-        }
-
-        .hero-metric-sub {
-            font-size: 13px;
-            color: var(--color-text-secondary);
-            font-weight: 500;
-        }
-
-        .dossier-actions-bar {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-top: 24px;
-            padding-top: 20px;
-            border-top: 1px solid var(--color-hairline);
-            flex-wrap: wrap;
-        }
-
-        .action-pill-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            padding: 8px 16px;
+        .ad-container-wrapper {
             background: var(--color-surface);
             border: 1px solid var(--color-hairline);
-            border-radius: var(--radius-pill);
-            color: var(--color-text-primary);
-            font-size: 13px;
-            font-weight: 600;
-            text-decoration: none;
-            cursor: pointer;
-            transition: all 0.15s ease;
-        }
-
-        .action-pill-btn:hover {
-            background: var(--color-surface-tertiary);
-            border-color: var(--color-border);
-            transform: translateY(-1px);
-        }
-
-        .action-pill-btn.primary {
-            background: var(--color-primary);
-            color: #ffffff;
-            border-color: var(--color-primary);
-        }
-
-        .action-pill-btn.primary:hover {
-            background: var(--color-primary-hover);
-        }
-
-        /* AdSense Blocks */
-        .ad-container-wrapper {
-            margin: 28px 0;
-            background: var(--color-surface-secondary);
-            border: 1px dashed var(--color-hairline);
-            border-radius: var(--radius-card);
+            border-radius: var(--radius-sheet);
             padding: 16px;
             text-align: center;
             overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
         }
 
         .ad-label {
             font-size: 10px;
             font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 0.08em;
+            letter-spacing: 0.06em;
             color: var(--color-text-tertiary);
             margin-bottom: 8px;
+            display: block;
         }
 
-        /* Dossier Sections */
-        .dossier-section {
+        .sidebar-widget {
             background: var(--color-surface);
             border: 1px solid var(--color-hairline);
             border-radius: var(--radius-sheet);
-            padding: 28px 32px;
-            margin-bottom: 24px;
-            box-shadow: var(--shadow-sm);
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
         }
 
-        .section-header {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 18px;
-            border-bottom: 1px solid var(--color-hairline);
-            padding-bottom: 12px;
-        }
-
-        .section-header h2 {
-            font-size: 18px;
-            font-weight: 600;
-            color: var(--color-text-primary);
-            margin: 0;
-            letter-spacing: -0.01em;
-        }
-
-        .section-header .material-symbols-outlined {
-            color: var(--color-primary);
-            font-size: 20px;
-        }
-
-        .dossier-body-text {
-            font-size: 15px;
-            line-height: 1.7;
-            color: var(--color-text-secondary);
-            margin: 0 0 16px 0;
-        }
-
-        .dossier-body-text:last-child {
-            margin-bottom: 0;
-        }
-
-        .info-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 16px 24px;
-        }
-
-        .info-cell {
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-        }
-
-        .info-cell.full-width {
-            grid-column: span 2;
-        }
-
-        .info-label {
-            font-size: 12px;
-            font-weight: 600;
-            color: var(--color-text-tertiary);
-            text-transform: uppercase;
-            letter-spacing: 0.02em;
-        }
-
-        .info-value {
+        .sidebar-widget-title {
             font-size: 14px;
-            font-weight: 500;
-            color: var(--color-text-primary);
-            line-height: 1.5;
-        }
-
-        .info-value.highlight {
-            color: var(--color-primary);
             font-weight: 600;
-        }
-
-        /* Founder Tags */
-        .founder-tag {
-            display: inline-flex;
+            color: var(--color-text-primary);
+            margin: 0 0 12px 0;
+            display: flex;
             align-items: center;
             gap: 6px;
-            padding: 4px 10px;
-            background: var(--color-surface-secondary);
-            border: 1px solid var(--color-hairline);
-            border-radius: var(--radius-pill);
-            font-size: 13px;
-            font-weight: 500;
-            margin: 0 6px 6px 0;
         }
 
-        .founder-icon {
+        .sidebar-widget-title .material-symbols-outlined {
             font-size: 16px;
             color: var(--color-primary);
         }
 
-        .founder-search-link {
-            color: var(--color-text-tertiary);
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            margin-left: 2px;
-            transition: color 0.15s ease;
+        .sidebar-deals-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
         }
 
-        .founder-search-link:hover {
-            color: var(--color-primary);
-        }
-
-        .founder-search-link .material-symbols-outlined {
-            font-size: 14px;
-        }
-
-        /* Related Deals Grid */
-        .related-deals-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-            gap: 16px;
-            margin-top: 16px;
-        }
-
-        .related-card {
+        .sidebar-deal-item {
+            display: flex;
+            flex-direction: column;
+            padding: 10px 12px;
             background: var(--color-surface-secondary);
             border: 1px solid var(--color-hairline);
             border-radius: var(--radius-card);
-            padding: 16px;
             text-decoration: none;
             color: inherit;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
             transition: all 0.15s ease;
         }
 
-        .related-card:hover {
+        .sidebar-deal-item:hover {
             background: var(--color-surface-tertiary);
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-sm);
+            transform: translateY(-1px);
         }
 
-        .related-top {
+        .sidebar-deal-header {
             display: flex;
-            align-items: center;
             justify-content: space-between;
-            margin-bottom: 8px;
+            align-items: center;
+            margin-bottom: 4px;
         }
 
-        .related-name {
+        .sidebar-deal-name {
+            font-size: 13px;
             font-weight: 600;
-            font-size: 15px;
             color: var(--color-text-primary);
         }
 
-        .related-amount {
-            font-size: 16px;
+        .sidebar-deal-amount {
+            font-size: 14px;
             font-weight: 700;
             color: var(--color-primary);
-            margin: 4px 0;
         }
 
-        .related-meta {
-            font-size: 12px;
+        .sidebar-deal-meta {
+            font-size: 11px;
             color: var(--color-text-tertiary);
         }
 
-        @media (max-width: 640px) {
-            .dossier-hero-card {
-                padding: 24px 20px;
-            }
-            .dossier-section {
-                padding: 20px 18px;
-            }
-            .info-grid {
+        /* Bottom Ad Banner */
+        .bottom-ad-wrapper {
+            margin-top: 32px;
+            background: var(--color-surface);
+            border: 1px solid var(--color-hairline);
+            border-radius: var(--radius-sheet);
+            padding: 20px;
+            text-align: center;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
+        }
+
+        @media (max-width: 960px) {
+            .dossier-layout-grid {
                 grid-template-columns: 1fr;
             }
-            .info-cell.full-width {
-                grid-column: span 1;
+            .dossier-sidebar {
+                position: static;
             }
-            .hero-metric-value {
-                font-size: 20px;
+            .dossier-standalone-card {
+                padding: 24px 20px;
             }
         }
     </style>
@@ -801,9 +622,9 @@ ${jsonLdString}
         </div>
     </header>
 
-    <main class="dossier-wrapper" role="main">
+    <main class="dossier-page-wrapper" role="main">
         <!-- Breadcrumbs -->
-        <nav class="breadcrumb-nav" aria-label="Breadcrumbs">
+        <nav class="breadcrumb-bar" aria-label="Breadcrumbs">
             <a href="../../">Home</a>
             <span>›</span>
             <a href="../../?industry=${encodeURIComponent(deal.industry || '')}">${escapeHtml(deal.industry || 'Startups')}</a>
@@ -811,242 +632,228 @@ ${jsonLdString}
             <span style="color: var(--color-text-primary); font-weight: 600;">${escapeHtml(companyName)}</span>
         </nav>
 
-        <!-- Hero Card -->
-        <article class="dossier-hero-card">
-            <div class="dossier-hero-header">
-                <div class="dossier-brand-wrap">
-                    <div class="dossier-avatar-box" style="background: ${monoStyle.bg}; color: ${monoStyle.color}; border: 1px solid ${monoStyle.border};">
-                        ${escapeHtml(mono)}
+        <div class="dossier-layout-grid">
+            <!-- Main Column: Exact 1:1 Apple Sheet Modal Card -->
+            <article class="dossier-standalone-card">
+                <div class="modal-hero">
+                    <!-- Tier 1: Top Bar (Avatar on Left, Round Pill Badge on Right) -->
+                    <div class="modal-hero-top-bar" style="padding-right: 0;">
+                        ${avatarHTML}
+                        <span class="modal-hero-badge ${stageClass}">${escapeHtml(deal.funding_round || 'Funding')}</span>
                     </div>
-                    <div class="dossier-title-area">
-                        <h1>${escapeHtml(companyName)}</h1>
-                        <div class="dossier-subtitle">
-                            <span>${escapeHtml(deal.industry || 'Tech')}</span>
-                            ${deal.sub_industry ? `<span>•</span><span>${escapeHtml(deal.sub_industry)}</span>` : ''}
-                            ${deal.company_headquarters ? `<span>•</span><span>${escapeHtml(deal.company_headquarters)}</span>` : ''}
+
+                    <!-- Tier 2: 100% Full-Width Identity Block -->
+                    <div class="modal-hero-identity">
+                        <div class="modal-hero-title-wrap">
+                            <h1 class="modal-hero-title" style="font-size: 24px;">${escapeHtml(companyName)}</h1>
+                        </div>
+                        <div class="modal-hero-subtitle">
+                            ${escapeHtml(deal.industry || 'General')}${deal.sub_industry ? ' • ' + escapeHtml(deal.sub_industry) : ''}
+                        </div>
+                    </div>
+
+                    <!-- Tier 3: Unified Actions Toolbar -->
+                    <div class="modal-hero-toolbar">
+                        <div class="modal-hero-action-row">
+                            ${companyDomain ? `
+                                <a href="${encodeURI(deal.company_website)}" target="_blank" rel="noopener noreferrer" class="modal-domain-chip" title="Visit: ${escapeHtml(deal.company_website)}">
+                                    <span class="material-symbols-outlined">language</span>
+                                    <span>${escapeHtml(companyDomain)}</span>
+                                    <span class="material-symbols-outlined" style="font-size: 12px; opacity: 0.75;">open_in_new</span>
+                                </a>
+                                <button type="button" class="modal-micro-btn" onclick="copyDomainText('${escapeHtml(companyDomain)}', this)" title="Copy domain: ${escapeHtml(companyDomain)}" aria-label="Copy domain ${escapeHtml(companyDomain)}">
+                                    <span class="material-symbols-outlined">content_copy</span>
+                                </button>
+                            ` : ''}
+                        </div>
+                        <div class="modal-hero-utility-row">
+                            <button type="button" class="modal-micro-btn" id="copySummaryBtn" onclick="copyDealSummary()" title="Copy Markdown deal summary for Slack/Email" aria-label="Copy Deal Summary">
+                                <span class="material-symbols-outlined" id="copySummaryIcon">assignment</span>
+                            </button>
+                            <button type="button" class="modal-micro-btn" onclick="window.print()" title="Print One-Pager Deal Memo" aria-label="Print One-Pager Deal Memo">
+                                <span class="material-symbols-outlined">print</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Tier 4: Deal Snapshot Meta Tile -->
+                    <div class="modal-stats-strip">
+                        <div class="stat-pill-block">
+                            <span class="stat-pill-label">Amount Raised</span>
+                            <span class="stat-pill-value">${escapeHtml(amountUsdFormatted)}</span>
+                        </div>
+                        <div class="stat-pill-block">
+                            <span class="stat-pill-label">Funding Date</span>
+                            <span class="stat-pill-value">${escapeHtml(dateFormatted)}</span>
+                        </div>
+                        <div class="stat-pill-block">
+                            <span class="stat-pill-label">Headquarters</span>
+                            <span class="stat-pill-value">${escapeHtml(deal.company_headquarters || 'N/A')}</span>
                         </div>
                     </div>
                 </div>
-                <div class="dossier-badge-wrap">
-                    <span class="badge-round ${stageClass}" style="font-size: 13px; padding: 6px 14px;">
-                        ${escapeHtml(roundName)}
-                    </span>
-                </div>
-            </div>
 
-            <!-- Key Deal Metrics Grid -->
-            <div class="dossier-hero-metrics">
-                <div class="hero-metric-item">
-                    <span class="hero-metric-label">Amount Raised</span>
-                    <span class="hero-metric-value">${escapeHtml(amountUsdFormatted)}</span>
-                    ${amountInrFormatted ? `<span class="hero-metric-sub">~ ${escapeHtml(amountInrFormatted)}</span>` : ''}
+                <!-- Section 1: Overview & Mission -->
+                <div class="modal-section-card">
+                    <div class="modal-section-title">
+                        <span class="material-symbols-outlined" style="font-size: 15px;">info</span>
+                        <span>Overview & Mission</span>
+                    </div>
+                    <p class="modal-desc-body">${escapeHtml(deal.company_description || 'No description available for this entity.')}</p>
+                    ${deal.product_or_solution ? `
+                        <div style="margin-top: 10px; padding: 10px 12px; background: var(--color-surface-secondary); border-radius: var(--radius-inner); font-size: 13px; color: var(--color-text-secondary); line-height: 1.5;">
+                            <strong style="color: var(--color-text-primary); display: block; margin-bottom: 2px; font-size: 11px; text-transform: uppercase; letter-spacing: 0.04em;">Product / Solution:</strong>
+                            ${escapeHtml(deal.product_or_solution)}
+                        </div>
+                    ` : ''}
                 </div>
-                <div class="hero-metric-item">
-                    <span class="hero-metric-label">Funding Date</span>
-                    <span class="hero-metric-value" style="font-size: 18px;">${escapeHtml(dateFormatted)}</span>
-                    <span class="hero-metric-sub">${escapeHtml(deal.funding_type || 'Equity Round')}</span>
-                </div>
-                <div class="hero-metric-item">
-                    <span class="hero-metric-label">Lead Investor</span>
-                    <span class="hero-metric-value" style="font-size: 18px; color: var(--color-primary);">${escapeHtml(deal.lead_investor || 'Undisclosed')}</span>
-                    <span class="hero-metric-sub">${deal.investor_count ? escapeHtml(deal.investor_count) + ' Participating' : 'Venture Round'}</span>
-                </div>
-            </div>
 
-            <!-- Action Buttons -->
-            <div class="dossier-actions-bar">
-                ${deal.company_website ? `
-                    <a href="${encodeURI(deal.company_website)}" target="_blank" rel="noopener noreferrer" class="action-pill-btn primary">
-                        <span class="material-symbols-outlined" style="font-size: 16px;">language</span>
-                        <span>Visit ${escapeHtml(domain)}</span>
-                        <span class="material-symbols-outlined" style="font-size: 14px;">open_in_new</span>
+                <!-- Section 2: Deal Terms & Syndicate -->
+                <div class="modal-section-card">
+                    <div class="modal-section-title">
+                        <span class="material-symbols-outlined" style="font-size: 15px;">paid</span>
+                        <span>Deal Terms & Syndicate</span>
+                    </div>
+                    <div class="inspector-grid">
+                        <div class="inspector-row"><span class="inspector-label">Funding Round</span><div class="inspector-val highlight">${escapeHtml(deal.funding_round || 'N/A')}</div></div>
+                        <div class="inspector-row"><span class="inspector-label">Amount Raised (USD)</span><div class="inspector-val highlight">${escapeHtml(amountUsdFormatted)}${amountInrFormatted ? ' (~ ' + escapeHtml(amountInrFormatted) + ')' : ''}</div></div>
+                        <div class="inspector-row"><span class="inspector-label">Date of Funding</span><div class="inspector-val">${escapeHtml(dateFormatted)}</div></div>
+                        <div class="inspector-row"><span class="inspector-label">Lead Investor</span><div class="inspector-val highlight">${escapeHtml(deal.lead_investor || 'N/A')}</div></div>
+                        <div class="inspector-row" style="grid-column: span 2;"><span class="inspector-label">Syndicate / All Investors</span><div class="inspector-val">${escapeHtml(deal.investors || deal.funded_by || 'N/A')}</div></div>
+                        ${deal.funding_use ? `<div class="inspector-row" style="grid-column: span 2;"><span class="inspector-label">Funding Use</span><div class="inspector-val">${escapeHtml(deal.funding_use)}</div></div>` : ''}
+                    </div>
+                </div>
+
+                <!-- Section 3: Company & Market Profile -->
+                <div class="modal-section-card">
+                    <div class="modal-section-title">
+                        <span class="material-symbols-outlined" style="font-size: 15px;">business</span>
+                        <span>Company & Market Profile</span>
+                    </div>
+                    <div class="inspector-grid">
+                        <div class="inspector-row"><span class="inspector-label">Industry</span><div class="inspector-val highlight">${escapeHtml(deal.industry || 'N/A')}</div></div>
+                        <div class="inspector-row"><span class="inspector-label">Sub-Industry</span><div class="inspector-val">${escapeHtml(deal.sub_industry || 'N/A')}</div></div>
+                        <div class="inspector-row"><span class="inspector-label">Business Model</span><div class="inspector-val">${escapeHtml(deal.business_model || 'N/A')}</div></div>
+                        <div class="inspector-row"><span class="inspector-label">Year Founded</span><div class="inspector-val">${escapeHtml(deal.year_founded || 'N/A')}</div></div>
+                        <div class="inspector-row"><span class="inspector-label">Team Size Range</span><div class="inspector-val">${escapeHtml(deal.employee_count_range_at_funding || deal.employee_count_range || 'N/A')}</div></div>
+                        <div class="inspector-row"><span class="inspector-label">Headquarters</span><div class="inspector-val">${escapeHtml(deal.company_headquarters || 'N/A')}</div></div>
+                        <div class="inspector-row" style="grid-column: span 2;"><span class="inspector-label">India Offices</span><div class="inspector-val">${escapeHtml(deal.other_offices_in_india || deal.company_india_offices || 'N/A')}</div></div>
+                    </div>
+                </div>
+
+                <!-- Section 4: Leadership & Executive Intelligence -->
+                <div class="modal-section-card">
+                    <div class="modal-section-title">
+                        <span class="material-symbols-outlined" style="font-size: 15px;">groups</span>
+                        <span>Leadership & Executive Intelligence</span>
+                    </div>
+                    <div class="inspector-grid">
+                        <div class="inspector-row" style="grid-column: span 2;">
+                            <span class="inspector-label">Founders</span>
+                            <div class="inspector-val highlight">${renderFoundersMarkup(deal.founders, companyName)}</div>
+                        </div>
+                    </div>
+                    <div class="executive-intel-actions">
+                        <a href="${linkedinSearchUrl}" target="_blank" rel="noopener noreferrer" class="executive-intel-btn" title="Search Google for C-Level LinkedIn Profiles">
+                            <div class="executive-intel-icon-wrap" style="background: rgba(10, 102, 194, 0.12); color: #0a66c2;">
+                                <span class="material-symbols-outlined" style="font-size: 20px;">person_search</span>
+                            </div>
+                            <div class="executive-intel-btn-text">
+                                <span class="executive-intel-btn-title">Search C-Suite on LinkedIn</span>
+                                <span class="executive-intel-btn-sub">Find verified executive profiles</span>
+                            </div>
+                            <span class="material-symbols-outlined" style="font-size: 14px; opacity: 0.5; margin-left: auto;">open_in_new</span>
+                        </a>
+                        <a href="${chatgptPromptUrl}" target="_blank" rel="noopener noreferrer" class="executive-intel-btn" title="Research Leadership Dossier with ChatGPT">
+                            <div class="executive-intel-icon-wrap" style="background: rgba(16, 163, 127, 0.12); color: #10a37f;">
+                                <span class="material-symbols-outlined" style="font-size: 20px;">smart_toy</span>
+                            </div>
+                            <div class="executive-intel-btn-text">
+                                <span class="executive-intel-btn-title">Research Leadership on ChatGPT</span>
+                                <span class="executive-intel-btn-sub">Generate full executive dossier</span>
+                            </div>
+                            <span class="material-symbols-outlined" style="font-size: 14px; opacity: 0.5; margin-left: auto;">open_in_new</span>
+                        </a>
+                    </div>
+                </div>
+
+                ${sourceLink}
+
+                <!-- Action Bar -->
+                <div class="modal-action-bar" style="display: flex; justify-content: space-between; align-items: center; margin-top: 24px; padding-top: 16px; border-top: 1px solid var(--color-hairline); flex-wrap: wrap; gap: 12px;">
+                    <a href="mailto:hello@fundingly.in?subject=Data%20Correction%3A%20${encodeURIComponent(companyName)}%20(${encodeURIComponent(deal.date_of_funding || '')})&body=${encodeURIComponent('Hello Fundingly Team,\n\nI noticed an inaccuracy regarding ' + companyName + ':\n- Date: ' + (deal.date_of_funding || 'N/A') + '\n- Amount: ' + amountUsdFormatted + '\n- Round: ' + roundName + '\n\nSuggested Correction:\n[Please describe corrected information and press link here]\n\nThank you!')}" class="btn-suggest-correction" title="Report an inaccuracy or suggest updated deal information">
+                        <span class="material-symbols-outlined" style="font-size: 16px;">edit_note</span>
+                        <span>Suggest Correction</span>
                     </a>
-                ` : ''}
-                <button type="button" class="action-pill-btn" onclick="copyDossierMemo()">
-                    <span class="material-symbols-outlined" style="font-size: 16px;" id="memoIcon">content_copy</span>
-                    <span id="memoText">Copy Deal Memo</span>
-                </button>
-                <button type="button" class="action-pill-btn" onclick="shareDossierPage()">
-                    <span class="material-symbols-outlined" style="font-size: 16px;">share</span>
-                    <span>Share</span>
-                </button>
-                <button type="button" class="action-pill-btn" onclick="window.print()">
-                    <span class="material-symbols-outlined" style="font-size: 16px;">print</span>
-                    <span>Print PDF</span>
-                </button>
-            </div>
-        </article>
+                    <button type="button" class="btn-detail" onclick="copyDealSummary()" style="background: var(--color-surface-secondary); color: var(--color-text-primary); border: 1px solid var(--color-hairline);" title="Copy markdown deal memo">
+                        <span class="material-symbols-outlined" style="font-size: 16px;">content_copy</span>
+                        <span>Copy Memo</span>
+                    </button>
+                </div>
+            </article>
 
-        <!-- Google AdSense Slot #1 (Hero Banner Unit) -->
-        <div class="ad-container-wrapper">
-            <div class="ad-label">Sponsored Intelligence</div>
+            <!-- Right Sidebar: Sticky Ad Unit + Sector Deals -->
+            <aside class="dossier-sidebar">
+                <!-- Google AdSense Slot #1 (Sidebar Display Unit) -->
+                <div class="ad-container-wrapper">
+                    <span class="ad-label">Sponsored</span>
+                    <ins class="adsbygoogle"
+                         style="display:block"
+                         data-ad-client="ca-pub-0000000000000000"
+                         data-ad-slot="0000000000"
+                         data-ad-format="auto"
+                         data-full-width-responsive="true"></ins>
+                    <script>
+                         (adsbygoogle = window.adsbygoogle || []).push({});
+                    </script>
+                </div>
+
+                ${relatedDeals.length > 0 ? `
+                    <!-- Related Deals Widget -->
+                    <div class="sidebar-widget">
+                        <h3 class="sidebar-widget-title">
+                            <span class="material-symbols-outlined">trending_up</span>
+                            <span>More in ${escapeHtml(deal.industry || 'Tech')}</span>
+                        </h3>
+                        <div class="sidebar-deals-list">
+                            ${relatedDeals.map(rd => {
+                                const rDomain = extractDomain(rd.company_website) || slugify(rd.company_name);
+                                return `
+                                    <a href="../${rDomain}/" class="sidebar-deal-item">
+                                        <div class="sidebar-deal-header">
+                                            <span class="sidebar-deal-name">${escapeHtml(rd.company_name)}</span>
+                                            <span class="modal-hero-badge ${getStageBadgeClass(rd.funding_round)}" style="font-size: 9px; padding: 2px 6px;">${escapeHtml(rd.funding_round || 'Round')}</span>
+                                        </div>
+                                        <div class="sidebar-deal-amount">${formatUSD(rd.funding_amount_usd)}</div>
+                                        <div class="sidebar-deal-meta">${escapeHtml(formatFundingDateDisplay(rd.date_of_funding))} • ${escapeHtml(rd.company_headquarters || 'India')}</div>
+                                    </a>
+                                `;
+                            }).join('')}
+                        </div>
+                    </div>
+                ` : ''}
+            </aside>
+        </div>
+
+        <!-- Google AdSense Slot #2 (Bottom Banner Unit) -->
+        <div class="bottom-ad-wrapper">
+            <span class="ad-label">Sponsored Intelligence</span>
             <ins class="adsbygoogle"
                  style="display:block"
                  data-ad-client="ca-pub-0000000000000000"
                  data-ad-slot="0000000000"
-                 data-ad-format="auto"
+                 data-ad-format="horizontal"
                  data-full-width-responsive="true"></ins>
             <script>
                  (adsbygoogle = window.adsbygoogle || []).push({});
             </script>
         </div>
 
-        <!-- Section 1: Executive Overview & Product -->
-        <section class="dossier-section">
-            <div class="section-header">
-                <span class="material-symbols-outlined">info</span>
-                <h2>Executive Overview & Product Solution</h2>
-            </div>
-            <p class="dossier-body-text">
-                ${escapeHtml(deal.company_description || 'Detailed operational profile pending review in Indian venture database.')}
-            </p>
-            ${deal.product_or_solution ? `
-                <div style="margin-top: 16px; padding: 16px; background: var(--color-surface-secondary); border-radius: var(--radius-card);">
-                    <div style="font-size: 12px; font-weight: 600; color: var(--color-text-tertiary); text-transform: uppercase; margin-bottom: 6px;">Product / Solution Architecture</div>
-                    <p class="dossier-body-text" style="margin: 0;">${escapeHtml(deal.product_or_solution)}</p>
-                </div>
-            ` : ''}
-            ${deal.target_market ? `
-                <div style="margin-top: 12px; font-size: 14px; color: var(--color-text-secondary);">
-                    <strong>Target Market:</strong> ${escapeHtml(deal.target_market)}
-                </div>
-            ` : ''}
-        </section>
-
-        <!-- Section 2: Leadership & Cap Table -->
-        <section class="dossier-section">
-            <div class="section-header">
-                <span class="material-symbols-outlined">groups</span>
-                <h2>Leadership & Cap Table Syndicate</h2>
-            </div>
-            <div class="info-grid">
-                <div class="info-cell full-width">
-                    <span class="info-label">Founders & Leadership</span>
-                    <div class="info-value" style="margin-top: 6px;">
-                        ${renderFoundersMarkup(deal.founders, companyName)}
-                    </div>
-                </div>
-                <div class="info-cell">
-                    <span class="info-label">Lead Investor</span>
-                    <div class="info-value highlight">${escapeHtml(deal.lead_investor || 'Undisclosed')}</div>
-                </div>
-                <div class="info-cell">
-                    <span class="info-label">Total Investors</span>
-                    <div class="info-value">${escapeHtml(deal.investor_count || '1')} Backer(s)</div>
-                </div>
-                <div class="info-cell full-width">
-                    <span class="info-label">Syndicate / All Investors</span>
-                    <div class="info-value">${escapeHtml(deal.investors || deal.funded_by || 'Confidential')}</div>
-                </div>
-                ${deal.funding_use ? `
-                    <div class="info-cell full-width">
-                        <span class="info-label">Use of Funds</span>
-                        <div class="info-value">${escapeHtml(deal.funding_use)}</div>
-                    </div>
-                ` : ''}
-            </div>
-        </section>
-
-        <!-- Section 3: Company Profile & Operating Details -->
-        <section class="dossier-section">
-            <div class="section-header">
-                <span class="material-symbols-outlined">business</span>
-                <h2>Company Details & Corporate Footprint</h2>
-            </div>
-            <div class="info-grid">
-                <div class="info-cell">
-                    <span class="info-label">Industry Sector</span>
-                    <div class="info-value highlight">${escapeHtml(deal.industry || 'N/A')}</div>
-                </div>
-                <div class="info-cell">
-                    <span class="info-label">Sub-Industry</span>
-                    <div class="info-value">${escapeHtml(deal.sub_industry || 'N/A')}</div>
-                </div>
-                <div class="info-cell">
-                    <span class="info-label">Business Model</span>
-                    <div class="info-value">${escapeHtml(deal.business_model || 'B2B / B2C')}</div>
-                </div>
-                <div class="info-cell">
-                    <span class="info-label">Year Founded</span>
-                    <div class="info-value">${escapeHtml(deal.year_founded || 'N/A')}</div>
-                </div>
-                <div class="info-cell">
-                    <span class="info-label">Headquarters</span>
-                    <div class="info-value">${escapeHtml(deal.company_headquarters || 'India')}</div>
-                </div>
-                <div class="info-cell">
-                    <span class="info-label">Team Size</span>
-                    <div class="info-value">${escapeHtml(deal.employee_count_range_at_funding || deal.employee_count_range || 'N/A')}</div>
-                </div>
-                ${deal.other_offices_in_india ? `
-                    <div class="info-cell full-width">
-                        <span class="info-label">Other Offices in India</span>
-                        <div class="info-value">${escapeHtml(deal.other_offices_in_india)}</div>
-                    </div>
-                ` : ''}
-            </div>
-        </section>
-
-        <!-- Google AdSense Slot #2 (In-Article Unit) -->
-        <div class="ad-container-wrapper">
-            <div class="ad-label">Advertisement</div>
-            <ins class="adsbygoogle"
-                 style="display:block; text-align:center;"
-                 data-ad-layout="in-article"
-                 data-ad-format="fluid"
-                 data-ad-client="ca-pub-0000000000000000"
-                 data-ad-slot="0000000000"></ins>
-            <script>
-                 (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
-        </div>
-
-        ${sourcesList.length > 0 ? `
-            <!-- Verified Sources & Footnotes -->
-            <section class="dossier-section" style="background: var(--color-surface-secondary);">
-                <div class="section-header">
-                    <span class="material-symbols-outlined">verified</span>
-                    <h2>Verified News & Intelligence Sources</h2>
-                </div>
-                <div style="display: flex; flex-wrap: wrap; gap: 8px;">
-                    ${sourcesList.map(s => `<a href="${encodeURI(s.url)}" target="_blank" rel="noopener noreferrer" class="action-pill-btn" style="font-size: 12px; background: var(--color-surface);">
-                        <span class="material-symbols-outlined" style="font-size: 14px;">open_in_new</span>
-                        <span>${escapeHtml(s.host)}</span>
-                    </a>`).join('')}
-                </div>
-            </section>
-        ` : ''}
-
-        ${relatedDeals.length > 0 ? `
-            <!-- Related Deals in Same Sector -->
-            <section class="dossier-section">
-                <div class="section-header">
-                    <span class="material-symbols-outlined">trending_up</span>
-                    <h2>More ${escapeHtml(deal.industry || 'Venture')} Deals in India</h2>
-                </div>
-                <div class="related-deals-grid">
-                    ${relatedDeals.map(rd => {
-                        const rDomain = extractDomain(rd.company_website) || slugify(rd.company_name);
-                        return `
-                            <a href="../${rDomain}/" class="related-card">
-                                <div class="related-top">
-                                    <span class="related-name">${escapeHtml(rd.company_name)}</span>
-                                    <span class="badge-round ${getStageBadgeClass(rd.funding_round)}" style="font-size: 9px;">${escapeHtml(rd.funding_round || 'Round')}</span>
-                                </div>
-                                <div class="related-amount">${formatUSD(rd.funding_amount_usd)}</div>
-                                <div class="related-meta">${escapeHtml(formatFundingDateDisplay(rd.date_of_funding))} • ${escapeHtml(rd.company_headquarters || 'India')}</div>
-                            </a>
-                        `;
-                    }).join('')}
-                </div>
-            </section>
-        ` : ''}
-
-        <!-- Back to Dashboard Sticky Footer Link -->
-        <div style="text-align: center; margin: 40px 0 20px 0;">
-            <a href="../../" class="action-pill-btn primary" style="padding: 12px 28px; font-size: 15px; border-radius: var(--radius-pill);">
-                <span class="material-symbols-outlined">arrow_back</span>
-                <span>Explore Full Venture Feed on Fundingly.in</span>
+        <!-- Return to Dashboard Link -->
+        <div style="text-align: center; margin: 32px 0 12px 0;">
+            <a href="../../" class="btn-detail primary" style="display: inline-flex; align-items: center; gap: 8px; padding: 10px 24px; font-size: 14px; text-decoration: none; border-radius: var(--radius-pill); background: var(--color-primary); color: #ffffff;">
+                <span class="material-symbols-outlined" style="font-size: 18px;">arrow_back</span>
+                <span>Back to Live Venture Feed</span>
             </a>
         </div>
     </main>
@@ -1098,8 +905,19 @@ ${jsonLdString}
             }
         })();
 
+        // Copy Domain Micro Action
+        function copyDomainText(text, btnEl) {
+            navigator.clipboard.writeText(text).then(() => {
+                const icon = btnEl.querySelector('.material-symbols-outlined');
+                if (icon) {
+                    icon.textContent = 'check';
+                    setTimeout(() => { icon.textContent = 'content_copy'; }, 1500);
+                }
+            }).catch(e => console.warn('Copy domain failed:', e));
+        }
+
         // Copy Markdown Deal Memo for Slack/Email
-        function copyDossierMemo() {
+        function copyDealSummary() {
             const memo = \`**\${${JSON.stringify(companyName)}}** Raised **\${${JSON.stringify(amountUsdFormatted)}}** (\${${JSON.stringify(roundName)}})\\n\` +
                 \`• **Lead Investor:** \${${JSON.stringify(deal.lead_investor || 'Undisclosed')}}\\n\` +
                 \`• **Date:** \${${JSON.stringify(dateFormatted)}}\\n\` +
@@ -1109,30 +927,13 @@ ${jsonLdString}
                 \`• **Dossier:** \${window.location.href}\`;
 
             navigator.clipboard.writeText(memo).then(() => {
-                const text = document.getElementById('memoText');
-                const icon = document.getElementById('memoIcon');
-                if (text) text.textContent = 'Copied to Clipboard!';
-                if (icon) icon.textContent = 'check';
-                setTimeout(() => {
-                    if (text) text.textContent = 'Copy Deal Memo';
-                    if (icon) icon.textContent = 'content_copy';
-                }, 2000);
+                const icon = document.getElementById('copySummaryIcon');
+                if (icon) {
+                    icon.textContent = 'check';
+                    setTimeout(() => { icon.textContent = 'assignment'; }, 1500);
+                }
+                alert('Deal memo copied to clipboard!');
             }).catch(err => console.warn('Copy failed:', err));
-        }
-
-        // Web Share API or fallback copy URL
-        function shareDossierPage() {
-            if (navigator.share) {
-                navigator.share({
-                    title: document.title,
-                    text: \`Check out \${${JSON.stringify(companyName)}} funding round dossier on Fundingly.in:\`,
-                    url: window.location.href
-                }).catch(() => {});
-            } else {
-                navigator.clipboard.writeText(window.location.href).then(() => {
-                    alert('Deal link copied to clipboard!');
-                });
-            }
         }
     </script>
 </body>
