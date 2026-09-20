@@ -1242,6 +1242,90 @@ let rawDataset = [];
             });
 
             weekSection.appendChild(gridDiv);
+
+            // Deisgned by Kapil Pidhwani: That week's dedicated compact table view for seamless timeline view-switching.
+            const tableDiv = document.createElement('div');
+            tableDiv.className = 'week-table-container';
+
+            const tableRowsHTML = group.items.map(({ company }, idx) => {
+                const avatar = renderCompanyAvatarHTML(company, false);
+                const name = escapeHtml(company.company_name || 'Enterprise');
+                const date = escapeHtml(formatFundingDateDisplay(company.date_of_funding));
+                const stage = escapeHtml(company.funding_round || 'Round');
+                const amountUsd = formatUSD(company.funding_amount_usd);
+                const amountInr = company.funding_amount_inr ? `• ₹${(Number(company.funding_amount_inr) / 10000000).toFixed(1)} Cr` : '';
+                const lead = escapeHtml(company.lead_investor || company.funded_by || 'Undisclosed');
+                const sector = escapeHtml(company.industry || 'General');
+                const hq = escapeHtml(company.company_headquarters || 'N/A');
+
+                return `
+                    <tr class="table-row-deal" data-item-index="${idx}">
+                        <td>
+                            <div class="table-company-cell">
+                                ${avatar}
+                                <span class="table-company-name">${name}</span>
+                            </div>
+                        </td>
+                        <td>${date}</td>
+                        <td><span class="table-stage-pill ${getStageBadgeClass(stage)}">${stage}</span></td>
+                        <td>
+                            <span class="table-amount-val">${amountUsd}</span>
+                            <span class="table-amount-inr">${amountInr}</span>
+                        </td>
+                        <td title="${lead}">${lead}</td>
+                        <td>${sector}</td>
+                        <td>${hq}</td>
+                        <td style="text-align: right;">
+                            <button type="button" class="btn-table-action" data-btn-index="${idx}" aria-label="View details for ${name}">
+                                View
+                            </button>
+                        </td>
+                    </tr>
+                `;
+            }).join('');
+
+            tableDiv.innerHTML = `
+                <div class="table-responsive-wrapper">
+                    <table class="dense-deals-table week-deals-table">
+                        <thead>
+                            <tr>
+                                <th>Company</th>
+                                <th>Date</th>
+                                <th>Stage</th>
+                                <th>Amount</th>
+                                <th>Lead / Backers</th>
+                                <th>Sector</th>
+                                <th>HQ</th>
+                                <th style="text-align: right;">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${tableRowsHTML}
+                        </tbody>
+                    </table>
+                </div>
+            `;
+
+            tableDiv.querySelectorAll('.table-row-deal').forEach(tr => {
+                const idx = Number(tr.dataset.itemIndex);
+                const item = group.items[idx];
+                if (item && item.company) {
+                    tr.addEventListener('click', () => openModal(item.company));
+                }
+            });
+
+            tableDiv.querySelectorAll('.btn-table-action').forEach(btn => {
+                const idx = Number(btn.dataset.btnIndex);
+                const item = group.items[idx];
+                if (item && item.company) {
+                    btn.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        openModal(item.company);
+                    });
+                }
+            });
+
+            weekSection.appendChild(tableDiv);
             return weekSection;
         }
 
@@ -1700,11 +1784,7 @@ let rawDataset = [];
             updateMobileFilterBadge();
 
             activeFilteredDataset = filtered;
-            if (activeViewMode === 'table') {
-                renderTableView(filtered);
-            } else {
-                renderGrid(filtered, shouldPreserveDOM);
-            }
+            renderGrid(filtered, shouldPreserveDOM);
         }
 
         function handleSearchDebounced() {
@@ -1722,6 +1802,11 @@ let rawDataset = [];
             }
             if (tableBtn) {
                 tableBtn.addEventListener('click', () => setViewMode('table'));
+            }
+            const gridContainer = document.getElementById('gridContainer');
+            if (gridContainer) {
+                gridContainer.classList.remove('view-cards', 'view-table');
+                gridContainer.classList.add('view-' + activeViewMode);
             }
         }
 
@@ -1743,16 +1828,9 @@ let rawDataset = [];
             }
 
             const gridContainer = document.getElementById('gridContainer');
-            const tableContainer = document.getElementById('tableContainer');
-
-            if (mode === 'table') {
-                if (gridContainer) gridContainer.style.display = 'none';
-                if (tableContainer) tableContainer.style.display = 'block';
-                renderTableView(activeFilteredDataset);
-            } else {
-                if (tableContainer) tableContainer.style.display = 'none';
-                if (gridContainer) gridContainer.style.display = 'flex';
-                renderGrid(activeFilteredDataset, false);
+            if (gridContainer) {
+                gridContainer.classList.remove('view-cards', 'view-table');
+                gridContainer.classList.add('view-' + mode);
             }
         }
 
