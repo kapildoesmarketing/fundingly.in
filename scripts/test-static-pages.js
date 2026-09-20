@@ -27,6 +27,14 @@ companies.forEach(comp => {
     assert(html.includes('rel="canonical"'), `Missing canonical link in ${comp}`);
     assert(html.includes('application/ld+json'), `Missing JSON-LD in ${comp}`);
 
+    // Sharing & UX Elements
+    assert(html.includes('id="dossierToast"'), `Missing toast container in ${comp}`);
+    assert(html.includes('shareDossier()'), `Missing shareDossier function call in ${comp}`);
+    assert(html.includes('share-btn whatsapp'), `Missing WhatsApp share button in ${comp}`);
+    assert(html.includes('share-btn twitter'), `Missing Twitter share button in ${comp}`);
+    assert(html.includes('share-btn linkedin'), `Missing LinkedIn share button in ${comp}`);
+    assert(html.includes('copyDealSummary()'), `Missing copyDealSummary in ${comp}`);
+
     // AdSense placeholders
     assert(html.includes('class="ad-container-wrapper"'), `Missing AdSense container in ${comp}`);
     assert(html.includes('class="adsbygoogle"'), `Missing adsbygoogle tag in ${comp}`);
@@ -45,7 +53,7 @@ companies.forEach(comp => {
 
     checkedCount++;
 });
-console.log(`✓ Successfully verified all ${checkedCount} company pages (HTML, SEO tags, JSON-LD Schema, AdSense blocks)`);
+console.log(`✓ Successfully verified all ${checkedCount} company pages (HTML, SEO tags, JSON-LD Schema, Sharing Suite, AdSense blocks)`);
 
 // 3. Verify sitemap.xml
 assert(fs.existsSync(SITEMAP_PATH), 'sitemap.xml must exist');
@@ -57,4 +65,4 @@ companies.forEach(comp => {
 });
 console.log('✓ Successfully verified sitemap.xml contains all generated URLs');
 
-console.log('🎉 ALL 3 STATIC PAGE INTEGRITY CHECKS PASSED!');
+console.log('🎉 ALL STATIC PAGE INTEGRITY CHECKS PASSED!');

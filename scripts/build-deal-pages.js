@@ -1,9 +1,12 @@
 /**
  * ============================================================================
- * FUNDINGLY.IN — STATIC DEAL & COMPANY PAGE GENERATOR (SEO & ADSENSE SUITE)
+ * FUNDINGLY.IN — STATIC DEAL & COMPANY PAGE GENERATOR (SEO, SHARING & ADS SUITE)
  * ============================================================================
  * Target: Generates 100% pre-rendered, static HTML pages matching the exact
  * 1:1 Apple-style modal dossier UI, complete with:
+ * - 100% Dataset Fields (Deal tags, product, target market, funding use, offices, syndicate)
+ * - Multi-Channel Sharing (Native Share, WhatsApp, X/Twitter, LinkedIn, Memo, Copy Link, Print)
+ * - Funding History Timeline (if company has multiple deals)
  * - Dynamic SEO meta tags, title tags, OpenGraph & Twitter Cards
  * - Schema.org JSON-LD Structured Data (Organization, InvestmentOrGrant, BreadcrumbList)
  * - Sidebar & Bottom Google AdSense ad slots (content remains pure & unscattered)
@@ -59,14 +62,24 @@ function formatUSD(amount) {
 }
 
 // Helper: Format INR currency approximate conversion (assumes 1 USD ~ 83.5 INR)
-function formatINR(amountUsd) {
+function formatINR(amountUsd, originalAmount, originalCurrency) {
+    if (originalCurrency === 'INR' && originalAmount && !isNaN(originalAmount)) {
+        const inr = Number(originalAmount);
+        if (inr >= 10000000) {
+            return `₹${(inr / 10000000).toFixed(1).replace(/\.0$/, '')} Cr`;
+        }
+        if (inr >= 100000) {
+            return `₹${(inr / 100000).toFixed(1).replace(/\.0$/, '')} Lakh`;
+        }
+        return `₹${Math.round(inr).toLocaleString('en-IN')}`;
+    }
     if (!amountUsd || isNaN(amountUsd) || amountUsd === 0) return '';
     const inr = Number(amountUsd) * 83.5;
-    if (inr >= 10000000) { // 1 Crore = 10,000,000
+    if (inr >= 10000000) {
         const cr = (inr / 10000000).toFixed(1).replace(/\.0$/, '');
         return `₹${cr} Cr`;
     }
-    if (inr >= 100000) { // 1 Lakh = 100,000
+    if (inr >= 100000) {
         const lakh = (inr / 100000).toFixed(1).replace(/\.0$/, '');
         return `₹${lakh} Lakh`;
     }
@@ -156,7 +169,15 @@ function parseSourcesList(sources) {
     });
 }
 
-// Helper: Format Person List with Google/LinkedIn Search (matching app.js modal)
+// Helper: Format Deal Tags into Badges
+function renderDealTagsMarkup(tagsStr) {
+    if (!tagsStr) return '';
+    const tags = String(tagsStr).split(/[,|]/).map(t => t.trim()).filter(Boolean);
+    if (tags.length === 0) return '';
+    return tags.map(tag => `<span class="deal-keyword-tag">#${escapeHtml(tag)}</span>`).join(' ');
+}
+
+// Helper: Format Person List with Google/LinkedIn Search
 function renderFoundersMarkup(foundersStr, companyName) {
     if (!foundersStr) return '<span style="color: var(--color-text-tertiary);">Undisclosed</span>';
     const names = foundersStr.split(/[,&|]/).map(n => n.trim()).filter(Boolean);
@@ -176,7 +197,7 @@ function renderFoundersMarkup(foundersStr, companyName) {
 
 // Main Build Function
 function buildStaticDealPages() {
-    console.log('🚀 Starting Fundingly.in Static Deal Page Generation (Modal Parity & Sidebar Ads)...');
+    console.log('🚀 Starting Fundingly.in Static Deal Page Generation (Modal Parity, Complete Data & Rich Sharing)...');
 
     if (!fs.existsSync(DATA_DIR)) {
         console.error('❌ Data directory does not exist:', DATA_DIR);
@@ -258,19 +279,32 @@ function buildStaticDealPages() {
     console.log(`✅ Successfully generated ${companyMap.size} static company dossier pages & updated sitemap.xml!`);
 }
 
-// Generate HTML for a single company matching the 1:1 modal layout
+// Generate HTML for a single company matching the 1:1 modal layout + complete dataset fields + rich sharing
 function generateCompanyPageHtml(compData, deal, totalRaisedUsd, relatedDeals) {
     const companyName = deal.company_name || 'Startup';
     const domain = compData.domain;
     const companyDomain = extractDomain(deal.company_website);
     const roundName = deal.funding_round || 'Funding Round';
     const amountUsdFormatted = formatUSD(deal.funding_amount_usd);
-    const amountInrFormatted = formatINR(deal.funding_amount_usd);
+    const amountInrFormatted = formatINR(deal.funding_amount_usd, deal.original_funding_amount, deal.original_funding_currency);
+    const totalRaisedFormatted = formatUSD(totalRaisedUsd);
     const dateFormatted = formatFundingDateDisplay(deal.date_of_funding);
     const stageClass = getStageBadgeClass(deal.funding_round);
     const mono = getMonogram(companyName);
     const monoStyle = getMonogramStyle(companyName);
     const sourcesList = parseSourcesList(deal.sources || deal.source_url);
+    const dealTagsHTML = renderDealTagsMarkup(deal.deal_tags);
+
+    // Quarter calculation
+    let quarterDisplay = '';
+    if (deal.date_of_funding) {
+        const month = parseInt(deal.date_of_funding.split('-')[1], 10);
+        const year = deal.date_of_funding.split('-')[0];
+        if (month && year) {
+            const q = Math.ceil(month / 3);
+            quarterDisplay = `Q${q} ${year}`;
+        }
+    }
 
     // SEO Dynamic Content
     const pageTitle = `${companyName} Raises ${amountUsdFormatted} in ${roundName} | Fundingly.in`;
@@ -285,7 +319,13 @@ function generateCompanyPageHtml(compData, deal, totalRaisedUsd, relatedDeals) {
     const chatgptPrompt = `Research the current C-level and senior executive leadership of ${companyName}. Identify the CEO, CTO, CFO, COO, CMO, founders, and other key decision-makers where publicly verifiable. For each person, provide their name, current title, responsibilities, professional background, and LinkedIn profile if publicly available. Prioritize current and authoritative sources, distinguish confirmed C-suite roles from board/director positions, and flag any information that cannot be independently verified. Include the sources used and the date the information was verified.`;
     const chatgptPromptUrl = `https://chatgpt.com/?q=${encodeURIComponent(chatgptPrompt)}`;
 
-    // Avatar HTML (matches app.js)
+    // 3. Social Share Intent URLs
+    const shareText = `📊 ${companyName} raised ${amountUsdFormatted} in ${roundName}${deal.lead_investor ? ' led by ' + deal.lead_investor : ''}.\n\nExplore the full venture intelligence dossier on Fundingly.in:`;
+    const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(shareText + ' ' + canonicalUrl)}`;
+    const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(canonicalUrl)}&hashtags=IndianStartups,VentureCapital,Funding`;
+    const linkedinShareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(canonicalUrl)}`;
+
+    // Avatar HTML
     let avatarHTML = '';
     if (companyDomain) {
         avatarHTML = `<img src="https://www.google.com/s2/favicons?domain=${encodeURIComponent(companyDomain)}&sz=128" alt="${escapeHtml(companyName)}" class="modal-hero-avatar" onerror="this.outerHTML='<div class=\\'modal-hero-monogram\\' style=\\'background:${monoStyle.bg}; color:${monoStyle.color}; border:1px solid ${monoStyle.border};\\'>${mono}</div>'">`;
@@ -296,8 +336,47 @@ function generateCompanyPageHtml(compData, deal, totalRaisedUsd, relatedDeals) {
     // Sources footer string
     let sourceLink = '';
     if (sourcesList.length > 0) {
-        const linksAnchors = sourcesList.map(s => `<a href="${encodeURI(s.url)}" target="_blank" rel="noopener noreferrer" style="color: var(--color-primary); text-decoration: underline; margin-right: 8px;">[${escapeHtml(s.host)}]</a>`).join(' ');
-        sourceLink = `<div class="modal-source-footer" style="display:flex; flex-wrap:wrap; align-items:center; gap:6px; font-size:12px; color:var(--color-text-tertiary); padding-top:12px; border-top:1px solid var(--color-divider-soft); margin-top:16px;"><strong>Sources:</strong> ${linksAnchors}</div>`;
+        const linksAnchors = sourcesList.map(s => `<a href="${encodeURI(s.url)}" target="_blank" rel="noopener noreferrer" class="source-chip-tag" title="Verified source: ${escapeHtml(s.host)}"><span class="material-symbols-outlined" style="font-size:13px;">link</span><span>${escapeHtml(s.host)}</span></a>`).join(' ');
+        sourceLink = `
+            <div class="modal-section-card sources-section">
+                <div class="modal-section-title">
+                    <span class="material-symbols-outlined" style="font-size: 15px;">verified</span>
+                    <span>Verified Primary Sources & Coverage</span>
+                </div>
+                <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px;">
+                    ${linksAnchors}
+                </div>
+            </div>
+        `;
+    }
+
+    // Funding Rounds Timeline (if multiple rounds exist for this company)
+    let fundingHistorySection = '';
+    if (compData.deals.length > 1) {
+        const rows = compData.deals.map(d => `
+            <div class="history-round-row">
+                <div class="history-round-left">
+                    <span class="modal-hero-badge ${getStageBadgeClass(d.funding_round)}" style="font-size: 11px; padding: 3px 8px;">${escapeHtml(d.funding_round || 'Round')}</span>
+                    <span class="history-round-date">${escapeHtml(formatFundingDateDisplay(d.date_of_funding))}</span>
+                </div>
+                <div class="history-round-center">
+                    <span class="history-round-amount">${formatUSD(d.funding_amount_usd)}</span>
+                    <span class="history-round-lead">${escapeHtml(d.lead_investor ? 'Led by ' + d.lead_investor : d.investors || 'Undisclosed')}</span>
+                </div>
+            </div>
+        `).join('');
+
+        fundingHistorySection = `
+            <div class="modal-section-card">
+                <div class="modal-section-title">
+                    <span class="material-symbols-outlined" style="font-size: 15px;">timeline</span>
+                    <span>Funding History & Rounds Trajectory (${compData.deals.length} Recorded Rounds)</span>
+                </div>
+                <div class="history-rounds-list">
+                    ${rows}
+                </div>
+            </div>
+        `;
     }
 
     // JSON-LD Schemas
@@ -419,9 +498,18 @@ ${jsonLdString}
 
     <style>
         .dossier-page-wrapper {
-            max-width: 1080px;
-            margin: 24px auto 80px auto;
+            max-width: 1140px;
+            margin: 20px auto 80px auto;
             padding: 0 16px;
+        }
+
+        .page-nav-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 12px;
         }
 
         .page-nav-back {
@@ -443,7 +531,7 @@ ${jsonLdString}
         /* 2-Column Desktop Grid (Main Card + Side Rail) */
         .dossier-layout-grid {
             display: grid;
-            grid-template-columns: minmax(0, 1fr) 300px;
+            grid-template-columns: minmax(0, 1fr) 320px;
             gap: 24px;
             align-items: start;
         }
@@ -458,7 +546,130 @@ ${jsonLdString}
             position: relative;
         }
 
-        /* Side Rail (Sticky Ad + Related Deals) */
+        /* Deal Keywords / Tags */
+        .deal-tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: 10px;
+        }
+
+        .deal-keyword-tag {
+            font-size: 11.5px;
+            font-weight: 500;
+            background: var(--color-surface-secondary);
+            color: var(--color-text-secondary);
+            border: 1px solid var(--color-hairline);
+            padding: 2px 8px;
+            border-radius: var(--radius-pill);
+            transition: all 0.15s ease;
+        }
+
+        .deal-keyword-tag:hover {
+            color: var(--color-primary);
+            border-color: var(--color-primary-subtle);
+        }
+
+        /* Feature Callout Box (Product, Target Market, Use of Funds) */
+        .feature-callout-box {
+            margin-top: 12px;
+            padding: 12px 14px;
+            background: var(--color-surface-secondary);
+            border: 1px solid var(--color-hairline);
+            border-radius: var(--radius-inner);
+            font-size: 13px;
+            color: var(--color-text-primary);
+            line-height: 1.5;
+        }
+
+        .feature-callout-header {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--color-text-secondary);
+            margin-bottom: 4px;
+        }
+
+        .feature-callout-header .material-symbols-outlined {
+            font-size: 15px;
+            color: var(--color-primary);
+        }
+
+        /* Source Chip Tag */
+        .source-chip-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            padding: 5px 11px;
+            background: var(--color-surface-secondary);
+            border: 1px solid var(--color-hairline);
+            border-radius: var(--radius-pill);
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--color-primary);
+            text-decoration: none;
+            transition: all 0.15s ease;
+        }
+
+        .source-chip-tag:hover {
+            background: var(--color-primary);
+            color: #ffffff;
+            border-color: var(--color-primary);
+        }
+
+        /* Funding History Timeline */
+        .history-rounds-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-top: 10px;
+        }
+
+        .history-round-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 14px;
+            background: var(--color-surface-secondary);
+            border: 1px solid var(--color-hairline);
+            border-radius: var(--radius-inner);
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .history-round-left {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .history-round-date {
+            font-size: 12px;
+            color: var(--color-text-secondary);
+        }
+
+        .history-round-center {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .history-round-amount {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--color-primary);
+        }
+
+        .history-round-lead {
+            font-size: 12px;
+            color: var(--color-text-secondary);
+        }
+
+        /* Side Rail (Sticky Ad + Share + Related Deals) */
         .dossier-sidebar {
             display: flex;
             flex-direction: column;
@@ -497,9 +708,9 @@ ${jsonLdString}
 
         .sidebar-widget-title {
             font-size: 14px;
-            font-weight: 600;
+            font-weight: 700;
             color: var(--color-text-primary);
-            margin: 0 0 12px 0;
+            margin: 0 0 14px 0;
             display: flex;
             align-items: center;
             gap: 6px;
@@ -508,6 +719,58 @@ ${jsonLdString}
         .sidebar-widget-title .material-symbols-outlined {
             font-size: 16px;
             color: var(--color-primary);
+        }
+
+        /* Share Widget Buttons Grid */
+        .share-buttons-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+        }
+
+        .share-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            padding: 8px 12px;
+            border-radius: var(--radius-pill);
+            border: 1px solid var(--color-hairline);
+            background: var(--color-surface-secondary);
+            color: var(--color-text-primary);
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.15s ease;
+        }
+
+        .share-btn:hover {
+            transform: translateY(-1px);
+        }
+
+        .share-btn.whatsapp:hover {
+            background: #25D366;
+            color: #ffffff;
+            border-color: #25D366;
+        }
+
+        .share-btn.twitter:hover {
+            background: #000000;
+            color: #ffffff;
+            border-color: #000000;
+        }
+
+        .share-btn.linkedin:hover {
+            background: #0A66C2;
+            color: #ffffff;
+            border-color: #0A66C2;
+        }
+
+        .share-btn.copy-link:hover {
+            background: var(--color-primary);
+            color: #ffffff;
+            border-color: var(--color-primary);
         }
 
         .sidebar-deals-list {
@@ -569,6 +832,40 @@ ${jsonLdString}
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
         }
 
+        /* Reusable Floating Toast Notification */
+        .dossier-toast {
+            position: fixed;
+            bottom: 32px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: rgba(29, 29, 31, 0.94);
+            color: #ffffff;
+            padding: 10px 20px;
+            border-radius: var(--radius-pill);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.28);
+            font-size: 13.5px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            z-index: 99999;
+            opacity: 0;
+            pointer-events: none;
+            transition: transform 0.24s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.24s ease;
+            backdrop-filter: blur(16px);
+        }
+
+        .dossier-toast.active {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        [data-theme="dark"] .dossier-toast {
+            background: rgba(245, 245, 247, 0.94);
+            color: #121215;
+        }
+
         @media (max-width: 960px) {
             .dossier-layout-grid {
                 grid-template-columns: 1fr;
@@ -577,7 +874,34 @@ ${jsonLdString}
                 position: static;
             }
             .dossier-standalone-card {
-                padding: 24px 20px;
+                padding: 24px 18px;
+            }
+        }
+
+        /* Print One-Pager Optimization */
+        @media print {
+            .app-header,
+            .page-nav-bar,
+            .dossier-sidebar,
+            .bottom-ad-wrapper,
+            .modal-action-bar,
+            .dossier-toast,
+            .app-main-footer,
+            .modal-hero-toolbar,
+            .executive-intel-actions {
+                display: none !important;
+            }
+            .dossier-layout-grid {
+                grid-template-columns: 1fr !important;
+            }
+            .dossier-standalone-card {
+                border: none !important;
+                box-shadow: none !important;
+                padding: 0 !important;
+            }
+            body {
+                background: #ffffff !important;
+                color: #000000 !important;
             }
         }
     </style>
@@ -613,39 +937,53 @@ ${jsonLdString}
     </header>
 
     <main class="dossier-page-wrapper" role="main">
-        <!-- Back to Home Navigation -->
-        <nav class="breadcrumb-bar" aria-label="Navigation">
+        <!-- Top Navigation Bar -->
+        <nav class="page-nav-bar" aria-label="Navigation">
             <a href="../../" class="page-nav-back">
                 <span class="material-symbols-outlined" style="font-size: 18px;">arrow_back</span>
-                <span>Back to Home</span>
+                <span>Back to Venture Feed</span>
             </a>
+            <div style="display: flex; gap: 8px; align-items: center;">
+                <button type="button" class="btn-detail" onclick="shareDossier()" style="background: var(--color-surface-secondary); color: var(--color-text-primary); border: 1px solid var(--color-hairline);" title="Share Deal Dossier">
+                    <span class="material-symbols-outlined" style="font-size: 16px;">share</span>
+                    <span>Share</span>
+                </button>
+                <button type="button" class="btn-detail" onclick="window.print()" style="background: var(--color-surface-secondary); color: var(--color-text-primary); border: 1px solid var(--color-hairline);" title="Print or save as PDF">
+                    <span class="material-symbols-outlined" style="font-size: 16px;">print</span>
+                    <span>Print PDF</span>
+                </button>
+            </div>
         </nav>
 
         <div class="dossier-layout-grid">
-            <!-- Main Column: Exact 1:1 Apple Sheet Modal Card -->
+            <!-- Main Column: Exact 1:1 Apple Sheet Modal Card + Full Dataset -->
             <article class="dossier-standalone-card">
                 <div class="modal-hero">
-                    <!-- Tier 1: Top Bar (Avatar on Left, Round Pill Badge on Right) -->
+                    <!-- Tier 1: Top Bar (Avatar on Left, Badges on Right) -->
                     <div class="modal-hero-top-bar" style="padding-right: 0;">
                         ${avatarHTML}
-                        <span class="modal-hero-badge ${stageClass}">${escapeHtml(deal.funding_round || 'Funding')}</span>
+                        <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+                            <span class="modal-hero-badge ${stageClass}">${escapeHtml(deal.funding_round || 'Funding')}</span>
+                            ${compData.deals.length > 1 ? `<span class="modal-hero-badge" style="background: var(--color-primary-subtle); color: var(--color-primary); border: 1px solid var(--color-primary-tint); font-weight: 700;">Total: ${totalRaisedFormatted}</span>` : ''}
+                        </div>
                     </div>
 
                     <!-- Tier 2: 100% Full-Width Identity Block -->
                     <div class="modal-hero-identity">
                         <div class="modal-hero-title-wrap">
-                            <h1 class="modal-hero-title" style="font-size: 24px;">${escapeHtml(companyName)}</h1>
+                            <h1 class="modal-hero-title" style="font-size: 26px;">${escapeHtml(companyName)}</h1>
                         </div>
                         <div class="modal-hero-subtitle">
                             ${escapeHtml(deal.industry || 'General')}${deal.sub_industry ? ' • ' + escapeHtml(deal.sub_industry) : ''}
                         </div>
+                        ${dealTagsHTML ? `<div class="deal-tags-container">${dealTagsHTML}</div>` : ''}
                     </div>
 
                     <!-- Tier 3: Unified Actions Toolbar -->
                     <div class="modal-hero-toolbar">
                         <div class="modal-hero-action-row">
                             ${companyDomain ? `
-                                <a href="${encodeURI(deal.company_website)}" target="_blank" rel="noopener noreferrer" class="modal-domain-chip" title="Visit: ${escapeHtml(deal.company_website)}">
+                                <a href="${encodeURI(deal.company_website)}" target="_blank" rel="noopener noreferrer" class="modal-domain-chip" title="Visit website: ${escapeHtml(deal.company_website)}">
                                     <span class="material-symbols-outlined">language</span>
                                     <span>${escapeHtml(companyDomain)}</span>
                                     <span class="material-symbols-outlined" style="font-size: 12px; opacity: 0.75;">open_in_new</span>
@@ -656,6 +994,9 @@ ${jsonLdString}
                             ` : ''}
                         </div>
                         <div class="modal-hero-utility-row">
+                            <button type="button" class="modal-micro-btn" onclick="shareDossier()" title="Share Deal Dossier" aria-label="Share Deal Dossier">
+                                <span class="material-symbols-outlined">share</span>
+                            </button>
                             <button type="button" class="modal-micro-btn" id="copySummaryBtn" onclick="copyDealSummary()" title="Copy Markdown deal summary for Slack/Email" aria-label="Copy Deal Summary">
                                 <span class="material-symbols-outlined" id="copySummaryIcon">assignment</span>
                             </button>
@@ -670,63 +1011,111 @@ ${jsonLdString}
                         <div class="stat-pill-block">
                             <span class="stat-pill-label">Amount Raised</span>
                             <span class="stat-pill-value">${escapeHtml(amountUsdFormatted)}</span>
+                            ${amountInrFormatted ? `<span style="font-size: 11px; color: var(--color-text-secondary); margin-top: 2px;">~ ${escapeHtml(amountInrFormatted)}</span>` : ''}
+                        </div>
+                        <div class="stat-pill-block">
+                            <span class="stat-pill-label">Round & Type</span>
+                            <span class="stat-pill-value">${escapeHtml(roundName)}</span>
+                            <span style="font-size: 11px; color: var(--color-text-secondary); margin-top: 2px;">${escapeHtml(deal.funding_type || 'Equity')}</span>
                         </div>
                         <div class="stat-pill-block">
                             <span class="stat-pill-label">Funding Date</span>
                             <span class="stat-pill-value">${escapeHtml(dateFormatted)}</span>
+                            ${quarterDisplay ? `<span style="font-size: 11px; color: var(--color-text-secondary); margin-top: 2px;">${escapeHtml(quarterDisplay)}</span>` : ''}
                         </div>
                         <div class="stat-pill-block">
-                            <span class="stat-pill-label">Headquarters</span>
-                            <span class="stat-pill-value">${escapeHtml(deal.company_headquarters || 'N/A')}</span>
+                            <span class="stat-pill-label">Lead Investor</span>
+                            <span class="stat-pill-value" style="font-size: 13.5px; font-weight: 600;">${escapeHtml(deal.lead_investor || 'Undisclosed')}</span>
                         </div>
                     </div>
                 </div>
 
-                <!-- Section 1: Overview & Mission -->
+                <!-- Section 1: Overview, Mission & Product -->
                 <div class="modal-section-card">
                     <div class="modal-section-title">
                         <span class="material-symbols-outlined" style="font-size: 15px;">info</span>
-                        <span>Overview & Mission</span>
+                        <span>Company Overview & Solution</span>
                     </div>
                     <p class="modal-desc-body">${escapeHtml(deal.company_description || 'No description available for this entity.')}</p>
+                    
                     ${deal.product_or_solution ? `
-                        <div style="margin-top: 10px; padding: 10px 12px; background: var(--color-surface-secondary); border-radius: var(--radius-inner); font-size: 13px; color: var(--color-text-secondary); line-height: 1.5;">
-                            <strong style="color: var(--color-text-primary); display: block; margin-bottom: 2px; font-size: 11px; text-transform: uppercase; letter-spacing: 0.04em;">Product / Solution:</strong>
-                            ${escapeHtml(deal.product_or_solution)}
+                        <div class="feature-callout-box">
+                            <div class="feature-callout-header">
+                                <span class="material-symbols-outlined">inventory_2</span>
+                                <span>Product & Solution</span>
+                            </div>
+                            <div>${escapeHtml(deal.product_or_solution)}</div>
+                        </div>
+                    ` : ''}
+
+                    ${deal.target_market ? `
+                        <div class="feature-callout-box">
+                            <div class="feature-callout-header">
+                                <span class="material-symbols-outlined">target</span>
+                                <span>Target Market & ICP</span>
+                            </div>
+                            <div>${escapeHtml(deal.target_market)}</div>
                         </div>
                     ` : ''}
                 </div>
 
-                <!-- Section 2: Deal Terms & Syndicate -->
+                <!-- Section 2: Deal Terms, Syndicate & Capital Allocation -->
                 <div class="modal-section-card">
                     <div class="modal-section-title">
                         <span class="material-symbols-outlined" style="font-size: 15px;">paid</span>
-                        <span>Deal Terms & Syndicate</span>
+                        <span>Deal Terms & Syndicate Intelligence</span>
                     </div>
                     <div class="inspector-grid">
                         <div class="inspector-row"><span class="inspector-label">Funding Round</span><div class="inspector-val highlight">${escapeHtml(deal.funding_round || 'N/A')}</div></div>
-                        <div class="inspector-row"><span class="inspector-label">Amount Raised (USD)</span><div class="inspector-val highlight">${escapeHtml(amountUsdFormatted)}${amountInrFormatted ? ' (~ ' + escapeHtml(amountInrFormatted) + ')' : ''}</div></div>
+                        <div class="inspector-row"><span class="inspector-label">Funding Type</span><div class="inspector-val">${escapeHtml(deal.funding_type || 'Equity')}</div></div>
+                        <div class="inspector-row"><span class="inspector-label">Amount Raised (USD)</span><div class="inspector-val highlight">${escapeHtml(amountUsdFormatted)}</div></div>
+                        <div class="inspector-row"><span class="inspector-label">Amount (INR / Original)</span><div class="inspector-val">${amountInrFormatted ? escapeHtml(amountInrFormatted) : 'N/A'}</div></div>
                         <div class="inspector-row"><span class="inspector-label">Date of Funding</span><div class="inspector-val">${escapeHtml(dateFormatted)}</div></div>
-                        <div class="inspector-row"><span class="inspector-label">Lead Investor</span><div class="inspector-val highlight">${escapeHtml(deal.lead_investor || 'N/A')}</div></div>
-                        <div class="inspector-row" style="grid-column: span 2;"><span class="inspector-label">Syndicate / All Investors</span><div class="inspector-val">${escapeHtml(deal.investors || deal.funded_by || 'N/A')}</div></div>
-                        ${deal.funding_use ? `<div class="inspector-row" style="grid-column: span 2;"><span class="inspector-label">Funding Use</span><div class="inspector-val">${escapeHtml(deal.funding_use)}</div></div>` : ''}
+                        <div class="inspector-row"><span class="inspector-label">Lead Investor</span><div class="inspector-val highlight">${escapeHtml(deal.lead_investor || 'Undisclosed')}</div></div>
+                        <div class="inspector-row" style="grid-column: span 2;">
+                            <span class="inspector-label">Syndicate / All Backers</span>
+                            <div class="inspector-val">${escapeHtml(deal.investors || deal.funded_by || 'Undisclosed')}</div>
+                        </div>
+                        ${deal.investor_types || deal.investor_count ? `
+                            <div class="inspector-row" style="grid-column: span 2;">
+                                <span class="inspector-label">Investor Structure</span>
+                                <div class="inspector-val">${deal.investor_count ? deal.investor_count + ' Investor(s)' : ''}${deal.investor_count && deal.investor_types ? ' • ' : ''}${escapeHtml(deal.investor_types || '')}</div>
+                            </div>
+                        ` : ''}
+                        ${deal.funding_use ? `
+                            <div class="inspector-row" style="grid-column: span 2;">
+                                <span class="inspector-label">Use of Funds</span>
+                                <div class="inspector-val">${escapeHtml(deal.funding_use)}</div>
+                            </div>
+                        ` : ''}
                     </div>
                 </div>
 
-                <!-- Section 3: Company & Market Profile -->
+                <!-- Section 3: Company Profile & Geographic Footprint -->
                 <div class="modal-section-card">
                     <div class="modal-section-title">
                         <span class="material-symbols-outlined" style="font-size: 15px;">business</span>
-                        <span>Company & Market Profile</span>
+                        <span>Company Profile & Footprint</span>
                     </div>
                     <div class="inspector-grid">
                         <div class="inspector-row"><span class="inspector-label">Industry</span><div class="inspector-val highlight">${escapeHtml(deal.industry || 'N/A')}</div></div>
                         <div class="inspector-row"><span class="inspector-label">Sub-Industry</span><div class="inspector-val">${escapeHtml(deal.sub_industry || 'N/A')}</div></div>
                         <div class="inspector-row"><span class="inspector-label">Business Model</span><div class="inspector-val">${escapeHtml(deal.business_model || 'N/A')}</div></div>
                         <div class="inspector-row"><span class="inspector-label">Year Founded</span><div class="inspector-val">${escapeHtml(deal.year_founded || 'N/A')}</div></div>
-                        <div class="inspector-row"><span class="inspector-label">Team Size Range</span><div class="inspector-val">${escapeHtml(deal.employee_count_range_at_funding || deal.employee_count_range || 'N/A')}</div></div>
+                        <div class="inspector-row"><span class="inspector-label">Team Size at Funding</span><div class="inspector-val">${escapeHtml(deal.employee_count_range_at_funding || deal.employee_count_range || 'N/A')}</div></div>
                         <div class="inspector-row"><span class="inspector-label">Headquarters</span><div class="inspector-val">${escapeHtml(deal.company_headquarters || 'N/A')}</div></div>
-                        <div class="inspector-row" style="grid-column: span 2;"><span class="inspector-label">India Offices</span><div class="inspector-val">${escapeHtml(deal.other_offices_in_india || deal.company_india_offices || 'N/A')}</div></div>
+                        ${deal.other_offices_in_india ? `
+                            <div class="inspector-row" style="grid-column: span 2;">
+                                <span class="inspector-label">Offices across India</span>
+                                <div class="inspector-val">${escapeHtml(deal.other_offices_in_india)}</div>
+                            </div>
+                        ` : ''}
+                        ${deal.other_offices_outside_india ? `
+                            <div class="inspector-row" style="grid-column: span 2;">
+                                <span class="inspector-label">International Footprint</span>
+                                <div class="inspector-val">${escapeHtml(deal.other_offices_outside_india)}</div>
+                            </div>
+                        ` : ''}
                     </div>
                 </div>
 
@@ -738,7 +1127,7 @@ ${jsonLdString}
                     </div>
                     <div class="inspector-grid">
                         <div class="inspector-row" style="grid-column: span 2;">
-                            <span class="inspector-label">Founders</span>
+                            <span class="inspector-label">Founders & Leadership</span>
                             <div class="inspector-val highlight">${renderFoundersMarkup(deal.founders, companyName)}</div>
                         </div>
                     </div>
@@ -766,6 +1155,8 @@ ${jsonLdString}
                     </div>
                 </div>
 
+                ${fundingHistorySection}
+
                 ${sourceLink}
 
                 <!-- Action Bar -->
@@ -774,14 +1165,20 @@ ${jsonLdString}
                         <span class="material-symbols-outlined" style="font-size: 16px;">edit_note</span>
                         <span>Suggest Correction</span>
                     </a>
-                    <button type="button" class="btn-detail" onclick="copyDealSummary()" style="background: var(--color-surface-secondary); color: var(--color-text-primary); border: 1px solid var(--color-hairline);" title="Copy markdown deal memo">
-                        <span class="material-symbols-outlined" style="font-size: 16px;">content_copy</span>
-                        <span>Copy Memo</span>
-                    </button>
+                    <div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;">
+                        <button type="button" class="btn-detail" onclick="copyDealSummary()" style="background: var(--color-surface-secondary); color: var(--color-text-primary); border: 1px solid var(--color-hairline);" title="Copy markdown deal memo">
+                            <span class="material-symbols-outlined" style="font-size: 16px;">content_copy</span>
+                            <span>Copy Memo</span>
+                        </button>
+                        <button type="button" class="btn-detail" onclick="copyPageUrl()" style="background: var(--color-surface-secondary); color: var(--color-text-primary); border: 1px solid var(--color-hairline);" title="Copy canonical page URL">
+                            <span class="material-symbols-outlined" style="font-size: 16px;">link</span>
+                            <span>Copy Link</span>
+                        </button>
+                    </div>
                 </div>
             </article>
 
-            <!-- Right Sidebar: Sticky Ad Unit + Sector Deals -->
+            <!-- Right Sidebar: Sticky Ad Unit + Share Suite + Sector Deals -->
             <aside class="dossier-sidebar">
                 <!-- Google AdSense Slot #1 (Sidebar Display Unit) -->
                 <div class="ad-container-wrapper">
@@ -795,6 +1192,38 @@ ${jsonLdString}
                     <script>
                          (adsbygoogle = window.adsbygoogle || []).push({});
                     </script>
+                </div>
+
+                <!-- Share & Export Widget -->
+                <div class="sidebar-widget">
+                    <h3 class="sidebar-widget-title">
+                        <span class="material-symbols-outlined">share</span>
+                        <span>Share Deal Dossier</span>
+                    </h3>
+                    <div class="share-buttons-grid">
+                        <a href="${whatsappUrl}" target="_blank" rel="noopener noreferrer" class="share-btn whatsapp" title="Share via WhatsApp">
+                            <span class="material-symbols-outlined" style="font-size: 16px;">chat</span>
+                            <span>WhatsApp</span>
+                        </a>
+                        <a href="${twitterUrl}" target="_blank" rel="noopener noreferrer" class="share-btn twitter" title="Share on X (Twitter)">
+                            <span class="material-symbols-outlined" style="font-size: 16px;">send</span>
+                            <span>X (Twitter)</span>
+                        </a>
+                        <a href="${linkedinShareUrl}" target="_blank" rel="noopener noreferrer" class="share-btn linkedin" title="Share on LinkedIn">
+                            <span class="material-symbols-outlined" style="font-size: 16px;">work</span>
+                            <span>LinkedIn</span>
+                        </a>
+                        <button type="button" class="share-btn copy-link" onclick="copyPageUrl()" title="Copy Page URL">
+                            <span class="material-symbols-outlined" style="font-size: 16px;">link</span>
+                            <span>Copy Link</span>
+                        </button>
+                    </div>
+                    <div style="margin-top: 10px;">
+                        <button type="button" class="share-btn" onclick="copyDealSummary()" style="width: 100%; justify-content: center;" title="Copy Markdown Summary for Slack/Teams">
+                            <span class="material-symbols-outlined" style="font-size: 16px;">assignment</span>
+                            <span>Copy Markdown Memo</span>
+                        </button>
+                    </div>
                 </div>
 
                 ${relatedDeals.length > 0 ? `
@@ -874,6 +1303,12 @@ ${jsonLdString}
         </div>
     </footer>
 
+    <!-- Floating Toast Notification -->
+    <div id="dossierToast" class="dossier-toast" role="status" aria-live="polite">
+        <span class="material-symbols-outlined" id="toastIcon" style="font-size: 18px; color: #34c759;">check_circle</span>
+        <span id="toastMessage">Copied to clipboard</span>
+    </div>
+
     <script>
         // Minimal Theme Controller
         (function () {
@@ -894,26 +1329,88 @@ ${jsonLdString}
             }
         })();
 
+        // Toast Feedback Controller
+        let toastTimeout;
+        function showToast(message, icon = 'check_circle') {
+            const toast = document.getElementById('dossierToast');
+            const msgEl = document.getElementById('toastMessage');
+            const iconEl = document.getElementById('toastIcon');
+            if (!toast || !msgEl) return;
+
+            msgEl.textContent = message;
+            if (iconEl) iconEl.textContent = icon;
+
+            toast.classList.add('active');
+            clearTimeout(toastTimeout);
+            toastTimeout = setTimeout(() => {
+                toast.classList.remove('active');
+            }, 2500);
+        }
+
+        // Native Web Share or Fallback
+        function shareDossier() {
+            const shareData = {
+                title: ${JSON.stringify(pageTitle)},
+                text: ${JSON.stringify(shareText)},
+                url: window.location.href
+            };
+            if (navigator.share && navigator.canShare && navigator.canShare(shareData)) {
+                navigator.share(shareData).catch(err => {
+                    if (err.name !== 'AbortError') {
+                        copyPageUrl();
+                    }
+                });
+            } else {
+                copyPageUrl();
+            }
+        }
+
+        // Copy Canonical Page URL
+        function copyPageUrl() {
+            navigator.clipboard.writeText(window.location.href).then(() => {
+                showToast('Link copied to clipboard!');
+            }).catch(() => {
+                showToast('Could not copy link');
+            });
+        }
+
         // Copy Domain Micro Action
         function copyDomainText(text, btnEl) {
             navigator.clipboard.writeText(text).then(() => {
-                const icon = btnEl.querySelector('.material-symbols-outlined');
-                if (icon) {
-                    icon.textContent = 'check';
-                    setTimeout(() => { icon.textContent = 'content_copy'; }, 1500);
+                if (btnEl) {
+                    const icon = btnEl.querySelector('.material-symbols-outlined');
+                    if (icon) {
+                        icon.textContent = 'check';
+                        setTimeout(() => { icon.textContent = 'content_copy'; }, 1500);
+                    }
                 }
+                showToast('Domain copied: ' + text);
             }).catch(e => console.warn('Copy domain failed:', e));
         }
 
-        // Copy Markdown Deal Memo for Slack/Email
+        // Copy Markdown Deal Memo for Slack/Email (Complete Dataset Fields)
         function copyDealSummary() {
-            const memo = \`**\${${JSON.stringify(companyName)}}** Raised **\${${JSON.stringify(amountUsdFormatted)}}** (\${${JSON.stringify(roundName)}})\\n\` +
-                \`• **Lead Investor:** \${${JSON.stringify(deal.lead_investor || 'Undisclosed')}}\\n\` +
-                \`• **Date:** \${${JSON.stringify(dateFormatted)}}\\n\` +
-                \`• **HQ:** \${${JSON.stringify(deal.company_headquarters || 'India')}}\\n\` +
-                \`• **Founders:** \${${JSON.stringify(deal.founders || 'Undisclosed')}}\\n\` +
-                \`• **Overview:** \${${JSON.stringify(deal.company_description || '')}}\\n\` +
-                \`• **Dossier:** \${window.location.href}\`;
+            const lines = [
+                \`*${companyName} — ${roundName} Funding Dossier*\`,
+                \`• Amount Raised: ${amountUsdFormatted}${amountInrFormatted ? ' (~ ' + amountInrFormatted + ')' : ''}\`,
+                \`• Stage & Type: ${roundName}${deal.funding_type ? ' (' + deal.funding_type + ')' : ''}\`,
+                \`• Date: ${dateFormatted}${quarterDisplay ? ' [' + quarterDisplay + ']' : ''}\`,
+                \`• Lead Investor: ${deal.lead_investor || 'Undisclosed'}\`,
+                \`• Syndicate: ${deal.investors || deal.funded_by || 'Undisclosed'}\`,
+                \`• Sector: ${deal.industry || 'General'}${deal.sub_industry ? ' (' + deal.sub_industry + ')' : ''}\`,
+                ${JSON.stringify(deal.deal_tags ? '• Focus Tags: ' + deal.deal_tags : null)},
+                \`• Headquarters: ${deal.company_headquarters || 'N/A'}\`,
+                ${JSON.stringify(deal.other_offices_in_india ? '• India Offices: ' + deal.other_offices_in_india : null)},
+                ${JSON.stringify(deal.founders ? '• Founders: ' + deal.founders : null)},
+                ${JSON.stringify(deal.company_website ? '• Website: ' + deal.company_website : null)},
+                ${JSON.stringify(deal.product_or_solution ? '• Product / Solution: ' + deal.product_or_solution : null)},
+                ${JSON.stringify(deal.target_market ? '• Target Market: ' + deal.target_market : null)},
+                ${JSON.stringify(deal.funding_use ? '• Funding Use: ' + deal.funding_use : null)},
+                ${JSON.stringify(deal.company_description ? '• Overview: ' + deal.company_description : null)},
+                \`• Full Intelligence Dossier: \${window.location.href}\`
+            ].filter(Boolean);
+
+            const memo = lines.join('\\n');
 
             navigator.clipboard.writeText(memo).then(() => {
                 const icon = document.getElementById('copySummaryIcon');
@@ -921,8 +1418,11 @@ ${jsonLdString}
                     icon.textContent = 'check';
                     setTimeout(() => { icon.textContent = 'assignment'; }, 1500);
                 }
-                alert('Deal memo copied to clipboard!');
-            }).catch(err => console.warn('Copy failed:', err));
+                showToast('Deal memo copied for Slack/Email!');
+            }).catch(err => {
+                console.warn('Copy failed:', err);
+                showToast('Could not copy deal memo');
+            });
         }
     </script>
 </body>
