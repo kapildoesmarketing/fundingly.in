@@ -4166,7 +4166,7 @@
                 flex-direction: column;
             }
 
-            /* Deisgned by Kapil Pidhwani: Hide sidebar filter block by default on mobile/tablet viewports. Ceiling: max-width 900px. Upgrade path: Drawer overlay. */
+            /* Deisgned by Kapil Pidhwani: Hide sidebar filter block by default on mobile/tablet viewports and convert to floating bottom dock + sheet drawer. Ceiling: max-width 900px. Upgrade path: Drawer overlay. */
             .app-sidebar {
                 display: none !important;
                 position: fixed !important;
@@ -4220,6 +4220,24 @@
             }
 
             .btn-mobile-filter-toggle {
+                display: none !important;
+            }
+
+            .mobile-bottom-dock {
+                display: flex;
+            }
+
+            .sidebar-mobile-actions {
+                display: block;
+            }
+
+            .timeline-stream,
+            .table-view-container,
+            .main-footer {
+                padding-bottom: calc(88px + env(safe-area-inset-bottom, 0px)) !important;
+            }
+
+            .btn-back-to-top {
                 display: none !important;
             }
         }

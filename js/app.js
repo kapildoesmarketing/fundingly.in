@@ -243,6 +243,14 @@ let rawDataset = [];
                     e.preventDefault();
                     e.stopPropagation();
                 }
+                if (sidebar.classList.contains('mobile-open')) {
+                    sidebar.classList.remove('mobile-open');
+                    const backdrop = document.getElementById('mobileFilterBackdrop');
+                    const dockFilterBtn = document.getElementById('dockFilterBtn');
+                    if (backdrop) backdrop.classList.remove('active');
+                    if (dockFilterBtn) dockFilterBtn.classList.remove('active');
+                    return;
+                }
                 const currentlyCollapsed = sidebar.classList.toggle('collapsed');
                 localStorage.setItem('fundingly_sidebar_collapsed', String(currentlyCollapsed));
                 updateToggleUI(currentlyCollapsed);
