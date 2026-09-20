@@ -1771,54 +1771,102 @@
             transition: all 0.15s ease;
         }
 
-        /* Deisgned by Kapil Pidhwani: Visual Deal Stage Color Coding System (Apple-grade pastel tints). Ceiling: 4 discrete stage buckets. Upgrade path: Custom user-defined color themes. */
+        /* Deisgned by Kapil Pidhwani: Visual Deal Stage Color Coding System (Apple-grade light pastel tints). Ceiling: 7 discrete stage buckets. Upgrade path: Custom user-defined color themes. */
+        
+        /* 1. Pre-Seed / Angel / Grants: Soft Mint Green */
+        .stage-pre-seed,
         .stage-early {
-            background-color: rgba(50, 173, 230, 0.12) !important;
-            color: #0077b6 !important;
-            border-color: rgba(50, 173, 230, 0.28) !important;
+            background-color: rgba(52, 199, 89, 0.12) !important;
+            color: #1b7a36 !important;
+            border-color: rgba(52, 199, 89, 0.28) !important;
         }
 
+        /* 2. Seed: Refreshing Teal / Emerald */
+        .stage-seed {
+            background-color: rgba(0, 168, 150, 0.12) !important;
+            color: #007569 !important;
+            border-color: rgba(0, 168, 150, 0.28) !important;
+        }
+
+        /* 3. Pre-Series A / Series A: Royal Sky Blue */
+        .stage-series-a,
         .stage-venture {
-            background-color: rgba(0, 113, 227, 0.12) !important;
-            color: #005bb5 !important;
-            border-color: rgba(0, 113, 227, 0.28) !important;
+            background-color: rgba(0, 122, 255, 0.12) !important;
+            color: #0062cc !important;
+            border-color: rgba(0, 122, 255, 0.28) !important;
         }
 
+        /* 4. Series B / Series B2: Electric Violet / Lavender */
+        .stage-series-b {
+            background-color: rgba(123, 76, 227, 0.12) !important;
+            color: #6228c2 !important;
+            border-color: rgba(123, 76, 227, 0.28) !important;
+        }
+
+        /* 5. Series C / D / Growth / PE: Rose Coral / Crimson */
         .stage-growth {
-            background-color: rgba(88, 86, 214, 0.12) !important;
-            color: #5856d6 !important;
-            border-color: rgba(88, 86, 214, 0.28) !important;
+            background-color: rgba(225, 29, 72, 0.10) !important;
+            color: #be123c !important;
+            border-color: rgba(225, 29, 72, 0.25) !important;
         }
 
+        /* 6. Debt / Bridge / Credit: Warm Amber / Gold */
         .stage-debt {
-            background-color: rgba(255, 149, 0, 0.12) !important;
-            color: #b25e00 !important;
-            border-color: rgba(255, 149, 0, 0.28) !important;
+            background-color: rgba(245, 158, 11, 0.12) !important;
+            color: #b45309 !important;
+            border-color: rgba(245, 158, 11, 0.30) !important;
+        }
+
+        /* 7. Other / Undisclosed: Cool Slate Neutral */
+        .stage-other {
+            background-color: rgba(100, 116, 139, 0.12) !important;
+            color: #475569 !important;
+            border-color: rgba(100, 116, 139, 0.28) !important;
         }
 
         /* Dark Mode Stage Color Overrides */
+        [data-theme="dark"] .stage-pre-seed,
         [data-theme="dark"] .stage-early {
-            background-color: rgba(50, 173, 230, 0.18) !important;
-            color: #5ac8fa !important;
-            border-color: rgba(50, 173, 230, 0.35) !important;
+            background-color: rgba(52, 199, 89, 0.18) !important;
+            color: #34c759 !important;
+            border-color: rgba(52, 199, 89, 0.35) !important;
         }
 
+        [data-theme="dark"] .stage-seed {
+            background-color: rgba(48, 209, 188, 0.18) !important;
+            color: #30d1bc !important;
+            border-color: rgba(48, 209, 188, 0.35) !important;
+        }
+
+        [data-theme="dark"] .stage-series-a,
         [data-theme="dark"] .stage-venture {
-            background-color: rgba(0, 113, 227, 0.22) !important;
-            color: #64d2ff !important;
-            border-color: rgba(0, 113, 227, 0.4) !important;
+            background-color: rgba(10, 132, 255, 0.20) !important;
+            color: #64b5f6 !important;
+            border-color: rgba(10, 132, 255, 0.38) !important;
+        }
+
+        [data-theme="dark"] .stage-series-b {
+            background-color: rgba(175, 82, 222, 0.20) !important;
+            color: #bf5af2 !important;
+            border-color: rgba(175, 82, 222, 0.38) !important;
         }
 
         [data-theme="dark"] .stage-growth {
-            background-color: rgba(175, 82, 222, 0.2) !important;
-            color: #af52de !important;
-            border-color: rgba(175, 82, 222, 0.4) !important;
+            background-color: rgba(255, 55, 95, 0.20) !important;
+            color: #ff6482 !important;
+            border-color: rgba(255, 55, 95, 0.38) !important;
         }
 
         [data-theme="dark"] .stage-debt {
-            background-color: rgba(255, 159, 10, 0.2) !important;
+            background-color: rgba(255, 159, 10, 0.20) !important;
             color: #ffd60a !important;
-            border-color: rgba(255, 159, 10, 0.4) !important;
+            border-color: rgba(255, 159, 10, 0.38) !important;
+        }
+
+        [data-theme="dark"] .stage-other {
+            background-color: rgba(148, 163, 184, 0.18) !important;
+            color: #cbd5e1 !important;
+            border-color: rgba(148, 163, 184, 0.35) !important;
         }
 
         /* Tier 2: 100% Full-Width Identity Block */

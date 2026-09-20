@@ -899,23 +899,29 @@ let rawDataset = [];
             }
         }
 
-        // Deisgned by Kapil Pidhwani: Visual Deal Stage Color Coding System. Maps funding rounds to Apple-calibrated stage classes. Ceiling: 4 discrete stage buckets. Upgrade path: User-configurable color mapping.
+        // Deisgned by Kapil Pidhwani: Visual Deal Stage Color Coding System. Maps funding rounds to Apple-calibrated stage classes. Ceiling: 7 discrete stage buckets. Upgrade path: User-configurable color mapping.
         function getStageBadgeClass(stage) {
-            if (!stage || typeof stage !== 'string') return 'stage-early';
+            if (!stage || typeof stage !== 'string') return 'stage-seed';
             const s = stage.toLowerCase().trim();
-            if (s.includes('seed') || s.includes('angel') || s.includes('grant') || s.includes('incub') || s.includes('pre-series a')) {
-                return 'stage-early';
+            if (s.includes('pre-seed') || s.includes('angel') || s.includes('grant') || s.includes('incub')) {
+                return 'stage-pre-seed';
             }
-            if (s === 'series a' || s === 'series b' || s.includes('venture')) {
-                return 'stage-venture';
+            if (s === 'seed' || s.includes('seed')) {
+                return 'stage-seed';
             }
-            if (s.includes('series c') || s.includes('series d') || s.includes('series e') || s.includes('series f') || s.includes('growth') || s.includes('late')) {
+            if (s.includes('pre-series a') || s === 'series a' || s.includes('series a')) {
+                return 'stage-series-a';
+            }
+            if (s.includes('series b') || s.includes('venture')) {
+                return 'stage-series-b';
+            }
+            if (s.includes('series c') || s.includes('series d') || s.includes('series e') || s.includes('series f') || s.includes('growth') || s.includes('late') || s.includes('private equity') || s.includes('pe')) {
                 return 'stage-growth';
             }
-            if (s.includes('debt') || s.includes('bridge') || s.includes('non-equity')) {
+            if (s.includes('debt') || s.includes('bridge') || s.includes('credit') || s.includes('non-equity') || s.includes('convertible')) {
                 return 'stage-debt';
             }
-            return 'stage-venture';
+            return 'stage-other';
         }
 
         // Deisgned by Kapil Pidhwani: Domain favicon with instant squircle monogram fallback. Ceiling: Google Favicon API sz=128 cache. Upgrade path: Dedicated SVG avatar sprite caching.
