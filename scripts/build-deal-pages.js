@@ -359,12 +359,6 @@ function generateCompanyPageHtml(compData, deal, totalRaisedUsd, relatedDeals) {
                     {
                         "@type": "ListItem",
                         "position": 2,
-                        "name": deal.industry || "Startups",
-                        "item": `https://fundingly.in/?industry=${encodeURIComponent(deal.industry || '')}`
-                    },
-                    {
-                        "@type": "ListItem",
-                        "position": 3,
                         "name": companyName,
                         "item": canonicalUrl
                     }
@@ -430,24 +424,20 @@ ${jsonLdString}
             padding: 0 16px;
         }
 
-        .breadcrumb-bar {
-            display: flex;
+        .page-nav-back {
+            display: inline-flex;
             align-items: center;
             gap: 6px;
-            font-size: 13px;
-            color: var(--color-text-tertiary);
-            margin-bottom: 20px;
-            flex-wrap: wrap;
-        }
-
-        .breadcrumb-bar a {
-            color: var(--color-text-secondary);
-            text-decoration: none;
-            transition: color 0.15s ease;
-        }
-
-        .breadcrumb-bar a:hover {
             color: var(--color-primary);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            transition: color 0.15s ease, transform 0.1s ease;
+        }
+
+        .page-nav-back:hover {
+            color: var(--color-primary-hover);
+            transform: translateX(-2px);
         }
 
         /* 2-Column Desktop Grid (Main Card + Side Rail) */
@@ -623,13 +613,12 @@ ${jsonLdString}
     </header>
 
     <main class="dossier-page-wrapper" role="main">
-        <!-- Breadcrumbs -->
-        <nav class="breadcrumb-bar" aria-label="Breadcrumbs">
-            <a href="../../">Home</a>
-            <span>›</span>
-            <a href="../../?industry=${encodeURIComponent(deal.industry || '')}">${escapeHtml(deal.industry || 'Startups')}</a>
-            <span>›</span>
-            <span style="color: var(--color-text-primary); font-weight: 600;">${escapeHtml(companyName)}</span>
+        <!-- Back to Home Navigation -->
+        <nav class="breadcrumb-bar" aria-label="Navigation">
+            <a href="../../" class="page-nav-back">
+                <span class="material-symbols-outlined" style="font-size: 18px;">arrow_back</span>
+                <span>Back to Home</span>
+            </a>
         </nav>
 
         <div class="dossier-layout-grid">
