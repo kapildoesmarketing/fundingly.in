@@ -230,7 +230,9 @@ let rawDataset = [];
                 }
             };
 
-            const isCollapsed = localStorage.getItem('fundingly_sidebar_collapsed') === 'true';
+            const savedState = localStorage.getItem('fundingly_sidebar_collapsed');
+            const isTablet = window.innerWidth >= 768 && window.innerWidth <= 1024;
+            const isCollapsed = savedState !== null ? (savedState === 'true') : isTablet;
             if (isCollapsed) {
                 sidebar.classList.add('collapsed');
             }
@@ -2822,6 +2824,7 @@ let rawDataset = [];
 
             const digestText = lines.join('\n');
             const showSuccess = () => {
+                showToast('Weekly digest copied to clipboard!');
                 if (btn) {
                     const origHtml = btn.innerHTML;
                     btn.innerHTML = '<span class="material-symbols-outlined" style="font-size: 14px; color: var(--color-status-success);">check</span><span style="color: var(--color-status-success);">Copied!</span>';
@@ -2836,6 +2839,23 @@ let rawDataset = [];
             } else {
                 fallbackCopyText(digestText, showSuccess);
             }
+        }
+
+        let toastTimeout = null;
+        function showToast(message, icon = 'check_circle') {
+            const toast = document.getElementById('globalToast');
+            const msgEl = document.getElementById('toastMessage');
+            const iconEl = document.getElementById('toastIcon');
+            if (!toast || !msgEl) return;
+
+            msgEl.textContent = message;
+            if (iconEl) iconEl.textContent = icon;
+
+            toast.classList.add('active');
+            clearTimeout(toastTimeout);
+            toastTimeout = setTimeout(() => {
+                toast.classList.remove('active');
+            }, 2500);
         }
 
         function printWeeklyTrends() {

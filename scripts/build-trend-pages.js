@@ -1110,7 +1110,7 @@ ${jsonLdString}
         <nav class="page-nav-bar" aria-label="Navigation">
             <a href="../../" class="page-nav-back">
                 <span class="material-symbols-outlined" style="font-size: 18px;">arrow_back</span>
-                <span>Back to Funding Feed</span>
+                <span>Back to Live Feed</span>
             </a>
             <div style="display: flex; gap: 8px; align-items: center;">
                 <button type="button" class="btn-detail" onclick="shareWeeklyReport()" style="background: var(--color-surface-secondary); color: var(--color-text-primary); border: 1px solid var(--color-hairline);" title="Share Weekly Trends">

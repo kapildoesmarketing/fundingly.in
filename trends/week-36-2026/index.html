@@ -461,7 +461,7 @@
         <nav class="page-nav-bar" aria-label="Navigation">
             <a href="../../" class="page-nav-back">
                 <span class="material-symbols-outlined" style="font-size: 18px;">arrow_back</span>
-                <span>Back to Funding Feed</span>
+                <span>Back to Live Feed</span>
             </a>
             <div style="display: flex; gap: 8px; align-items: center;">
                 <button type="button" class="btn-detail" onclick="shareWeeklyReport()" style="background: var(--color-surface-secondary); color: var(--color-text-primary); border: 1px solid var(--color-hairline);" title="Share Weekly Trends">
@@ -506,12 +506,12 @@
                     <div class="trends-kpi-card">
                         <span class="trends-kpi-label">Total Capital</span>
                         <span class="trends-kpi-val">$194.4M</span>
-                        <span class="trends-kpi-sub delta-up"><span class="material-symbols-outlined" style="font-size: 12px;">trending_up</span>+111601% WoW</span>
+                        <span class="trends-kpi-sub delta-down"><span class="material-symbols-outlined" style="font-size: 12px;">trending_down</span>-5% WoW</span>
                     </div>
                     <div class="trends-kpi-card">
                         <span class="trends-kpi-label">Deals Announced</span>
                         <span class="trends-kpi-val">22 Deals</span>
-                        <span class="trends-kpi-sub">+21 deals vs prior week</span>
+                        <span class="trends-kpi-sub">+1 deals vs prior week</span>
                     </div>
                     <div class="trends-kpi-card">
                         <span class="trends-kpi-label">Median Check</span>
@@ -1430,6 +1430,21 @@
                                     <span style="font-size: 11px; opacity: 0.8;">$194.4M • 22d</span>
                                 </a>
                             
+                                <a href="../week-35-2026/" class="sidebar-week-item ">
+                                    <span>Week 35 (2026)</span>
+                                    <span style="font-size: 11px; opacity: 0.8;">$204.1M • 21d</span>
+                                </a>
+                            
+                                <a href="../week-34-2026/" class="sidebar-week-item ">
+                                    <span>Week 34 (2026)</span>
+                                    <span style="font-size: 11px; opacity: 0.8;">$240.3M • 20d</span>
+                                </a>
+                            
+                                <a href="../week-33-2026/" class="sidebar-week-item ">
+                                    <span>Week 33 (2026)</span>
+                                    <span style="font-size: 11px; opacity: 0.8;">$1M • 1d</span>
+                                </a>
+                            
                                 <a href="../week-6-2026/" class="sidebar-week-item ">
                                     <span>Week 6 (2026)</span>
                                     <span style="font-size: 11px; opacity: 0.8;">$174K • 1d</span>
@@ -1593,7 +1608,7 @@
         }
 
         // Copy Weekly Markdown Digest
-        const weeklyDigestMarkdown = "📊 *Weekly Venture Intelligence: Week 36 of 2026 (Aug 31 – Sep 6, 2026)*\n• Total Capital Deployed: $194.4M across 22 deals\n• Median Check Size: $3.2M | Avg Round: $10.2M\n• Capital Velocity: +111601% WoW vs prior week\n• Top Funded Deal: Ultrahuman ($70M, Series C)\n\n💼 *Capital Allocation by Stage:*\n• Seed / Angel: $15M (7 deals • 8%)\n• Series A: $60.8M (7 deals • 31%)\n• Series B / C: $103.3M (4 deals • 53%)\n• Growth / Late: $15.3M (1 deals • 8%)\n• Debt / Other: Undisclosed (3 deals • 0%)\n\n🚀 *Industry Hotspots:*\n1. Health Tech: $74.5M (4 deals)\n2. Ecommerce: $55.9M (4 deals)\n3. Clean Tech: $46.3M (5 deals)\n4. Advanced Hardware & Technology: $16.3M (4 deals)\n5. AI: $879K (2 deals)\n\n📍 *Top Regional Hubs:*\n• Bengaluru: 12 deals (55%)\n• Pune: 2 deals (9%)\n• Mumbai: 2 deals (9%)\n• Undisclosed: 2 deals (9%)\n• Hyderabad: 1 deals (5%)\n\n🏆 *Top Showcase Deals:*\n• Ultrahuman — $70M (Series C) | Lead: Qualcomm Ventures\n• Yuma Energy — $35M (Series A) | Lead: Magna International Inc.\n• Mokobara — $18M (Series C) | Lead: Sauce.vc [https://mokobara.com]";
+        const weeklyDigestMarkdown = "📊 *Weekly Venture Intelligence: Week 36 of 2026 (Aug 31 – Sep 6, 2026)*\n• Total Capital Deployed: $194.4M across 22 deals\n• Median Check Size: $3.2M | Avg Round: $10.2M\n• Capital Velocity: -5% WoW vs prior week\n• Top Funded Deal: Ultrahuman ($70M, Series C)\n\n💼 *Capital Allocation by Stage:*\n• Seed / Angel: $15M (7 deals • 8%)\n• Series A: $60.8M (7 deals • 31%)\n• Series B / C: $103.3M (4 deals • 53%)\n• Growth / Late: $15.3M (1 deals • 8%)\n• Debt / Other: Undisclosed (3 deals • 0%)\n\n🚀 *Industry Hotspots:*\n1. Health Tech: $74.5M (4 deals)\n2. Ecommerce: $55.9M (4 deals)\n3. Clean Tech: $46.3M (5 deals)\n4. Advanced Hardware & Technology: $16.3M (4 deals)\n5. AI: $879K (2 deals)\n\n📍 *Top Regional Hubs:*\n• Bengaluru: 12 deals (55%)\n• Pune: 2 deals (9%)\n• Mumbai: 2 deals (9%)\n• Undisclosed: 2 deals (9%)\n• Hyderabad: 1 deals (5%)\n\n🏆 *Top Showcase Deals:*\n• Ultrahuman — $70M (Series C) | Lead: Qualcomm Ventures\n• Yuma Energy — $35M (Series A) | Lead: Magna International Inc.\n• Mokobara — $18M (Series C) | Lead: Sauce.vc [https://mokobara.com]";
         function copyWeeklyDigest() {
             const btn = document.getElementById('btnTrendsCopyDigest');
             const showSuccess = () => {

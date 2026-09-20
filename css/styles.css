@@ -4982,3 +4982,147 @@
             from { transform: translateY(100%); }
             to { transform: translateY(0); }
         }
+
+        /* ==========================================================================
+           UI/UX & RESPONSIVE POLISH SPECIFICATIONS (design.txt)
+           ========================================================================== */
+
+        /* 1. Header & Navigation Desktop Constraint */
+        @media (max-width: 900px) {
+            .btn-nav-desktop-only {
+                display: none !important;
+            }
+        }
+
+        /* 2. Root Layout Containment on Ultra-Wide / 4K Displays */
+        .app-layout,
+        .dossier-page-wrapper,
+        .trends-page-wrapper {
+            max-width: 1440px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* 3. Tabular Numerals for Precise Financial Alignment */
+        .card-amount,
+        .deal-amount-usd,
+        .deal-amount-inr,
+        .trends-kpi-val,
+        .sidebar-deal-amount,
+        .trends-deal-amount,
+        .history-round-amount,
+        .inspector-val.highlight,
+        .stat-pill-value,
+        .week-metrics-pill,
+        .table-amount-val {
+            font-feature-settings: "tnum" 1;
+            -webkit-font-feature-settings: "tnum" 1;
+        }
+
+        /* 4. Apple-Grade Card Hover Elevation */
+        .company-card {
+            transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.15s ease;
+        }
+
+        .company-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.04);
+            border-color: var(--color-primary-subtle);
+        }
+
+        /* 5. Tablet & Laptop Responsive Grid (768px – 1024px) */
+        @media (min-width: 768px) and (max-width: 1024px) {
+            .grid-container,
+            .week-grid {
+                grid-template-columns: repeat(2, 1fr) !important;
+            }
+        }
+
+        /* 6. Mobile Date Horizon Popover as Sliding Bottom Drawer (< 600px) */
+        @media (max-width: 600px) {
+            .date-popover-card {
+                position: fixed !important;
+                top: auto !important;
+                bottom: 0 !important;
+                left: 0 !important;
+                right: 0 !important;
+                width: 100% !important;
+                max-width: 100% !important;
+                border-radius: 20px 20px 0 0 !important;
+                box-shadow: 0 -8px 30px rgba(0, 0, 0, 0.25) !important;
+                z-index: 10001 !important;
+                animation: slideUpDrawer 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards !important;
+                padding-bottom: calc(24px + env(safe-area-inset-bottom, 0px)) !important;
+            }
+
+            .date-popover-backdrop {
+                z-index: 10000 !important;
+            }
+        }
+
+        @keyframes slideUpDrawer {
+            from {
+                transform: translateY(100%);
+            }
+            to {
+                transform: translateY(0);
+            }
+        }
+
+        /* 7. Unified Toast Notification Container */
+        .app-toast,
+        .dossier-toast,
+        .trends-toast {
+            position: fixed;
+            bottom: 28px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: rgba(29, 29, 31, 0.92);
+            color: #ffffff;
+            padding: 10px 20px;
+            border-radius: var(--radius-pill);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.28);
+            font-size: 13.5px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            z-index: 99999;
+            opacity: 0;
+            pointer-events: none;
+            transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.24s ease;
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+        }
+
+        .app-toast.active,
+        .dossier-toast.active,
+        .trends-toast.active {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        [data-theme="dark"] .app-toast,
+        [data-theme="dark"] .dossier-toast,
+        [data-theme="dark"] .trends-toast {
+            background: rgba(245, 245, 247, 0.92);
+            color: #121215;
+        }
+
+        /* 8. Subpage Back Navigation Slide Hover Effect */
+        .page-nav-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--color-primary);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            transition: color 0.15s ease, transform 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .page-nav-back:hover {
+            color: var(--color-primary-hover);
+            transform: translateX(-3px);
+        }
