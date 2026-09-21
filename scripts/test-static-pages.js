@@ -40,6 +40,8 @@ companies.forEach(comp => {
     assert(html.includes('class="ad-container-wrapper"'), `Missing AdSense container in ${comp}`);
     assert(html.includes('class="adsbygoogle"'), `Missing adsbygoogle tag in ${comp}`);
     assert(html.includes('ca-pub-6148655095183291'), `Missing AdSense client ca-pub-6148655095183291 in ${comp}`);
+    assert(html.includes('1876441959'), `Missing AdSense slot 1876441959 in ${comp}`);
+    assert(html.includes('6069828671'), `Missing AdSense slot 6069828671 in ${comp}`);
 
     // Extract and parse JSON-LD
     const jsonLdMatch = html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/);
@@ -96,6 +98,8 @@ trendWeeks.forEach(weekSlug => {
     assert(html.includes('class="ad-container-wrapper"'), `Missing AdSense container in trends/${weekSlug}`);
     assert(html.includes('class="adsbygoogle"'), `Missing adsbygoogle tag in trends/${weekSlug}`);
     assert(html.includes('ca-pub-6148655095183291'), `Missing AdSense client ca-pub-6148655095183291 in trends/${weekSlug}`);
+    assert(html.includes('1876441959'), `Missing AdSense slot 1876441959 in trends/${weekSlug}`);
+    assert(html.includes('6069828671'), `Missing AdSense slot 6069828671 in trends/${weekSlug}`);
 
     // Extract and parse JSON-LD
     const jsonLdMatch = html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/);

@@ -1278,13 +1278,13 @@ ${jsonLdString}
 
             <!-- Right Sidebar: Sticky Ad Unit + Share Suite + Weekly Reports Archive -->
             <aside class="trends-sidebar">
-                <!-- Google AdSense Slot #1 (Sidebar Display Unit) -->
+                <!-- Google AdSense Slot #1 (Sidebar Display Unit - Banner Right) -->
                 <div class="ad-container-wrapper">
                     <span class="ad-label">Sponsored</span>
                     <ins class="adsbygoogle"
                          style="display:block"
                          data-ad-client="ca-pub-6148655095183291"
-                         data-ad-slot="0000000000"
+                         data-ad-slot="1876441959"
                          data-ad-format="auto"
                          data-full-width-responsive="true"></ins>
                     <script>
@@ -1346,14 +1346,14 @@ ${jsonLdString}
             </aside>
         </div>
 
-        <!-- Google AdSense Slot #2 (Bottom Banner Unit) -->
+        <!-- Google AdSense Slot #2 (Bottom Banner Unit - Banner Bottom) -->
         <div class="bottom-ad-wrapper">
             <span class="ad-label">Sponsored Intelligence</span>
             <ins class="adsbygoogle"
                  style="display:block"
                  data-ad-client="ca-pub-6148655095183291"
-                 data-ad-slot="0000000000"
-                 data-ad-format="horizontal"
+                 data-ad-slot="6069828671"
+                 data-ad-format="auto"
                  data-full-width-responsive="true"></ins>
             <script>
                  (adsbygoogle = window.adsbygoogle || []).push({});
