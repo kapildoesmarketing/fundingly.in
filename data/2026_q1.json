@@ -1,6 +1,8 @@
 [
   {
     "date_of_funding": "2026-02-04",
+    "company_name": "CHINI KUM",
+    "company_website": "",
     "funding_round": "Pre-Seed",
     "funding_amount_usd": 174000,
     "original_funding_amount": 10000000,
@@ -12,8 +14,6 @@
     "investor_types": "Angel Investors",
     "lead_investor": "Angel Investors",
     "deal_tags": "D2C, Prebiotics, Zero Sugar Beverages",
-    "company_name": "CHINI KUM",
-    "company_website": "",
     "industry": "Ecommerce",
     "sub_industry": "D2C",
     "company_description": "A beverage startup offering zero-sugar, low-calorie, prebiotic-infused drinks.",
