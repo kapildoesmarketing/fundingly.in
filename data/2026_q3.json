@@ -16,46 +16,52 @@
     "deal_tags": "Electric Vehicles, Leasing, B2B",
     "industry": "Transportation and Logistics",
     "sub_industry": "Electric Mobility",
+    "vertical": "Automotive",
+    "sub-vertical": "Other (Automotive)",
     "company_description": "Drivn is an electric mobility company enabling commercial fleet electrification through EV leasing, financing, deployment, and full-lifecycle asset solutions for electric buses and heavy-duty trucks in India.",
     "product_or_solution": "Flexible leasing solutions and intelligent financing for electric commercial vehicles, supported by an in-house technology platform to monitor vehicle and battery performance.",
     "target_market": "Commercial transport operators and industrial fleets in India.",
     "year_founded": 2025,
-    "employee_count_range_at_funding": "11 to 20",
+    "employee_count_range_at_funding": "11 -20",
     "business_model": "B2B",
     "company_headquarters": "Gurugram, Haryana, India",
     "other_offices_in_india": "",
     "other_offices_outside_india": "Singapore",
     "founders": "Adwitiya Mal, Alpna Jain, Manav Bansal, Madhujeet Chimni",
-    "sources": "https://indianstartupnews.com/funding/electric-mobility-startup-drivn-raises-rs-45-crore-in-seed-funding-from-avaana-capital-12559768, https://yourstory.com/companies/drivn-transition-private-limited"
+    "sources": "https://indianstartupnews.com/funding/electric-mobility-startup-drivn-raises-rs-45-crore-in-seed-funding-from-avaana-capital-12559768, https://yourstory.com/companies/drivn-transition-private-limited",
+    "verified": false
   },
   {
     "date_of_funding": "2026-09-21",
-    "company_name": "Indulge Concierge",
-    "company_website": "",
+    "company_name": "Indulge Concierge / Indulge Global (India Indulge Private Limited)",
+    "company_website": "https://indulge.global/",
     "funding_round": "Pre-Series A",
     "funding_amount_usd": 1000000,
     "original_funding_amount": 1000000,
     "original_funding_currency": "USD",
     "funding_type": "Equity",
-    "funding_use": "To support international expansion into the US, UAE, Malaysia, and South Africa, and to further develop its AI capabilities.",
-    "investors": "",
-    "investor_count": 1,
-    "investor_types": "",
-    "lead_investor": "",
+    "funding_use": "The capital is being deployed to spearhead global expansion into the US, UAE, Malaysia, and South Africa, while aggressively scaling their AI-driven luxury operations and tech infrastructure.",
+    "investors": "Gautham Pai (Manipal Group), Nikhil Shettar, Revathi Kamath, along with other participating strategic angel networks and existing backers.",
+    "investor_count": "Multiple (exact count undisclosed, comprised of a syndicate of both existing and new investors).",
+    "investor_types": "Corporates / Strategic Investors, Angel Investors",
+    "lead_investor": "Not publicly designated as a single lead institution; the round was pushed forward by a syndicate of strategic private angels and existing marquee backers",
     "deal_tags": "Concierge, Luxury, Artificial Intelligence",
     "industry": "Consumer Services",
     "sub_industry": "Luxury Lifestyle Management",
-    "company_description": "Indulge Concierge is an invite-only luxury lifestyle management company that provides 24/7 personalized services for high-net-worth individuals, integrating AI with human concierge teams.",
-    "product_or_solution": "Bespoke travel planning, private event execution, exclusive access, personal assistance, and a curated luxury commerce platform.",
-    "target_market": "Ultra-high-net-worth individuals (UHNIs), public figures, and industrialists.",
-    "year_founded": 2019,
-    "employee_count_range_at_funding": 20,
-    "business_model": "B2C",
-    "company_headquarters": "Revora, Goa, India",
-    "other_offices_in_india": "Haryana, Karnataka, Telangana",
-    "other_offices_outside_india": "USA, UAE, Malaysia, South Africa",
+    "vertical": "Travel",
+    "sub-vertical": "Business Services",
+    "company_description": "Indulge Concierge is an invitation-only, tech-enabled luxury concierge company providing end-to-end bespoke lifestyle management and VIP access to elite clients worldwide.",
+    "product_or_solution": "It delivers 24/7 personalized concierge assistance via a dedicated app and WhatsApp interface, handling rare luxury retail sourcing, private aviation, Michelin-star dining bookings, VIP event access, and bespoke travel curation.",
+    "target_market": "Ultra-high-net-worth individuals (UHNWIs), high-net-worth families, startup founders, C-suite executives, and high-profile creators.",
+    "year_founded": 2022,
+    "employee_count_range_at_funding": "11–50",
+    "business_model": "B2C / B2B2C",
+    "company_headquarters": "Goa, India",
+    "other_offices_in_india": "Hyderabad (Jubilee Hills / Nandagiri Hills)",
+    "other_offices_outside_india": "None",
     "founders": "Karan Bhangay, Advita Bihani",
-    "sources": "https://www.ciol.com/funding-acquistion-merger/indulge-concierge-raises-1-million-ai-expansion-us-uae-malaysia-south-africa-12560002, https://startuppedia.in/startup-stories/indulge-global-a-private-concierge-company-caters-to-over-1000-uhnis-across-the-globe-4787223"
+    "sources": "https://www.ciol.com/funding-acquistion-merger/indulge-concierge-raises-1-million-ai-expansion-us-uae-malaysia-south-africa-12560002, https://startuppedia.in/startup-stories/indulge-global-a-private-concierge-company-caters-to-over-1000-uhnis-across-the-globe-4787223",
+    "verified": true
   },
   {
     "date_of_funding": "2026-09-19",
@@ -74,6 +80,8 @@
     "deal_tags": "Healthtech, AI Health Coach, Digital Health, Chronic Care",
     "industry": "Healthcare",
     "sub_industry": "HealthTech / AI Health Coaching",
+    "vertical": "Healthcare",
+    "sub-vertical": "Health Education",
     "company_description": "Disha is a vernacular, 24/7 AI-powered health coach that delivers personalized diet, lifestyle, and condition management plans. It blends artificial intelligence with clinical guidance to help users manage lifestyle disorders and chronic conditions in their local language.",
     "product_or_solution": "24/7 vernacular AI health coach app that provides personalized diet, fitness, and chronic-care protocols. The platform delivers tailored daily coaching, localized Indian meal plans, and automated lab report analysis in Hindi, English, and Hinglish to help users sustainably manage lifestyle disorders like PCOS, diabetes, and thyroid issues.",
     "target_market": "Indian individuals—primarily in Tier 1 to Tier 3 regions—managing or seeking preventive guidance for chronic conditions and lifestyle issues, including PCOS, type 2 diabetes, thyroid disorders, weight management, hair loss, sexual wellness, and menopause.",
@@ -84,7 +92,8 @@
     "other_offices_in_india": "None",
     "other_offices_outside_india": "None",
     "founders": "Divyansh Jain, Aman Singla",
-    "sources": "https://tracxn.com/d/geographies/india/__ujYf3QI9FSnpS3x-zJCSwnay2nENQhm1kAN-U8-6Kfg, https://disha.health/, https://entrackr.com/2022/03/curelink-raises-3-5-mn-in-seed-round/, https://disha.health/en/about.html"
+    "sources": "https://tracxn.com/d/geographies/india/__ujYf3QI9FSnpS3x-zJCSwnay2nENQhm1kAN-U8-6Kfg, https://disha.health/, https://entrackr.com/2022/03/curelink-raises-3-5-mn-in-seed-round/, https://disha.health/en/about.html",
+    "verified": true
   },
   {
     "date_of_funding": "2026-09-18",
@@ -103,6 +112,8 @@
     "deal_tags": "Fintech, Wealthtech, Digital Gold, Micro-savings",
     "industry": "FinTech (Financial Technology) / Wealth Management",
     "sub_industry": "Digital Savings and Investment Tech",
+    "vertical": "Finance",
+    "sub-vertical": "Brokerage & Investments",
     "company_description": "Jar is an Indian micro-savings and investment platform that helps users build healthy financial habits by automatically investing spare change from daily online transactions into digital gold.",
     "product_or_solution": "Jar is a digital micro-savings and wealth platform that automatically rounds up users' online transaction spare change and invests it into 24K digital gold. Through its sub-brand Nek, the platform also allows users to smoothly convert their digital savings into physical jewelry, coins, and delivery options.",
     "target_market": "\"Middle India\" (Bharat)—predominantly tech-savvy millennials, Gen Z, first-jobbers, gig workers, and daily wage earners in Tier 1, 2, and 3 cities who want to start saving without heavy initial capital or complex financial jargon.",
@@ -113,7 +124,8 @@
     "other_offices_in_india": "None",
     "other_offices_outside_india": "None",
     "founders": "Arkalagud Gowrishankar Nishchay Babu, Misbah Ashraf, Captain Prashant Priya",
-    "sources": "https://18startup.com/company/jar-myjar-app, https://entrackr.com/exclusive/exclusive-jar-raises-small-fresh-funding-from-unitary-fund-12547515"
+    "sources": "https://18startup.com/company/jar-myjar-app, https://entrackr.com/exclusive/exclusive-jar-raises-small-fresh-funding-from-unitary-fund-12547515",
+    "verified": true
   },
   {
     "date_of_funding": "2026-09-18",
@@ -132,6 +144,8 @@
     "deal_tags": "Beauty, Lifestyle, Body Care, D2C",
     "industry": "Beauty & Personal Care",
     "sub_industry": "Beauty & Wellness",
+    "vertical": "Consumer Packaged Goods",
+    "sub-vertical": "Personal Care",
     "company_description": "MoroMaa is an Indian direct-to-consumer beauty brand bridging traditional Moroccan heritage with modern skincare by introducing authentic hammam rituals and premium ingredients to the Indian market.",
     "product_or_solution": "The brand offers curated ritual bundles and standalone items, including oil-based face and body scrubs, Moroccan Black Beldi Soap, Kessa exfoliating gloves, Argan Nila Body Tbrima (body mask), and Aker Fassi (a natural pomegranate-based lip and cheek tint).",
     "target_market": "Indian consumers and artists seeking clean, heritage-backed, and premium natural personal care alternatives rooted in Moroccan beauty traditions (often referred to as \"M-Beauty\").",
@@ -142,7 +156,8 @@
     "other_offices_in_india": "None",
     "other_offices_outside_india": "None",
     "founders": "Soundous Moufakir",
-    "sources": "https://www.dealstreetasia.com/stories/moromaa-factrika-jar-495593/, https://moromaa.com/pages/our-story"
+    "sources": "https://www.dealstreetasia.com/stories/moromaa-factrika-jar-495593/, https://moromaa.com/pages/our-story",
+    "verified": true
   },
   {
     "date_of_funding": "2026-09-18",
@@ -161,6 +176,8 @@
     "deal_tags": "Healthtech, Digital Physiotherapy, Digital Health",
     "industry": "Healthcare",
     "sub_industry": "Digital Physiotherapy / Healthtech",
+    "vertical": "Healthcare",
+    "sub-vertical": "Computer Software",
     "company_description": "Physioplus Healthcare is a digital health platform that connects patients with certified physiotherapists to digitise, streamline, and monitor physical rehabilitation.",
     "product_or_solution": "Application and web-based infrastructure providing physiotherapy discovery, virtual and in-person consultations, automated patient assessments, clinical documentation, digital practice management tools, and an AI-powered symptom assessment tool.",
     "target_market": "Individuals suffering from chronic pain, musculoskeletal injuries, sports injuries, and post-surgery rehabilitation, as well as working physiotherapists requiring digital practice management tooling.",
@@ -171,7 +188,8 @@
     "other_offices_in_india": "None",
     "other_offices_outside_india": "None",
     "founders": "Samit Saxena, Jaswant Singh, Madhukar Pareek",
-    "sources": "https://startupfox.in/company/physioplus-healthcare, https://entrackr.com/snippets/physioplus-healthcare-raises-seed-round-at-800k-valuation-12547680"
+    "sources": "https://startupfox.in/company/physioplus-healthcare, https://entrackr.com/snippets/physioplus-healthcare-raises-seed-round-at-800k-valuation-12547680",
+    "verified": true
   },
   {
     "date_of_funding": "2026-09-18",
@@ -190,6 +208,8 @@
     "deal_tags": "D2C, Jewellery, Lab-grown Diamonds, Retail",
     "industry": "Retail",
     "sub_industry": "Jewelry",
+    "vertical": "Retail",
+    "sub-vertical": "Apparel & Accessories",
     "company_description": "Zinara is a modern consumer jewelry brand that designs and retails accessible, everyday fine jewellery made with certified lab-grown diamonds set in BIS-hallmarked gold and gold vermeil.",
     "product_or_solution": "SGL- and IGI-certified lab-grown diamond rings, earrings, pendants, and bracelets crafted in 18KT gold vermeil on 925 sterling silver as well as solid hallmarked gold, supported by virtual styling consultations and at-home try-on experiences.",
     "target_market": "Modern, style-conscious consumers and working professionals seeking ethical, affordable, and everyday fine luxury jewelry without paying traditional mined-diamond premiums",
@@ -200,7 +220,8 @@
     "other_offices_in_india": "None",
     "other_offices_outside_india": "None",
     "founders": "Sumanyu Vyas, Harshit Abrol",
-    "sources": "https://www.entrepreneurindia.com/blog/en/news/nikita-dutta-makes-strategic-investment-in-zinara.61093, https://tracxn.com/d/companies/zinara/__CNXj7nQssMhmKsZvxKdcl61jc6_3-ufTNrYNivlv8i0"
+    "sources": "https://www.entrepreneurindia.com/blog/en/news/nikita-dutta-makes-strategic-investment-in-zinara.61093, https://tracxn.com/d/companies/zinara/__CNXj7nQssMhmKsZvxKdcl61jc6_3-ufTNrYNivlv8i0",
+    "verified": true
   },
   {
     "date_of_funding": "2026-09-17",
@@ -219,6 +240,8 @@
     "deal_tags": "DeepTech, Aerospace, Defense, Propulsion, Clean Energy",
     "industry": "Aerospace & Defense",
     "sub_industry": "Turbomachinery & Propulsion Systems",
+    "vertical": "Technology",
+    "sub-vertical": "Industrial Equipment",
     "company_description": "An indigenous deep-tech aerospace startup developing fuel-flexible micro gas turbine engines and green hydrogen propulsion systems.",
     "product_or_solution": "The company builds micro turbojets and gas turbines (such as the DET 200 and DET 500) ranging from 20 kgf to 400 kgf of thrust, alongside ATEX-certified clean energy hydrogen blowers and compressors.",
     "target_market": "Original Equipment Manufacturers (OEMs) in advanced aerial mobility, defense unmanned aerial systems (UAS), and distributed clean energy sectors worldwide.",
@@ -229,7 +252,8 @@
     "other_offices_in_india": "None",
     "other_offices_outside_india": "None",
     "founders": "Gurushankara K C, Abhinav Alva, Chetan Kumar",
-    "sources": "https://newzchain.com/dheyatech-raises-rs-43-cr-for-micro-gas-turbine-engines/, https://india.entrepreneur.com/business-news/dheyatech-raises-inr-43-cr-led-by-avaana-capital, https://dealroom.co/news/151430-dheyatech-raises-4-5m-to-build-indias-first-homegrown-micro-gas-turbines/, https://yourstory.com/2026/04/dheyatech-indigenous-propulsion-hydrogen-india"
+    "sources": "https://newzchain.com/dheyatech-raises-rs-43-cr-for-micro-gas-turbine-engines/, https://india.entrepreneur.com/business-news/dheyatech-raises-inr-43-cr-led-by-avaana-capital, https://dealroom.co/news/151430-dheyatech-raises-4-5m-to-build-indias-first-homegrown-micro-gas-turbines/, https://yourstory.com/2026/04/dheyatech-indigenous-propulsion-hydrogen-india",
+    "verified": true
   },
   {
     "date_of_funding": "2026-09-17",
@@ -248,6 +272,8 @@
     "deal_tags": "FMCG, D2C, Home Cleaning, Sustainable Products",
     "industry": "Consumer Goods / FMCG",
     "sub_industry": "Laundry & Home Cleaning",
+    "vertical": "Consumer Packaged Goods",
+    "sub-vertical": "Household",
     "company_description": "An eco-friendly FMCG startup dedicated to transforming the Indian cleaning sector by replacing conventional powder or liquid detergents with plastic-free, water-soluble solutions.",
     "product_or_solution": "The brand specializes in single-dose, water-soluble PVA laundry pods that combine detergent, fabric softener, and stain remover, alongside a capsule-based range of eco-friendly glass, floor, and bathroom cleaners.",
     "target_market": "Urban Indian households and eco-conscious consumers looking for convenient, premium, and sustainable alternatives to traditional household cleaners.",
@@ -258,7 +284,8 @@
     "other_offices_in_india": "None",
     "other_offices_outside_india": "None",
     "founders": "Sumit Goyal, Chirag Dangi",
-    "sources": "https://dealroom.co/news/151423-ecosys-raises-520-000-to-build-a-laundry-pod-category-in-india/, https://entrepreneur.economictimes.indiatimes.com/news/funding/ecosys-raises-5-cr-pre-series-a-funding-led-by-gvfl-prarambh-fund/134303767, https://newzchain.com/ecosys-raises-rs-5-cr-pre-series-a-for-sustainable-cleaning-pods/"
+    "sources": "https://dealroom.co/news/151423-ecosys-raises-520-000-to-build-a-laundry-pod-category-in-india/, https://entrepreneur.economictimes.indiatimes.com/news/funding/ecosys-raises-5-cr-pre-series-a-funding-led-by-gvfl-prarambh-fund/134303767, https://newzchain.com/ecosys-raises-rs-5-cr-pre-series-a-for-sustainable-cleaning-pods/",
+    "verified": true
   },
   {
     "date_of_funding": "2026-09-17",
@@ -277,6 +304,8 @@
     "deal_tags": "B2B, Supply Chain, AI Procurement, Metal Industry",
     "industry": "Industrial Technology / Supply Chain Tech.",
     "sub_industry": "Metal Procurement Platform & Supply Aggregation.",
+    "vertical": "Business & Industrial Markets",
+    "sub-vertical": "Construction & Building Materials",
     "company_description": "Enlight Metals is a digital-first industrial metal supply aggregator and procurement platform that integrates Agentic AI, ERP, and CRM infrastructure to automate fragmented B2B sourcing workflows.",
     "product_or_solution": "They provide a tech-driven supply network for mild steel and metal products (including HR/CR coils, TMT bars, structural steel, and custom GI earthing strips) featuring real-time pricing, end-to-end tracking, and automated drawing-based procurement that reduces manufacturing scrap.",
     "target_market": "Original Equipment Manufacturers (OEMs), fabricators, EPC contractors, and infrastructure builders operating within the solar, wind, automotive, construction, and government project sectors across India.",
@@ -287,7 +316,8 @@
     "other_offices_in_india": "Mumbai and Raipur",
     "other_offices_outside_india": "None",
     "founders": "Vedant Goel, Dhananjay Goel",
-    "sources": "https://indianstartupnews.com/funding/agentic-ai-enabled-metal-procurement-platform-enlight-metals-raises-15-million-from-exar-north-group-12544098, https://entrepreneur.economictimes.indiatimes.com/amp/news/funding/enlight-metals-raises-1-5-mn-funding-from-us-based-investment-firm-exar-north-group/134332803, https://yourstory.com/2025/07/enlight-metals-pune-startup-building-tech-backbone-india-metal-supply-chain"
+    "sources": "https://indianstartupnews.com/funding/agentic-ai-enabled-metal-procurement-platform-enlight-metals-raises-15-million-from-exar-north-group-12544098, https://entrepreneur.economictimes.indiatimes.com/amp/news/funding/enlight-metals-raises-1-5-mn-funding-from-us-based-investment-firm-exar-north-group/134332803, https://yourstory.com/2025/07/enlight-metals-pune-startup-building-tech-backbone-india-metal-supply-chain",
+    "verified": true
   },
   {
     "date_of_funding": "2026-09-17",
@@ -306,6 +336,8 @@
     "deal_tags": "HRTech, Industrial Workforce, On-demand Staffing",
     "industry": "Human Resources Tech",
     "sub_industry": "Industrial Workforce & Staffing Platforms",
+    "vertical": "Business & Industrial Markets",
+    "sub-vertical": "Careers",
     "company_description": "Factrika operates an on-demand, technology-enabled industrial workforce platform designed to alleviate daily labor disruptions for manufacturers. It seamlessly matches verified blue-collar workers with manufacturing units while handling digital shift allocations, real-time attendance, and automated payout processing.",
     "product_or_solution": "A digital workforce matching platform that deploys vetted, skilled factory workers to manufacturing plants within two hours while building verified work records to boost worker career growth.",
     "target_market": "Manufacturing companies experiencing factory absenteeism, high labor attrition, and seasonal demand fluctuations across India.",
@@ -316,7 +348,8 @@
     "other_offices_in_india": "Bhiwadi, Manesar, Bawal, Noida, and Bahadurgarh.",
     "other_offices_outside_india": "None",
     "founders": "Kshitij Puri, Gaurav Asthana",
-    "sources": "https://entrepreneur.economictimes.indiatimes.com/amp/news/funding/factrika-raises-8-9-cr-seed-funding-led-by-info-edge/134302042, https://indianstartupnews.com/funding/industrial-workforce-startup-factrika-raises-rs-89-crore-in-seed-funding-led-by-info-edge-12545143"
+    "sources": "https://entrepreneur.economictimes.indiatimes.com/amp/news/funding/factrika-raises-8-9-cr-seed-funding-led-by-info-edge/134302042, https://indianstartupnews.com/funding/industrial-workforce-startup-factrika-raises-rs-89-crore-in-seed-funding-led-by-info-edge-12545143",
+    "verified": true
   },
   {
     "date_of_funding": "2026-09-17",
@@ -335,6 +368,8 @@
     "deal_tags": "Fintech, Digital Lending, Personal Loans, NBFC",
     "industry": "Financial Services",
     "sub_industry": "Digital Lending",
+    "vertical": "Finance",
+    "sub-vertical": "Loans",
     "company_description": "OnEMI Technology Solutions is a technology-driven financial institution that leverages artificial intelligence and alternative data underwriting to offer seamless, instant retail credit solutions to India's unserved and credit-underpenetrated population.",
     "product_or_solution": "Kissht offers an instant digital credit platform that provides small-ticket personal loans and buy-now-pay-later (BNPL) checkout financing. By leveraging alternative data underwriting, they deliver fast, paperless loans directly to consumer bank accounts or retail merchants.",
     "target_market": "Young salaried and self-employed individuals, mass-market borrowers, and small business owners across India—with a targeted reach into Tier-2 and Tier-3 cities who lack adequate documentation for traditional banking credit channels.",
@@ -345,7 +380,8 @@
     "other_offices_in_india": "None",
     "other_offices_outside_india": "None",
     "founders": "Ranvir Singh, Krishnan Vishwanathan",
-    "sources": "https://www.business-standard.com/amp/markets/capital-market-news/board-of-onemi-technology-solutions-approves-capital-raising-of-rs-832-cr-126091800429_1.html, https://nstartup.me/news/f469f036-62c6-4fe6-a802-18d4827d81ee, https://www.kissht.com/about-us-app"
+    "sources": "https://www.business-standard.com/amp/markets/capital-market-news/board-of-onemi-technology-solutions-approves-capital-raising-of-rs-832-cr-126091800429_1.html, https://nstartup.me/news/f469f036-62c6-4fe6-a802-18d4827d81ee, https://www.kissht.com/about-us-app",
+    "verified": true
   },
   {
     "date_of_funding": "2026-09-16",
@@ -364,6 +400,8 @@
     "deal_tags": "Fashion Tech, E-commerce, Discovery Platform, D2C",
     "industry": "Consumer Technology",
     "sub_industry": "Fashion Discovery & Retail",
+    "vertical": "Retail",
+    "sub-vertical": "Apparel & Accessories",
     "company_description": "Gurugram-based fashion discovery platform aggregating products from over 300 marketplaces and using AI models to spot emerging trends.",
     "product_or_solution": "Platform bringing together fashion items into personalized feeds and theme-based collections, alongside its own data-informed private label (Slayd Originals).",
     "target_market": "Online fashion shoppers in India.",
@@ -374,7 +412,8 @@
     "other_offices_in_india": "",
     "other_offices_outside_india": "",
     "founders": "Sparsh Jain, Harsh Porwal, Kumar Prasang",
-    "sources": "https://dealroom.co/news/151108-slayd-raises-160-000-to-build-indias-fashion-discovery-layer/, https://indianstartupnews.com/funding/fashion-discovery-startup-slayd-raises-rs-15-crore-to-scale-private-label-business-as-it-crosses-2-lakh-users-12540235, https://arabfounders.net/en/slayd-raises-156k-pre-seed-funding/"
+    "sources": "https://dealroom.co/news/151108-slayd-raises-160-000-to-build-indias-fashion-discovery-layer/, https://indianstartupnews.com/funding/fashion-discovery-startup-slayd-raises-rs-15-crore-to-scale-private-label-business-as-it-crosses-2-lakh-users-12540235, https://arabfounders.net/en/slayd-raises-156k-pre-seed-funding/",
+    "verified": false
   },
   {
     "date_of_funding": "2026-09-16",
@@ -393,6 +432,8 @@
     "deal_tags": "Healthcare, Aesthetic Surgery, Cosmetic Clinics",
     "industry": "Healthcare",
     "sub_industry": "Aesthetic Healthcare & Surgery",
+    "vertical": "Healthcare",
+    "sub-vertical": "Plastic & Cosmetic Surgery",
     "company_description": "Integrated aesthetic surgery platform operating purpose-built centres offering procedures across facial aesthetics, breast surgery, body contouring, and hair restoration.",
     "product_or_solution": "Purpose-built aesthetic surgery centres with operating theatres, dedicated recovery areas, ICU backup, and technology-led patient care.",
     "target_market": "Patients seeking aesthetic surgeries and non-surgical treatments in India.",
@@ -403,7 +444,8 @@
     "other_offices_in_india": "Haryana",
     "other_offices_outside_india": "",
     "founders": "Ankit Joshi, Sandeep Upadhyay",
-    "sources": "https://m.economictimes.com/small-biz/security-tech/technology/true-artis-raises-rs-11-4-crore-to-expand-network-of-premium-aesthetic-surgery-centres/articleshow/134282744.cms, https://aestheticmed.in/true-artis-raises-rs-11-4-crore-in-seed-funding/"
+    "sources": "https://m.economictimes.com/small-biz/security-tech/technology/true-artis-raises-rs-11-4-crore-to-expand-network-of-premium-aesthetic-surgery-centres/articleshow/134282744.cms, https://aestheticmed.in/true-artis-raises-rs-11-4-crore-in-seed-funding/",
+    "verified": false
   },
   {
     "date_of_funding": "2026-09-15",
@@ -422,6 +464,8 @@
     "deal_tags": "HRTech, SaaS, Human Capital Management, Enterprise Software",
     "industry": "Enterprise Software",
     "sub_industry": "HR Tech / HCM",
+    "vertical": "Technology",
+    "sub-vertical": "Computer Software",
     "company_description": "Cloud-based human capital management (HCM) platform managing the full employee lifecycle for enterprises globally.",
     "product_or_solution": "AI-powered Human Capital Management suite including recruitment, onboarding, performance, payroll, and engagement with AI features.",
     "target_market": "Enterprises globally, spanning India, Southeast Asia, Middle East, and North America.",
@@ -432,7 +476,8 @@
     "other_offices_in_india": "",
     "other_offices_outside_india": "United States, Southeast Asia, Middle East",
     "founders": "Jayant Prasad Paleti, Satyanarayana Chaitanya Peddi, Rohit Chennamaneni, Vineet Singh",
-    "sources": "https://indianstartupnews.com/funding/hrtech-unicorn-darwinbox-secures-follow-on-investment-from-teachers-venture-growth-12536429, https://www.dhrmap.com/news/india-s-darwinbox-secures-follow-on-investment-from-tvg-amount-and-round-undisclosed"
+    "sources": "https://indianstartupnews.com/funding/hrtech-unicorn-darwinbox-secures-follow-on-investment-from-teachers-venture-growth-12536429, https://www.dhrmap.com/news/india-s-darwinbox-secures-follow-on-investment-from-tvg-amount-and-round-undisclosed",
+    "verified": false
   },
   {
     "date_of_funding": "2026-09-15",
@@ -451,6 +496,8 @@
     "deal_tags": "Quick Commerce, BeautyTech, AI Discovery, Curated Marketplace",
     "industry": "Retail",
     "sub_industry": "Beauty & Personal Care Quick Commerce",
+    "vertical": "Retail",
+    "sub-vertical": "Cosmetics & Beauty Supplies",
     "company_description": "Gurugram-based quick commerce startup for beauty and personal care delivering highly curated, AI-shortlisted products within nine minutes.",
     "product_or_solution": "AI-curated beauty marketplace evaluating 50 million reviews to shortlist premium items, delivered rapidly via dark stores.",
     "target_market": "Beauty shoppers in India requiring curated selection and ultra-fast delivery.",
@@ -461,7 +508,8 @@
     "other_offices_in_india": "",
     "other_offices_outside_india": "",
     "founders": "Karishma Rathaur, Vivek Madani",
-    "sources": "https://dealroom.co/news/150900-firi-raises-3m-seed-to-build-an-ai-curated-beauty-marketplace-in-india/, https://www.thesaasnews.com/news/firi-raises-3m-seed/, https://retail.economictimes.indiatimes.com/amp/news/health-and-beauty/firi-raises-3-million-seed-led-by-360-one-asset-to-expand-curated-beauty-commerce/134261542"
+    "sources": "https://dealroom.co/news/150900-firi-raises-3m-seed-to-build-an-ai-curated-beauty-marketplace-in-india/, https://www.thesaasnews.com/news/firi-raises-3m-seed/, https://retail.economictimes.indiatimes.com/amp/news/health-and-beauty/firi-raises-3-million-seed-led-by-360-one-asset-to-expand-curated-beauty-commerce/134261542",
+    "verified": false
   },
   {
     "date_of_funding": "2026-09-15",
@@ -480,6 +528,8 @@
     "deal_tags": "AI, Semiconductor, EDA, Hardware Verification",
     "industry": "Technology",
     "sub_industry": "Semiconductors & EDA",
+    "vertical": "Technology",
+    "sub-vertical": "Computer Software",
     "company_description": "Cupertino, CA-based AI-native semiconductor verification and EDA software startup building a trust layer for AI-driven chip development.",
     "product_or_solution": "AI verification platform ('Formal Brain') that combines AI reasoning with mathematical formal methods to simulate hardware and ensure designs match intended specifications.",
     "target_market": "Fabless semiconductor companies, custom-silicon developers, AI accelerator companies, and hyperscalers.",
@@ -490,7 +540,8 @@
     "other_offices_in_india": "Unknown",
     "other_offices_outside_india": "Israel",
     "founders": "Madhulima Tewari, Kenneth Roe, Avner Landver",
-    "sources": "https://startupbeat.com/verifaix-raises-5m-to-build-an-ai-trust-layer-for-semiconductor-verification/39602/, https://pulse2.com/verifaix-5-million-seed-funding/, https://www.finsmes.com/2026/09/verifaix-raises-usd5m-in-seed-funding.html"
+    "sources": "https://startupbeat.com/verifaix-raises-5m-to-build-an-ai-trust-layer-for-semiconductor-verification/39602/, https://pulse2.com/verifaix-5-million-seed-funding/, https://www.finsmes.com/2026/09/verifaix-raises-usd5m-in-seed-funding.html",
+    "verified": false
   },
   {
     "date_of_funding": "2026-09-14",
@@ -509,6 +560,8 @@
     "deal_tags": "AI, Interactive Content, Mixed Reality, Enterprise Software",
     "industry": "Technology",
     "sub_industry": "AI & Interactive Media",
+    "vertical": "Technology",
+    "sub-vertical": "Computer Software",
     "company_description": "San Francisco and Bengaluru-based AI-powered interactive content platform that helps enterprises create immersive experiences for marketing, product visualization, and customer engagement.",
     "product_or_solution": "Interactive digital content formats including Flicks (interactive video), Airboards (3D camera experiences), and Visual Agents (AI avatars).",
     "target_market": "Global enterprise customers, consumer brands, and marketers.",
@@ -519,7 +572,8 @@
     "other_offices_in_india": "Karnataka",
     "other_offices_outside_india": "Japan",
     "founders": "Shourya Agarwal, Malhar Patil, Amit Gaiki",
-    "sources": "https://siliconangle.com/2026/09/14/flam-raises-40m-in-funding-to-make-ai-enabled-interactive-content-a-reality/, https://superpowerdaily.com/posts/flam-raises-40-million-to-push-interactive-ai-content-into-global-enterprise-sales, https://www.businesswire.com/news/home/20260914846059/en/Flam-Raises-%2440-Million-Series-B-to-Scale-AI-Interactive-Content"
+    "sources": "https://siliconangle.com/2026/09/14/flam-raises-40m-in-funding-to-make-ai-enabled-interactive-content-a-reality/, https://superpowerdaily.com/posts/flam-raises-40-million-to-push-interactive-ai-content-into-global-enterprise-sales, https://www.businesswire.com/news/home/20260914846059/en/Flam-Raises-%2440-Million-Series-B-to-Scale-AI-Interactive-Content",
+    "verified": false
   },
   {
     "date_of_funding": "2026-09-14",
@@ -538,6 +592,8 @@
     "deal_tags": "Furniture, Retail, D2C, Home Living",
     "industry": "Retail",
     "sub_industry": "Home Furniture",
+    "vertical": "Retail",
+    "sub-vertical": "Home",
     "company_description": "Bengaluru-based furniture retailer addressing the home furnishing market with online channels and physical stores.",
     "product_or_solution": "Living room, dining, and bedroom furniture offering customisation and affordability.",
     "target_market": "Homeowners and retail consumers in India.",
@@ -548,7 +604,8 @@
     "other_offices_in_india": "",
     "other_offices_outside_india": "",
     "founders": "Ganesh Pawar",
-    "sources": "https://dealroom.co/news/150526-furnishka-raises-2-8m-seed-extension-backed-by-physicswallah-udaan-found/"
+    "sources": "https://dealroom.co/news/150526-furnishka-raises-2-8m-seed-extension-backed-by-physicswallah-udaan-found/",
+    "verified": false
   },
   {
     "date_of_funding": "2026-09-14",
@@ -567,6 +624,8 @@
     "deal_tags": "Fashion Tech, D2C, AI Fashion, Women's Fashion",
     "industry": "Retail",
     "sub_industry": "Fashion & Apparel",
+    "vertical": "Retail",
+    "sub-vertical": "Apparel & Accessories",
     "company_description": "Bengaluru-based women's fashion startup establishing a tech-first platform using AI to detect, evaluate, and forecast fast-evolving consumer design trends.",
     "product_or_solution": "Direct-to-consumer technology-first fashion platform embedding real-time trend analytics into its supply chain and product development.",
     "target_market": "Fashion-conscious shoppers across India.",
@@ -577,7 +636,8 @@
     "other_offices_in_india": "",
     "other_offices_outside_india": "",
     "founders": "",
-    "sources": "https://www.facebook.com/entrepreneursstoryofficial/posts/%F0%9D%90%94%F0%9D%90%A7%F0%9D%90%A2%F0%9D%90%AA%F0%9D%90%98%F0%9D%90%A8%F0%9D%90%AE-%F0%9D%90%87%F0%9D%90%A2%F0%9D%90%AD%F0%9D%90%AC-%F0%9D%9F%94%F0%9D%9F%92-%F0%9D%90%82%F0%9D%90%AB%F0%9D%90%A8%F0%9D%90%AB%F0%9D%90%9E-%F0%9D%90%95%F0%9D%90%9A%F0%9D%90%A5%F0%9D%90%AE%F0%9D%90%9A%F0%9D%90%AD%F0%9D%90%A2%F0%9D%90%A8%F0%9D%90%A7-%F0%9D%90%85%F0%9D%90%A8%F0%9D%90%A5%F0%9D%90%A5%F0%9D%90%A8%F0%9D%90%B0%F0%9D%90%A2%F0%9D%90%A7%F0%9D%90%A0-%F0%9D%90%92%F0%9D%90%9E%F0%9D%90%9E%F0%9D%90%9D-%F0%9D%90%91%F0%9D%90%A8%F0%9D%90%AE%F0%9D%90%A7%F0%9D%90%9D-%F0%9D%90%8B%F0%9D%90%9E%F0%9D%90%9D-%F0%9D%90%9B%F0%9D%90%B2-%F0%9D%90%80%F0%9D%90%AB%F0%9D%90%A4%F0%9D%90%9A%F0%9D%90%A6-%F0%9D%90%95%F0%9D%90%9E%F0%9D%90%A7%F0%9D%90%AD%F0%9D%90%AE%F0%9D%90%AB%F0%9D%90%9E%F0%9D%90%AC-%F0%9D%90%9A%F0%9D%90%A7%F0%9D%90%9D-%F0%9D%90%80/122184947234875730/, https://newzchain.com/uniqyou-raises-rs-15-8-cr-seed-funding-from-arkam-antler/"
+    "sources": "https://www.facebook.com/entrepreneursstoryofficial/posts/%F0%9D%90%94%F0%9D%90%A7%F0%9D%90%A2%F0%9D%90%AA%F0%9D%90%98%F0%9D%90%A8%F0%9D%90%AE-%F0%9D%90%87%F0%9D%90%A2%F0%9D%90%AD%F0%9D%90%AC-%F0%9D%9F%94%F0%9D%9F%92-%F0%9D%90%82%F0%9D%90%AB%F0%9D%90%A8%F0%9D%90%AB%F0%9D%90%9E-%F0%9D%90%95%F0%9D%90%9A%F0%9D%90%A5%F0%9D%90%AE%F0%9D%90%9A%F0%9D%90%AD%F0%9D%90%A2%F0%9D%90%A8%F0%9D%90%A7-%F0%9D%90%85%F0%9D%90%A8%F0%9D%90%A5%F0%9D%90%A5%F0%9D%90%A8%F0%9D%90%B0%F0%9D%90%A2%F0%9D%90%A7%F0%9D%90%A0-%F0%9D%90%92%F0%9D%90%9E%F0%9D%90%9E%F0%9D%90%9D-%F0%9D%90%91%F0%9D%90%A8%F0%9D%90%AE%F0%9D%90%A7%F0%9D%90%9D-%F0%9D%90%8B%F0%9D%90%9E%F0%9D%90%9D-%F0%9D%90%9B%F0%9D%90%B2-%F0%9D%90%80%F0%9D%90%AB%F0%9D%90%A4%F0%9D%90%9A%F0%9D%90%A6-%F0%9D%90%95%F0%9D%90%9E%F0%9D%90%A7%F0%9D%90%AD%F0%9D%90%AE%F0%9D%90%AB%F0%9D%90%9E%F0%9D%90%AC-%F0%9D%90%9A%F0%9D%90%A7%F0%9D%90%9D-%F0%9D%90%80/122184947234875730/, https://newzchain.com/uniqyou-raises-rs-15-8-cr-seed-funding-from-arkam-antler/",
+    "verified": false
   },
   {
     "date_of_funding": "2026-09-12",
@@ -596,6 +656,8 @@
     "deal_tags": "Aerospace, Defense Technology, Robotics, Drones, AI",
     "industry": "Aerospace and Defense",
     "sub_industry": "Defence Technology",
+    "vertical": "Technology",
+    "sub-vertical": "Computer Software",
     "company_description": "Hyderabad-based defence technology startup building modular autonomy systems designed to slot into equipment the Indian Armed Forces already operate.",
     "product_or_solution": "Plug-and-play autonomous navigation modules for commercial drones, Prachand swarm ground station software, and Autonomous Artillery Positioning System.",
     "target_market": "Indian Armed Forces and defence sector.",
@@ -606,7 +668,8 @@
     "other_offices_in_india": "",
     "other_offices_outside_india": "",
     "founders": "Naman Kasliwal, Shiv Patil",
-    "sources": "https://dealroom.co/news/150424-beijan-raises-180-000-pre-seed-as-college-founders-land-army-deployments/, https://startupfox.in/company/beijan"
+    "sources": "https://dealroom.co/news/150424-beijan-raises-180-000-pre-seed-as-college-founders-land-army-deployments/, https://startupfox.in/company/beijan",
+    "verified": false
   },
   {
     "date_of_funding": "2026-09-11",
@@ -625,6 +688,8 @@
     "deal_tags": "D2C, Beauty, Eyewear",
     "industry": "Ecommerce",
     "sub_industry": "D2C",
+    "vertical": "Consumer Packaged Goods",
+    "sub-vertical": "Cosmetics & Beauty Supplies",
     "company_description": "A D2C eye-focused beauty brand positioning coloured contact lenses as everyday makeup and self-expression.",
     "product_or_solution": "Coloured contact lenses and complementary liquid eyeshadows designed for the Indian eye.",
     "target_market": "Young Indian consumers looking for beauty and eye makeup products.",
@@ -635,7 +700,8 @@
     "other_offices_in_india": "",
     "other_offices_outside_india": "",
     "founders": "Aman Arora",
-    "sources": "https://dealroom.co/news/150361-peep-beauty-raises-1-3m-to-sell-coloured-lenses-as-makeup-with-actor-tri/, https://www.bollywoodhungama.com/news/bollywood/triptii-dimri-joins-peep-beauty-as-investor-and-co-creator/"
+    "sources": "https://dealroom.co/news/150361-peep-beauty-raises-1-3m-to-sell-coloured-lenses-as-makeup-with-actor-tri/, https://www.bollywoodhungama.com/news/bollywood/triptii-dimri-joins-peep-beauty-as-investor-and-co-creator/",
+    "verified": false
   },
   {
     "date_of_funding": "2026-09-11",
@@ -654,6 +720,8 @@
     "deal_tags": "Foodtech, F&B, QSR, Multi-brand",
     "industry": "Foodtech",
     "sub_industry": "F&B",
+    "vertical": "Retail",
+    "sub-vertical": "Restaurants & Bars",
     "company_description": "A Bengaluru-based restaurant company operating gourmet food brands across dine-in and delivery formats.",
     "product_or_solution": "Gourmet food brands including The Pizza Bakery, Paris Panini, and Smash Guys.",
     "target_market": "Consumers seeking premium casual dining and quick service restaurants.",
@@ -664,7 +732,8 @@
     "other_offices_in_india": "",
     "other_offices_outside_india": "Sri Lanka",
     "founders": "Nikhil Gupta, Abhijit Gupta",
-    "sources": "https://www.startupresearcher.com/news/popo-global-raises-56-million-from-artal-asia, https://www.inspireindiatalks.com/business-insights/popo-global-pizza-bakery-raises-532cr"
+    "sources": "https://www.startupresearcher.com/news/popo-global-raises-56-million-from-artal-asia, https://www.inspireindiatalks.com/business-insights/popo-global-pizza-bakery-raises-532cr",
+    "verified": false
   },
   {
     "date_of_funding": "2026-09-10",
@@ -683,6 +752,8 @@
     "deal_tags": "AI Contact Centre, Hybrid AI, Enterprise Software",
     "industry": "AI",
     "sub_industry": "Application Layer",
+    "vertical": "Technology",
+    "sub-vertical": "Computer Software",
     "company_description": "An AI-first contact centre platform for enterprises that combines human and AI voice agents.",
     "product_or_solution": "Intelligent AI voice agents coupled with an attribution engine tracking customer experience and ROI.",
     "target_market": "Enterprises in India and the Middle East.",
@@ -693,7 +764,8 @@
     "other_offices_in_india": "",
     "other_offices_outside_india": "",
     "founders": "Abhishek Kumar",
-    "sources": "https://dealroom.co/news/150102-dialflo-raises-180k-seed-to-build-hybrid-ai-contact-centres/, https://m.dailyhunt.in/news/india/english/entrackr+english-epaper-entrackr/ai+contact+centre+startup+dialflo+raises+rs+17+cr+led+by+ajvc-newsid-n726432331"
+    "sources": "https://dealroom.co/news/150102-dialflo-raises-180k-seed-to-build-hybrid-ai-contact-centres/, https://m.dailyhunt.in/news/india/english/entrackr+english-epaper-entrackr/ai+contact+centre+startup+dialflo+raises+rs+17+cr+led+by+ajvc-newsid-n726432331",
+    "verified": false
   },
   {
     "date_of_funding": "2026-09-10",
@@ -712,6 +784,8 @@
     "deal_tags": "AI, Healthtech, Pharmacovigilance",
     "industry": "AI",
     "sub_industry": "Application Layer",
+    "vertical": "Healthcare",
+    "sub-vertical": "Computer Software",
     "company_description": "A startup focused on the pharmaceutical industry that builds AI platforms to automate pharmacovigilance and patient safety workflows.",
     "product_or_solution": "Graph Safety, an AI-native pharmacovigilance operating system with modules like /intake, /nucleus, and /report.",
     "target_market": "Global pharmaceutical and biotechnology companies.",
@@ -722,7 +796,8 @@
     "other_offices_in_india": "",
     "other_offices_outside_india": "",
     "founders": "Raghav Parvataraju",
-    "sources": "https://www.prnewswire.com/news-releases/graph-ai-raises-13-3m-series-a-to-scale-the-first-ai-native-operating-system-for-patient-safety-302874459.html, https://www.business-standard.com/technology/artificial-intelligence/graph-ai-raises-13-3-million-in-series-a-round-to-fuel-global-expansion-126091001530_1.html"
+    "sources": "https://www.prnewswire.com/news-releases/graph-ai-raises-13-3m-series-a-to-scale-the-first-ai-native-operating-system-for-patient-safety-302874459.html, https://www.business-standard.com/technology/artificial-intelligence/graph-ai-raises-13-3-million-in-series-a-round-to-fuel-global-expansion-126091001530_1.html",
+    "verified": false
   },
   {
     "date_of_funding": "2026-09-10",
@@ -741,6 +816,8 @@
     "deal_tags": "Quick Commerce, Cloud Kitchen, Food Delivery",
     "industry": "Consumer Services",
     "sub_industry": "Quick Commerce",
+    "vertical": "Retail",
+    "sub-vertical": "Food & Beverage",
     "company_description": "A vertically integrated food delivery platform delivering fresh food to consumers in 10 minutes.",
     "product_or_solution": "10-minute fresh food delivery operating via owned neighbourhood kitchens and last-mile delivery infrastructure.",
     "target_market": "Urban consumers demanding convenient and fast meal solutions.",
@@ -751,7 +828,8 @@
     "other_offices_in_india": "Delhi, Haryana, Uttar Pradesh",
     "other_offices_outside_india": "",
     "founders": "Aniket Shah, Ujjwal Sukheja, Saran S",
-    "sources": "https://founderpin.com/swish-funding-24-million-raised/, https://justswish.in/blog/swish-raises-24m"
+    "sources": "https://founderpin.com/swish-funding-24-million-raised/, https://justswish.in/blog/swish-raises-24m",
+    "verified": false
   },
   {
     "date_of_funding": "2026-09-10",
@@ -770,6 +848,8 @@
     "deal_tags": "D2C, Fashion, Mass-Premium",
     "industry": "Ecommerce",
     "sub_industry": "D2C",
+    "vertical": "Retail",
+    "sub-vertical": "Apparel & Accessories",
     "company_description": "A digital-first fashion and lifestyle brand offering mass-premium western fashion accessories.",
     "product_or_solution": "Footwear, stockings, perfumes, and bags.",
     "target_market": "Indian consumers seeking design-led fashion at accessible price points.",
@@ -780,7 +860,8 @@
     "other_offices_in_india": "",
     "other_offices_outside_india": "",
     "founders": "Sarthak Aggarwal, Vikram Jain, Karan Jain, Shruti Aggarwal",
-    "sources": "https://retail.economictimes.indiatimes.com/news/apparel-fashion/footwear/theater-raises-rs-75-crore-in-series-a-funding-led-by-niveshaay/134003394, https://india.entrepreneur.com/business-news/theater-raises-inr-75-cr-in-series-a-led-by-niveshaay"
+    "sources": "https://retail.economictimes.indiatimes.com/news/apparel-fashion/footwear/theater-raises-rs-75-crore-in-series-a-funding-led-by-niveshaay/134003394, https://india.entrepreneur.com/business-news/theater-raises-inr-75-cr-in-series-a-led-by-niveshaay",
+    "verified": false
   },
   {
     "date_of_funding": "2026-09-09",
@@ -799,6 +880,8 @@
     "deal_tags": "Fleet Management, B2B Mobility, Ride-hailing",
     "industry": "Travel Tech",
     "sub_industry": "Electric MaaS",
+    "vertical": "Automotive",
+    "sub-vertical": "Computer Software",
     "company_description": "A technology-driven B2B fleet management company focused on CNG and electric vehicles for ride-hailing networks.",
     "product_or_solution": "Tech-first fleet management solutions tracking fleet utilisation and handling driver operations.",
     "target_market": "Ride-hailing operators and drivers in India.",
@@ -809,7 +892,8 @@
     "other_offices_in_india": "Telangana, Maharashtra, Delhi, West Bengal, Tamil Nadu",
     "other_offices_outside_india": "",
     "founders": "Karan Jain",
-    "sources": "https://india.entrepreneur.com/business-news/carrum-mobility-raises-usd-10-million-in-series-b-funding, https://arabfounders.net/en/carrum-mobility-raises-10-million-uber/"
+    "sources": "https://india.entrepreneur.com/business-news/carrum-mobility-raises-usd-10-million-in-series-b-funding, https://arabfounders.net/en/carrum-mobility-raises-10-million-uber/",
+    "verified": false
   },
   {
     "date_of_funding": "2026-09-09",
@@ -828,6 +912,8 @@
     "deal_tags": "Agentic AI, Sales Enablement, Enterprise Software",
     "industry": "Enterprise Software",
     "sub_industry": "HR Technology / Sales Enablement",
+    "vertical": "Technology",
+    "sub-vertical": "Computer Software",
     "company_description": "Eubrics is an agentic AI-powered employee training and sales performance platform that uses autonomous AI agents to simulate real-world, industry-specific sales challenges for role-playing and coaching.",
     "product_or_solution": "AI sales roleplay platform that offers interactive verbal and written role-playing modules, live guidance during calls, and post-call analysis.",
     "target_market": "Enterprise sales teams, advisers, and HR/sales leaders in Fortune 100 organizations.",
@@ -838,7 +924,8 @@
     "other_offices_in_india": "Haryana",
     "other_offices_outside_india": "",
     "founders": "Nikita Jain, Maxim Dsouza, Tom Chavez, Vivek Vaidya",
-    "sources": "https://www.thesaasnews.com/news/eubrics-raises-pre-seed-funding/, https://trainingindustry.com/press-release/sales/eubrics-raises-funding-from-superset-to-accelerate-north-american-expansion/"
+    "sources": "https://www.thesaasnews.com/news/eubrics-raises-pre-seed-funding/, https://trainingindustry.com/press-release/sales/eubrics-raises-funding-from-superset-to-accelerate-north-american-expansion/",
+    "verified": false
   },
   {
     "date_of_funding": "2026-09-09",
@@ -857,6 +944,8 @@
     "deal_tags": "Cybersecurity, Deep Tech, Quantum Computing",
     "industry": "Advanced Hardware & Technology",
     "sub_industry": "",
+    "vertical": "Technology",
+    "sub-vertical": "Computer Software",
     "company_description": "A deep-tech cybersecurity company developing quantum-safe security solutions for critical infrastructure.",
     "product_or_solution": "Quantum-safe cybersecurity products including quantum random number generation, quantum key distribution, and post-quantum cryptography.",
     "target_market": "Government agencies, BFSI sector, and defence.",
@@ -867,7 +956,8 @@
     "other_offices_in_india": "",
     "other_offices_outside_india": "Australia, United States",
     "founders": "Sunil Gupta, Srinivasa Rao Aluri",
-    "sources": "https://www.dealstreetasia.com/stories/qnu-labs-national-quantum-speciale-494680, https://arabfounders.net/en/qnu-labs-raises-21-million-quantum-cybersecurity/"
+    "sources": "https://www.dealstreetasia.com/stories/qnu-labs-national-quantum-speciale-494680, https://arabfounders.net/en/qnu-labs-raises-21-million-quantum-cybersecurity/",
+    "verified": false
   },
   {
     "date_of_funding": "2026-09-08",
@@ -886,6 +976,8 @@
     "deal_tags": "Gaming Hardware, Operating System, eSports",
     "industry": "Media & Entertainment",
     "sub_industry": "Gaming",
+    "vertical": "Technology",
+    "sub-vertical": "Consumer Electronics",
     "company_description": "A gaming technology startup building an integrated platform that encompasses hardware, software, and gaming experiences.",
     "product_or_solution": "ARC X1 portable gaming console and proprietary OWL OS.",
     "target_market": "Indian mobile-first gamers seeking accessible dedicated hardware.",
@@ -896,7 +988,8 @@
     "other_offices_in_india": "",
     "other_offices_outside_india": "",
     "founders": "Jobin Joseph, Kaustubh K. Jadhav",
-    "sources": "https://newzchain.com/arc-raises-rs-10-5-cr-pre-seed-for-portable-gaming-system-arc-x1/, https://www.livemint.com/technology/what-gaming-tech-firm-arc-raised-in-pre-seed-funding-led-by-chimera-vc-mixi-global-investments-11789041546622.html"
+    "sources": "https://newzchain.com/arc-raises-rs-10-5-cr-pre-seed-for-portable-gaming-system-arc-x1/, https://www.livemint.com/technology/what-gaming-tech-firm-arc-raised-in-pre-seed-funding-led-by-chimera-vc-mixi-global-investments-11789041546622.html",
+    "verified": false
   },
   {
     "date_of_funding": "2026-09-08",
@@ -915,6 +1008,8 @@
     "deal_tags": "Cooling-as-a-Service, Climatetech, IoT",
     "industry": "Clean Tech",
     "sub_industry": "Climate Tech",
+    "vertical": "Business & Industrial Markets",
+    "sub-vertical": "Business Services",
     "company_description": "A Cooling-as-a-Service (CaaS) startup providing IoT-enabled commercial cooling infrastructure on a subscription basis.",
     "product_or_solution": "Subscription-based AC installation, maintenance, repairs, and lifecycle management via predictive IoT.",
     "target_market": "Small businesses, restaurants, hotels, gyms, clinics, and corporate offices.",
@@ -925,7 +1020,8 @@
     "other_offices_in_india": "",
     "other_offices_outside_india": "",
     "founders": "Abhishek Murarka, Tushar Patil, Devanshu Mishra",
-    "sources": "https://newzchain.com/circolife-raises-4-5m-pre-series-a-for-cooling-as-a-service/, https://www.techinasia.com/news/indian-coolingasaservice-startup-circolife-raises-45m"
+    "sources": "https://newzchain.com/circolife-raises-4-5m-pre-series-a-for-cooling-as-a-service/, https://www.techinasia.com/news/indian-coolingasaservice-startup-circolife-raises-45m",
+    "verified": false
   },
   {
     "date_of_funding": "2026-09-08",
@@ -944,6 +1040,8 @@
     "deal_tags": "Watertech, Cleantech, IoT",
     "industry": "Clean Tech",
     "sub_industry": "Climate Tech",
+    "vertical": "Technology",
+    "sub-vertical": "Computer Software",
     "company_description": "A watertech startup providing an AI and IoT-powered platform for managing water and wastewater infrastructure.",
     "product_or_solution": "Software platform connecting real-time asset data to identify operational inefficiencies, automate maintenance, and increase recycling.",
     "target_market": "Businesses, utilities, and municipalities.",
@@ -954,7 +1052,8 @@
     "other_offices_in_india": "",
     "other_offices_outside_india": "",
     "founders": "Mansi Jain, Rajesh Jain",
-    "sources": "https://www.thesaasnews.com/news/digitalpaani-raises-2-3m-series-a/, https://newzchain.com/digitalpaani-raises-2-3m-for-ai-water-management-platform/"
+    "sources": "https://www.thesaasnews.com/news/digitalpaani-raises-2-3m-series-a/, https://newzchain.com/digitalpaani-raises-2-3m-for-ai-water-management-platform/",
+    "verified": false
   },
   {
     "date_of_funding": "2026-09-08",
@@ -973,6 +1072,8 @@
     "deal_tags": "B2B Supply Chain, Embedded Finance, Pharma Commerce",
     "industry": "AI",
     "sub_industry": "Application Layer",
+    "vertical": "Healthcare",
+    "sub-vertical": "E-Business & E-Commerce",
     "company_description": "An AI-native B2B distribution network and embedded finance platform for India's pharmaceutical secondary trade.",
     "product_or_solution": "B2B eCommerce platform (FundlyMart), payment settlement infrastructure, and embedded credit solutions.",
     "target_market": "Pharmacy retailers and distributors across India.",
@@ -983,7 +1084,8 @@
     "other_offices_in_india": "Maharashtra, Tamil Nadu, Andhra Pradesh",
     "other_offices_outside_india": "",
     "founders": "Amit Chawla, Shreeram Ramanathan",
-    "sources": "https://www.startupresearcher.com/news/fundly-ai-raises-4-million-pre-series-a-for-pharma-distribution, https://startupfox.in/article/fundly-ai-raises-4m-from-its-existing-backers-three-years-after-a-3m-seed"
+    "sources": "https://www.startupresearcher.com/news/fundly-ai-raises-4-million-pre-series-a-for-pharma-distribution, https://startupfox.in/article/fundly-ai-raises-4m-from-its-existing-backers-three-years-after-a-3m-seed",
+    "verified": false
   },
   {
     "date_of_funding": "2026-09-08",
@@ -1002,6 +1104,8 @@
     "deal_tags": "Hyperlocal Services, Fabric Care, On-Demand",
     "industry": "Consumer Services",
     "sub_industry": "Hyperlocal Services",
+    "vertical": "Classifieds & Local",
+    "sub-vertical": "Home Services",
     "company_description": "A hyperlocal fabric care startup offering on-demand ironing and fabric care via an apartment-hub model.",
     "product_or_solution": "Clothes ironing, dry cleaning, and shoe repair services with same-day delivery.",
     "target_market": "Urban households in India requiring reliable and structured fabric care.",
@@ -1012,7 +1116,8 @@
     "other_offices_in_india": "",
     "other_offices_outside_india": "",
     "founders": "Rohit Ramesh, Ankit Choudhary",
-    "sources": "https://newzchain.com/iztri-raises-1-1m-seed-for-hyper-local-fabric-care-network/, https://pulse.d2cinsider.com/iztri-raises-seed-round-to-scale-hyperlocal-fabric-care-network/"
+    "sources": "https://newzchain.com/iztri-raises-1-1m-seed-for-hyper-local-fabric-care-network/, https://pulse.d2cinsider.com/iztri-raises-seed-round-to-scale-hyperlocal-fabric-care-network/",
+    "verified": false
   },
   {
     "date_of_funding": "2026-09-08",
@@ -1031,6 +1136,8 @@
     "deal_tags": "D2C, Clean-label, Healthy Beverages",
     "industry": "Ecommerce",
     "sub_industry": "D2C",
+    "vertical": "Consumer Packaged Goods",
+    "sub-vertical": "Food & Beverages",
     "company_description": "A clean-label beverage brand offering café-style drinks sweetened with monk fruit with zero added sugar.",
     "product_or_solution": "Coffee beverages and zero-added-sugar gelatos.",
     "target_market": "Gen Z consumers and health-conscious individuals.",
@@ -1041,7 +1148,8 @@
     "other_offices_in_india": "Delhi",
     "other_offices_outside_india": "",
     "founders": "Deepak Pathak, Kunal Verma, Shashank Sherawat, Saiyam Malik",
-    "sources": "https://www.businesstoday.in/entrepreneurship/start-up/story/sorry-sugar-raises-1-million-in-seed-funding-led-by-dhanuka-family-amishi-london-554072-2026-09-08, https://retail.economictimes.indiatimes.com/news/food-entertainment/personal-care-pet-supplies-liquor/sorry-sugar-raises-1-million-in-seed-round-led-by-dhanuka-family-amishi-london/133917096"
+    "sources": "https://www.businesstoday.in/entrepreneurship/start-up/story/sorry-sugar-raises-1-million-in-seed-funding-led-by-dhanuka-family-amishi-london-554072-2026-09-08, https://retail.economictimes.indiatimes.com/news/food-entertainment/personal-care-pet-supplies-liquor/sorry-sugar-raises-1-million-in-seed-round-led-by-dhanuka-family-amishi-london/133917096",
+    "verified": false
   },
   {
     "date_of_funding": "2026-09-08",
@@ -1060,6 +1168,8 @@
     "deal_tags": "GenAI, Video Personalization, Enterprise Tech",
     "industry": "AI",
     "sub_industry": "Application Layer",
+    "vertical": "Technology",
+    "sub-vertical": "Computer Software",
     "company_description": "An enterprise-grade, AI-powered video generation platform designed to create hyper-personalized, multi-lingual video content at scale.",
     "product_or_solution": "Generative AI platform for creating custom video messages, dealer enablement materials, and interactive in-app live avatars.",
     "target_market": "Global banking, financial services, and insurance (BFSI) sectors.",
@@ -1070,7 +1180,8 @@
     "other_offices_in_india": "",
     "other_offices_outside_india": "",
     "founders": "Nimish Goel, Devender Bindal",
-    "sources": "https://www.finsmes.com/2026/09/truefan-ai-receives-investment-from-finserv-intelligence.html, https://yourstory.com/2026/09/bajaj-finance-acquires-5-stake-in-truefan-ai"
+    "sources": "https://www.finsmes.com/2026/09/truefan-ai-receives-investment-from-finserv-intelligence.html, https://yourstory.com/2026/09/bajaj-finance-acquires-5-stake-in-truefan-ai",
+    "verified": false
   },
   {
     "date_of_funding": "2026-09-07",
@@ -1089,6 +1200,8 @@
     "deal_tags": "Pet Care, Pet Nutrition, D2C",
     "industry": "Ecommerce",
     "sub_industry": "D2C",
+    "vertical": "Consumer Packaged Goods",
+    "sub-vertical": "Pet",
     "company_description": "A digital-first, omnichannel pet food and nutrition brand for dogs and cats.",
     "product_or_solution": "Dry and wet food, treats, fresh food, supplements, and nutritional toppers.",
     "target_market": "Pet owners in India.",
@@ -1099,7 +1212,8 @@
     "other_offices_in_india": "",
     "other_offices_outside_india": "",
     "founders": "Shashwat Sahai, Chandan Jha",
-    "sources": "https://newzchain.com/lickicious-raises-rs-19-cr-led-by-prath-ventures-for-pet-food-expansion/, https://internationalpetfood.com/lickicious-raises-funds-to-expand-petfood-operations/"
+    "sources": "https://newzchain.com/lickicious-raises-rs-19-cr-led-by-prath-ventures-for-pet-food-expansion/, https://internationalpetfood.com/lickicious-raises-funds-to-expand-petfood-operations/",
+    "verified": false
   },
   {
     "date_of_funding": "2026-09-07",
@@ -1118,6 +1232,8 @@
     "deal_tags": "Voice AI, Enterprise AI, Indic Languages",
     "industry": "AI",
     "sub_industry": "Application Layer",
+    "vertical": "Technology",
+    "sub-vertical": "Computer Software",
     "company_description": "A sovereign voice AI company providing on-premise language solutions for regulated enterprises.",
     "product_or_solution": "Proprietary speech models covering 12 Indian languages and 45 dialects, and AI Contact Centre tools.",
     "target_market": "BFSI companies, banks, and NBFCs requiring data privacy and compliance.",
@@ -1128,7 +1244,8 @@
     "other_offices_in_india": "",
     "other_offices_outside_india": "",
     "founders": "Raoul Nanavati, Jai Nanavati",
-    "sources": "https://newzchain.com/navana-ai-raises-4-2m-series-a-for-bfsi-voice-ai/, https://dealroom.co/news/149175-navana-ai-raises-4-2m-series-a-led-by-ronnie-screwvala-for-indic-voice-a/"
+    "sources": "https://newzchain.com/navana-ai-raises-4-2m-series-a-for-bfsi-voice-ai/, https://dealroom.co/news/149175-navana-ai-raises-4-2m-series-a-led-by-ronnie-screwvala-for-indic-voice-a/",
+    "verified": false
   },
   {
     "date_of_funding": "2026-09-07",
@@ -1147,6 +1264,8 @@
     "deal_tags": "Women's Wellness, Femtech, D2C",
     "industry": "Ecommerce",
     "sub_industry": "D2C",
+    "vertical": "Consumer Packaged Goods",
+    "sub-vertical": "Personal Care",
     "company_description": "A digital-first, omni-channel women's wellness brand serving over 3 million women and girls every month.",
     "product_or_solution": "Period care, maternity care, and intimate care products, alongside the Nua Period Tracker App.",
     "target_market": "Women and girls in India seeking wellness and personal care products.",
@@ -1157,7 +1276,8 @@
     "other_offices_in_india": "",
     "other_offices_outside_india": "",
     "founders": "Ravi Ramachandran",
-    "sources": "https://india.entrepreneur.com/business-news/nua-raises-usd-50-mn-in-series-c-round, https://newzchain.com/nua-raises-50m-series-c-led-by-peak-xv-partners/"
+    "sources": "https://india.entrepreneur.com/business-news/nua-raises-usd-50-mn-in-series-c-round, https://newzchain.com/nua-raises-50m-series-c-led-by-peak-xv-partners/",
+    "verified": false
   },
   {
     "date_of_funding": "2026-09-07",
@@ -1176,6 +1296,8 @@
     "deal_tags": "Spacetech, Earth Observation, Satellite Manufacturing",
     "industry": "Advanced Hardware & Technology",
     "sub_industry": "Spacetech",
+    "vertical": "Technology",
+    "sub-vertical": "Computer Software",
     "company_description": "An Indian space technology company building hyperspectral Earth observation satellites and Earth intelligence software.",
     "product_or_solution": "Hyperspectral Earth observation satellites, Earth intelligence software (Aurora), and sovereign space systems.",
     "target_market": "Governments, enterprises, and research institutions.",
@@ -1186,7 +1308,8 @@
     "other_offices_in_india": "",
     "other_offices_outside_india": "United States",
     "founders": "Awais Ahmed",
-    "sources": "https://pulse2.com/pixxel-raises-100-million-series-c-led-by-temasek-and-seraphim/, https://payloadspace.com/pixxel-raises-100m-series-c-to-fund-next-gen-sats/"
+    "sources": "https://pulse2.com/pixxel-raises-100-million-series-c-led-by-temasek-and-seraphim/, https://payloadspace.com/pixxel-raises-100m-series-c-to-fund-next-gen-sats/",
+    "verified": false
   },
   {
     "date_of_funding": "2026-09-05",
@@ -1205,6 +1328,8 @@
     "deal_tags": "D2C, Luggage, Travel Accessories",
     "industry": "Ecommerce",
     "sub_industry": "D2C",
+    "vertical": "Retail",
+    "sub-vertical": "Apparel & Accessories",
     "company_description": "A direct-to-consumer lifestyle brand focusing on design-forward luggage and travel gear.",
     "product_or_solution": "Luggage, travel bags, wallets, kits, and sling bags.",
     "target_market": "Frequent flyers and modern travelers seeking aesthetic and functional gear.",
@@ -1215,7 +1340,8 @@
     "other_offices_in_india": "Delhi, Maharashtra",
     "other_offices_outside_india": "United Arab Emirates",
     "founders": "Sangeet Agrawal, Navin Parwal",
-    "sources": "https://startupspotlightindia.com/mokobara-raises-rs-170-cr-in-series-c-funding-led-by-sauce-vc/, https://venturecapitaltracker.com/startup/mokobara"
+    "sources": "https://startupspotlightindia.com/mokobara-raises-rs-170-cr-in-series-c-funding-led-by-sauce-vc/, https://venturecapitaltracker.com/startup/mokobara",
+    "verified": false
   },
   {
     "date_of_funding": "2026-09-04",
@@ -1234,6 +1360,8 @@
     "deal_tags": "Sneakers, Athleisure, Retail, D2C",
     "industry": "Ecommerce",
     "sub_industry": "D2C",
+    "vertical": "Retail",
+    "sub-vertical": "Apparel & Accessories",
     "company_description": "A homegrown sneaker brand manufacturing slides and sneakers, operating via digital and expanding physical retail stores.",
     "product_or_solution": "Sneakers and slides with dedicated sole tooling.",
     "target_market": "Indian consumers seeking athleisure and streetwear.",
@@ -1244,7 +1372,8 @@
     "other_offices_in_india": "",
     "other_offices_outside_india": "",
     "founders": "Utkarsh Gupta, Dishant Daryani",
-    "sources": "https://www.vccircle.com/verlinvestleads-series-b-funding-in-sneaker-brand-comet, https://retail.economictimes.indiatimes.com/news/apparel-fashion/footwear/comet-raises-rs-100-crore-in-series-b-led-by-verlinvest-targets-20-stores-by-fy27/133764418"
+    "sources": "https://www.vccircle.com/verlinvestleads-series-b-funding-in-sneaker-brand-comet, https://retail.economictimes.indiatimes.com/news/apparel-fashion/footwear/comet-raises-rs-100-crore-in-series-b-led-by-verlinvest-targets-20-stores-by-fy27/133764418",
+    "verified": false
   },
   {
     "date_of_funding": "2026-09-04",
@@ -1263,6 +1392,8 @@
     "deal_tags": "Power Electronics, Clean Tech, EV Chargers",
     "industry": "Clean Tech",
     "sub_industry": "Electric Vehicles",
+    "vertical": "Technology",
+    "sub-vertical": "Auto Parts & Services",
     "company_description": "An Indian clean technology startup that develops and manufactures power electronics products for electric vehicles and energy applications.",
     "product_or_solution": "Portable and onboard chargers (500W to 6.6kW) for EVs, with expansion into broader power-conversion products.",
     "target_market": "Electric vehicle manufacturers (OEMs) and energy-sector customers in India.",
@@ -1273,7 +1404,8 @@
     "other_offices_in_india": "",
     "other_offices_outside_india": "",
     "founders": "Pradeep Chowdary, Sujith Kumar, Abhilash Reddy",
-    "sources": "https://arabfounders.net/en/leanwatts-raises-2-million-ev-power-electronics/, https://www.indianstartuptimes.com/investment/leanwatts-raises-2-mn-seed-round-led-by-trivest-partners-to-scale-power-electronics-manufacturing/"
+    "sources": "https://arabfounders.net/en/leanwatts-raises-2-million-ev-power-electronics/, https://www.indianstartuptimes.com/investment/leanwatts-raises-2-mn-seed-round-led-by-trivest-partners-to-scale-power-electronics-manufacturing/",
+    "verified": false
   },
   {
     "date_of_funding": "2026-09-03",
@@ -1292,6 +1424,8 @@
     "deal_tags": "AI, Infant Sleep Technology, Consumer Health, D2C",
     "industry": "Ecommerce",
     "sub_industry": "D2C",
+    "vertical": "Technology",
+    "sub-vertical": "Baby",
     "company_description": "An AI-first infant sleep and child wellness company developing smart cribs for babies.",
     "product_or_solution": "AI-powered smart sleep system combining a crib, contactless monitoring, adaptive motion, and a connected app.",
     "target_market": "Parents of infants (0-24 months) and older children.",
@@ -1302,7 +1436,8 @@
     "other_offices_in_india": "Pune",
     "other_offices_outside_india": "United States",
     "founders": "Radhika Patil, Bharath Patil",
-    "sources": "https://retail.economictimes.indiatimes.com/news/toys-kids-and-baby/babycare/cradlewise-raises-12-million-in-series-a-led-by-3one4-capital/133729395, https://www.globalwomanleader.com/news/cradlewise-raises-12m-series-a-to-expand-ai-smart-cribs-globally-nwid-6682.html"
+    "sources": "https://retail.economictimes.indiatimes.com/news/toys-kids-and-baby/babycare/cradlewise-raises-12-million-in-series-a-led-by-3one4-capital/133729395, https://www.globalwomanleader.com/news/cradlewise-raises-12m-series-a-to-expand-ai-smart-cribs-globally-nwid-6682.html",
+    "verified": false
   },
   {
     "date_of_funding": "2026-09-03",
@@ -1321,6 +1456,8 @@
     "deal_tags": "Deep Tech, Semiconductors, Metrology",
     "industry": "Advanced Hardware & Technology",
     "sub_industry": "Semiconductor",
+    "vertical": "Technology",
+    "sub-vertical": "Semiconductors & Components",
     "company_description": "A semiconductor metrology startup building inspection tools that let chipmakers visualize and measure hidden structures beneath semiconductor surfaces.",
     "product_or_solution": "Nanoscale 3D subsurface metrology products utilizing Acoustic AFM imaging and optical tomography.",
     "target_market": "Global semiconductor manufacturers.",
@@ -1331,7 +1468,8 @@
     "other_offices_in_india": "",
     "other_offices_outside_india": "",
     "founders": "Ashwin Lal",
-    "sources": "https://dealroom.co/news/148595-bluehill-leads-1-1m-seed-round-in-indian-semiconductor-metrology-startup/, https://arabfounders.net/en/makr-microsystems-raises-1-08-million-seed-funding/"
+    "sources": "https://dealroom.co/news/148595-bluehill-leads-1-1m-seed-round-in-indian-semiconductor-metrology-startup/, https://arabfounders.net/en/makr-microsystems-raises-1-08-million-seed-funding/",
+    "verified": false
   },
   {
     "date_of_funding": "2026-09-03",
@@ -1350,6 +1488,8 @@
     "deal_tags": "Health Tech, Emergency Response, Ambulance Network",
     "industry": "Health Tech",
     "sub_industry": "",
+    "vertical": "Healthcare",
+    "sub-vertical": "Medical Equipment & Services",
     "company_description": "A GPS-based ambulance booking and dispatch service running an emergency response platform in India.",
     "product_or_solution": "Tech-enabled ambulance and pre-hospital emergency services, including 5G-connected ambulances with patient data transmission.",
     "target_market": "Individuals, hospitals, businesses, and government organizations in India.",
@@ -1360,7 +1500,8 @@
     "other_offices_in_india": "",
     "other_offices_outside_india": "",
     "founders": "Pranav Bajaj, Ravjot Singh Arora",
-    "sources": "https://dealroom.co/news/148909-medulance-raises-2-5m-to-expand-indias-ambulance-network/, https://newzchain.com/medulance-raises-2-5m-series-a-2-for-tech-enabled-ambulance-network/"
+    "sources": "https://dealroom.co/news/148909-medulance-raises-2-5m-to-expand-indias-ambulance-network/, https://newzchain.com/medulance-raises-2-5m-series-a-2-for-tech-enabled-ambulance-network/",
+    "verified": false
   },
   {
     "date_of_funding": "2026-09-03",
@@ -1379,6 +1520,8 @@
     "deal_tags": "Health Tech, Wearables, AI, Smart Ring, Fitness & Wellness",
     "industry": "Health Tech",
     "sub_industry": "Fitness & Wellness",
+    "vertical": "Healthcare",
+    "sub-vertical": "Consumer Electronics",
     "company_description": "A health intelligence company transitioning from wearable tracking to ambient computing, providing products like smart rings and continuous glucose monitoring.",
     "product_or_solution": "Ultrahuman Ring (Air and Pro), Blood Vision, M1/M2 Live CGM, Ultrahuman Home, Jade AI system, and Pulsomics research platform.",
     "target_market": "Consumers seeking advanced health tracking, sleep monitoring, and metabolic insights.",
@@ -1389,7 +1532,8 @@
     "other_offices_in_india": "",
     "other_offices_outside_india": "",
     "founders": "Mohit Kumar, Vatsal Singhal",
-    "sources": "https://entrepreneurloop.com/ultrahuman-qualcomm-funding-ai-smart-ring/, https://thenextweb.com/news/ultrahuman-smart-ring-70m-qualcomm-computer, https://startupstorymedia.com/ultrahuman-raises-70-mn-from-qualcomm-alpha-wave-nexus-and-others/"
+    "sources": "https://entrepreneurloop.com/ultrahuman-qualcomm-funding-ai-smart-ring/, https://thenextweb.com/news/ultrahuman-smart-ring-70m-qualcomm-computer, https://startupstorymedia.com/ultrahuman-raises-70-mn-from-qualcomm-alpha-wave-nexus-and-others/",
+    "verified": false
   },
   {
     "date_of_funding": "2026-09-02",
@@ -1408,6 +1552,8 @@
     "deal_tags": "Deep Tech, Aerospace, Defence, Inertial Navigation",
     "industry": "Advanced Hardware & Technology",
     "sub_industry": "Space Tech",
+    "vertical": "Technology",
+    "sub-vertical": "Semiconductors & Components",
     "company_description": "An Indian deep-tech company specializing in navigation, sensing, and monitoring technologies for aerospace, defence, and industrial applications.",
     "product_or_solution": "Inertial navigation systems, air data computers, weather sensing solutions, flight test instrumentation, avionics, and cloud-based monitoring software.",
     "target_market": "Aerospace, defence (army, navy, DRDO), renewable energy, and industrial sectors.",
@@ -1418,7 +1564,8 @@
     "other_offices_in_india": "",
     "other_offices_outside_india": "",
     "founders": "Ashvani Shukla, Abhijeet Bokil",
-    "sources": "https://mounttechindia.com/news/aeron-systems-raises-4-7m-in-pre-series-b-funding, https://www.cxodigitalpulse.com/aeron-systems-raises-4-7-million-to-scale-navigation-and-sensing-technologies/"
+    "sources": "https://mounttechindia.com/news/aeron-systems-raises-4-7m-in-pre-series-b-funding, https://www.cxodigitalpulse.com/aeron-systems-raises-4-7-million-to-scale-navigation-and-sensing-technologies/",
+    "verified": false
   },
   {
     "date_of_funding": "2026-09-02",
@@ -1437,6 +1584,8 @@
     "deal_tags": "Creator Economy, AI Growth Coach, Social Media Analytics",
     "industry": "AI",
     "sub_industry": "Application Layer",
+    "vertical": "Media & Entertainment",
+    "sub-vertical": "Computer Software",
     "company_description": "An AI-powered creator growth platform that connects with social media accounts to provide a data-driven coach analyzing performance and optimizing content.",
     "product_or_solution": "AI companion named Cree, Reel Analyzer, Script Builder, Trend Signals, Auto DM functionality, and performance insights.",
     "target_market": "Content creators on Instagram and YouTube in India and the US.",
@@ -1447,7 +1596,8 @@
     "other_offices_in_india": "",
     "other_offices_outside_india": "",
     "founders": "Naveen Murugan, Naveen Sowriraj, Aswin Dhananjai",
-    "sources": "https://www.indianstartuptimes.com/news/creedom-raises-%E2%82%B94-1-crore-in-seed-round-at-%E2%82%B942-crore-valuation-to-scale-ai-growth-coach-for-creators/, https://entrepreneur.economictimes.indiatimes.com/news/funding/creedom-raises-4-1-cr-seed-funding/133730463, https://www.todaysstartupnews.com/startups/creedom-seed-round-ai-growth-coach-creators"
+    "sources": "https://www.indianstartuptimes.com/news/creedom-raises-%E2%82%B94-1-crore-in-seed-round-at-%E2%82%B942-crore-valuation-to-scale-ai-growth-coach-for-creators/, https://entrepreneur.economictimes.indiatimes.com/news/funding/creedom-raises-4-1-cr-seed-funding/133730463, https://www.todaysstartupnews.com/startups/creedom-seed-round-ai-growth-coach-creators",
+    "verified": false
   },
   {
     "date_of_funding": "2026-09-02",
@@ -1466,6 +1616,8 @@
     "deal_tags": "Health Tech, Quick Commerce, Supply Chain, Logistics",
     "industry": "Health Tech",
     "sub_industry": "",
+    "vertical": "Healthcare",
+    "sub-vertical": "Medical Equipment & Services",
     "company_description": "A B2B healthcare infrastructure startup providing underlying technology and prescription-compliant dark stores for health platforms to offer rapid medicine delivery.",
     "product_or_solution": "SaaS platform (DocPharma One) and a network of licensed dark stores combining warehouse management, AI inventory, and prescription-compliant fulfillment.",
     "target_market": "Health and wellness businesses, e-pharmacies, and healthcare providers in India.",
@@ -1476,7 +1628,8 @@
     "other_offices_in_india": "",
     "other_offices_outside_india": "",
     "founders": "Saquib Ali, Shashank Rai, Sagar Chauhan",
-    "sources": "https://arabfounders.net/en/docpharma-raises-2-million-pre-series-a/, https://retail.economictimes.indiatimes.com/news/health-and-beauty/docpharma-raises-2-million-to-expand-healthcare-quick-commerce-network-to-50-cities/133675019"
+    "sources": "https://arabfounders.net/en/docpharma-raises-2-million-pre-series-a/, https://retail.economictimes.indiatimes.com/news/health-and-beauty/docpharma-raises-2-million-to-expand-healthcare-quick-commerce-network-to-50-cities/133675019",
+    "verified": false
   },
   {
     "date_of_funding": "2026-09-01",
@@ -1495,6 +1648,8 @@
     "deal_tags": "Fintech, Wealthtech, Invest Tech, SEBI Registered",
     "industry": "Fintech",
     "sub_industry": "Invest Tech",
+    "vertical": "Finance",
+    "sub-vertical": "Brokerage & Investments",
     "company_description": "An investment research platform combining SEBI-registered research and AI-powered market analysis to make stock-market research accessible to retail investors.",
     "product_or_solution": "Venty, an AI-powered stock market researcher that scans over 3,800 NSE and BSE listed stocks across fundamental, technical, and sentiment indicators.",
     "target_market": "Retail investors in India.",
@@ -1505,7 +1660,8 @@
     "other_offices_in_india": "",
     "other_offices_outside_india": "",
     "founders": "Rohit Agarwal, Fal Ghancha",
-    "sources": "https://arabfounders.net/en/72-street-raises-423k-investment-research-expansion/, https://entrepreneur.economictimes.indiatimes.com/news/funding/72-street-raises-4-crore-in-funding-led-by-uhnis-angel-investors/133677755"
+    "sources": "https://arabfounders.net/en/72-street-raises-423k-investment-research-expansion/, https://entrepreneur.economictimes.indiatimes.com/news/funding/72-street-raises-4-crore-in-funding-led-by-uhnis-angel-investors/133677755",
+    "verified": false
   },
   {
     "date_of_funding": "2026-09-01",
@@ -1524,6 +1680,8 @@
     "deal_tags": "Deep Tech, Aerospace, Autonomous Vehicles",
     "industry": "Advanced Hardware & Technology",
     "sub_industry": "Aerial Vehicles",
+    "vertical": "Technology",
+    "sub-vertical": "Other Motorized Vehicles",
     "company_description": "A deep-tech aerospace startup developing autonomous, ultra-high-endurance aircraft designed to fly for months by using dynamic soaring to harvest energy from the atmosphere.",
     "product_or_solution": "Autonomous dynamic-soaring vehicles that extract energy from wind gradients.",
     "target_market": "Maritime surveillance, tracking ships, monitoring infrastructure, defence, search and rescue.",
@@ -1534,7 +1692,8 @@
     "other_offices_in_india": "",
     "other_offices_outside_india": "",
     "founders": "Samay Sanghvi",
-    "sources": "https://entrackr.com/snippets/deep-tech-aerospace-startup-alteon-raises-25-mn-led-by-lachy-groom-12479389, https://startupfeed.in/alteon-2-5-mn-pre-seed-lachy-groom-together-fund/"
+    "sources": "https://entrackr.com/snippets/deep-tech-aerospace-startup-alteon-raises-25-mn-led-by-lachy-groom-12479389, https://startupfeed.in/alteon-2-5-mn-pre-seed-lachy-groom-together-fund/",
+    "verified": false
   },
   {
     "date_of_funding": "2026-09-01",
@@ -1553,6 +1712,8 @@
     "deal_tags": "Space Tech, Aerospace, Defense, ISR Satellites",
     "industry": "Advanced Hardware & Technology",
     "sub_industry": "Space Tech",
+    "vertical": "Technology",
+    "sub-vertical": "Other (Tech)",
     "company_description": "A space infrastructure and autonomous mission operations startup developing autonomous multi-satellite swarms and military-grade avionics for critical defense applications.",
     "product_or_solution": "Autonomous swarming intelligence, surveillance, and reconnaissance (ISR) satellite constellations, Mission Operations as a Service, and Avionics as a Service.",
     "target_market": "Indian defence space ecosystem, Defence Space Agency, and ISRO.",
@@ -1563,7 +1724,8 @@
     "other_offices_in_india": "",
     "other_offices_outside_india": "",
     "founders": "Navneet Singh, Kiran V. Sharma",
-    "sources": "https://www.finsmes.com/2026/09/kepler-aerospace-raises-8m-in-seed-funding.html, https://indiantelevision.com/mam/kepler-aerospace-secures-8-million-seed-funding-for-defence-satellite-push/"
+    "sources": "https://www.finsmes.com/2026/09/kepler-aerospace-raises-8m-in-seed-funding.html, https://indiantelevision.com/mam/kepler-aerospace-secures-8-million-seed-funding-for-defence-satellite-push/",
+    "verified": false
   },
   {
     "date_of_funding": "2026-09-01",
@@ -1582,6 +1744,8 @@
     "deal_tags": "Deep Tech, Lubricant Circularity, Clean Tech",
     "industry": "Clean Tech",
     "sub_industry": "Climate Tech",
+    "vertical": "Business & Industrial Markets",
+    "sub-vertical": "Industrial Equipment",
     "company_description": "An industrial deep-tech company focused on lubricant lifecycle management, circularity, and contamination control solutions.",
     "product_or_solution": "Miniaturised fluid-treatment systems, Recycling on Wheels (mobile on-site lubricant restoration model), and Lubricants as a Service.",
     "target_market": "Industrial manufacturing plants, including NTPC, Adani Power, Tata Steel.",
@@ -1592,7 +1756,8 @@
     "other_offices_in_india": "",
     "other_offices_outside_india": "",
     "founders": "Anshuman Agrawal",
-    "sources": "https://india.entrepreneur.com/business-news/minimac-systems-raises-inr-30-cr-in-a-round-led-by-zerodhas-rainmatter, https://incubees.com/rainmatter-led-rs-30-cr-pre-series-a-funding-raised-by-minimac-systems/, https://m.dailyhunt.in/news/india/english/entrackr+english-epaper-entrackr/rainmatter+leads+rs+30+cr+preseries+a+round+in+minimac+systems-newsid-n725325871"
+    "sources": "https://india.entrepreneur.com/business-news/minimac-systems-raises-inr-30-cr-in-a-round-led-by-zerodhas-rainmatter, https://incubees.com/rainmatter-led-rs-30-cr-pre-series-a-funding-raised-by-minimac-systems/, https://m.dailyhunt.in/news/india/english/entrackr+english-epaper-entrackr/rainmatter+leads+rs+30+cr+preseries+a+round+in+minimac+systems-newsid-n725325871",
+    "verified": false
   },
   {
     "date_of_funding": "2026-09-01",
@@ -1611,6 +1776,8 @@
     "deal_tags": "Enterprise Software, AI-native platform, Production Operations",
     "industry": "AI",
     "sub_industry": "Application Layer",
+    "vertical": "Technology",
+    "sub-vertical": "Computer Software",
     "company_description": "An AI-native platform for production operations targeting the enterprise software development lifecycle to automate incident response.",
     "product_or_solution": "An agentic platform designed to bring together context from observability systems, customer support, and cloud infrastructure to understand production incidents.",
     "target_market": "Enterprise technology teams globally.",
@@ -1621,7 +1788,8 @@
     "other_offices_in_india": "",
     "other_offices_outside_india": "",
     "founders": "Prasun Kumar, Pranit Kumar",
-    "sources": "https://m.economictimes.com/tech/funding/oppex-ai-raises-rs-4-2-crore-in-pre-seed-round-from-info-edge-ventures/articleshow/133683856.cms, https://entrepreneur.economictimes.indiatimes.com/news/funding/oppex-ai-raises-4-2-cr-pre-seed-funding-from-info-edge-ventures/133670669, https://dealroom.co/news/147999-oppex-ai-raises-4-2-crore-pre-seed-to-automate-production-incidents/"
+    "sources": "https://m.economictimes.com/tech/funding/oppex-ai-raises-rs-4-2-crore-in-pre-seed-round-from-info-edge-ventures/articleshow/133683856.cms, https://entrepreneur.economictimes.indiatimes.com/news/funding/oppex-ai-raises-4-2-cr-pre-seed-funding-from-info-edge-ventures/133670669, https://dealroom.co/news/147999-oppex-ai-raises-4-2-crore-pre-seed-to-automate-production-incidents/",
+    "verified": false
   },
   {
     "date_of_funding": "2026-09-01",
@@ -1640,6 +1808,8 @@
     "deal_tags": "Edtech, AI, Language Learning",
     "industry": "Edtech",
     "sub_industry": "Digital Learning Platform",
+    "vertical": "Education & Government",
+    "sub-vertical": "Educational Resources & Services",
     "company_description": "An AI-powered English-speaking platform providing personalized and contextual learning to help users practice real-life communication.",
     "product_or_solution": "An AI tutor platform combining speech recognition, feedback for Indian accents, and learning modules for workplace, interviews, and everyday interactions.",
     "target_market": "Learners across 16 languages in India seeking to improve conversational English skills.",
@@ -1650,7 +1820,8 @@
     "other_offices_in_india": "",
     "other_offices_outside_india": "",
     "founders": "Arpit Mittal",
-    "sources": "https://entrepreneur.economictimes.indiatimes.com/news/funding/ms-dhoni-backs-ai-based-english-learning-platform-speakx/133677517, https://indiantelevision.com/mam/marketing/ms-dhoni-joins-speakx-as-brand-ambassador-after-investing-in-company/"
+    "sources": "https://entrepreneur.economictimes.indiatimes.com/news/funding/ms-dhoni-backs-ai-based-english-learning-platform-speakx/133677517, https://indiantelevision.com/mam/marketing/ms-dhoni-joins-speakx-as-brand-ambassador-after-investing-in-company/",
+    "verified": false
   },
   {
     "date_of_funding": "2026-09-01",
@@ -1669,6 +1840,8 @@
     "deal_tags": "D2C, Beauty, Cosmetics",
     "industry": "Ecommerce",
     "sub_industry": "D2C",
+    "vertical": "Consumer Packaged Goods",
+    "sub-vertical": "Cosmetics & Beauty Supplies",
     "company_description": "A prominent player in the Indian direct-to-consumer beauty space selling makeup and everyday skincare products (Note: The recent round was a down round at a 75-80% valuation cut).",
     "product_or_solution": "Beauty and personal care products across four brands: SUGAR, POP, ENN, and Quench Botanics.",
     "target_market": "Indian consumers seeking beauty and personal care products.",
@@ -1679,7 +1852,8 @@
     "other_offices_in_india": "",
     "other_offices_outside_india": "",
     "founders": "Vineeta Singh, Kaushik Mukherjee",
-    "sources": "https://www.uoguelph.ca/arts/preliminary-2019-tri-university-history-conference-program?live-blog-32522074-2026-09-12-sugar-cosmetics-plummets-to-rs550-cr-valuation-trustburn-reputation-check-shows, https://dealroom.co/news/148979-sugar-cosmetics-raises-15-3m-in-down-round-valuation-cut-nearly-80/"
+    "sources": "https://www.uoguelph.ca/arts/preliminary-2019-tri-university-history-conference-program?live-blog-32522074-2026-09-12-sugar-cosmetics-plummets-to-rs550-cr-valuation-trustburn-reputation-check-shows, https://dealroom.co/news/148979-sugar-cosmetics-raises-15-3m-in-down-round-valuation-cut-nearly-80/",
+    "verified": false
   },
   {
     "date_of_funding": "2026-09-01",
@@ -1698,6 +1872,8 @@
     "deal_tags": "Creator Economy, Media, Content Distribution, Advertising",
     "industry": "Enterprise Services",
     "sub_industry": "Advertising",
+    "vertical": "Media & Entertainment",
+    "sub-vertical": "Media & Publishing",
     "company_description": "A content distribution and creator-led marketing company that operates platforms across creator marketing, content, and distribution.",
     "product_or_solution": "Solo (campaign execution), Meme'd (short-form content), Crunchy Studios (production), Imagined Studio (brand design), and ScoopWhoop (media property).",
     "target_market": "Consumer brands seeking creator-led distribution and digital marketing.",
@@ -1708,7 +1884,8 @@
     "other_offices_in_india": "Mumbai, Delhi",
     "other_offices_outside_india": "",
     "founders": "Arihant Jain",
-    "sources": "https://customerengagement.net/wldd-strategic-investment-adfactors-pr-vikas-khemani/, https://adtechtoday.com/wldd-secures-investment-from-adfactors-pr-and-vikas-khemani-to-expand-creator-led-business/"
+    "sources": "https://customerengagement.net/wldd-strategic-investment-adfactors-pr-vikas-khemani/, https://adtechtoday.com/wldd-secures-investment-from-adfactors-pr-and-vikas-khemani-to-expand-creator-led-business/",
+    "verified": false
   },
   {
     "date_of_funding": "2026-09-01",
@@ -1727,6 +1904,8 @@
     "deal_tags": "Health Tech, Neurotechnology, Medical Devices",
     "industry": "Health Tech",
     "sub_industry": "",
+    "vertical": "Healthcare",
+    "sub-vertical": "Medical Equipment & Services",
     "company_description": "A neurotechnology startup that develops a non-invasive spinal neuromodulation and rehabilitation platform for individuals with neurological disorders.",
     "product_or_solution": "Non-invasive spinal neuromodulation technology (developed by SpineX Inc. and manufactured by VIVATRONIX Tech) and xStep One integrated rehabilitation centers.",
     "target_market": "Individuals living with cerebral palsy, stroke, spinal cord injury, and multiple sclerosis in India and emerging markets.",
@@ -1737,7 +1916,8 @@
     "other_offices_in_india": "",
     "other_offices_outside_india": "",
     "founders": "Parag Gad, Shruti H.",
-    "sources": "https://titancapital.vc/blogs/xStep, https://www.biospectrumindia.com/news/16/28405/xstep-raises-funding-from-titan-capital-to-scale-non-invasive-neurorehabilitation-platform.html"
+    "sources": "https://titancapital.vc/blogs/xStep, https://www.biospectrumindia.com/news/16/28405/xstep-raises-funding-from-titan-capital-to-scale-non-invasive-neurorehabilitation-platform.html",
+    "verified": false
   },
   {
     "date_of_funding": "2026-09-01",
@@ -1756,6 +1936,8 @@
     "deal_tags": "Electric Vehicles, Battery Swapping, Clean Tech",
     "industry": "Clean Tech",
     "sub_industry": "Electric Vehicles",
+    "vertical": "Automotive",
+    "sub-vertical": "Auto Parts & Services",
     "company_description": "An Indian battery-swapping network for electric mobility, formed as a joint venture between Yulu and Magna International.",
     "product_or_solution": "Battery-swapping infrastructure platform with over 100,000 batteries deployed across charging units and touchpoints.",
     "target_market": "Electric vehicle users, fleet operators, and OEM partners in India.",
@@ -1766,7 +1948,8 @@
     "other_offices_in_india": "Delhi NCR",
     "other_offices_outside_india": "",
     "founders": "Muthu Subramanian (Managing Director & GM)",
-    "sources": "https://www.wiondrive.com/reviews/yuma-energy-raises-35-million-from-magna-to-expand-battery-swapping-network-in-india-30220/, https://www.livemint.com/companies/yuma-energy-battery-swapping-magna-international-yulu-electric-vehicles-ev-funding-energy-storage-battery-units-11788182456754.html, https://www.dealstreetasia.com/stories/yuma-energy-magna-international-493801"
+    "sources": "https://www.wiondrive.com/reviews/yuma-energy-raises-35-million-from-magna-to-expand-battery-swapping-network-in-india-30220/, https://www.livemint.com/companies/yuma-energy-battery-swapping-magna-international-yulu-electric-vehicles-ev-funding-energy-storage-battery-units-11788182456754.html, https://www.dealstreetasia.com/stories/yuma-energy-magna-international-493801",
+    "verified": false
   },
   {
     "date_of_funding": "2026-09-01",
@@ -1785,6 +1968,8 @@
     "deal_tags": "Deep Tech, Clean Tech, Power Electronics, SiC",
     "industry": "Clean Tech",
     "sub_industry": "Electric Vehicles",
+    "vertical": "Technology",
+    "sub-vertical": "Semiconductors & Components",
     "company_description": "An R&D-driven deep-tech company developing indigenous Silicon Carbide (SiC)-based power electronics.",
     "product_or_solution": "Silicon carbide-based power electronics portfolio.",
     "target_market": "India's renewable energy and electric mobility ecosystem.",
@@ -1795,7 +1980,8 @@
     "other_offices_in_india": "",
     "other_offices_outside_india": "",
     "founders": "",
-    "sources": "https://www.electronicsforyou.biz/industry-buzz/zenergize-technologies-raises-4-million-pre-series-a-to-scale-sic-power-electronics/, https://arabfounders.net/en/zenergize-raises-4-million-pre-series-a/"
+    "sources": "https://www.electronicsforyou.biz/industry-buzz/zenergize-technologies-raises-4-million-pre-series-a-to-scale-sic-power-electronics/, https://arabfounders.net/en/zenergize-raises-4-million-pre-series-a/",
+    "verified": false
   },
   {
     "date_of_funding": "2026-08-31",
@@ -1814,6 +2000,8 @@
     "deal_tags": "Clean Tech, Indoor Air Quality",
     "industry": "Clean Tech",
     "sub_industry": "Climate Tech",
+    "vertical": "Business & Industrial Markets",
+    "sub-vertical": "Industrial Equipment",
     "company_description": "An indoor air quality firm providing high-tech filtration and ventilation systems designed to clean the air across an entire building.",
     "product_or_solution": "Patented Clean Air Bubble technology that filters incoming outdoor air and maintains positive indoor pressure to keep pollution out while controlling CO2 levels.",
     "target_market": "Residential homes, schools, offices, hospitals, gyms, and public transport.",
@@ -1824,7 +2012,8 @@
     "other_offices_in_india": "Delhi-NCR, Mumbai, Kolkata, Bengaluru, Hyderabad",
     "other_offices_outside_india": "",
     "founders": "Sachin Panwar, Deepak Raina, Gaurav Nagar",
-    "sources": "https://www.startupresearcher.com/news/yoga-clean-air-raises-20-crore-in-series-a-funding-led-by-info-edge-ventures, https://newzchain.com/yoga-clean-air-raises-20-cr-series-a-from-info-edge-ventures/"
+    "sources": "https://www.startupresearcher.com/news/yoga-clean-air-raises-20-crore-in-series-a-funding-led-by-info-edge-ventures, https://newzchain.com/yoga-clean-air-raises-20-cr-series-a-from-info-edge-ventures/",
+    "verified": false
   },
   {
     "date_of_funding": "2026-08-27",
@@ -1843,6 +2032,8 @@
     "deal_tags": "Foodtech, QSR, B2C",
     "industry": "Food and Beverage",
     "sub_industry": "QSR",
+    "vertical": "Consumer Packaged Goods",
+    "sub-vertical": "Food & Beverages",
     "company_description": "Biryani and Indian meals brand focusing on everyday meals through a central kitchen-led model.",
     "product_or_solution": "Biryani and daily Indian meals.",
     "target_market": "B2C",
@@ -1853,7 +2044,8 @@
     "other_offices_in_india": "Madhya Pradesh",
     "other_offices_outside_india": "",
     "founders": "",
-    "sources": "https://retail.economictimes.indiatimes.com/news/food-entertainment/food-services/biryani-bees-raises-funding-from-vivek-oberoi-family-office-to-expand-across-tier-2-cities/133541049"
+    "sources": "https://retail.economictimes.indiatimes.com/news/food-entertainment/food-services/biryani-bees-raises-funding-from-vivek-oberoi-family-office-to-expand-across-tier-2-cities/133541049",
+    "verified": false
   },
   {
     "date_of_funding": "2026-08-27",
@@ -1872,6 +2064,8 @@
     "deal_tags": "AI, Application Layer, B2B",
     "industry": "Hardware",
     "sub_industry": "Automotive Tech",
+    "vertical": "Automotive",
+    "sub-vertical": "Computer Software",
     "company_description": "Deeptech startup developing edge AI-based perception technology for mobility and safety applications.",
     "product_or_solution": "Perceiva ARAS, Perceiva DMS.",
     "target_market": "B2B",
@@ -1882,7 +2076,8 @@
     "other_offices_in_india": "",
     "other_offices_outside_india": "",
     "founders": "Arindam Ghosh, Subrata Debnath, Navaneeth A",
-    "sources": "https://newzchain.com/edgeverse-raises-rs-3-crore-from-gvfl-for-edge-ai/"
+    "sources": "https://newzchain.com/edgeverse-raises-rs-3-crore-from-gvfl-for-edge-ai/",
+    "verified": false
   },
   {
     "date_of_funding": "2026-08-27",
@@ -1901,6 +2096,8 @@
     "deal_tags": "Advanced Hardware & Technology, Space Tech, B2B, B2G",
     "industry": "Aerospace",
     "sub_industry": "Space Tech",
+    "vertical": "Technology",
+    "sub-vertical": "Other (Tech)",
     "company_description": "Spacetech startup focusing on in-orbit servicing, rendezvous and proximity operations, and satellite life extension.",
     "product_or_solution": "In-orbit servicing technologies and satellite propulsion systems.",
     "target_market": "B2B",
@@ -1911,7 +2108,8 @@
     "other_offices_in_india": "",
     "other_offices_outside_india": "",
     "founders": "Arindrajit Chowdhury, Tausif Shaikh",
-    "sources": "https://www.startupresearcher.com/news/inspecity-raises-inr-100-crore-pre-series-a-funding"
+    "sources": "https://www.startupresearcher.com/news/inspecity-raises-inr-100-crore-pre-series-a-funding",
+    "verified": false
   },
   {
     "date_of_funding": "2026-08-27",
@@ -1930,6 +2128,8 @@
     "deal_tags": "Consumer Services, Astrology Services, B2C",
     "industry": "Consumer Services",
     "sub_industry": "Astrology Services",
+    "vertical": "Media & Entertainment",
+    "sub-vertical": "Religion",
     "company_description": "Online astrology and spiritual wellness platform offering consultations, spiritual products, and digital rituals.",
     "product_or_solution": "Astrology consultations, tarot readings, numerology, Pooja Seva, and spiritual commerce.",
     "target_market": "B2C",
@@ -1940,7 +2140,8 @@
     "other_offices_in_india": "",
     "other_offices_outside_india": "",
     "founders": "Nitin Verma",
-    "sources": "https://raising.fi/news/instaastro-series-a-august-2026, https://indianstartupnews.com/funding/online-astrology-and-spiritual-wellness-platform-instaastro-raises-12-million-in-series-a-funding-12443449"
+    "sources": "https://raising.fi/news/instaastro-series-a-august-2026, https://indianstartupnews.com/funding/online-astrology-and-spiritual-wellness-platform-instaastro-raises-12-million-in-series-a-funding-12443449",
+    "verified": false
   },
   {
     "date_of_funding": "2026-08-27",
@@ -1959,6 +2160,8 @@
     "deal_tags": "Logistics, Logistic SaaS, B2B",
     "industry": "Logistics",
     "sub_industry": "Supply Chain Management",
+    "vertical": "Technology",
+    "sub-vertical": "Computer Software",
     "company_description": "AI-powered technology-led intra-city and mid-mile logistics platform.",
     "product_or_solution": "Datashastra (AI/SaaS logistics stack).",
     "target_market": "B2B",
@@ -1969,7 +2172,8 @@
     "other_offices_in_india": "",
     "other_offices_outside_india": "",
     "founders": "Sandeep Patil, Prashant Mohite, Yogesh Parab, Umesh Singh",
-    "sources": "https://entrepreneur.economictimes.indiatimes.com/news/funding/oorjaa-raises-9-7-cr-in-series-a-first-close-led-by-equentis-angel-fund/133558303"
+    "sources": "https://entrepreneur.economictimes.indiatimes.com/news/funding/oorjaa-raises-9-7-cr-in-series-a-first-close-led-by-equentis-angel-fund/133558303",
+    "verified": false
   },
   {
     "date_of_funding": "2026-08-26",
@@ -1988,6 +2192,8 @@
     "deal_tags": "Clean Tech, Climate Tech, B2B",
     "industry": "Advanced Materials",
     "sub_industry": "Climate Tech",
+    "vertical": "Business & Industrial Markets",
+    "sub-vertical": "Chemical & Energy",
     "company_description": "Advanced materials company converting rice husk ash (RHA) into low-carbon, precipitated silica.",
     "product_or_solution": "High-purity green silica for tyres, rubber, footwear and consumer goods.",
     "target_market": "B2B",
@@ -1998,7 +2204,8 @@
     "other_offices_in_india": "",
     "other_offices_outside_india": "",
     "founders": "Tanmay Pandya",
-    "sources": "https://peakventures.in/media/brisil-pre-series-a"
+    "sources": "https://peakventures.in/media/brisil-pre-series-a",
+    "verified": false
   },
   {
     "date_of_funding": "2026-08-26",
@@ -2017,6 +2224,8 @@
     "deal_tags": "Ecommerce, D2C, B2C",
     "industry": "Retail",
     "sub_industry": "Kitchenware",
+    "vertical": "Consumer Packaged Goods",
+    "sub-vertical": "Home",
     "company_description": "D2C kitchenware startup designing appliances and tools tailored for Indian households.",
     "product_or_solution": "Choppers, blenders, hand mixers, kettles, induction cooktops, and tableware.",
     "target_market": "B2C",
@@ -2027,7 +2236,8 @@
     "other_offices_in_india": "",
     "other_offices_outside_india": "",
     "founders": "Sanjyot Keer, Neeraj Kumawat",
-    "sources": "https://startups.center/w/curaa-2026-creator-led-kitchenware-bet, https://m.economictimes.com/tech/funding/d2c-kitchenware-startup-curaa-raises-rs-40-crore-led-by-3one4-capital/articleshow/133536337.cms"
+    "sources": "https://startups.center/w/curaa-2026-creator-led-kitchenware-bet, https://m.economictimes.com/tech/funding/d2c-kitchenware-startup-curaa-raises-rs-40-crore-led-by-3one4-capital/articleshow/133536337.cms",
+    "verified": false
   },
   {
     "date_of_funding": "2026-08-26",
@@ -2046,6 +2256,8 @@
     "deal_tags": "AI, Application Layer, B2B",
     "industry": "Enterprise Software",
     "sub_industry": "Voice AI",
+    "vertical": "Technology",
+    "sub-vertical": "Computer Software",
     "company_description": "Builds multilingual voice AI agents for enterprises to automate customer conversations and workflows.",
     "product_or_solution": "Voice AI agents for lead qualification, onboarding, support, collections, and appointment booking.",
     "target_market": "B2B",
@@ -2056,7 +2268,8 @@
     "other_offices_in_india": "",
     "other_offices_outside_india": "",
     "founders": "Siddharth Shankar Tripathi, Utkarsh Shukla, Kali CV",
-    "sources": "https://yourstory.com/2026/08/voice-ai-startup-ringg-ai-raises-10m-series-a-peak-xv-partners, https://dealroom.co/news/146963-ringg-lands-10m-from-peak-xv-to-expand-voice-ai-beyond-calls/"
+    "sources": "https://yourstory.com/2026/08/voice-ai-startup-ringg-ai-raises-10m-series-a-peak-xv-partners, https://dealroom.co/news/146963-ringg-lands-10m-from-peak-xv-to-expand-voice-ai-beyond-calls/",
+    "verified": false
   },
   {
     "date_of_funding": "2026-08-26",
@@ -2075,6 +2288,8 @@
     "deal_tags": "AI, Application Layer, B2B",
     "industry": "Enterprise Software",
     "sub_industry": "AI Platform",
+    "vertical": "Technology",
+    "sub-vertical": "Computer Software",
     "company_description": "End-to-end autonomous AI agent platform that builds, runs, and grows businesses.",
     "product_or_solution": "AI agents that create websites, mobile apps, marketing campaigns, and manage day-to-day operations.",
     "target_market": "B2B",
@@ -2085,7 +2300,8 @@
     "other_offices_in_india": "",
     "other_offices_outside_india": "",
     "founders": "Umesh Kumar, Saksham Sarda",
-    "sources": "https://www.finsmes.com/2026/08/runable-raises-21m-in-series-a-funding.html, https://www.dealstreetasia.com/stories/runable-susquehanna-vc-nexus-493411"
+    "sources": "https://www.finsmes.com/2026/08/runable-raises-21m-in-series-a-funding.html, https://www.dealstreetasia.com/stories/runable-susquehanna-vc-nexus-493411",
+    "verified": false
   },
   {
     "date_of_funding": "2026-08-26",
@@ -2104,6 +2320,8 @@
     "deal_tags": "Consumer Services, Pet Care Services, B2C",
     "industry": "Consumer Services",
     "sub_industry": "Pet Care",
+    "vertical": "Classifieds & Local",
+    "sub-vertical": "Pet Care",
     "company_description": "Premium dog care hubs offering daycare, boarding and spa services built around canine behaviour principles.",
     "product_or_solution": "Neighbourhood-led free-roam dog daycare spaces.",
     "target_market": "B2C",
@@ -2114,7 +2332,8 @@
     "other_offices_in_india": "",
     "other_offices_outside_india": "",
     "founders": "Animeha Singh, Ankit Gupta",
-    "sources": "https://retail.economictimes.indiatimes.com/news/food-entertainment/grocery/scoobys-club-raises-250k-in-pre-seed-round-led-by-tdv-partners/133535398"
+    "sources": "https://retail.economictimes.indiatimes.com/news/food-entertainment/grocery/scoobys-club-raises-250k-in-pre-seed-round-led-by-tdv-partners/133535398",
+    "verified": false
   },
   {
     "date_of_funding": "2026-08-25",
@@ -2133,6 +2352,8 @@
     "deal_tags": "Advanced Hardware & Technology, Aerial Vehicles, B2B, Deeptech",
     "industry": "Aerospace & Logistics",
     "sub_industry": "Drone Logistics",
+    "vertical": "Technology",
+    "sub-vertical": "Other Motorized Vehicles",
     "company_description": "Aerospace startup building lightweight autonomous delivery aircraft for lower-cost aerial logistics.",
     "product_or_solution": "Autonomous delivery drones (blended-wing-body tailsitter) and RUDRA fleet ground control system.",
     "target_market": "B2B",
@@ -2143,7 +2364,8 @@
     "other_offices_in_india": "Andhra Pradesh",
     "other_offices_outside_india": "",
     "founders": "Naman Pushp",
-    "sources": "https://dronelife.com/2026/08/25/airbound-raises-37-million-series-a-and-plans-10000-daily-drone-flights-across-andhra-pradesh/"
+    "sources": "https://dronelife.com/2026/08/25/airbound-raises-37-million-series-a-and-plans-10000-daily-drone-flights-across-andhra-pradesh/",
+    "verified": false
   },
   {
     "date_of_funding": "2026-08-25",
@@ -2162,6 +2384,8 @@
     "deal_tags": "Clean Tech, Climate Tech, B2B",
     "industry": "Clean Tech",
     "sub_industry": "Climate Tech",
+    "vertical": "Technology",
+    "sub-vertical": "Chemical & Energy",
     "company_description": "Climate-tech startup focused on environmental solutions.",
     "product_or_solution": "",
     "target_market": "B2B",
@@ -2172,7 +2396,8 @@
     "other_offices_in_india": "",
     "other_offices_outside_india": "",
     "founders": "",
-    "sources": "https://www.mvcapital.vc/news.html"
+    "sources": "https://www.mvcapital.vc/news.html",
+    "verified": false
   },
   {
     "date_of_funding": "2026-08-25",
@@ -2191,6 +2416,8 @@
     "deal_tags": "Clean Tech, Electric Vehicles, B2C",
     "industry": "Automotive",
     "sub_industry": "Electric Vehicles",
+    "vertical": "Automotive",
+    "sub-vertical": "Automakers",
     "company_description": "Electric motorcycle maker developing geared electric vehicles and core components in-house.",
     "product_or_solution": "AERA electric motorcycle platform featuring proprietary four-speed manual transmission.",
     "target_market": "B2C",
@@ -2201,7 +2428,8 @@
     "other_offices_in_india": "",
     "other_offices_outside_india": "",
     "founders": "Mohal Lalbhai, Saran Babu, Arun Pratap Singh, Kumar Prasad Telikepalli",
-    "sources": "https://auto.economictimes.indiatimes.com/news/two-wheelers/matter-raises-25-million-to-scale-manufacturing-launch-four-new-electric-motorcycles/133499086"
+    "sources": "https://auto.economictimes.indiatimes.com/news/two-wheelers/matter-raises-25-million-to-scale-manufacturing-launch-four-new-electric-motorcycles/133499086",
+    "verified": false
   },
   {
     "date_of_funding": "2026-08-25",
@@ -2220,6 +2448,8 @@
     "deal_tags": "Fintech, Investment Tech, B2C",
     "industry": "Financial Services",
     "sub_industry": "Wealth Management",
+    "vertical": "Finance",
+    "sub-vertical": "Brokerage & Investments",
     "company_description": "Wealth management and multi-family office firm for HNIs, UHNIs, families, and corporates.",
     "product_or_solution": "Financial investments, portfolio management, estate planning, business expansion, and global mobility services.",
     "target_market": "B2C",
@@ -2230,7 +2460,8 @@
     "other_offices_in_india": "",
     "other_offices_outside_india": "",
     "founders": "Anirudha Taparia",
-    "sources": "https://www.business-standard.com/industry/news/nexedge-capital-raises-20-million-mirae-asset-elev8-wealth-management-126082500267_1.html, https://www.techinasia.com/news/mirae-asset-leads-20m-india-wealth-manager-nexedge"
+    "sources": "https://www.business-standard.com/industry/news/nexedge-capital-raises-20-million-mirae-asset-elev8-wealth-management-126082500267_1.html, https://www.techinasia.com/news/mirae-asset-leads-20m-india-wealth-manager-nexedge",
+    "verified": false
   },
   {
     "date_of_funding": "2026-08-25",
@@ -2249,6 +2480,8 @@
     "deal_tags": "Fintech, Insurtech, B2C",
     "industry": "Financial Services",
     "sub_industry": "Insurtech",
+    "vertical": "Healthcare",
+    "sub-vertical": "Insurance",
     "company_description": "AI-native health insurance platform integrating technology with human advisors for coverage to claims.",
     "product_or_solution": "ClaimsKavach, AI-powered health insurance distribution.",
     "target_market": "B2C",
@@ -2259,7 +2492,8 @@
     "other_offices_in_india": "",
     "other_offices_outside_india": "",
     "founders": "Arun Ramamurthy, Arup Chatterjee, Atul Mehta",
-    "sources": "https://www.businesstoday.in/personal-finance/story/staywellhealth-secures-equanimity-led-investment-to-scale-ai-native-health-insurance-platform-551333-2026-08-25"
+    "sources": "https://www.businesstoday.in/personal-finance/story/staywellhealth-secures-equanimity-led-investment-to-scale-ai-native-health-insurance-platform-551333-2026-08-25",
+    "verified": false
   },
   {
     "date_of_funding": "2026-08-25",
@@ -2278,6 +2512,8 @@
     "deal_tags": "Ecommerce, D2C, B2C, QSR",
     "industry": "Food and Beverage",
     "sub_industry": "QSR",
+    "vertical": "Retail",
+    "sub-vertical": "Restaurants & Bars",
     "company_description": "Homegrown coffee and food QSR brand operating over 240 cafes across India.",
     "product_or_solution": "Specialty coffee, food, and Third Rush Desserts.",
     "target_market": "B2C",
@@ -2288,7 +2524,8 @@
     "other_offices_in_india": "Delhi, Maharashtra, Telangana, Tamil Nadu, Gujarat, West Bengal, Uttar Pradesh",
     "other_offices_outside_india": "",
     "founders": "Sushant Goel, Ayush Bathwal, Anirudh Sharma",
-    "sources": "https://hospitality.economictimes.indiatimes.com/news/restaurants/third-wave-coffee-raises-43-million-in-funding-led-by-westbridge-capital/133458760"
+    "sources": "https://hospitality.economictimes.indiatimes.com/news/restaurants/third-wave-coffee-raises-43-million-in-funding-led-by-westbridge-capital/133458760",
+    "verified": false
   },
   {
     "date_of_funding": "2026-08-25",
@@ -2307,6 +2544,8 @@
     "deal_tags": "Consumer Services, eDarshan Services, B2C",
     "industry": "Consumer Services",
     "sub_industry": "Spiritual / Devotion",
+    "vertical": "Media & Entertainment",
+    "sub-vertical": "Religion",
     "company_description": "Spiritual and devotion platform working with temple priests and scholars to offer devotional services.",
     "product_or_solution": "Puja bookings, pujari consultations, e-prasad, and personalised rituals.",
     "target_market": "B2C",
@@ -2317,7 +2556,8 @@
     "other_offices_in_india": "",
     "other_offices_outside_india": "",
     "founders": "Sourajit Basu, Ankita De, Prajata Samanta",
-    "sources": "https://entrackr.com/snippets/utsav-raises-rs-36-cr-in-series-a-led-by-atomic-capital-12431868"
+    "sources": "https://entrackr.com/snippets/utsav-raises-rs-36-cr-in-series-a-led-by-atomic-capital-12431868",
+    "verified": false
   },
   {
     "date_of_funding": "2026-08-24",
@@ -2336,6 +2576,8 @@
     "deal_tags": "Ecommerce, D2C, B2C",
     "industry": "Retail",
     "sub_industry": "Skincare",
+    "vertical": "Consumer Packaged Goods",
+    "sub-vertical": "Personal Care",
     "company_description": "D2C skincare brand developing clinically tested formulations with dermatologically active ingredients.",
     "product_or_solution": "Targeted skincare solutions.",
     "target_market": "B2C",
@@ -2346,7 +2588,8 @@
     "other_offices_in_india": "",
     "other_offices_outside_india": "",
     "founders": "Neeraj Biyani, Eeti Sharma, Mandeep Bhatia",
-    "sources": "https://businessmatters.in/bengaluru-based-d2c-skincare-brand-asaya-raises/, https://www.vccircle.com/asayabe-clinical-water-lightfury-games-pocket-early-stage-cheques"
+    "sources": "https://businessmatters.in/bengaluru-based-d2c-skincare-brand-asaya-raises/, https://www.vccircle.com/asayabe-clinical-water-lightfury-games-pocket-early-stage-cheques",
+    "verified": false
   },
   {
     "date_of_funding": "2026-08-24",
@@ -2365,6 +2608,8 @@
     "deal_tags": "Ecommerce, D2C, B2C",
     "industry": "Retail",
     "sub_industry": "Skincare",
+    "vertical": "Consumer Packaged Goods",
+    "sub-vertical": "Beauty",
     "company_description": "Science-backed skincare brand targeting ageing concerns with medical-grade ingredients.",
     "product_or_solution": "Clinically tested skincare formulations.",
     "target_market": "B2C",
@@ -2375,7 +2620,8 @@
     "other_offices_in_india": "",
     "other_offices_outside_india": "",
     "founders": "Hemangi Dhir, Sanjiv Dhir",
-    "sources": "https://www.indianretailer.com/news/funding-alert-clinical-skincare-brand-be-clinical-secures-rs-21-cr-seed-investment, https://www.ynos.in/startup/be-clinical-0571423"
+    "sources": "https://www.indianretailer.com/news/funding-alert-clinical-skincare-brand-be-clinical-secures-rs-21-cr-seed-investment, https://www.ynos.in/startup/be-clinical-0571423",
+    "verified": false
   },
   {
     "date_of_funding": "2026-08-24",
@@ -2394,6 +2640,8 @@
     "deal_tags": "Media & Entertainment, Gaming, B2C",
     "industry": "Gaming",
     "sub_industry": "Sports Games",
+    "vertical": "Media & Entertainment",
+    "sub-vertical": "Games",
     "company_description": "AAA-focused game-tech studio developing competitive and interactive sports gaming experiences.",
     "product_or_solution": "eCricket game.",
     "target_market": "B2C",
@@ -2404,7 +2652,8 @@
     "other_offices_in_india": "",
     "other_offices_outside_india": "",
     "founders": "Karan Shroff, Anurag Banerjee, Tina Balachandran",
-    "sources": "https://www.business-standard.com/content/press-releases-ani/rohit-sharma-joins-lightfury-games-as-investor-alongside-ms-dhoni-jasprit-bumrah-and-hardik-pandya-ecricket-closed-beta-begins-september-2026-126082400935_1.html"
+    "sources": "https://www.business-standard.com/content/press-releases-ani/rohit-sharma-joins-lightfury-games-as-investor-alongside-ms-dhoni-jasprit-bumrah-and-hardik-pandya-ecricket-closed-beta-begins-september-2026-126082400935_1.html",
+    "verified": false
   },
   {
     "date_of_funding": "2026-08-24",
@@ -2423,6 +2672,8 @@
     "deal_tags": "Advanced Hardware & Technology, Robotics, B2C",
     "industry": "Hardware",
     "sub_industry": "Robotics",
+    "vertical": "Technology",
+    "sub-vertical": "Consumer Electronics",
     "company_description": "Physical AI startup building adaptive intelligent surfaces that respond to human interactions.",
     "product_or_solution": "FLOW adaptive chair, CAMA adaptive bed, powered by VORTEX AI.",
     "target_market": "B2C",
@@ -2433,7 +2684,8 @@
     "other_offices_in_india": "",
     "other_offices_outside_india": "",
     "founders": "Teja Vinukollu, Haneesh Mourya Desu",
-    "sources": "https://www.vccircle.com/asayabe-clinical-water-lightfury-games-pocket-early-stage-cheques, https://www.facebook.com/businessmattersmagazine/posts/-ai-meets-robotics-hyderabad-based-ai-startup-water-robotics-has-raised-25-mn-24/1085332537226811/"
+    "sources": "https://www.vccircle.com/asayabe-clinical-water-lightfury-games-pocket-early-stage-cheques, https://www.facebook.com/businessmattersmagazine/posts/-ai-meets-robotics-hyderabad-based-ai-startup-water-robotics-has-raised-25-mn-24/1085332537226811/",
+    "verified": false
   },
   {
     "date_of_funding": "2026-08-21",
@@ -2452,6 +2704,8 @@
     "deal_tags": "Clean Tech, Climate Tech, B2B2C",
     "industry": "Renewable Energy",
     "sub_industry": "Biofuels",
+    "vertical": "Technology",
+    "sub-vertical": "Chemical & Energy",
     "company_description": "Deep-tech biorefinery that converts agri-waste and agro-industrial residues into second-generation biofuels.",
     "product_or_solution": "Biofuels that can replace conventional diesel, sustainable aviation fuel (SAF), green hydrogen, and biomethane.",
     "target_market": "B2B2C",
@@ -2462,7 +2716,8 @@
     "other_offices_in_india": "Raipur",
     "other_offices_outside_india": "",
     "founders": "S Viraraghavan, V Radhika, VS Shridhar, R Sethunath",
-    "sources": "https://dealroom.co/news/146295-greenjoules-raises-6-5m-series-b-from-amazon-singularity-for-green-fuels/, https://impactalpha.com/greenjoules-lands-6-5-million-from-amazon-and-singularity-amid-biofuels-push-in-india/"
+    "sources": "https://dealroom.co/news/146295-greenjoules-raises-6-5m-series-b-from-amazon-singularity-for-green-fuels/, https://impactalpha.com/greenjoules-lands-6-5-million-from-amazon-and-singularity-amid-biofuels-push-in-india/",
+    "verified": false
   },
   {
     "date_of_funding": "2026-08-21",
@@ -2481,6 +2736,8 @@
     "deal_tags": "Clean Tech, Electric Vehicles, B2B, B2C",
     "industry": "Automotive",
     "sub_industry": "Electric Vehicles",
+    "vertical": "Automotive",
+    "sub-vertical": "Automakers",
     "company_description": "Indian electric commercial vehicle maker operating across multiple EV segments.",
     "product_or_solution": "Electric cargo three-wheelers, passenger vehicles, premium electric two-wheelers, and light commercial vehicles.",
     "target_market": "B2B",
@@ -2491,7 +2748,8 @@
     "other_offices_in_india": "Haryana, Maharashtra",
     "other_offices_outside_india": "",
     "founders": "Uday Narang",
-    "sources": "https://dealroom.co/news/146211-omega-seiki-mobility-raises-50-crore-to-expand-electric-mobility/"
+    "sources": "https://dealroom.co/news/146211-omega-seiki-mobility-raises-50-crore-to-expand-electric-mobility/",
+    "verified": false
   },
   {
     "date_of_funding": "2026-08-20",
@@ -2510,6 +2768,8 @@
     "deal_tags": "Ecommerce, D2C, B2C",
     "industry": "Retail",
     "sub_industry": "Watches",
+    "vertical": "Retail",
+    "sub-vertical": "Apparel & Accessories",
     "company_description": "D2C watch brand offering modern, hand-finished quartz and chronograph watches at accessible prices.",
     "product_or_solution": "Vittorio Chrono, Ambrosiana Chic, and Duomo Heritage watch collections, plus corporate gifting.",
     "target_market": "B2C",
@@ -2520,7 +2780,8 @@
     "other_offices_in_india": "",
     "other_offices_outside_india": "",
     "founders": "Rachit Jain, Saurabh Agarwal",
-    "sources": "https://m.economictimes.com/tech/funding/d2c-watch-brand-bruno-milano-raises-rs-7-5-crore-led-by-sauce-vc/articleshow/133376365.cms, https://newzchain.com/sauce-vc-leads-rs-7-5-cr-round-in-d2c-watch-brand-bruno-milano/"
+    "sources": "https://m.economictimes.com/tech/funding/d2c-watch-brand-bruno-milano-raises-rs-7-5-crore-led-by-sauce-vc/articleshow/133376365.cms, https://newzchain.com/sauce-vc-leads-rs-7-5-cr-round-in-d2c-watch-brand-bruno-milano/",
+    "verified": false
   },
   {
     "date_of_funding": "2026-08-20",
@@ -2539,6 +2800,8 @@
     "deal_tags": "Consumer Services, Quick Commerce, B2C",
     "industry": "Retail",
     "sub_industry": "Quick Commerce",
+    "vertical": "Retail",
+    "sub-vertical": "Baby",
     "company_description": "Vertical quick commerce platform focused specifically on baby and kids-care products, promising delivery within 60 minutes.",
     "product_or_solution": "Rapid delivery of babycare essentials including apparel, toys, shoes, accessories, hard goods, diapers, wipes, personal care items, and baby food.",
     "target_market": "B2C",
@@ -2549,7 +2812,8 @@
     "other_offices_in_india": "",
     "other_offices_outside_india": "",
     "founders": "Chetan Sharma, Abhijit Gairola, Vivek Khetan",
-    "sources": "https://indianstartupnews.com/funding/peeko-raises-over-7-million-in-series-a-funding-led-by-chiratae-ventures-12398550, https://www.todaysstartupnews.com/startups/peeko-raises-7-million-series-a-babycare-quick-commerce"
+    "sources": "https://indianstartupnews.com/funding/peeko-raises-over-7-million-in-series-a-funding-led-by-chiratae-ventures-12398550, https://www.todaysstartupnews.com/startups/peeko-raises-7-million-series-a-babycare-quick-commerce",
+    "verified": false
   },
   {
     "date_of_funding": "2026-08-20",
@@ -2568,6 +2832,8 @@
     "deal_tags": "AI, Application Layer, B2B",
     "industry": "Healthcare Technology",
     "sub_industry": "AI Infrastructure",
+    "vertical": "Healthcare",
+    "sub-vertical": "Computer Software",
     "company_description": "Healthcare infrastructure startup building an API and data layer that enables AI companies to connect with and operate across electronic health records, payer portals, and legacy healthcare systems.",
     "product_or_solution": "APIs and integrations automating workflows across scheduling, referrals, claims, clinical documentation, and data extraction.",
     "target_market": "B2B",
@@ -2578,7 +2844,8 @@
     "other_offices_in_india": "",
     "other_offices_outside_india": "",
     "founders": "Padam Kataria, Meet Shah",
-    "sources": "https://raising.fi/news/tross-pre-seed-august-2026, https://entrackr.com/snippets/all-in-capital-leads-pre-seed-round-in-healthcare-infrastructure-startup-tross-12398446"
+    "sources": "https://raising.fi/news/tross-pre-seed-august-2026, https://entrackr.com/snippets/all-in-capital-leads-pre-seed-round-in-healthcare-infrastructure-startup-tross-12398446",
+    "verified": false
   },
   {
     "date_of_funding": "2026-08-20",
@@ -2597,6 +2864,8 @@
     "deal_tags": "Ecommerce, D2C, B2C",
     "industry": "Retail",
     "sub_industry": "Footwear",
+    "vertical": "Retail",
+    "sub-vertical": "Apparel & Accessories",
     "company_description": "Homegrown, digital-first sneaker brand focused on design-led, comfortable and accessible footwear for Gen-Z consumers.",
     "product_or_solution": "Mass-premium sneakers featuring wide toe boxes, lightweight TPR soles, dual cushioning, memory foam insoles and breathable uppers.",
     "target_market": "B2C",
@@ -2607,7 +2876,8 @@
     "other_offices_in_india": "",
     "other_offices_outside_india": "",
     "founders": "Ankit Dass, Vidushi Chaudhary",
-    "sources": "https://pulse.d2cinsider.com/zaydn-raises-681k-seed-round-to-scale-gen-z-sneaker-business/, https://kicksandbeaters.com/zaydn-funding-681k-seed-round/"
+    "sources": "https://pulse.d2cinsider.com/zaydn-raises-681k-seed-round-to-scale-gen-z-sneaker-business/, https://kicksandbeaters.com/zaydn-funding-681k-seed-round/",
+    "verified": false
   },
   {
     "date_of_funding": "2026-08-19",
@@ -2626,6 +2896,8 @@
     "deal_tags": "Advanced Hardware & Technology, Defence Tech, B2B",
     "industry": "Aerospace & Defense",
     "sub_industry": "Drone Infrastructure",
+    "vertical": "Technology",
+    "sub-vertical": "Industrial Equipment",
     "company_description": "Deep-tech startup building autonomous docking and charging systems that let drone fleets operate without human intervention.",
     "product_or_solution": "Autonomous Launch Pads, AlgoDOCK, AX Charger, AlgoBMS.",
     "target_market": "B2B",
@@ -2636,7 +2908,8 @@
     "other_offices_in_india": "",
     "other_offices_outside_india": "",
     "founders": "",
-    "sources": "https://startupfox.in/top-stories, https://algofet.com/"
+    "sources": "https://startupfox.in/top-stories, https://algofet.com/",
+    "verified": false
   },
   {
     "date_of_funding": "2026-08-19",
@@ -2655,6 +2928,8 @@
     "deal_tags": "Consumer Services, Listing & Discovery Services, B2C",
     "industry": "Media & Entertainment",
     "sub_industry": "Ticketing and Live Entertainment",
+    "vertical": "Media & Entertainment",
+    "sub-vertical": "Ticketing",
     "company_description": "India's leading entertainment destination and ticketing platform that has evolved into a full-stack entertainment company.",
     "product_or_solution": "Online ticketing platform for movies, live events, concerts, festivals, comedy tours, immersive exhibitions, and cultural gatherings.",
     "target_market": "B2C",
@@ -2665,7 +2940,8 @@
     "other_offices_in_india": "",
     "other_offices_outside_india": "",
     "founders": "Ashish Hemrajani",
-    "sources": "https://m.economictimes.com/industry/media/entertainment/kkr-buys-into-indian-entertainment-platform-bookmyshow/articleshow/133336970.cms, https://www.businesswire.com/news/home/20260818473527/en/KKR-Invests-in-Indian-Ticketing-and-Live-Entertainment-Platform-BookMyShow"
+    "sources": "https://m.economictimes.com/industry/media/entertainment/kkr-buys-into-indian-entertainment-platform-bookmyshow/articleshow/133336970.cms, https://www.businesswire.com/news/home/20260818473527/en/KKR-Invests-in-Indian-Ticketing-and-Live-Entertainment-Platform-BookMyShow",
+    "verified": false
   },
   {
     "date_of_funding": "2026-08-19",
@@ -2684,6 +2960,8 @@
     "deal_tags": "Health Tech, Therapy, B2B, B2C",
     "industry": "Healthcare",
     "sub_industry": "Pediatric Behavioral Health",
+    "vertical": "Healthcare",
+    "sub-vertical": "Hospitals & Treatment Centers",
     "company_description": "Paediatric behavioural health platform providing care for children with autism, ADHD and learning disabilities through an omni-channel model.",
     "product_or_solution": "Clinical therapy, inclusive schooling, diagnostics, digital therapeutics, Get SET Early (eye-tracking based autism screening), and therapist training.",
     "target_market": "B2B, B2C",
@@ -2694,7 +2972,8 @@
     "other_offices_in_india": "",
     "other_offices_outside_india": "",
     "founders": "Dr Sonam Kothari, Dr Abhishek Sen",
-    "sources": "https://entrackr.com/snippets/butterfly-learnings-raises-rs-65-cr-in-pre-series-b-round-led-by-inflexor-ventures-12394562, https://scoopearth.com/butterfly-learnings-secured-65-crore-in-a-pre-series-b-funding-round-led-by-inflexor-ventures/"
+    "sources": "https://entrackr.com/snippets/butterfly-learnings-raises-rs-65-cr-in-pre-series-b-round-led-by-inflexor-ventures-12394562, https://scoopearth.com/butterfly-learnings-secured-65-crore-in-a-pre-series-b-funding-round-led-by-inflexor-ventures/",
+    "verified": false
   },
   {
     "date_of_funding": "2026-08-19",
@@ -2713,6 +2992,8 @@
     "deal_tags": "Enterprise Services, B2B",
     "industry": "IT Infrastructure",
     "sub_industry": "Data Centers",
+    "vertical": "Technology",
+    "sub-vertical": "IT Support Solutions",
     "company_description": "One of the largest hyperscale data centre operators in India offering data center platforms to support India's digital economy.",
     "product_or_solution": "Hyperscale data centre campuses and IT infrastructure solutions.",
     "target_market": "B2B",
@@ -2723,7 +3004,8 @@
     "other_offices_in_india": "Mumbai, Chennai, Noida, Lucknow, Patna, Bengaluru, Kolkata",
     "other_offices_outside_india": "",
     "founders": "Sridhar Pinnapureddy",
-    "sources": "https://www.vccircle.com/cppibbacked-ctrls-raises-fresh-capital-from-two-new-investors"
+    "sources": "https://www.vccircle.com/cppibbacked-ctrls-raises-fresh-capital-from-two-new-investors",
+    "verified": false
   },
   {
     "date_of_funding": "2026-08-19",
@@ -2742,6 +3024,8 @@
     "deal_tags": "Consumer Services, Quick Commerce, B2B",
     "industry": "Retail Technology",
     "sub_industry": "B2B Quick Commerce",
+    "vertical": "Business & Industrial Markets",
+    "sub-vertical": "Construction & Building Materials",
     "company_description": "B2B quick-commerce platform built for construction-material retailers, enabling on-demand, 60-minute delivery of materials.",
     "product_or_solution": "Digital procurement platform for construction materials.",
     "target_market": "B2B",
@@ -2752,7 +3036,8 @@
     "other_offices_in_india": "",
     "other_offices_outside_india": "",
     "founders": "Lakshya Agarwal, Kshitij S. Rungta",
-    "sources": "https://startuptalky.com/news/digidukan-raises-2-crore-to-60-minute-procurement-contstruction-retailers/, https://retail.economictimes.indiatimes.com/news/e-commerce/e-tailing/digidukan-raises-rs-2-crore-to-expand-60-minute-construction-procurement/133341165"
+    "sources": "https://startuptalky.com/news/digidukan-raises-2-crore-to-60-minute-procurement-contstruction-retailers/, https://retail.economictimes.indiatimes.com/news/e-commerce/e-tailing/digidukan-raises-rs-2-crore-to-expand-60-minute-construction-procurement/133341165",
+    "verified": false
   },
   {
     "date_of_funding": "2026-08-19",
@@ -2771,6 +3056,8 @@
     "deal_tags": "Foodtech, QSR, B2C",
     "industry": "Food and Beverage",
     "sub_industry": "Specialty Coffee",
+    "vertical": "Consumer Packaged Goods",
+    "sub-vertical": "Food & Beverages",
     "company_description": "Grab-and-go specialty coffee brand targeting Gen Z consumers with premium beverages.",
     "product_or_solution": "Cold coffee, matcha, single-origin Arabica coffee.",
     "target_market": "B2C",
@@ -2781,7 +3068,8 @@
     "other_offices_in_india": "Punjab, Haryana",
     "other_offices_outside_india": "",
     "founders": "Sohrab Sitaram, Shiv Dhawan",
-    "sources": "https://retail.economictimes.indiatimes.com/news/food-entertainment/food-services/first-coffee-raises-1-3-million-to-fuel-national-expansion/133340002, https://dealroom.co/news/145770-first-coffee-raises-1-3m-in-pre-series-a-round/"
+    "sources": "https://retail.economictimes.indiatimes.com/news/food-entertainment/food-services/first-coffee-raises-1-3-million-to-fuel-national-expansion/133340002, https://dealroom.co/news/145770-first-coffee-raises-1-3m-in-pre-series-a-round/",
+    "verified": false
   },
   {
     "date_of_funding": "2026-08-19",
@@ -2800,6 +3088,8 @@
     "deal_tags": "Fintech, Lending Tech, B2C",
     "industry": "Financial Services",
     "sub_industry": "Digital Financial Services",
+    "vertical": "Finance",
+    "sub-vertical": "Other (Finance)",
     "company_description": "A digital financial services company positioned as a full-stack provider operating across personal loans, home loans, insurance and mutual funds through a mobile-first platform.",
     "product_or_solution": "Personal loans, home loans, insurance, mutual funds, and UPI payments.",
     "target_market": "B2C",
@@ -2810,7 +3100,8 @@
     "other_offices_in_india": "",
     "other_offices_outside_india": "",
     "founders": "Sachin Bansal",
-    "sources": "https://www.renascence.io/news/37346/prosus-invests-100m-in-indian-fintech-navi, https://bfsi.economictimes.indiatimes.com/articles/navi-raises-usd-100-million-from-prosus-in-first-institutional-funding-round/133350802"
+    "sources": "https://www.renascence.io/news/37346/prosus-invests-100m-in-indian-fintech-navi, https://bfsi.economictimes.indiatimes.com/articles/navi-raises-usd-100-million-from-prosus-in-first-institutional-funding-round/133350802",
+    "verified": false
   },
   {
     "date_of_funding": "2026-08-19",
@@ -2829,6 +3120,8 @@
     "deal_tags": "Advanced Hardware & Technology, Internet Of Things (IoT) & Hardware, B2B",
     "industry": "Cleantech",
     "sub_industry": "Water Infrastructure",
+    "vertical": "Business & Industrial Markets",
+    "sub-vertical": "Industrial Equipment",
     "company_description": "Water infrastructure startup transforming sewage treatment by developing factory-built, modular wastewater treatment systems.",
     "product_or_solution": "Standardized, modular wastewater treatment plants using established technologies.",
     "target_market": "B2B",
@@ -2839,7 +3132,8 @@
     "other_offices_in_india": "",
     "other_offices_outside_india": "",
     "founders": "Anuj Arora, Anand Dad",
-    "sources": "https://indianstartupnews.com/funding/neuromod-aqua-raises-pre-seed-funding-from-sportskeeda-founder-porush-jain-12398453, https://entrepreneur.economictimes.indiatimes.com/news/funding/neuromod-aqua-raises-pre-seed-funding-from-sportskeeda-founder-porush-jain/133348875"
+    "sources": "https://indianstartupnews.com/funding/neuromod-aqua-raises-pre-seed-funding-from-sportskeeda-founder-porush-jain-12398453, https://entrepreneur.economictimes.indiatimes.com/news/funding/neuromod-aqua-raises-pre-seed-funding-from-sportskeeda-founder-porush-jain/133348875",
+    "verified": false
   },
   {
     "date_of_funding": "2026-08-19",
@@ -2858,6 +3152,8 @@
     "deal_tags": "Logistics, Logistics Process Solutions, B2B",
     "industry": "Logistics",
     "sub_industry": "Reusable Packaging",
+    "vertical": "Business & Industrial Markets",
+    "sub-vertical": "Business Services",
     "company_description": "Logistics startup (operated by Yantraksh Logistics) providing reusable packaging pooling and asset tracking solutions.",
     "product_or_solution": "Reusable packaging assets and Trakkia network intelligence platform.",
     "target_market": "B2B",
@@ -2868,7 +3164,8 @@
     "other_offices_in_india": "",
     "other_offices_outside_india": "",
     "founders": "",
-    "sources": "https://yourstory.com/2026/08/startup-news-and-updates-daily-roundup-august-24-2026, https://straitsresearch.com/report/pallets-market"
+    "sources": "https://yourstory.com/2026/08/startup-news-and-updates-daily-roundup-august-24-2026, https://straitsresearch.com/report/pallets-market",
+    "verified": false
   },
   {
     "date_of_funding": "2026-08-19",
@@ -2887,6 +3184,8 @@
     "deal_tags": "AI, Application Layer, B2B",
     "industry": "Enterprise Software",
     "sub_industry": "Agentic AI",
+    "vertical": "Technology",
+    "sub-vertical": "Computer Software",
     "company_description": "Agentic AI platform for enterprise execution, designing AI to execute enterprise workflows.",
     "product_or_solution": "ZenForce platform, ZenBank, ZenProcure, and ZenLegal agents.",
     "target_market": "B2B",
@@ -2897,7 +3196,8 @@
     "other_offices_in_india": "",
     "other_offices_outside_india": "Delaware, Chicago",
     "founders": "Nagendra Singh, Sanketh Krishnappa, Vijay Jha",
-    "sources": "https://entrackr.com/snippets/enterprise-ai-platform-zenalyst-raises-pre-seed-funding-12394262, https://scoopearth.com/zenalyst-secured-3-crore-in-a-pre-seed-funding-round-from-angel-and-corporate-investors/"
+    "sources": "https://entrackr.com/snippets/enterprise-ai-platform-zenalyst-raises-pre-seed-funding-12394262, https://scoopearth.com/zenalyst-secured-3-crore-in-a-pre-seed-funding-round-from-angel-and-corporate-investors/",
+    "verified": false
   },
   {
     "date_of_funding": "2026-08-18",
@@ -2916,6 +3216,8 @@
     "deal_tags": "Health Tech, Therapy, B2C",
     "industry": "Healthcare",
     "sub_industry": "Child Development",
+    "vertical": "Healthcare",
+    "sub-vertical": "Hospitals & Treatment Centers",
     "company_description": "Health-tech platform focused on children with special needs and developmental delays.",
     "product_or_solution": "Therapy for conditions such as autism, ADHD, and speech delays via its child development brand Sunshine by LISSUN, combining physical therapy centres, digital services, and AI-driven tools.",
     "target_market": "B2C",
@@ -2926,7 +3228,8 @@
     "other_offices_in_india": "",
     "other_offices_outside_india": "",
     "founders": "Krishna Veer Singh, Tarun Gupta",
-    "sources": "https://www.indianretailer.com/news/lissun-raises-rs-48-cr-series-funding-expand-child-development-centres, https://dealroom.co/news/145507-lissun-raises-5-8m-series-a-to-grow-child-development-centres/"
+    "sources": "https://www.indianretailer.com/news/lissun-raises-rs-48-cr-series-funding-expand-child-development-centres, https://dealroom.co/news/145507-lissun-raises-5-8m-series-a-to-grow-child-development-centres/",
+    "verified": false
   },
   {
     "date_of_funding": "2026-08-18",
@@ -2945,6 +3248,8 @@
     "deal_tags": "Advanced Hardware & Technology, Internet Of Things (IoT) & Hardware, B2B, B2G",
     "industry": "Information Technology",
     "sub_industry": "Geospatial Intelligence",
+    "vertical": "Technology",
+    "sub-vertical": "Computer Software",
     "company_description": "Geospatial intelligence startup providing integrated spatial intelligence solutions across natural resource management, disaster management, urban governance, utilities, infrastructure, and smart cities.",
     "product_or_solution": "OptiFleet (fleet management), GeoBalance (natural resource management), UrbanVista (urban governance), InfraSync (infrastructure asset management), and data acquisition/processing services.",
     "target_market": "B2B, B2G",
@@ -2955,7 +3260,8 @@
     "other_offices_in_india": "",
     "other_offices_outside_india": "West Asia",
     "founders": "Sreeramam GV, Brahmam GVS",
-    "sources": "https://indianstartupnews.com/funding/neogeo-raises-20-million-in-series-a-funding-co-led-by-neev-fund-ii-aavishkaar-capital-12392608, https://dealroom.co/news/145503-neogeoinfo-technologies-raises-20m-series-a/"
+    "sources": "https://indianstartupnews.com/funding/neogeo-raises-20-million-in-series-a-funding-co-led-by-neev-fund-ii-aavishkaar-capital-12392608, https://dealroom.co/news/145503-neogeoinfo-technologies-raises-20m-series-a/",
+    "verified": false
   },
   {
     "date_of_funding": "2026-08-18",
@@ -2974,6 +3280,8 @@
     "deal_tags": "Fintech, Fintech SaaS, B2B",
     "industry": "Financial Technology",
     "sub_industry": "Lending Technology",
+    "vertical": "Finance",
+    "sub-vertical": "Computer Software",
     "company_description": "AI-native lending technology platform that provides software to banks and NBFCs for lending and debt-collection workflows.",
     "product_or_solution": "AI-powered platform spanning customer engagement, collections, field operations, legal, recoveries and underwriting.",
     "target_market": "B2B",
@@ -2984,7 +3292,8 @@
     "other_offices_in_india": "",
     "other_offices_outside_india": "",
     "founders": "Karan Mehta, Sonali Jindal",
-    "sources": "https://www.konsulteer.com/article/rezolv-raises-12-5-million-to-take-ai-across-the-lending-lifecycle, https://entrepreneur.economictimes.indiatimes.com/news/funding/rezolv-raises-12-5-mn-series-a-funding-led-by-norwest/133324232"
+    "sources": "https://www.konsulteer.com/article/rezolv-raises-12-5-million-to-take-ai-across-the-lending-lifecycle, https://entrepreneur.economictimes.indiatimes.com/news/funding/rezolv-raises-12-5-mn-series-a-funding-led-by-norwest/133324232",
+    "verified": false
   },
   {
     "date_of_funding": "2026-08-17",
@@ -3003,6 +3312,8 @@
     "deal_tags": "Ecommerce, D2C, B2C",
     "industry": "Food and Beverage",
     "sub_industry": "Organic/Pesticide-Free Food",
+    "vertical": "Consumer Packaged Goods",
+    "sub-vertical": "Food & Beverages",
     "company_description": "A pesticide-free consumer food brand launched by agritech company DeHaat, connecting India's farms directly with consumer households.",
     "product_or_solution": "Pesticide-free food products with transparency and traceability.",
     "target_market": "B2C",
@@ -3013,7 +3324,8 @@
     "other_offices_in_india": "",
     "other_offices_outside_india": "",
     "founders": "Adarsh J Srivastava",
-    "sources": "https://app.fundz.net/fundings/dehaat-honest-farms-funding-round-series-a-bfc402, https://www.facebook.com/TheStartupCaffeOfficial/posts/dehaats-honest-farms-raises-35-crore-in-a-pre-series-a-round-led-by-otp-ventures/1581155660714113/"
+    "sources": "https://app.fundz.net/fundings/dehaat-honest-farms-funding-round-series-a-bfc402, https://www.facebook.com/TheStartupCaffeOfficial/posts/dehaats-honest-farms-raises-35-crore-in-a-pre-series-a-round-led-by-otp-ventures/1581155660714113/",
+    "verified": false
   },
   {
     "date_of_funding": "2026-08-10",
@@ -3032,6 +3344,8 @@
     "deal_tags": "AI, Application Layer, B2B",
     "industry": "Enterprise Software",
     "sub_industry": "Market Research",
+    "vertical": "Technology",
+    "sub-vertical": "Computer Software",
     "company_description": "AI-native market-research automation platform.",
     "product_or_solution": "AI agents that design, recruit, execute, and analyze market research studies.",
     "target_market": "B2B",
@@ -3042,6 +3356,7 @@
     "other_offices_in_india": "",
     "other_offices_outside_india": "",
     "founders": "Smriti Gupta, Vipul Nair, Himadri Roy",
-    "sources": "https://engtechnica.com/echovane-raises-1m-to-build-ai-agents-for-market-research/"
+    "sources": "https://engtechnica.com/echovane-raises-1m-to-build-ai-agents-for-market-research/",
+    "verified": false
   }
 ]
