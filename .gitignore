@@ -6,5 +6,6 @@ Thumbs.db
 # Dependencies
 node_modules/
 
-# Generated Static Deal Pages (built automatically during GitHub Actions deployment)
+# Generated Static Deal & Trend Pages (built automatically during GitHub Actions deployment)
 company/
+trends/
