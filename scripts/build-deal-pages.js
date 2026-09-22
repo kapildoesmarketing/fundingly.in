@@ -53,8 +53,9 @@ function slugify(text) {
 
 // Helper: Format USD currency
 function formatUSD(amount) {
-    if (!amount || isNaN(amount) || amount === 0) return 'Undisclosed';
+    if (amount === null || amount === undefined || amount === '' || amount === 'Undisclosed' || amount === 'undisclosed') return 'Undisclosed';
     const num = Number(amount);
+    if (isNaN(num) || num <= 0) return 'Undisclosed';
     if (num >= 1000000000) return '$' + (num / 1000000000).toFixed(1).replace(/\.0$/, '') + 'B';
     if (num >= 1000000) return '$' + (num / 1000000).toFixed(1).replace(/\.0$/, '') + 'M';
     if (num >= 1000) return '$' + (num / 1000).toFixed(0) + 'K';
@@ -254,9 +255,10 @@ function buildStaticDealPages() {
         // Total raised calculation
         const totalRaisedUsd = compData.deals.reduce((sum, d) => sum + (Number(d.funding_amount_usd) || 0), 0);
 
-        // Find related deals in same industry
+        // Find related deals in same vertical / segment
+        const primarySector = latestDeal.vertical || latestDeal.segment || latestDeal.industry;
         const relatedDeals = allDeals
-            .filter(d => d.company_name !== latestDeal.company_name && d.industry && d.industry === latestDeal.industry)
+            .filter(d => d.company_name !== latestDeal.company_name && primarySector && (d.vertical === primarySector || d.segment === primarySector || d.industry === primarySector))
             .slice(0, 4);
 
         const htmlContent = generateCompanyPageHtml(compData, latestDeal, totalRaisedUsd, relatedDeals);
@@ -307,7 +309,9 @@ function generateCompanyPageHtml(compData, deal, totalRaisedUsd, relatedDeals) {
     }
 
     // SEO Dynamic Content
-    const pageTitle = `${companyName} Raises ${amountUsdFormatted} in ${roundName} | Fundingly.in`;
+    const pageTitle = amountUsdFormatted !== 'Undisclosed'
+        ? `${companyName} Raises ${amountUsdFormatted} in ${roundName} | Fundingly.in`
+        : `${companyName} Secures ${roundName} Funding | Fundingly.in`;
     const pageDescription = `${companyName} (${deal.company_headquarters || 'India'}) raised ${amountUsdFormatted}${amountInrFormatted ? ' (' + amountInrFormatted + ')' : ''} in ${roundName} led by ${deal.lead_investor || 'top investors'}. Explore complete cap table, founders, and intelligence dossier on Fundingly.in.`;
     const canonicalUrl = `https://fundingly.in/company/${domain}/`;
 
@@ -985,7 +989,7 @@ ${jsonLdString}
                             <h1 class="modal-hero-title" style="font-size: 26px;">${escapeHtml(companyName)}</h1>
                         </div>
                         <div class="modal-hero-subtitle">
-                            ${escapeHtml(deal.industry || 'General')}${deal.sub_industry ? ' • ' + escapeHtml(deal.sub_industry) : ''}
+                            ${escapeHtml(deal.vertical || deal.industry || 'General')}${deal.sub_vertical || deal.sub_industry ? ' • ' + escapeHtml(deal.sub_vertical || deal.sub_industry) : ''}
                         </div>
                         ${dealTagsHTML ? `<div class="deal-tags-container">${dealTagsHTML}</div>` : ''}
                     </div>
@@ -1109,8 +1113,10 @@ ${jsonLdString}
                         <span>Company Profile & Footprint</span>
                     </div>
                     <div class="inspector-grid">
-                        <div class="inspector-row"><span class="inspector-label">Industry</span><div class="inspector-val highlight">${escapeHtml(deal.industry || 'N/A')}</div></div>
-                        <div class="inspector-row"><span class="inspector-label">Sub-Industry</span><div class="inspector-val">${escapeHtml(deal.sub_industry || 'N/A')}</div></div>
+                        <div class="inspector-row"><span class="inspector-label">Vertical</span><div class="inspector-val highlight">${escapeHtml(deal.vertical || deal.industry || 'N/A')}</div></div>
+                        <div class="inspector-row"><span class="inspector-label">Sub-Vertical</span><div class="inspector-val">${escapeHtml(deal.sub_vertical || deal.sub_industry || 'N/A')}</div></div>
+                        <div class="inspector-row"><span class="inspector-label">Segment</span><div class="inspector-val highlight">${escapeHtml(deal.segment || deal.industry || 'N/A')}</div></div>
+                        <div class="inspector-row"><span class="inspector-label">Sub-Segment</span><div class="inspector-val">${escapeHtml(deal.sub_segment || deal.sub_industry || 'N/A')}</div></div>
                         <div class="inspector-row"><span class="inspector-label">Business Model</span><div class="inspector-val">${escapeHtml(deal.business_model || 'N/A')}</div></div>
                         <div class="inspector-row"><span class="inspector-label">Year Founded</span><div class="inspector-val">${escapeHtml(deal.year_founded || 'N/A')}</div></div>
                         <div class="inspector-row"><span class="inspector-label">Team Size at Funding</span><div class="inspector-val">${escapeHtml(deal.employee_count_range_at_funding || deal.employee_count_range || 'N/A')}</div></div>
@@ -1172,10 +1178,23 @@ ${jsonLdString}
 
                 <!-- Action Bar -->
                 <div class="modal-action-bar" style="display: flex; justify-content: space-between; align-items: center; margin-top: 24px; padding-top: 16px; border-top: 1px solid var(--color-hairline); flex-wrap: wrap; gap: 12px;">
-                    <a href="mailto:hello@fundingly.in?subject=Data%20Correction%3A%20${encodeURIComponent(companyName)}%20(${encodeURIComponent(deal.date_of_funding || '')})&body=${encodeURIComponent('Hello Fundingly Team,\n\nI noticed an inaccuracy regarding ' + companyName + ':\n- Date: ' + (deal.date_of_funding || 'N/A') + '\n- Amount: ' + amountUsdFormatted + '\n- Round: ' + roundName + '\n\nSuggested Correction:\n[Please describe corrected information and press link here]\n\nThank you!')}" class="btn-suggest-correction" title="Report an inaccuracy or suggest updated deal information">
-                        <span class="material-symbols-outlined" style="font-size: 16px;">edit_note</span>
-                        <span>Suggest Correction</span>
-                    </a>
+                    <div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;">
+                        <a href="mailto:hello@fundingly.in?subject=Data%20Correction%3A%20${encodeURIComponent(companyName)}%20(${encodeURIComponent(deal.date_of_funding || '')})&body=${encodeURIComponent('Hello Fundingly Team,\n\nI noticed an inaccuracy regarding ' + companyName + ':\n- Date: ' + (deal.date_of_funding || 'N/A') + '\n- Amount: ' + amountUsdFormatted + '\n- Round: ' + roundName + '\n\nSuggested Correction:\n[Please describe corrected information and press link here]\n\nThank you!')}" class="btn-suggest-correction" title="Report an inaccuracy or suggest updated deal information">
+                            <span class="material-symbols-outlined" style="font-size: 16px;">edit_note</span>
+                            <span>Suggest Correction</span>
+                        </a>
+                        ${(deal.verified === true || String(deal.verified).toLowerCase() === 'true') ? `
+                        <span class="verified-status-chip verified" title="Reviewed and verified by Fundingly.in Research Team">
+                            <span class="material-symbols-outlined" style="font-size: 15px;">verified</span>
+                            <span>Reviewed by Fundingly.in Team</span>
+                        </span>
+                        ` : `
+                        <span class="verified-status-chip pending" title="Data under active verification by Fundingly.in Research Team">
+                            <span class="material-symbols-outlined" style="font-size: 15px;">pending_actions</span>
+                            <span>Review in Progress</span>
+                        </span>
+                        `}
+                    </div>
                     <div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;">
                         <button type="button" class="btn-detail" onclick="copyDealSummary()" style="background: var(--color-surface-secondary); color: var(--color-text-primary); border: 1px solid var(--color-hairline);" title="Copy markdown deal memo">
                             <span class="material-symbols-outlined" style="font-size: 16px;">content_copy</span>
@@ -1437,9 +1456,8 @@ ${jsonLdString}
                 \`• Amount Raised: ${amountUsdFormatted}${amountInrFormatted ? ' (~ ' + amountInrFormatted + ')' : ''}\`,
                 \`• Stage & Type: ${roundName}${deal.funding_type ? ' (' + deal.funding_type + ')' : ''}\`,
                 \`• Date: ${dateFormatted}${quarterDisplay ? ' [' + quarterDisplay + ']' : ''}\`,
-                \`• Lead Investor: ${deal.lead_investor || 'Undisclosed'}\`,
-                \`• Syndicate: ${deal.investors || deal.funded_by || 'Undisclosed'}\`,
-                \`• Sector: ${deal.industry || 'General'}${deal.sub_industry ? ' (' + deal.sub_industry + ')' : ''}\`,
+                \`• Vertical: ${deal.vertical || deal.industry || 'General'}${deal.sub_vertical || deal.sub_industry ? ' (' + (deal.sub_vertical || deal.sub_industry) + ')' : ''}\`,
+                ${JSON.stringify(deal.segment ? '• Segment: ' + deal.segment + (deal.sub_segment ? ' (' + deal.sub_segment + ')' : '') : null)},
                 ${JSON.stringify(deal.deal_tags ? '• Focus Tags: ' + deal.deal_tags : null)},
                 \`• Headquarters: ${deal.company_headquarters || 'N/A'}\`,
                 ${JSON.stringify(deal.other_offices_in_india ? '• India Offices: ' + deal.other_offices_in_india : null)},

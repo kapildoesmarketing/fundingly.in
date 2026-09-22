@@ -567,13 +567,20 @@
                     </div>
                 </div>
 
-                <!-- Module C: Industry Hotspots (3-Tier Hierarchical Drilldown) -->
+                <!-- Module C: Industry Hotspots (3-Tier Hierarchical Drilldown with Dual View Toggle) -->
                 <div class="trends-section-card">
-                    <div class="trends-section-title">
-                        <span>Industry Hotspots</span>
+                    <div class="trends-section-header-row">
+                        <div class="trends-section-title" style="margin-bottom: 0;">
+                            <span>Industry Hotspots</span>
+                        </div>
+                        <div class="trends-toggle-group" role="tablist" aria-label="Hotspots View Selection">
+                            <button type="button" class="trends-toggle-btn active" id="btnViewVertical" data-view="vertical" role="tab" aria-selected="true" onclick="switchHotspotsView('vertical')">Vertical</button>
+                            <button type="button" class="trends-toggle-btn" id="btnViewSegment" data-view="segment" role="tab" aria-selected="false" onclick="switchHotspotsView('segment')">Segment</button>
+                        </div>
                     </div>
-                    <div id="trendsIndustryView" class="trends-progress-list">
-                        
+                    <div id="trendsIndustryView">
+                        <div id="trendsVerticalView" class="trends-progress-list">
+                            
             <div class="trends-drill-item">
                 <div class="trends-drill-header" role="button" tabindex="0" onclick="toggleTrendsDrilldown(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleTrendsDrilldown(this);}">
                     <button type="button" class="trends-drill-chevron" aria-label="Toggle Food and Beverage" tabindex="-1">
@@ -610,9 +617,9 @@
                         
                     <div class="trends-drill-company-row">
                         <div class="trends-deal-left">
-                            <a href="../../company/third-wave-coffee/" class="avatar-link" aria-label="View Third Wave Coffee"><div class="modal-hero-monogram" style="width:32px; height:32px; font-size:12px; border-radius:8px; background:#FAF5FF; color:#9333EA; border:1px solid #E9D5FF;">TW</div></a>
+                            <a href="../../company/thirdwavecoffeeroasters.com/" class="avatar-link" aria-label="View Third Wave Coffee"><img src="https://www.google.com/s2/favicons?domain=thirdwavecoffeeroasters.com&sz=128" alt="Third Wave Coffee" class="modal-hero-avatar" style="width: 32px; height: 32px; border-radius: 8px;" onerror="this.outerHTML='<div class=\'modal-hero-monogram\' style=\'width:32px; height:32px; font-size:12px; border-radius:8px; background:#FAF5FF; color:#9333EA; border:1px solid #E9D5FF;\'>TW</div>'"></a>
                             <div style="min-width: 0;">
-                                <a href="../../company/third-wave-coffee/" class="company-title-link" style="text-decoration: none; color: inherit;">
+                                <a href="../../company/thirdwavecoffeeroasters.com/" class="company-title-link" style="text-decoration: none; color: inherit;">
                                     <div class="trends-deal-title">Third Wave Coffee</div>
                                 </a>
                                 <div class="trends-deal-meta">Round • WestBridge Capital</div>
@@ -620,7 +627,7 @@
                         </div>
                         <div class="trends-deal-right">
                             <div class="trends-deal-amount">$43M</div>
-                            <a href="../../company/third-wave-coffee/" class="btn-trends-memo" aria-label="View details for Third Wave Coffee">
+                            <a href="../../company/thirdwavecoffeeroasters.com/" class="btn-trends-memo" aria-label="View details for Third Wave Coffee">
                                 <span>View Details</span>
                                 <span class="material-symbols-outlined" style="font-size: 13px;">arrow_outward</span>
                             </a>
@@ -629,9 +636,9 @@
                 
                     <div class="trends-drill-company-row">
                         <div class="trends-deal-left">
-                            <a href="../../company/biryani-bees/" class="avatar-link" aria-label="View Biryani Bees"><div class="modal-hero-monogram" style="width:32px; height:32px; font-size:12px; border-radius:8px; background:#F0FDF4; color:#16A34A; border:1px solid #BBF7D0;">BB</div></a>
+                            <a href="../../company/biryanibees.com/" class="avatar-link" aria-label="View Biryani Bees"><img src="https://www.google.com/s2/favicons?domain=biryanibees.com&sz=128" alt="Biryani Bees" class="modal-hero-avatar" style="width: 32px; height: 32px; border-radius: 8px;" onerror="this.outerHTML='<div class=\'modal-hero-monogram\' style=\'width:32px; height:32px; font-size:12px; border-radius:8px; background:#F0FDF4; color:#16A34A; border:1px solid #BBF7D0;\'>BB</div>'"></a>
                             <div style="min-width: 0;">
-                                <a href="../../company/biryani-bees/" class="company-title-link" style="text-decoration: none; color: inherit;">
+                                <a href="../../company/biryanibees.com/" class="company-title-link" style="text-decoration: none; color: inherit;">
                                     <div class="trends-deal-title">Biryani Bees</div>
                                 </a>
                                 <div class="trends-deal-meta">Round • Vivek Oberoi Family Office</div>
@@ -639,7 +646,7 @@
                         </div>
                         <div class="trends-deal-right">
                             <div class="trends-deal-amount">$1M</div>
-                            <a href="../../company/biryani-bees/" class="btn-trends-memo" aria-label="View details for Biryani Bees">
+                            <a href="../../company/biryanibees.com/" class="btn-trends-memo" aria-label="View details for Biryani Bees">
                                 <span>View Details</span>
                                 <span class="material-symbols-outlined" style="font-size: 13px;">arrow_outward</span>
                             </a>
@@ -747,9 +754,9 @@
                         
                     <div class="trends-drill-company-row">
                         <div class="trends-deal-left">
-                            <a href="../../company/runable/" class="avatar-link" aria-label="View Runable"><div class="modal-hero-monogram" style="width:32px; height:32px; font-size:12px; border-radius:8px; background:#FAF5FF; color:#9333EA; border:1px solid #E9D5FF;">RU</div></a>
+                            <a href="../../company/runable.co/" class="avatar-link" aria-label="View Runable"><img src="https://www.google.com/s2/favicons?domain=runable.co&sz=128" alt="Runable" class="modal-hero-avatar" style="width: 32px; height: 32px; border-radius: 8px;" onerror="this.outerHTML='<div class=\'modal-hero-monogram\' style=\'width:32px; height:32px; font-size:12px; border-radius:8px; background:#FAF5FF; color:#9333EA; border:1px solid #E9D5FF;\'>RU</div>'"></a>
                             <div style="min-width: 0;">
-                                <a href="../../company/runable/" class="company-title-link" style="text-decoration: none; color: inherit;">
+                                <a href="../../company/runable.co/" class="company-title-link" style="text-decoration: none; color: inherit;">
                                     <div class="trends-deal-title">Runable</div>
                                 </a>
                                 <div class="trends-deal-meta">Series A • Susquehanna Venture Capital, Nexus Venture Partners</div>
@@ -757,7 +764,7 @@
                         </div>
                         <div class="trends-deal-right">
                             <div class="trends-deal-amount">$21M</div>
-                            <a href="../../company/runable/" class="btn-trends-memo" aria-label="View details for Runable">
+                            <a href="../../company/runable.co/" class="btn-trends-memo" aria-label="View details for Runable">
                                 <span>View Details</span>
                                 <span class="material-symbols-outlined" style="font-size: 13px;">arrow_outward</span>
                             </a>
@@ -786,9 +793,9 @@
                         
                     <div class="trends-drill-company-row">
                         <div class="trends-deal-left">
-                            <a href="../../company/ringg-ai/" class="avatar-link" aria-label="View Ringg AI"><div class="modal-hero-monogram" style="width:32px; height:32px; font-size:12px; border-radius:8px; background:#FEF2F2; color:#DC2626; border:1px solid #FECACA;">RA</div></a>
+                            <a href="../../company/ringg.ai/" class="avatar-link" aria-label="View Ringg AI"><img src="https://www.google.com/s2/favicons?domain=ringg.ai&sz=128" alt="Ringg AI" class="modal-hero-avatar" style="width: 32px; height: 32px; border-radius: 8px;" onerror="this.outerHTML='<div class=\'modal-hero-monogram\' style=\'width:32px; height:32px; font-size:12px; border-radius:8px; background:#FEF2F2; color:#DC2626; border:1px solid #FECACA;\'>RA</div>'"></a>
                             <div style="min-width: 0;">
-                                <a href="../../company/ringg-ai/" class="company-title-link" style="text-decoration: none; color: inherit;">
+                                <a href="../../company/ringg.ai/" class="company-title-link" style="text-decoration: none; color: inherit;">
                                     <div class="trends-deal-title">Ringg AI</div>
                                 </a>
                                 <div class="trends-deal-meta">Series A • Peak XV Partners</div>
@@ -796,7 +803,7 @@
                         </div>
                         <div class="trends-deal-right">
                             <div class="trends-deal-amount">$10M</div>
-                            <a href="../../company/ringg-ai/" class="btn-trends-memo" aria-label="View details for Ringg AI">
+                            <a href="../../company/ringg.ai/" class="btn-trends-memo" aria-label="View details for Ringg AI">
                                 <span>View Details</span>
                                 <span class="material-symbols-outlined" style="font-size: 13px;">arrow_outward</span>
                             </a>
@@ -845,9 +852,9 @@
                         
                     <div class="trends-drill-company-row">
                         <div class="trends-deal-left">
-                            <a href="../../company/matter/" class="avatar-link" aria-label="View MATTER"><div class="modal-hero-monogram" style="width:32px; height:32px; font-size:12px; border-radius:8px; background:#F0FDF4; color:#16A34A; border:1px solid #BBF7D0;">MA</div></a>
+                            <a href="../../company/matter.in/" class="avatar-link" aria-label="View MATTER"><img src="https://www.google.com/s2/favicons?domain=matter.in&sz=128" alt="MATTER" class="modal-hero-avatar" style="width: 32px; height: 32px; border-radius: 8px;" onerror="this.outerHTML='<div class=\'modal-hero-monogram\' style=\'width:32px; height:32px; font-size:12px; border-radius:8px; background:#F0FDF4; color:#16A34A; border:1px solid #BBF7D0;\'>MA</div>'"></a>
                             <div style="min-width: 0;">
-                                <a href="../../company/matter/" class="company-title-link" style="text-decoration: none; color: inherit;">
+                                <a href="../../company/matter.in/" class="company-title-link" style="text-decoration: none; color: inherit;">
                                     <div class="trends-deal-title">MATTER</div>
                                 </a>
                                 <div class="trends-deal-meta">Round</div>
@@ -855,7 +862,7 @@
                         </div>
                         <div class="trends-deal-right">
                             <div class="trends-deal-amount">$25M</div>
-                            <a href="../../company/matter/" class="btn-trends-memo" aria-label="View details for MATTER">
+                            <a href="../../company/matter.in/" class="btn-trends-memo" aria-label="View details for MATTER">
                                 <span>View Details</span>
                                 <span class="material-symbols-outlined" style="font-size: 13px;">arrow_outward</span>
                             </a>
@@ -904,9 +911,9 @@
                         
                     <div class="trends-drill-company-row">
                         <div class="trends-deal-left">
-                            <a href="../../company/nexedge-capital/" class="avatar-link" aria-label="View Nexedge Capital"><div class="modal-hero-monogram" style="width:32px; height:32px; font-size:12px; border-radius:8px; background:#FFF7ED; color:#EA580C; border:1px solid #FFEDD5;">NC</div></a>
+                            <a href="../../company/nexedge.capital/" class="avatar-link" aria-label="View Nexedge Capital"><img src="https://www.google.com/s2/favicons?domain=nexedge.capital&sz=128" alt="Nexedge Capital" class="modal-hero-avatar" style="width: 32px; height: 32px; border-radius: 8px;" onerror="this.outerHTML='<div class=\'modal-hero-monogram\' style=\'width:32px; height:32px; font-size:12px; border-radius:8px; background:#FFF7ED; color:#EA580C; border:1px solid #FFEDD5;\'>NC</div>'"></a>
                             <div style="min-width: 0;">
-                                <a href="../../company/nexedge-capital/" class="company-title-link" style="text-decoration: none; color: inherit;">
+                                <a href="../../company/nexedge.capital/" class="company-title-link" style="text-decoration: none; color: inherit;">
                                     <div class="trends-deal-title">Nexedge Capital</div>
                                 </a>
                                 <div class="trends-deal-meta">Round • Mirae Asset Venture Investment, Elev8 Venture Partners</div>
@@ -914,7 +921,7 @@
                         </div>
                         <div class="trends-deal-right">
                             <div class="trends-deal-amount">$20M</div>
-                            <a href="../../company/nexedge-capital/" class="btn-trends-memo" aria-label="View details for Nexedge Capital">
+                            <a href="../../company/nexedge.capital/" class="btn-trends-memo" aria-label="View details for Nexedge Capital">
                                 <span>View Details</span>
                                 <span class="material-symbols-outlined" style="font-size: 13px;">arrow_outward</span>
                             </a>
@@ -943,9 +950,9 @@
                         
                     <div class="trends-drill-company-row">
                         <div class="trends-deal-left">
-                            <a href="../../company/staywell-health/" class="avatar-link" aria-label="View Staywell.Health"><div class="modal-hero-monogram" style="width:32px; height:32px; font-size:12px; border-radius:8px; background:#EBF5FF; color:#0066CC; border:1px solid #B8DBFF;">ST</div></a>
+                            <a href="../../company/staywellhealth.in/" class="avatar-link" aria-label="View Staywell.Health"><img src="https://www.google.com/s2/favicons?domain=staywellhealth.in&sz=128" alt="Staywell.Health" class="modal-hero-avatar" style="width: 32px; height: 32px; border-radius: 8px;" onerror="this.outerHTML='<div class=\'modal-hero-monogram\' style=\'width:32px; height:32px; font-size:12px; border-radius:8px; background:#EBF5FF; color:#0066CC; border:1px solid #B8DBFF;\'>ST</div>'"></a>
                             <div style="min-width: 0;">
-                                <a href="../../company/staywell-health/" class="company-title-link" style="text-decoration: none; color: inherit;">
+                                <a href="../../company/staywellhealth.in/" class="company-title-link" style="text-decoration: none; color: inherit;">
                                     <div class="trends-deal-title">Staywell.Health</div>
                                 </a>
                                 <div class="trends-deal-meta">Round • Equanimity Investments</div>
@@ -953,7 +960,7 @@
                         </div>
                         <div class="trends-deal-right">
                             <div class="trends-deal-amount">Undisclosed</div>
-                            <a href="../../company/staywell-health/" class="btn-trends-memo" aria-label="View details for Staywell.Health">
+                            <a href="../../company/staywellhealth.in/" class="btn-trends-memo" aria-label="View details for Staywell.Health">
                                 <span>View Details</span>
                                 <span class="material-symbols-outlined" style="font-size: 13px;">arrow_outward</span>
                             </a>
@@ -966,6 +973,402 @@
                 </div>
             </div>
         
+                        </div>
+                        <div id="trendsSegmentView" class="trends-progress-list" style="display: none;">
+                            
+            <div class="trends-drill-item">
+                <div class="trends-drill-header" role="button" tabindex="0" onclick="toggleTrendsDrilldown(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleTrendsDrilldown(this);}">
+                    <button type="button" class="trends-drill-chevron" aria-label="Toggle Food and Beverage" tabindex="-1">
+                        <span class="material-symbols-outlined">chevron_right</span>
+                    </button>
+                    <div class="trends-drill-info">
+                        <div class="trends-progress-labels">
+                            <span class="trends-progress-name" title="Food and Beverage">Food and Beverage</span>
+                            <span class="trends-progress-val">$44M • 2 deals (22%)</span>
+                        </div>
+                        <div class="trends-progress-track">
+                            <div class="trends-progress-fill" style="width: 22%;"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="trends-drill-sub-list">
+                    
+                <div class="trends-drill-sub-item">
+                    <div class="trends-drill-sub-header" role="button" tabindex="0" onclick="toggleTrendsDrilldown(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleTrendsDrilldown(this);}">
+                        <button type="button" class="trends-drill-chevron" aria-label="Toggle QSR" tabindex="-1">
+                            <span class="material-symbols-outlined">chevron_right</span>
+                        </button>
+                        <div class="trends-drill-info">
+                            <div class="trends-progress-labels">
+                                <span class="trends-sub-name" title="QSR">QSR</span>
+                                <span class="trends-progress-val">$44M • 2 deals (100%)</span>
+                            </div>
+                            <div class="trends-progress-track sub-track">
+                                <div class="trends-progress-fill" style="width: 100%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="trends-drill-company-list">
+                        
+                    <div class="trends-drill-company-row">
+                        <div class="trends-deal-left">
+                            <a href="../../company/thirdwavecoffeeroasters.com/" class="avatar-link" aria-label="View Third Wave Coffee"><img src="https://www.google.com/s2/favicons?domain=thirdwavecoffeeroasters.com&sz=128" alt="Third Wave Coffee" class="modal-hero-avatar" style="width: 32px; height: 32px; border-radius: 8px;" onerror="this.outerHTML='<div class=\'modal-hero-monogram\' style=\'width:32px; height:32px; font-size:12px; border-radius:8px; background:#FAF5FF; color:#9333EA; border:1px solid #E9D5FF;\'>TW</div>'"></a>
+                            <div style="min-width: 0;">
+                                <a href="../../company/thirdwavecoffeeroasters.com/" class="company-title-link" style="text-decoration: none; color: inherit;">
+                                    <div class="trends-deal-title">Third Wave Coffee</div>
+                                </a>
+                                <div class="trends-deal-meta">Round • WestBridge Capital</div>
+                            </div>
+                        </div>
+                        <div class="trends-deal-right">
+                            <div class="trends-deal-amount">$43M</div>
+                            <a href="../../company/thirdwavecoffeeroasters.com/" class="btn-trends-memo" aria-label="View details for Third Wave Coffee">
+                                <span>View Details</span>
+                                <span class="material-symbols-outlined" style="font-size: 13px;">arrow_outward</span>
+                            </a>
+                        </div>
+                    </div>
+                
+                    <div class="trends-drill-company-row">
+                        <div class="trends-deal-left">
+                            <a href="../../company/biryanibees.com/" class="avatar-link" aria-label="View Biryani Bees"><img src="https://www.google.com/s2/favicons?domain=biryanibees.com&sz=128" alt="Biryani Bees" class="modal-hero-avatar" style="width: 32px; height: 32px; border-radius: 8px;" onerror="this.outerHTML='<div class=\'modal-hero-monogram\' style=\'width:32px; height:32px; font-size:12px; border-radius:8px; background:#F0FDF4; color:#16A34A; border:1px solid #BBF7D0;\'>BB</div>'"></a>
+                            <div style="min-width: 0;">
+                                <a href="../../company/biryanibees.com/" class="company-title-link" style="text-decoration: none; color: inherit;">
+                                    <div class="trends-deal-title">Biryani Bees</div>
+                                </a>
+                                <div class="trends-deal-meta">Round • Vivek Oberoi Family Office</div>
+                            </div>
+                        </div>
+                        <div class="trends-deal-right">
+                            <div class="trends-deal-amount">$1M</div>
+                            <a href="../../company/biryanibees.com/" class="btn-trends-memo" aria-label="View details for Biryani Bees">
+                                <span>View Details</span>
+                                <span class="material-symbols-outlined" style="font-size: 13px;">arrow_outward</span>
+                            </a>
+                        </div>
+                    </div>
+                
+                    </div>
+                </div>
+            
+                </div>
+            </div>
+        
+            <div class="trends-drill-item">
+                <div class="trends-drill-header" role="button" tabindex="0" onclick="toggleTrendsDrilldown(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleTrendsDrilldown(this);}">
+                    <button type="button" class="trends-drill-chevron" aria-label="Toggle Aerospace &amp; Logistics" tabindex="-1">
+                        <span class="material-symbols-outlined">chevron_right</span>
+                    </button>
+                    <div class="trends-drill-info">
+                        <div class="trends-progress-labels">
+                            <span class="trends-progress-name" title="Aerospace &amp; Logistics">Aerospace &amp; Logistics</span>
+                            <span class="trends-progress-val">$37M • 1 deal (18%)</span>
+                        </div>
+                        <div class="trends-progress-track">
+                            <div class="trends-progress-fill" style="width: 18%;"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="trends-drill-sub-list">
+                    
+                <div class="trends-drill-sub-item">
+                    <div class="trends-drill-sub-header" role="button" tabindex="0" onclick="toggleTrendsDrilldown(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleTrendsDrilldown(this);}">
+                        <button type="button" class="trends-drill-chevron" aria-label="Toggle Drone Logistics" tabindex="-1">
+                            <span class="material-symbols-outlined">chevron_right</span>
+                        </button>
+                        <div class="trends-drill-info">
+                            <div class="trends-progress-labels">
+                                <span class="trends-sub-name" title="Drone Logistics">Drone Logistics</span>
+                                <span class="trends-progress-val">$37M • 1 deal (100%)</span>
+                            </div>
+                            <div class="trends-progress-track sub-track">
+                                <div class="trends-progress-fill" style="width: 100%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="trends-drill-company-list">
+                        
+                    <div class="trends-drill-company-row">
+                        <div class="trends-deal-left">
+                            <a href="../../company/airbound.com/" class="avatar-link" aria-label="View Airbound"><img src="https://www.google.com/s2/favicons?domain=airbound.com&sz=128" alt="Airbound" class="modal-hero-avatar" style="width: 32px; height: 32px; border-radius: 8px;" onerror="this.outerHTML='<div class=\'modal-hero-monogram\' style=\'width:32px; height:32px; font-size:12px; border-radius:8px; background:#FDF2F8; color:#DB2777; border:1px solid #FCE7F3;\'>AI</div>'"></a>
+                            <div style="min-width: 0;">
+                                <a href="../../company/airbound.com/" class="company-title-link" style="text-decoration: none; color: inherit;">
+                                    <div class="trends-deal-title">Airbound</div>
+                                </a>
+                                <div class="trends-deal-meta">Series A • Greenoaks</div>
+                            </div>
+                        </div>
+                        <div class="trends-deal-right">
+                            <div class="trends-deal-amount">$37M</div>
+                            <a href="../../company/airbound.com/" class="btn-trends-memo" aria-label="View details for Airbound">
+                                <span>View Details</span>
+                                <span class="material-symbols-outlined" style="font-size: 13px;">arrow_outward</span>
+                            </a>
+                        </div>
+                    </div>
+                
+                    </div>
+                </div>
+            
+                </div>
+            </div>
+        
+            <div class="trends-drill-item">
+                <div class="trends-drill-header" role="button" tabindex="0" onclick="toggleTrendsDrilldown(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleTrendsDrilldown(this);}">
+                    <button type="button" class="trends-drill-chevron" aria-label="Toggle Enterprise Software" tabindex="-1">
+                        <span class="material-symbols-outlined">chevron_right</span>
+                    </button>
+                    <div class="trends-drill-info">
+                        <div class="trends-progress-labels">
+                            <span class="trends-progress-name" title="Enterprise Software">Enterprise Software</span>
+                            <span class="trends-progress-val">$31M • 2 deals (15%)</span>
+                        </div>
+                        <div class="trends-progress-track">
+                            <div class="trends-progress-fill" style="width: 15%;"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="trends-drill-sub-list">
+                    
+                <div class="trends-drill-sub-item">
+                    <div class="trends-drill-sub-header" role="button" tabindex="0" onclick="toggleTrendsDrilldown(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleTrendsDrilldown(this);}">
+                        <button type="button" class="trends-drill-chevron" aria-label="Toggle AI Platform" tabindex="-1">
+                            <span class="material-symbols-outlined">chevron_right</span>
+                        </button>
+                        <div class="trends-drill-info">
+                            <div class="trends-progress-labels">
+                                <span class="trends-sub-name" title="AI Platform">AI Platform</span>
+                                <span class="trends-progress-val">$21M • 1 deal (68%)</span>
+                            </div>
+                            <div class="trends-progress-track sub-track">
+                                <div class="trends-progress-fill" style="width: 68%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="trends-drill-company-list">
+                        
+                    <div class="trends-drill-company-row">
+                        <div class="trends-deal-left">
+                            <a href="../../company/runable.co/" class="avatar-link" aria-label="View Runable"><img src="https://www.google.com/s2/favicons?domain=runable.co&sz=128" alt="Runable" class="modal-hero-avatar" style="width: 32px; height: 32px; border-radius: 8px;" onerror="this.outerHTML='<div class=\'modal-hero-monogram\' style=\'width:32px; height:32px; font-size:12px; border-radius:8px; background:#FAF5FF; color:#9333EA; border:1px solid #E9D5FF;\'>RU</div>'"></a>
+                            <div style="min-width: 0;">
+                                <a href="../../company/runable.co/" class="company-title-link" style="text-decoration: none; color: inherit;">
+                                    <div class="trends-deal-title">Runable</div>
+                                </a>
+                                <div class="trends-deal-meta">Series A • Susquehanna Venture Capital, Nexus Venture Partners</div>
+                            </div>
+                        </div>
+                        <div class="trends-deal-right">
+                            <div class="trends-deal-amount">$21M</div>
+                            <a href="../../company/runable.co/" class="btn-trends-memo" aria-label="View details for Runable">
+                                <span>View Details</span>
+                                <span class="material-symbols-outlined" style="font-size: 13px;">arrow_outward</span>
+                            </a>
+                        </div>
+                    </div>
+                
+                    </div>
+                </div>
+            
+                <div class="trends-drill-sub-item">
+                    <div class="trends-drill-sub-header" role="button" tabindex="0" onclick="toggleTrendsDrilldown(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleTrendsDrilldown(this);}">
+                        <button type="button" class="trends-drill-chevron" aria-label="Toggle Voice AI" tabindex="-1">
+                            <span class="material-symbols-outlined">chevron_right</span>
+                        </button>
+                        <div class="trends-drill-info">
+                            <div class="trends-progress-labels">
+                                <span class="trends-sub-name" title="Voice AI">Voice AI</span>
+                                <span class="trends-progress-val">$10M • 1 deal (32%)</span>
+                            </div>
+                            <div class="trends-progress-track sub-track">
+                                <div class="trends-progress-fill" style="width: 32%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="trends-drill-company-list">
+                        
+                    <div class="trends-drill-company-row">
+                        <div class="trends-deal-left">
+                            <a href="../../company/ringg.ai/" class="avatar-link" aria-label="View Ringg AI"><img src="https://www.google.com/s2/favicons?domain=ringg.ai&sz=128" alt="Ringg AI" class="modal-hero-avatar" style="width: 32px; height: 32px; border-radius: 8px;" onerror="this.outerHTML='<div class=\'modal-hero-monogram\' style=\'width:32px; height:32px; font-size:12px; border-radius:8px; background:#FEF2F2; color:#DC2626; border:1px solid #FECACA;\'>RA</div>'"></a>
+                            <div style="min-width: 0;">
+                                <a href="../../company/ringg.ai/" class="company-title-link" style="text-decoration: none; color: inherit;">
+                                    <div class="trends-deal-title">Ringg AI</div>
+                                </a>
+                                <div class="trends-deal-meta">Series A • Peak XV Partners</div>
+                            </div>
+                        </div>
+                        <div class="trends-deal-right">
+                            <div class="trends-deal-amount">$10M</div>
+                            <a href="../../company/ringg.ai/" class="btn-trends-memo" aria-label="View details for Ringg AI">
+                                <span>View Details</span>
+                                <span class="material-symbols-outlined" style="font-size: 13px;">arrow_outward</span>
+                            </a>
+                        </div>
+                    </div>
+                
+                    </div>
+                </div>
+            
+                </div>
+            </div>
+        
+            <div class="trends-drill-item">
+                <div class="trends-drill-header" role="button" tabindex="0" onclick="toggleTrendsDrilldown(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleTrendsDrilldown(this);}">
+                    <button type="button" class="trends-drill-chevron" aria-label="Toggle Automotive" tabindex="-1">
+                        <span class="material-symbols-outlined">chevron_right</span>
+                    </button>
+                    <div class="trends-drill-info">
+                        <div class="trends-progress-labels">
+                            <span class="trends-progress-name" title="Automotive">Automotive</span>
+                            <span class="trends-progress-val">$25M • 1 deal (12%)</span>
+                        </div>
+                        <div class="trends-progress-track">
+                            <div class="trends-progress-fill" style="width: 12%;"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="trends-drill-sub-list">
+                    
+                <div class="trends-drill-sub-item">
+                    <div class="trends-drill-sub-header" role="button" tabindex="0" onclick="toggleTrendsDrilldown(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleTrendsDrilldown(this);}">
+                        <button type="button" class="trends-drill-chevron" aria-label="Toggle Electric Vehicles" tabindex="-1">
+                            <span class="material-symbols-outlined">chevron_right</span>
+                        </button>
+                        <div class="trends-drill-info">
+                            <div class="trends-progress-labels">
+                                <span class="trends-sub-name" title="Electric Vehicles">Electric Vehicles</span>
+                                <span class="trends-progress-val">$25M • 1 deal (100%)</span>
+                            </div>
+                            <div class="trends-progress-track sub-track">
+                                <div class="trends-progress-fill" style="width: 100%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="trends-drill-company-list">
+                        
+                    <div class="trends-drill-company-row">
+                        <div class="trends-deal-left">
+                            <a href="../../company/matter.in/" class="avatar-link" aria-label="View MATTER"><img src="https://www.google.com/s2/favicons?domain=matter.in&sz=128" alt="MATTER" class="modal-hero-avatar" style="width: 32px; height: 32px; border-radius: 8px;" onerror="this.outerHTML='<div class=\'modal-hero-monogram\' style=\'width:32px; height:32px; font-size:12px; border-radius:8px; background:#F0FDF4; color:#16A34A; border:1px solid #BBF7D0;\'>MA</div>'"></a>
+                            <div style="min-width: 0;">
+                                <a href="../../company/matter.in/" class="company-title-link" style="text-decoration: none; color: inherit;">
+                                    <div class="trends-deal-title">MATTER</div>
+                                </a>
+                                <div class="trends-deal-meta">Round</div>
+                            </div>
+                        </div>
+                        <div class="trends-deal-right">
+                            <div class="trends-deal-amount">$25M</div>
+                            <a href="../../company/matter.in/" class="btn-trends-memo" aria-label="View details for MATTER">
+                                <span>View Details</span>
+                                <span class="material-symbols-outlined" style="font-size: 13px;">arrow_outward</span>
+                            </a>
+                        </div>
+                    </div>
+                
+                    </div>
+                </div>
+            
+                </div>
+            </div>
+        
+            <div class="trends-drill-item">
+                <div class="trends-drill-header" role="button" tabindex="0" onclick="toggleTrendsDrilldown(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleTrendsDrilldown(this);}">
+                    <button type="button" class="trends-drill-chevron" aria-label="Toggle Financial Services" tabindex="-1">
+                        <span class="material-symbols-outlined">chevron_right</span>
+                    </button>
+                    <div class="trends-drill-info">
+                        <div class="trends-progress-labels">
+                            <span class="trends-progress-name" title="Financial Services">Financial Services</span>
+                            <span class="trends-progress-val">$20M • 2 deals (10%)</span>
+                        </div>
+                        <div class="trends-progress-track">
+                            <div class="trends-progress-fill" style="width: 10%;"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="trends-drill-sub-list">
+                    
+                <div class="trends-drill-sub-item">
+                    <div class="trends-drill-sub-header" role="button" tabindex="0" onclick="toggleTrendsDrilldown(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleTrendsDrilldown(this);}">
+                        <button type="button" class="trends-drill-chevron" aria-label="Toggle Wealth Management" tabindex="-1">
+                            <span class="material-symbols-outlined">chevron_right</span>
+                        </button>
+                        <div class="trends-drill-info">
+                            <div class="trends-progress-labels">
+                                <span class="trends-sub-name" title="Wealth Management">Wealth Management</span>
+                                <span class="trends-progress-val">$20M • 1 deal (100%)</span>
+                            </div>
+                            <div class="trends-progress-track sub-track">
+                                <div class="trends-progress-fill" style="width: 100%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="trends-drill-company-list">
+                        
+                    <div class="trends-drill-company-row">
+                        <div class="trends-deal-left">
+                            <a href="../../company/nexedge.capital/" class="avatar-link" aria-label="View Nexedge Capital"><img src="https://www.google.com/s2/favicons?domain=nexedge.capital&sz=128" alt="Nexedge Capital" class="modal-hero-avatar" style="width: 32px; height: 32px; border-radius: 8px;" onerror="this.outerHTML='<div class=\'modal-hero-monogram\' style=\'width:32px; height:32px; font-size:12px; border-radius:8px; background:#FFF7ED; color:#EA580C; border:1px solid #FFEDD5;\'>NC</div>'"></a>
+                            <div style="min-width: 0;">
+                                <a href="../../company/nexedge.capital/" class="company-title-link" style="text-decoration: none; color: inherit;">
+                                    <div class="trends-deal-title">Nexedge Capital</div>
+                                </a>
+                                <div class="trends-deal-meta">Round • Mirae Asset Venture Investment, Elev8 Venture Partners</div>
+                            </div>
+                        </div>
+                        <div class="trends-deal-right">
+                            <div class="trends-deal-amount">$20M</div>
+                            <a href="../../company/nexedge.capital/" class="btn-trends-memo" aria-label="View details for Nexedge Capital">
+                                <span>View Details</span>
+                                <span class="material-symbols-outlined" style="font-size: 13px;">arrow_outward</span>
+                            </a>
+                        </div>
+                    </div>
+                
+                    </div>
+                </div>
+            
+                <div class="trends-drill-sub-item">
+                    <div class="trends-drill-sub-header" role="button" tabindex="0" onclick="toggleTrendsDrilldown(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleTrendsDrilldown(this);}">
+                        <button type="button" class="trends-drill-chevron" aria-label="Toggle Insurtech" tabindex="-1">
+                            <span class="material-symbols-outlined">chevron_right</span>
+                        </button>
+                        <div class="trends-drill-info">
+                            <div class="trends-progress-labels">
+                                <span class="trends-sub-name" title="Insurtech">Insurtech</span>
+                                <span class="trends-progress-val">Undisclosed • 1 deal (0%)</span>
+                            </div>
+                            <div class="trends-progress-track sub-track">
+                                <div class="trends-progress-fill" style="width: 3%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="trends-drill-company-list">
+                        
+                    <div class="trends-drill-company-row">
+                        <div class="trends-deal-left">
+                            <a href="../../company/staywellhealth.in/" class="avatar-link" aria-label="View Staywell.Health"><img src="https://www.google.com/s2/favicons?domain=staywellhealth.in&sz=128" alt="Staywell.Health" class="modal-hero-avatar" style="width: 32px; height: 32px; border-radius: 8px;" onerror="this.outerHTML='<div class=\'modal-hero-monogram\' style=\'width:32px; height:32px; font-size:12px; border-radius:8px; background:#EBF5FF; color:#0066CC; border:1px solid #B8DBFF;\'>ST</div>'"></a>
+                            <div style="min-width: 0;">
+                                <a href="../../company/staywellhealth.in/" class="company-title-link" style="text-decoration: none; color: inherit;">
+                                    <div class="trends-deal-title">Staywell.Health</div>
+                                </a>
+                                <div class="trends-deal-meta">Round • Equanimity Investments</div>
+                            </div>
+                        </div>
+                        <div class="trends-deal-right">
+                            <div class="trends-deal-amount">Undisclosed</div>
+                            <a href="../../company/staywellhealth.in/" class="btn-trends-memo" aria-label="View details for Staywell.Health">
+                                <span>View Details</span>
+                                <span class="material-symbols-outlined" style="font-size: 13px;">arrow_outward</span>
+                            </a>
+                        </div>
+                    </div>
+                
+                    </div>
+                </div>
+            
+                </div>
+            </div>
+        
+                        </div>
                     </div>
                 </div>
 
@@ -1037,15 +1440,15 @@
                         
                                 <div class="trends-deal-row">
                                     <div class="trends-deal-left">
-                                        <a href="../../company/third-wave-coffee/" class="avatar-link" aria-label="View Third Wave Coffee"><div class="modal-hero-monogram" style="width:32px; height:32px; font-size:12px; border-radius:8px; background:#FAF5FF; color:#9333EA; border:1px solid #E9D5FF;">TW</div></a>
+                                        <a href="../../company/thirdwavecoffeeroasters.com/" class="avatar-link" aria-label="View Third Wave Coffee"><img src="https://www.google.com/s2/favicons?domain=thirdwavecoffeeroasters.com&sz=128" alt="Third Wave Coffee" class="modal-hero-avatar" style="width: 32px; height: 32px; border-radius: 8px;" onerror="this.outerHTML='<div class=\'modal-hero-monogram\' style=\'width:32px; height:32px; font-size:12px; border-radius:8px; background:#FAF5FF; color:#9333EA; border:1px solid #E9D5FF;\'>TW</div>'"></a>
                                         <div style="min-width: 0;">
-                                            <a href="../../company/third-wave-coffee/" class="company-title-link" style="text-decoration: none; color: inherit;"><div class="trends-deal-title">Third Wave Coffee</div></a>
+                                            <a href="../../company/thirdwavecoffeeroasters.com/" class="company-title-link" style="text-decoration: none; color: inherit;"><div class="trends-deal-title">Third Wave Coffee</div></a>
                                             <div class="trends-deal-meta">Round • WestBridge Capital</div>
                                         </div>
                                     </div>
                                     <div class="trends-deal-right">
                                         <div class="trends-deal-amount">$43M</div>
-                                        <a href="../../company/third-wave-coffee/" class="btn-trends-memo" aria-label="View details for Third Wave Coffee">
+                                        <a href="../../company/thirdwavecoffeeroasters.com/" class="btn-trends-memo" aria-label="View details for Third Wave Coffee">
                                             <span>View Details</span>
                                             <span class="material-symbols-outlined" style="font-size: 13px;">arrow_outward</span>
                                         </a>
@@ -1071,15 +1474,15 @@
                             
                                 <div class="trends-deal-row">
                                     <div class="trends-deal-left">
-                                        <a href="../../company/matter/" class="avatar-link" aria-label="View MATTER"><div class="modal-hero-monogram" style="width:32px; height:32px; font-size:12px; border-radius:8px; background:#F0FDF4; color:#16A34A; border:1px solid #BBF7D0;">MA</div></a>
+                                        <a href="../../company/matter.in/" class="avatar-link" aria-label="View MATTER"><img src="https://www.google.com/s2/favicons?domain=matter.in&sz=128" alt="MATTER" class="modal-hero-avatar" style="width: 32px; height: 32px; border-radius: 8px;" onerror="this.outerHTML='<div class=\'modal-hero-monogram\' style=\'width:32px; height:32px; font-size:12px; border-radius:8px; background:#F0FDF4; color:#16A34A; border:1px solid #BBF7D0;\'>MA</div>'"></a>
                                         <div style="min-width: 0;">
-                                            <a href="../../company/matter/" class="company-title-link" style="text-decoration: none; color: inherit;"><div class="trends-deal-title">MATTER</div></a>
+                                            <a href="../../company/matter.in/" class="company-title-link" style="text-decoration: none; color: inherit;"><div class="trends-deal-title">MATTER</div></a>
                                             <div class="trends-deal-meta">Round</div>
                                         </div>
                                     </div>
                                     <div class="trends-deal-right">
                                         <div class="trends-deal-amount">$25M</div>
-                                        <a href="../../company/matter/" class="btn-trends-memo" aria-label="View details for MATTER">
+                                        <a href="../../company/matter.in/" class="btn-trends-memo" aria-label="View details for MATTER">
                                             <span>View Details</span>
                                             <span class="material-symbols-outlined" style="font-size: 13px;">arrow_outward</span>
                                         </a>
@@ -1164,14 +1567,19 @@
                     </h3>
                     <div class="sidebar-weeks-list">
                         
+                                <a href="../week-39-2026/" class="sidebar-week-item ">
+                                    <span>Week 39 (2026)</span>
+                                    <span style="font-size: 11px; opacity: 0.8;">$5.7M • 2d</span>
+                                </a>
+                            
                                 <a href="../week-38-2026/" class="sidebar-week-item ">
                                     <span>Week 38 (2026)</span>
-                                    <span style="font-size: 11px; opacity: 0.8;">$210.7M • 18d</span>
+                                    <span style="font-size: 11px; opacity: 0.8;">$212.1M • 18d</span>
                                 </a>
                             
                                 <a href="../week-37-2026/" class="sidebar-week-item ">
                                     <span>Week 37 (2026)</span>
-                                    <span style="font-size: 11px; opacity: 0.8;">$304M • 20d</span>
+                                    <span style="font-size: 11px; opacity: 0.8;">$304M • 21d</span>
                                 </a>
                             
                                 <a href="../week-36-2026/" class="sidebar-week-item ">
@@ -1357,7 +1765,7 @@
         }
 
         // Copy Weekly Markdown Digest
-        const weeklyDigestMarkdown = "📊 *Weekly Venture Intelligence: Week 35 of 2026 (Aug 24 – Aug 30, 2026)*\n• Total Capital Deployed: $204.1M across 21 deals\n• Median Check Size: $6.7M | Avg Round: $11.3M\n• Capital Velocity: -15% WoW vs prior week\n• Top Funded Deal: Third Wave Coffee ($43M, Round)\n\n💼 *Capital Allocation by Stage:*\n• Seed / Angel: $6.3M (4 deals • 3%)\n• Series A: $108.5M (10 deals • 53%)\n• Debt / Other: $89.3M (7 deals • 44%)\n\n🚀 *Industry Hotspots:*\n1. Food and Beverage: $44M (2 deals)\n2. Aerospace & Logistics: $37M (1 deals)\n3. Enterprise Software: $31M (2 deals)\n4. Automotive: $25M (1 deals)\n5. Financial Services: $20M (2 deals)\n\n📍 *Top Regional Hubs:*\n• Bengaluru: 9 deals (43%)\n• Mumbai: 2 deals (10%)\n• New Delhi: 2 deals (10%)\n• Uttar Pradesh: 1 deals (5%)\n• Thane: 1 deals (5%)\n\n🏆 *Top Showcase Deals:*\n• Third Wave Coffee — $43M (Round) | Lead: WestBridge Capital\n• Airbound — $37M (Series A) | Lead: Greenoaks [airbound.com]\n• MATTER — $25M (Round)";
+        const weeklyDigestMarkdown = "📊 *Weekly Venture Intelligence: Week 35 of 2026 (Aug 24 – Aug 30, 2026)*\n• Total Capital Deployed: $204.1M across 21 deals\n• Median Check Size: $6.7M | Avg Round: $11.3M\n• Capital Velocity: -15% WoW vs prior week\n• Top Funded Deal: Third Wave Coffee ($43M, Round)\n\n💼 *Capital Allocation by Stage:*\n• Seed / Angel: $6.3M (4 deals • 3%)\n• Series A: $108.5M (10 deals • 53%)\n• Debt / Other: $89.3M (7 deals • 44%)\n\n🚀 *Industry Hotspots:*\n1. Food and Beverage: $44M (2 deals)\n2. Aerospace & Logistics: $37M (1 deals)\n3. Enterprise Software: $31M (2 deals)\n4. Automotive: $25M (1 deals)\n5. Financial Services: $20M (2 deals)\n\n📍 *Top Regional Hubs:*\n• Bengaluru: 9 deals (43%)\n• Mumbai: 2 deals (10%)\n• New Delhi: 2 deals (10%)\n• Uttar Pradesh: 1 deals (5%)\n• Thane: 1 deals (5%)\n\n🏆 *Top Showcase Deals:*\n• Third Wave Coffee — $43M (Round) | Lead: WestBridge Capital [https://www.thirdwavecoffeeroasters.com/]\n• Airbound — $37M (Series A) | Lead: Greenoaks [airbound.com]\n• MATTER — $25M (Round) [https://www.matter.in/]";
         function copyWeeklyDigest() {
             const btn = document.getElementById('btnTrendsCopyDigest');
             const showSuccess = () => {
@@ -1403,6 +1811,37 @@
             const parent = headerEl.closest('.trends-drill-item, .trends-drill-sub-item');
             if (parent) {
                 parent.classList.toggle('expanded');
+            }
+        }
+
+        // Dual-view switch between Vertical and Segment in Industry Hotspots
+        function switchHotspotsView(view) {
+            const vertBtn = document.getElementById('btnViewVertical');
+            const segBtn = document.getElementById('btnViewSegment');
+            const vertView = document.getElementById('trendsVerticalView');
+            const segView = document.getElementById('trendsSegmentView');
+            if (view === 'segment') {
+                if (vertBtn) {
+                    vertBtn.classList.remove('active');
+                    vertBtn.setAttribute('aria-selected', 'false');
+                }
+                if (segBtn) {
+                    segBtn.classList.add('active');
+                    segBtn.setAttribute('aria-selected', 'true');
+                }
+                if (vertView) vertView.style.display = 'none';
+                if (segView) segView.style.display = 'flex';
+            } else {
+                if (segBtn) {
+                    segBtn.classList.remove('active');
+                    segBtn.setAttribute('aria-selected', 'false');
+                }
+                if (vertBtn) {
+                    vertBtn.classList.add('active');
+                    vertBtn.setAttribute('aria-selected', 'true');
+                }
+                if (segView) segView.style.display = 'none';
+                if (vertView) vertView.style.display = 'flex';
             }
         }
     </script>

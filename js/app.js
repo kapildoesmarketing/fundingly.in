@@ -324,8 +324,9 @@ let rawDataset = [];
 
             const sectorsSet = new Set();
             records.forEach(r => {
-                if (r.industry && typeof r.industry === 'string') {
-                    const trimmed = r.industry.trim();
+                const sectorVal = r.vertical || r.segment || r.industry;
+                if (sectorVal && typeof sectorVal === 'string') {
+                    const trimmed = sectorVal.trim();
                     if (trimmed && trimmed.toLowerCase() !== 'general') sectorsSet.add(trimmed);
                 }
             });
@@ -743,10 +744,11 @@ let rawDataset = [];
             return false;
         }
 
-        // Deisgned by Kapil Pidhwani: Compact USD currency formatting heuristic (K/M/B). Ceiling: Only handles standard USD scaling up to billions; does not format negative rounds or non-USD currencies. Upgrade path: Use Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', notation: 'compact' }).
+        // Deisgned by Kapil Pidhwani: Compact USD currency formatting heuristic (K/M/B) with Undisclosed resilience. Ceiling: Only handles standard USD scaling up to billions. Upgrade path: Use Intl.NumberFormat.
         function formatUSD(num) {
-            if (!num || isNaN(num) || num <= 0) return 'Undisclosed';
+            if (num === null || num === undefined || num === '' || num === 'Undisclosed' || num === 'undisclosed') return 'Undisclosed';
             const n = Number(num);
+            if (isNaN(n) || n <= 0) return 'Undisclosed';
             if (n >= 1e9) return '$' + (n / 1e9).toFixed(1) + 'B';
             if (n >= 1e6) return '$' + (n / 1e6).toFixed(1) + 'M';
             if (n >= 1e3) return '$' + (n / 1e3).toFixed(0) + 'K';
@@ -1199,8 +1201,8 @@ let rawDataset = [];
                 });
 
                 const titleText = company.company_name || 'Unnamed Enterprise';
-                const industry = company.industry || 'General';
-                const subIndustry = company.sub_industry ? ' • ' + company.sub_industry : '';
+                const industry = company.vertical || company.industry || 'General';
+                const subIndustry = (company.sub_vertical || company.sub_industry) ? ' • ' + (company.sub_vertical || company.sub_industry) : '';
                 const fundingRound = company.funding_round || 'Funding';
                 const amountFormatted = formatUSD(company.funding_amount_usd);
                 const location = company.company_headquarters || 'N/A';
@@ -1268,7 +1270,7 @@ let rawDataset = [];
                 const amountUsd = formatUSD(company.funding_amount_usd);
                 const amountInr = company.funding_amount_inr ? `• ₹${(Number(company.funding_amount_inr) / 10000000).toFixed(1)} Cr` : '';
                 const lead = escapeHtml(company.lead_investor || company.funded_by || 'Undisclosed');
-                const sector = escapeHtml(company.industry || 'General');
+                const sector = escapeHtml(company.vertical || company.segment || company.industry || 'General');
                 const hq = escapeHtml(company.company_headquarters || 'N/A');
                 const companyUrl = getCompanyUrl(company);
 
@@ -1706,6 +1708,10 @@ let rawDataset = [];
                     matchesQueryFuzzy(item.founders, search) ||
                     matchesQueryFuzzy(item.funded_by, search) ||
                     matchesQueryFuzzy(item.lead_investor, search) ||
+                    matchesQueryFuzzy(item.vertical, search) ||
+                    matchesQueryFuzzy(item.sub_vertical, search) ||
+                    matchesQueryFuzzy(item.segment, search) ||
+                    matchesQueryFuzzy(item.sub_segment, search) ||
                     matchesQueryFuzzy(item.industry, search) ||
                     matchesQueryFuzzy(item.sub_industry, search) ||
                     matchesQueryFuzzy(item.funding_round, search) ||
@@ -1735,17 +1741,23 @@ let rawDataset = [];
                     }
                 }
 
-                // Suggestion 3.1: Sector Filter
+                // Suggestion 3.1: Sector Filter (Vertical & Segment aware)
                 let matchesSector = true;
                 if (activeSector !== 'all') {
-                    matchesSector = (item.industry === activeSector) || (item.sub_industry === activeSector);
+                    matchesSector = (item.vertical === activeSector) || 
+                                    (item.sub_vertical === activeSector) || 
+                                    (item.segment === activeSector) || 
+                                    (item.sub_segment === activeSector) || 
+                                    (item.industry === activeSector) || 
+                                    (item.sub_industry === activeSector);
                 }
 
-                // Suggestion 3.1: Amount Bracket Filter
+                // Suggestion 3.1: Amount Bracket Filter (with Undisclosed support)
                 let matchesAmount = true;
                 if (activeAmount !== 'all') {
                     const amt = Number(item.funding_amount_usd) || 0;
-                    if (activeAmount === 'under-1m') matchesAmount = amt > 0 && amt < 1000000;
+                    if (activeAmount === 'undisclosed') matchesAmount = amt <= 0 || item.funding_amount_usd === 'Undisclosed' || !item.funding_amount_usd;
+                    else if (activeAmount === 'under-1m') matchesAmount = amt > 0 && amt < 1000000;
                     else if (activeAmount === '1m-5m') matchesAmount = amt >= 1000000 && amt <= 5000000;
                     else if (activeAmount === '5m-20m') matchesAmount = amt > 5000000 && amt <= 20000000;
                     else if (activeAmount === 'over-20m') matchesAmount = amt > 20000000;
@@ -1884,7 +1896,7 @@ let rawDataset = [];
                 const amountUsd = formatUSD(company.funding_amount_usd);
                 const amountInr = company.funding_amount_inr ? `• ₹${(Number(company.funding_amount_inr) / 10000000).toFixed(1)} Cr` : '';
                 const lead = escapeHtml(company.lead_investor || company.funded_by || 'Undisclosed');
-                const sector = escapeHtml(company.industry || 'General');
+                const sector = escapeHtml(company.vertical || company.segment || company.industry || 'General');
                 const hq = escapeHtml(company.company_headquarters || 'N/A');
 
                 const companyUrl = getCompanyUrl(company);
@@ -2214,7 +2226,8 @@ let rawDataset = [];
                 `• Date: ${company.date_of_funding || 'N/A'}`,
                 `• Lead Investor: ${company.lead_investor || 'Undisclosed'}`,
                 `• Syndicate: ${company.funded_by || 'Undisclosed'}`,
-                `• Sector: ${company.industry || 'General'}${company.sub_industry ? ' (' + company.sub_industry + ')' : ''}`,
+                `• Vertical: ${company.vertical || company.industry || 'General'}${company.sub_vertical || company.sub_industry ? ' (' + (company.sub_vertical || company.sub_industry) + ')' : ''}`,
+                company.segment ? `• Segment: ${company.segment}${company.sub_segment ? ' (' + company.sub_segment + ')' : ''}` : null,
                 `• Headquarters: ${company.company_headquarters || 'N/A'}`,
                 company.company_website ? `• Website: ${company.company_website}` : null,
                 company.company_description ? `• Overview: ${company.company_description}` : null
@@ -2448,25 +2461,43 @@ let rawDataset = [];
                 st.pct = baseForStagePct > 0 ? Math.round(((totalCapital > 0 ? st.amount : st.count) / baseForStagePct) * 100) : 0;
             });
 
-            // 5. Module C: Industry Hotspots (3-Tier Hierarchical Drilldown)
-            // Deisgned by Kapil Pidhwani: 3-tier venture hierarchy aggregation (Industry -> Sub-Industry -> Companies). Ceiling: O(N) single-pass Map grouping. Upgrade path: Pre-aggregated weekly cube.
-            const indMap = new Map();
+            // 5. Module C: Industry Hotspots (Dual Vertical & Segment 3-Tier Drilldown)
+            // Deisgned by Kapil Pidhwani: 3-tier venture hierarchy aggregation (Vertical/Segment -> Sub-Category -> Companies).
+            const vertMap = new Map();
+            const segMap = new Map();
+
             weekDeals.forEach(c => {
-                const ind = (c.industry && c.industry.trim()) || 'General / Other';
-                const subInd = (c.sub_industry && c.sub_industry.trim()) || 'Core / General';
+                const vert = (c.vertical && c.vertical.trim()) || (c.industry && c.industry.trim()) || 'General / Other';
+                const subVert = (c.sub_vertical && c.sub_vertical.trim()) || (c.sub_industry && c.sub_industry.trim()) || 'Core / General';
+                const seg = (c.segment && c.segment.trim()) || (c.industry && c.industry.trim()) || 'General / Other';
+                const subSeg = (c.sub_segment && c.sub_segment.trim()) || (c.sub_industry && c.sub_industry.trim()) || 'Core / General';
                 const amt = Number(c.funding_amount_usd) || 0;
                 const rawIdx = rawDataset.indexOf(c);
-                if (!indMap.has(ind)) indMap.set(ind, { name: ind, amount: 0, count: 0, subMap: new Map() });
-                const item = indMap.get(ind);
-                item.amount += amt;
-                item.count += 1;
-                if (!item.subMap.has(subInd)) item.subMap.set(subInd, { name: subInd, amount: 0, count: 0, companies: [] });
-                const subItem = item.subMap.get(subInd);
-                subItem.amount += amt;
-                subItem.count += 1;
-                subItem.companies.push({ ...c, rawIdx });
+
+                // Vertical Grouping
+                if (!vertMap.has(vert)) vertMap.set(vert, { name: vert, amount: 0, count: 0, subMap: new Map() });
+                const vertItem = vertMap.get(vert);
+                vertItem.amount += amt;
+                vertItem.count += 1;
+                if (!vertItem.subMap.has(subVert)) vertItem.subMap.set(subVert, { name: subVert, amount: 0, count: 0, companies: [] });
+                const subVertItem = vertItem.subMap.get(subVert);
+                subVertItem.amount += amt;
+                subVertItem.count += 1;
+                subVertItem.companies.push({ ...c, rawIdx });
+
+                // Segment Grouping
+                if (!segMap.has(seg)) segMap.set(seg, { name: seg, amount: 0, count: 0, subMap: new Map() });
+                const segItem = segMap.get(seg);
+                segItem.amount += amt;
+                segItem.count += 1;
+                if (!segItem.subMap.has(subSeg)) segItem.subMap.set(subSeg, { name: subSeg, amount: 0, count: 0, companies: [] });
+                const subSegItem = segItem.subMap.get(subSeg);
+                subSegItem.amount += amt;
+                subSegItem.count += 1;
+                subSegItem.companies.push({ ...c, rawIdx });
             });
-            const topIndustries = Array.from(indMap.values())
+
+            const topVerticals = Array.from(vertMap.values())
                 .sort((a, b) => b.amount - a.amount || b.count - a.count)
                 .slice(0, 5)
                 .map(ind => ({
@@ -2484,6 +2515,27 @@ let rawDataset = [];
                             companies: [...sub.companies].sort((a, b) => (Number(b.funding_amount_usd) || 0) - (Number(a.funding_amount_usd) || 0))
                         }))
                 }));
+
+            const topSegments = Array.from(segMap.values())
+                .sort((a, b) => b.amount - a.amount || b.count - a.count)
+                .slice(0, 5)
+                .map(ind => ({
+                    name: ind.name,
+                    amount: ind.amount,
+                    count: ind.count,
+                    pct: totalCapital > 0 ? Math.round((ind.amount / totalCapital) * 100) : (dealCount > 0 ? Math.round((ind.count / dealCount) * 100) : 0),
+                    subCategories: Array.from(ind.subMap.values())
+                        .sort((a, b) => b.amount - a.amount || b.count - a.count)
+                        .map(sub => ({
+                            name: sub.name,
+                            amount: sub.amount,
+                            count: sub.count,
+                            pctOfParent: ind.amount > 0 ? Math.round((sub.amount / ind.amount) * 100) : (ind.count > 0 ? Math.round((sub.count / ind.count) * 100) : 0),
+                            companies: [...sub.companies].sort((a, b) => (Number(b.funding_amount_usd) || 0) - (Number(a.funding_amount_usd) || 0))
+                        }))
+                }));
+
+            const topIndustries = topVerticals;
 
             // 6. Modules D & E: Regional Deal Hubs & Active Investors
             // Regional Hubs
@@ -2536,6 +2588,8 @@ let rawDataset = [];
                 prevWeekInfo,
                 topDeal,
                 stageStats,
+                topVerticals,
+                topSegments,
                 topIndustries,
                 topHubs,
                 topInvestors,
@@ -2739,13 +2793,24 @@ let rawDataset = [];
           </div>
         </div>
 
-        <!-- Module C: Industry Hotspots (3-Tier Hierarchical Drilldown) -->
+        <!-- Module C: Industry Hotspots (3-Tier Hierarchical Drilldown with Dual View Toggle) -->
         <div class="trends-section-card">
-          <div class="trends-section-title">
-            <span>Industry Hotspots</span>
+          <div class="trends-section-header-row">
+            <div class="trends-section-title" style="margin-bottom: 0;">
+              <span>Industry Hotspots</span>
+            </div>
+            <div class="trends-toggle-group" role="tablist" aria-label="Hotspots View Selection">
+              <button type="button" class="trends-toggle-btn active" id="modalBtnViewVertical" data-view="vertical" role="tab" aria-selected="true" onclick="switchModalHotspotsView('vertical')">Vertical</button>
+              <button type="button" class="trends-toggle-btn" id="modalBtnViewSegment" data-view="segment" role="tab" aria-selected="false" onclick="switchModalHotspotsView('segment')">Segment</button>
+            </div>
           </div>
-          <div id="trendsIndustryView" class="trends-progress-list">
-            ${renderDrilldownList(trends.topIndustries, false)}
+          <div id="trendsIndustryView">
+            <div id="modalTrendsVerticalView" class="trends-progress-list">
+              ${renderDrilldownList(trends.topVerticals || trends.topIndustries, false)}
+            </div>
+            <div id="modalTrendsSegmentView" class="trends-progress-list" style="display: none;">
+              ${renderDrilldownList(trends.topSegments || trends.topIndustries, false)}
+            </div>
           </div>
         </div>
 
@@ -2902,6 +2967,37 @@ let rawDataset = [];
                 }
             }
         }
+
+        // Dual-view switch between Vertical and Segment in Modal Hotspots
+        window.switchModalHotspotsView = function(view) {
+            const vertBtn = document.getElementById('modalBtnViewVertical');
+            const segBtn = document.getElementById('modalBtnViewSegment');
+            const vertView = document.getElementById('modalTrendsVerticalView');
+            const segView = document.getElementById('modalTrendsSegmentView');
+            if (view === 'segment') {
+                if (vertBtn) {
+                    vertBtn.classList.remove('active');
+                    vertBtn.setAttribute('aria-selected', 'false');
+                }
+                if (segBtn) {
+                    segBtn.classList.add('active');
+                    segBtn.setAttribute('aria-selected', 'true');
+                }
+                if (vertView) vertView.style.display = 'none';
+                if (segView) segView.style.display = 'flex';
+            } else {
+                if (segBtn) {
+                    segBtn.classList.remove('active');
+                    segBtn.setAttribute('aria-selected', 'false');
+                }
+                if (vertBtn) {
+                    vertBtn.classList.add('active');
+                    vertBtn.setAttribute('aria-selected', 'true');
+                }
+                if (segView) segView.style.display = 'none';
+                if (vertView) vertView.style.display = 'flex';
+            }
+        };
 
         function openTrendsModal(weekKey, weekTitle) {
             if (weekKey && weekKey.includes('-W')) {

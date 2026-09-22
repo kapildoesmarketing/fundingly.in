@@ -569,13 +569,20 @@
                     </div>
                 </div>
 
-                <!-- Module C: Industry Hotspots (3-Tier Hierarchical Drilldown) -->
+                <!-- Module C: Industry Hotspots (3-Tier Hierarchical Drilldown with Dual View Toggle) -->
                 <div class="trends-section-card">
-                    <div class="trends-section-title">
-                        <span>Industry Hotspots</span>
+                    <div class="trends-section-header-row">
+                        <div class="trends-section-title" style="margin-bottom: 0;">
+                            <span>Industry Hotspots</span>
+                        </div>
+                        <div class="trends-toggle-group" role="tablist" aria-label="Hotspots View Selection">
+                            <button type="button" class="trends-toggle-btn active" id="btnViewVertical" data-view="vertical" role="tab" aria-selected="true" onclick="switchHotspotsView('vertical')">Vertical</button>
+                            <button type="button" class="trends-toggle-btn" id="btnViewSegment" data-view="segment" role="tab" aria-selected="false" onclick="switchHotspotsView('segment')">Segment</button>
+                        </div>
                     </div>
-                    <div id="trendsIndustryView" class="trends-progress-list">
-                        
+                    <div id="trendsIndustryView">
+                        <div id="trendsVerticalView" class="trends-progress-list">
+                            
             <div class="trends-drill-item">
                 <div class="trends-drill-header" role="button" tabindex="0" onclick="toggleTrendsDrilldown(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleTrendsDrilldown(this);}">
                     <button type="button" class="trends-drill-chevron" aria-label="Toggle Health Tech" tabindex="-1">
@@ -612,9 +619,9 @@
                         
                     <div class="trends-drill-company-row">
                         <div class="trends-deal-left">
-                            <a href="../../company/ultrahuman/" class="avatar-link" aria-label="View Ultrahuman"><div class="modal-hero-monogram" style="width:32px; height:32px; font-size:12px; border-radius:8px; background:#EBF5FF; color:#0066CC; border:1px solid #B8DBFF;">UL</div></a>
+                            <a href="../../company/ultrahuman.com/" class="avatar-link" aria-label="View Ultrahuman"><img src="https://www.google.com/s2/favicons?domain=ultrahuman.com&sz=128" alt="Ultrahuman" class="modal-hero-avatar" style="width: 32px; height: 32px; border-radius: 8px;" onerror="this.outerHTML='<div class=\'modal-hero-monogram\' style=\'width:32px; height:32px; font-size:12px; border-radius:8px; background:#EBF5FF; color:#0066CC; border:1px solid #B8DBFF;\'>UL</div>'"></a>
                             <div style="min-width: 0;">
-                                <a href="../../company/ultrahuman/" class="company-title-link" style="text-decoration: none; color: inherit;">
+                                <a href="../../company/ultrahuman.com/" class="company-title-link" style="text-decoration: none; color: inherit;">
                                     <div class="trends-deal-title">Ultrahuman</div>
                                 </a>
                                 <div class="trends-deal-meta">Series C • Qualcomm Ventures</div>
@@ -622,7 +629,7 @@
                         </div>
                         <div class="trends-deal-right">
                             <div class="trends-deal-amount">$70M</div>
-                            <a href="../../company/ultrahuman/" class="btn-trends-memo" aria-label="View details for Ultrahuman">
+                            <a href="../../company/ultrahuman.com/" class="btn-trends-memo" aria-label="View details for Ultrahuman">
                                 <span>View Details</span>
                                 <span class="material-symbols-outlined" style="font-size: 13px;">arrow_outward</span>
                             </a>
@@ -651,9 +658,9 @@
                         
                     <div class="trends-drill-company-row">
                         <div class="trends-deal-left">
-                            <a href="../../company/medulance/" class="avatar-link" aria-label="View Medulance"><div class="modal-hero-monogram" style="width:32px; height:32px; font-size:12px; border-radius:8px; background:#FEF2F2; color:#DC2626; border:1px solid #FECACA;">ME</div></a>
+                            <a href="../../company/medulance.com/" class="avatar-link" aria-label="View Medulance"><img src="https://www.google.com/s2/favicons?domain=medulance.com&sz=128" alt="Medulance" class="modal-hero-avatar" style="width: 32px; height: 32px; border-radius: 8px;" onerror="this.outerHTML='<div class=\'modal-hero-monogram\' style=\'width:32px; height:32px; font-size:12px; border-radius:8px; background:#FEF2F2; color:#DC2626; border:1px solid #FECACA;\'>ME</div>'"></a>
                             <div style="min-width: 0;">
-                                <a href="../../company/medulance/" class="company-title-link" style="text-decoration: none; color: inherit;">
+                                <a href="../../company/medulance.com/" class="company-title-link" style="text-decoration: none; color: inherit;">
                                     <div class="trends-deal-title">Medulance</div>
                                 </a>
                                 <div class="trends-deal-meta">Series A-2 • Auxano Capital</div>
@@ -661,7 +668,7 @@
                         </div>
                         <div class="trends-deal-right">
                             <div class="trends-deal-amount">$2.5M</div>
-                            <a href="../../company/medulance/" class="btn-trends-memo" aria-label="View details for Medulance">
+                            <a href="../../company/medulance.com/" class="btn-trends-memo" aria-label="View details for Medulance">
                                 <span>View Details</span>
                                 <span class="material-symbols-outlined" style="font-size: 13px;">arrow_outward</span>
                             </a>
@@ -670,9 +677,9 @@
                 
                     <div class="trends-drill-company-row">
                         <div class="trends-deal-left">
-                            <a href="../../company/docpharma/" class="avatar-link" aria-label="View DocPharma"><div class="modal-hero-monogram" style="width:32px; height:32px; font-size:12px; border-radius:8px; background:#F0FDFA; color:#0D9488; border:1px solid #CCFBF1;">DO</div></a>
+                            <a href="../../company/docpharma.in/" class="avatar-link" aria-label="View DocPharma"><img src="https://www.google.com/s2/favicons?domain=docpharma.in&sz=128" alt="DocPharma" class="modal-hero-avatar" style="width: 32px; height: 32px; border-radius: 8px;" onerror="this.outerHTML='<div class=\'modal-hero-monogram\' style=\'width:32px; height:32px; font-size:12px; border-radius:8px; background:#F0FDFA; color:#0D9488; border:1px solid #CCFBF1;\'>DO</div>'"></a>
                             <div style="min-width: 0;">
-                                <a href="../../company/docpharma/" class="company-title-link" style="text-decoration: none; color: inherit;">
+                                <a href="../../company/docpharma.in/" class="company-title-link" style="text-decoration: none; color: inherit;">
                                     <div class="trends-deal-title">DocPharma</div>
                                 </a>
                                 <div class="trends-deal-meta">Pre-Series A • Equentis</div>
@@ -680,7 +687,7 @@
                         </div>
                         <div class="trends-deal-right">
                             <div class="trends-deal-amount">$2M</div>
-                            <a href="../../company/docpharma/" class="btn-trends-memo" aria-label="View details for DocPharma">
+                            <a href="../../company/docpharma.in/" class="btn-trends-memo" aria-label="View details for DocPharma">
                                 <span>View Details</span>
                                 <span class="material-symbols-outlined" style="font-size: 13px;">arrow_outward</span>
                             </a>
@@ -689,9 +696,9 @@
                 
                     <div class="trends-drill-company-row">
                         <div class="trends-deal-left">
-                            <a href="../../company/xstep/" class="avatar-link" aria-label="View xStep"><div class="modal-hero-monogram" style="width:32px; height:32px; font-size:12px; border-radius:8px; background:#F0FDF4; color:#16A34A; border:1px solid #BBF7D0;">XS</div></a>
+                            <a href="../../company/xstep.co/" class="avatar-link" aria-label="View xStep"><img src="https://www.google.com/s2/favicons?domain=xstep.co&sz=128" alt="xStep" class="modal-hero-avatar" style="width: 32px; height: 32px; border-radius: 8px;" onerror="this.outerHTML='<div class=\'modal-hero-monogram\' style=\'width:32px; height:32px; font-size:12px; border-radius:8px; background:#F0FDF4; color:#16A34A; border:1px solid #BBF7D0;\'>XS</div>'"></a>
                             <div style="min-width: 0;">
-                                <a href="../../company/xstep/" class="company-title-link" style="text-decoration: none; color: inherit;">
+                                <a href="../../company/xstep.co/" class="company-title-link" style="text-decoration: none; color: inherit;">
                                     <div class="trends-deal-title">xStep</div>
                                 </a>
                                 <div class="trends-deal-meta">Round • Titan Capital</div>
@@ -699,7 +706,7 @@
                         </div>
                         <div class="trends-deal-right">
                             <div class="trends-deal-amount">Undisclosed</div>
-                            <a href="../../company/xstep/" class="btn-trends-memo" aria-label="View details for xStep">
+                            <a href="../../company/xstep.co/" class="btn-trends-memo" aria-label="View details for xStep">
                                 <span>View Details</span>
                                 <span class="material-symbols-outlined" style="font-size: 13px;">arrow_outward</span>
                             </a>
@@ -767,9 +774,9 @@
                 
                     <div class="trends-drill-company-row">
                         <div class="trends-deal-left">
-                            <a href="../../company/sugar-cosmetics/" class="avatar-link" aria-label="View SUGAR Cosmetics"><div class="modal-hero-monogram" style="width:32px; height:32px; font-size:12px; border-radius:8px; background:#F0FDFA; color:#0D9488; border:1px solid #CCFBF1;">SC</div></a>
+                            <a href="../../company/sugarcosmetics.com/" class="avatar-link" aria-label="View SUGAR Cosmetics"><img src="https://www.google.com/s2/favicons?domain=sugarcosmetics.com&sz=128" alt="SUGAR Cosmetics" class="modal-hero-avatar" style="width: 32px; height: 32px; border-radius: 8px;" onerror="this.outerHTML='<div class=\'modal-hero-monogram\' style=\'width:32px; height:32px; font-size:12px; border-radius:8px; background:#F0FDFA; color:#0D9488; border:1px solid #CCFBF1;\'>SC</div>'"></a>
                             <div style="min-width: 0;">
-                                <a href="../../company/sugar-cosmetics/" class="company-title-link" style="text-decoration: none; color: inherit;">
+                                <a href="../../company/sugarcosmetics.com/" class="company-title-link" style="text-decoration: none; color: inherit;">
                                     <div class="trends-deal-title">SUGAR Cosmetics</div>
                                 </a>
                                 <div class="trends-deal-meta">Series D • A91 Partners</div>
@@ -777,7 +784,7 @@
                         </div>
                         <div class="trends-deal-right">
                             <div class="trends-deal-amount">$15.3M</div>
-                            <a href="../../company/sugar-cosmetics/" class="btn-trends-memo" aria-label="View details for SUGAR Cosmetics">
+                            <a href="../../company/sugarcosmetics.com/" class="btn-trends-memo" aria-label="View details for SUGAR Cosmetics">
                                 <span>View Details</span>
                                 <span class="material-symbols-outlined" style="font-size: 13px;">arrow_outward</span>
                             </a>
@@ -786,9 +793,9 @@
                 
                     <div class="trends-drill-company-row">
                         <div class="trends-deal-left">
-                            <a href="../../company/cradlewise/" class="avatar-link" aria-label="View Cradlewise"><div class="modal-hero-monogram" style="width:32px; height:32px; font-size:12px; border-radius:8px; background:#F0FDF4; color:#16A34A; border:1px solid #BBF7D0;">CR</div></a>
+                            <a href="../../company/cradlewise.com/" class="avatar-link" aria-label="View Cradlewise"><img src="https://www.google.com/s2/favicons?domain=cradlewise.com&sz=128" alt="Cradlewise" class="modal-hero-avatar" style="width: 32px; height: 32px; border-radius: 8px;" onerror="this.outerHTML='<div class=\'modal-hero-monogram\' style=\'width:32px; height:32px; font-size:12px; border-radius:8px; background:#F0FDF4; color:#16A34A; border:1px solid #BBF7D0;\'>CR</div>'"></a>
                             <div style="min-width: 0;">
-                                <a href="../../company/cradlewise/" class="company-title-link" style="text-decoration: none; color: inherit;">
+                                <a href="../../company/cradlewise.com/" class="company-title-link" style="text-decoration: none; color: inherit;">
                                     <div class="trends-deal-title">Cradlewise</div>
                                 </a>
                                 <div class="trends-deal-meta">Series A • 3one4 Capital, Prudent Investment Management</div>
@@ -796,7 +803,7 @@
                         </div>
                         <div class="trends-deal-right">
                             <div class="trends-deal-amount">$12M</div>
-                            <a href="../../company/cradlewise/" class="btn-trends-memo" aria-label="View details for Cradlewise">
+                            <a href="../../company/cradlewise.com/" class="btn-trends-memo" aria-label="View details for Cradlewise">
                                 <span>View Details</span>
                                 <span class="material-symbols-outlined" style="font-size: 13px;">arrow_outward</span>
                             </a>
@@ -805,9 +812,9 @@
                 
                     <div class="trends-drill-company-row">
                         <div class="trends-deal-left">
-                            <a href="../../company/comet/" class="avatar-link" aria-label="View Comet"><div class="modal-hero-monogram" style="width:32px; height:32px; font-size:12px; border-radius:8px; background:#FFF7ED; color:#EA580C; border:1px solid #FFEDD5;">CO</div></a>
+                            <a href="../../company/wearcomet.com/" class="avatar-link" aria-label="View Comet"><img src="https://www.google.com/s2/favicons?domain=wearcomet.com&sz=128" alt="Comet" class="modal-hero-avatar" style="width: 32px; height: 32px; border-radius: 8px;" onerror="this.outerHTML='<div class=\'modal-hero-monogram\' style=\'width:32px; height:32px; font-size:12px; border-radius:8px; background:#FFF7ED; color:#EA580C; border:1px solid #FFEDD5;\'>CO</div>'"></a>
                             <div style="min-width: 0;">
-                                <a href="../../company/comet/" class="company-title-link" style="text-decoration: none; color: inherit;">
+                                <a href="../../company/wearcomet.com/" class="company-title-link" style="text-decoration: none; color: inherit;">
                                     <div class="trends-deal-title">Comet</div>
                                 </a>
                                 <div class="trends-deal-meta">Series B • Verlinvest</div>
@@ -815,7 +822,7 @@
                         </div>
                         <div class="trends-deal-right">
                             <div class="trends-deal-amount">$10.6M</div>
-                            <a href="../../company/comet/" class="btn-trends-memo" aria-label="View details for Comet">
+                            <a href="../../company/wearcomet.com/" class="btn-trends-memo" aria-label="View details for Comet">
                                 <span>View Details</span>
                                 <span class="material-symbols-outlined" style="font-size: 13px;">arrow_outward</span>
                             </a>
@@ -864,9 +871,9 @@
                         
                     <div class="trends-drill-company-row">
                         <div class="trends-deal-left">
-                            <a href="../../company/yuma-energy/" class="avatar-link" aria-label="View Yuma Energy"><div class="modal-hero-monogram" style="width:32px; height:32px; font-size:12px; border-radius:8px; background:#F0FDFA; color:#0D9488; border:1px solid #CCFBF1;">YE</div></a>
+                            <a href="../../company/yumaenergy.in/" class="avatar-link" aria-label="View Yuma Energy"><img src="https://www.google.com/s2/favicons?domain=yumaenergy.in&sz=128" alt="Yuma Energy" class="modal-hero-avatar" style="width: 32px; height: 32px; border-radius: 8px;" onerror="this.outerHTML='<div class=\'modal-hero-monogram\' style=\'width:32px; height:32px; font-size:12px; border-radius:8px; background:#F0FDFA; color:#0D9488; border:1px solid #CCFBF1;\'>YE</div>'"></a>
                             <div style="min-width: 0;">
-                                <a href="../../company/yuma-energy/" class="company-title-link" style="text-decoration: none; color: inherit;">
+                                <a href="../../company/yumaenergy.in/" class="company-title-link" style="text-decoration: none; color: inherit;">
                                     <div class="trends-deal-title">Yuma Energy</div>
                                 </a>
                                 <div class="trends-deal-meta">Series A • Magna International Inc.</div>
@@ -874,7 +881,7 @@
                         </div>
                         <div class="trends-deal-right">
                             <div class="trends-deal-amount">$35M</div>
-                            <a href="../../company/yuma-energy/" class="btn-trends-memo" aria-label="View details for Yuma Energy">
+                            <a href="../../company/yumaenergy.in/" class="btn-trends-memo" aria-label="View details for Yuma Energy">
                                 <span>View Details</span>
                                 <span class="material-symbols-outlined" style="font-size: 13px;">arrow_outward</span>
                             </a>
@@ -883,9 +890,9 @@
                 
                     <div class="trends-drill-company-row">
                         <div class="trends-deal-left">
-                            <a href="../../company/zenergize/" class="avatar-link" aria-label="View Zenergize"><div class="modal-hero-monogram" style="width:32px; height:32px; font-size:12px; border-radius:8px; background:#EBF5FF; color:#0066CC; border:1px solid #B8DBFF;">ZE</div></a>
+                            <a href="../../company/zenergize.in/" class="avatar-link" aria-label="View Zenergize"><img src="https://www.google.com/s2/favicons?domain=zenergize.in&sz=128" alt="Zenergize" class="modal-hero-avatar" style="width: 32px; height: 32px; border-radius: 8px;" onerror="this.outerHTML='<div class=\'modal-hero-monogram\' style=\'width:32px; height:32px; font-size:12px; border-radius:8px; background:#EBF5FF; color:#0066CC; border:1px solid #B8DBFF;\'>ZE</div>'"></a>
                             <div style="min-width: 0;">
-                                <a href="../../company/zenergize/" class="company-title-link" style="text-decoration: none; color: inherit;">
+                                <a href="../../company/zenergize.in/" class="company-title-link" style="text-decoration: none; color: inherit;">
                                     <div class="trends-deal-title">Zenergize</div>
                                 </a>
                                 <div class="trends-deal-meta">Pre-Series A • Giraffe Studios</div>
@@ -893,7 +900,7 @@
                         </div>
                         <div class="trends-deal-right">
                             <div class="trends-deal-amount">$4M</div>
-                            <a href="../../company/zenergize/" class="btn-trends-memo" aria-label="View details for Zenergize">
+                            <a href="../../company/zenergize.in/" class="btn-trends-memo" aria-label="View details for Zenergize">
                                 <span>View Details</span>
                                 <span class="material-symbols-outlined" style="font-size: 13px;">arrow_outward</span>
                             </a>
@@ -902,9 +909,9 @@
                 
                     <div class="trends-drill-company-row">
                         <div class="trends-deal-left">
-                            <a href="../../company/leanwatts/" class="avatar-link" aria-label="View Leanwatts"><div class="modal-hero-monogram" style="width:32px; height:32px; font-size:12px; border-radius:8px; background:#FEF2F2; color:#DC2626; border:1px solid #FECACA;">LE</div></a>
+                            <a href="../../company/leanwatts.com/" class="avatar-link" aria-label="View Leanwatts"><img src="https://www.google.com/s2/favicons?domain=leanwatts.com&sz=128" alt="Leanwatts" class="modal-hero-avatar" style="width: 32px; height: 32px; border-radius: 8px;" onerror="this.outerHTML='<div class=\'modal-hero-monogram\' style=\'width:32px; height:32px; font-size:12px; border-radius:8px; background:#FEF2F2; color:#DC2626; border:1px solid #FECACA;\'>LE</div>'"></a>
                             <div style="min-width: 0;">
-                                <a href="../../company/leanwatts/" class="company-title-link" style="text-decoration: none; color: inherit;">
+                                <a href="../../company/leanwatts.com/" class="company-title-link" style="text-decoration: none; color: inherit;">
                                     <div class="trends-deal-title">Leanwatts</div>
                                 </a>
                                 <div class="trends-deal-meta">Seed • Trivest Partners</div>
@@ -912,7 +919,7 @@
                         </div>
                         <div class="trends-deal-right">
                             <div class="trends-deal-amount">$2M</div>
-                            <a href="../../company/leanwatts/" class="btn-trends-memo" aria-label="View details for Leanwatts">
+                            <a href="../../company/leanwatts.com/" class="btn-trends-memo" aria-label="View details for Leanwatts">
                                 <span>View Details</span>
                                 <span class="material-symbols-outlined" style="font-size: 13px;">arrow_outward</span>
                             </a>
@@ -960,9 +967,9 @@
                 
                     <div class="trends-drill-company-row">
                         <div class="trends-deal-left">
-                            <a href="../../company/y-o-g-a-clean-air/" class="avatar-link" aria-label="View Y.O.G.A. Clean Air"><div class="modal-hero-monogram" style="width:32px; height:32px; font-size:12px; border-radius:8px; background:#EBF5FF; color:#0066CC; border:1px solid #B8DBFF;">YC</div></a>
+                            <a href="../../company/yogacleanair.com/" class="avatar-link" aria-label="View Y.O.G.A. Clean Air"><img src="https://www.google.com/s2/favicons?domain=yogacleanair.com&sz=128" alt="Y.O.G.A. Clean Air" class="modal-hero-avatar" style="width: 32px; height: 32px; border-radius: 8px;" onerror="this.outerHTML='<div class=\'modal-hero-monogram\' style=\'width:32px; height:32px; font-size:12px; border-radius:8px; background:#EBF5FF; color:#0066CC; border:1px solid #B8DBFF;\'>YC</div>'"></a>
                             <div style="min-width: 0;">
-                                <a href="../../company/y-o-g-a-clean-air/" class="company-title-link" style="text-decoration: none; color: inherit;">
+                                <a href="../../company/yogacleanair.com/" class="company-title-link" style="text-decoration: none; color: inherit;">
                                     <div class="trends-deal-title">Y.O.G.A. Clean Air</div>
                                 </a>
                                 <div class="trends-deal-meta">Series A • Info Edge Ventures</div>
@@ -970,7 +977,7 @@
                         </div>
                         <div class="trends-deal-right">
                             <div class="trends-deal-amount">$2.1M</div>
-                            <a href="../../company/y-o-g-a-clean-air/" class="btn-trends-memo" aria-label="View details for Y.O.G.A. Clean Air">
+                            <a href="../../company/yogacleanair.com/" class="btn-trends-memo" aria-label="View details for Y.O.G.A. Clean Air">
                                 <span>View Details</span>
                                 <span class="material-symbols-outlined" style="font-size: 13px;">arrow_outward</span>
                             </a>
@@ -1019,9 +1026,9 @@
                         
                     <div class="trends-drill-company-row">
                         <div class="trends-deal-left">
-                            <a href="../../company/kepler-aerospace/" class="avatar-link" aria-label="View Kepler Aerospace"><div class="modal-hero-monogram" style="width:32px; height:32px; font-size:12px; border-radius:8px; background:#F0FDFA; color:#0D9488; border:1px solid #CCFBF1;">KA</div></a>
+                            <a href="../../company/kepleraerospace.com/" class="avatar-link" aria-label="View Kepler Aerospace"><img src="https://www.google.com/s2/favicons?domain=kepleraerospace.com&sz=128" alt="Kepler Aerospace" class="modal-hero-avatar" style="width: 32px; height: 32px; border-radius: 8px;" onerror="this.outerHTML='<div class=\'modal-hero-monogram\' style=\'width:32px; height:32px; font-size:12px; border-radius:8px; background:#F0FDFA; color:#0D9488; border:1px solid #CCFBF1;\'>KA</div>'"></a>
                             <div style="min-width: 0;">
-                                <a href="../../company/kepler-aerospace/" class="company-title-link" style="text-decoration: none; color: inherit;">
+                                <a href="../../company/kepleraerospace.com/" class="company-title-link" style="text-decoration: none; color: inherit;">
                                     <div class="trends-deal-title">Kepler Aerospace</div>
                                 </a>
                                 <div class="trends-deal-meta">Seed • Blue Ashva Capital</div>
@@ -1029,7 +1036,7 @@
                         </div>
                         <div class="trends-deal-right">
                             <div class="trends-deal-amount">$8M</div>
-                            <a href="../../company/kepler-aerospace/" class="btn-trends-memo" aria-label="View details for Kepler Aerospace">
+                            <a href="../../company/kepleraerospace.com/" class="btn-trends-memo" aria-label="View details for Kepler Aerospace">
                                 <span>View Details</span>
                                 <span class="material-symbols-outlined" style="font-size: 13px;">arrow_outward</span>
                             </a>
@@ -1038,9 +1045,9 @@
                 
                     <div class="trends-drill-company-row">
                         <div class="trends-deal-left">
-                            <a href="../../company/aeron-systems/" class="avatar-link" aria-label="View Aeron Systems"><div class="modal-hero-monogram" style="width:32px; height:32px; font-size:12px; border-radius:8px; background:#FEF2F2; color:#DC2626; border:1px solid #FECACA;">AS</div></a>
+                            <a href="../../company/aeronsystems.com/" class="avatar-link" aria-label="View Aeron Systems"><img src="https://www.google.com/s2/favicons?domain=aeronsystems.com&sz=128" alt="Aeron Systems" class="modal-hero-avatar" style="width: 32px; height: 32px; border-radius: 8px;" onerror="this.outerHTML='<div class=\'modal-hero-monogram\' style=\'width:32px; height:32px; font-size:12px; border-radius:8px; background:#FEF2F2; color:#DC2626; border:1px solid #FECACA;\'>AS</div>'"></a>
                             <div style="min-width: 0;">
-                                <a href="../../company/aeron-systems/" class="company-title-link" style="text-decoration: none; color: inherit;">
+                                <a href="../../company/aeronsystems.com/" class="company-title-link" style="text-decoration: none; color: inherit;">
                                     <div class="trends-deal-title">Aeron Systems</div>
                                 </a>
                                 <div class="trends-deal-meta">Pre-Series B • Riverwalk Holdings, MGF-Kavachh</div>
@@ -1048,7 +1055,7 @@
                         </div>
                         <div class="trends-deal-right">
                             <div class="trends-deal-amount">$4.7M</div>
-                            <a href="../../company/aeron-systems/" class="btn-trends-memo" aria-label="View details for Aeron Systems">
+                            <a href="../../company/aeronsystems.com/" class="btn-trends-memo" aria-label="View details for Aeron Systems">
                                 <span>View Details</span>
                                 <span class="material-symbols-outlined" style="font-size: 13px;">arrow_outward</span>
                             </a>
@@ -1077,9 +1084,9 @@
                         
                     <div class="trends-drill-company-row">
                         <div class="trends-deal-left">
-                            <a href="../../company/alteon/" class="avatar-link" aria-label="View Alteon"><div class="modal-hero-monogram" style="width:32px; height:32px; font-size:12px; border-radius:8px; background:#F0FDFA; color:#0D9488; border:1px solid #CCFBF1;">AL</div></a>
+                            <a href="../../company/alteon.io/" class="avatar-link" aria-label="View Alteon"><img src="https://www.google.com/s2/favicons?domain=alteon.io&sz=128" alt="Alteon" class="modal-hero-avatar" style="width: 32px; height: 32px; border-radius: 8px;" onerror="this.outerHTML='<div class=\'modal-hero-monogram\' style=\'width:32px; height:32px; font-size:12px; border-radius:8px; background:#F0FDFA; color:#0D9488; border:1px solid #CCFBF1;\'>AL</div>'"></a>
                             <div style="min-width: 0;">
-                                <a href="../../company/alteon/" class="company-title-link" style="text-decoration: none; color: inherit;">
+                                <a href="../../company/alteon.io/" class="company-title-link" style="text-decoration: none; color: inherit;">
                                     <div class="trends-deal-title">Alteon</div>
                                 </a>
                                 <div class="trends-deal-meta">Pre-Seed • Lachy Groom</div>
@@ -1087,7 +1094,7 @@
                         </div>
                         <div class="trends-deal-right">
                             <div class="trends-deal-amount">$2.5M</div>
-                            <a href="../../company/alteon/" class="btn-trends-memo" aria-label="View details for Alteon">
+                            <a href="../../company/alteon.io/" class="btn-trends-memo" aria-label="View details for Alteon">
                                 <span>View Details</span>
                                 <span class="material-symbols-outlined" style="font-size: 13px;">arrow_outward</span>
                             </a>
@@ -1116,9 +1123,9 @@
                         
                     <div class="trends-drill-company-row">
                         <div class="trends-deal-left">
-                            <a href="../../company/makr-microsystems/" class="avatar-link" aria-label="View Makr Microsystems"><div class="modal-hero-monogram" style="width:32px; height:32px; font-size:12px; border-radius:8px; background:#F0FDF4; color:#16A34A; border:1px solid #BBF7D0;">MM</div></a>
+                            <a href="../../company/makrmicro.com/" class="avatar-link" aria-label="View Makr Microsystems"><img src="https://www.google.com/s2/favicons?domain=makrmicro.com&sz=128" alt="Makr Microsystems" class="modal-hero-avatar" style="width: 32px; height: 32px; border-radius: 8px;" onerror="this.outerHTML='<div class=\'modal-hero-monogram\' style=\'width:32px; height:32px; font-size:12px; border-radius:8px; background:#F0FDF4; color:#16A34A; border:1px solid #BBF7D0;\'>MM</div>'"></a>
                             <div style="min-width: 0;">
-                                <a href="../../company/makr-microsystems/" class="company-title-link" style="text-decoration: none; color: inherit;">
+                                <a href="../../company/makrmicro.com/" class="company-title-link" style="text-decoration: none; color: inherit;">
                                     <div class="trends-deal-title">Makr Microsystems</div>
                                 </a>
                                 <div class="trends-deal-meta">Seed • Bluehill VC</div>
@@ -1126,7 +1133,7 @@
                         </div>
                         <div class="trends-deal-right">
                             <div class="trends-deal-amount">$1.1M</div>
-                            <a href="../../company/makr-microsystems/" class="btn-trends-memo" aria-label="View details for Makr Microsystems">
+                            <a href="../../company/makrmicro.com/" class="btn-trends-memo" aria-label="View details for Makr Microsystems">
                                 <span>View Details</span>
                                 <span class="material-symbols-outlined" style="font-size: 13px;">arrow_outward</span>
                             </a>
@@ -1175,9 +1182,9 @@
                         
                     <div class="trends-drill-company-row">
                         <div class="trends-deal-left">
-                            <a href="../../company/oppex-ai/" class="avatar-link" aria-label="View Oppex AI"><div class="modal-hero-monogram" style="width:32px; height:32px; font-size:12px; border-radius:8px; background:#EBF5FF; color:#0066CC; border:1px solid #B8DBFF;">OA</div></a>
+                            <a href="../../company/oppex.ai/" class="avatar-link" aria-label="View Oppex AI"><img src="https://www.google.com/s2/favicons?domain=oppex.ai&sz=128" alt="Oppex AI" class="modal-hero-avatar" style="width: 32px; height: 32px; border-radius: 8px;" onerror="this.outerHTML='<div class=\'modal-hero-monogram\' style=\'width:32px; height:32px; font-size:12px; border-radius:8px; background:#EBF5FF; color:#0066CC; border:1px solid #B8DBFF;\'>OA</div>'"></a>
                             <div style="min-width: 0;">
-                                <a href="../../company/oppex-ai/" class="company-title-link" style="text-decoration: none; color: inherit;">
+                                <a href="../../company/oppex.ai/" class="company-title-link" style="text-decoration: none; color: inherit;">
                                     <div class="trends-deal-title">Oppex AI</div>
                                 </a>
                                 <div class="trends-deal-meta">Pre-Seed • Info Edge Ventures</div>
@@ -1185,7 +1192,7 @@
                         </div>
                         <div class="trends-deal-right">
                             <div class="trends-deal-amount">$445K</div>
-                            <a href="../../company/oppex-ai/" class="btn-trends-memo" aria-label="View details for Oppex AI">
+                            <a href="../../company/oppex.ai/" class="btn-trends-memo" aria-label="View details for Oppex AI">
                                 <span>View Details</span>
                                 <span class="material-symbols-outlined" style="font-size: 13px;">arrow_outward</span>
                             </a>
@@ -1217,6 +1224,651 @@
                 </div>
             </div>
         
+                        </div>
+                        <div id="trendsSegmentView" class="trends-progress-list" style="display: none;">
+                            
+            <div class="trends-drill-item">
+                <div class="trends-drill-header" role="button" tabindex="0" onclick="toggleTrendsDrilldown(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleTrendsDrilldown(this);}">
+                    <button type="button" class="trends-drill-chevron" aria-label="Toggle Health Tech" tabindex="-1">
+                        <span class="material-symbols-outlined">chevron_right</span>
+                    </button>
+                    <div class="trends-drill-info">
+                        <div class="trends-progress-labels">
+                            <span class="trends-progress-name" title="Health Tech">Health Tech</span>
+                            <span class="trends-progress-val">$74.5M • 4 deals (38%)</span>
+                        </div>
+                        <div class="trends-progress-track">
+                            <div class="trends-progress-fill" style="width: 38%;"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="trends-drill-sub-list">
+                    
+                <div class="trends-drill-sub-item">
+                    <div class="trends-drill-sub-header" role="button" tabindex="0" onclick="toggleTrendsDrilldown(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleTrendsDrilldown(this);}">
+                        <button type="button" class="trends-drill-chevron" aria-label="Toggle Fitness &amp; Wellness" tabindex="-1">
+                            <span class="material-symbols-outlined">chevron_right</span>
+                        </button>
+                        <div class="trends-drill-info">
+                            <div class="trends-progress-labels">
+                                <span class="trends-sub-name" title="Fitness &amp; Wellness">Fitness &amp; Wellness</span>
+                                <span class="trends-progress-val">$70M • 1 deal (94%)</span>
+                            </div>
+                            <div class="trends-progress-track sub-track">
+                                <div class="trends-progress-fill" style="width: 94%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="trends-drill-company-list">
+                        
+                    <div class="trends-drill-company-row">
+                        <div class="trends-deal-left">
+                            <a href="../../company/ultrahuman.com/" class="avatar-link" aria-label="View Ultrahuman"><img src="https://www.google.com/s2/favicons?domain=ultrahuman.com&sz=128" alt="Ultrahuman" class="modal-hero-avatar" style="width: 32px; height: 32px; border-radius: 8px;" onerror="this.outerHTML='<div class=\'modal-hero-monogram\' style=\'width:32px; height:32px; font-size:12px; border-radius:8px; background:#EBF5FF; color:#0066CC; border:1px solid #B8DBFF;\'>UL</div>'"></a>
+                            <div style="min-width: 0;">
+                                <a href="../../company/ultrahuman.com/" class="company-title-link" style="text-decoration: none; color: inherit;">
+                                    <div class="trends-deal-title">Ultrahuman</div>
+                                </a>
+                                <div class="trends-deal-meta">Series C • Qualcomm Ventures</div>
+                            </div>
+                        </div>
+                        <div class="trends-deal-right">
+                            <div class="trends-deal-amount">$70M</div>
+                            <a href="../../company/ultrahuman.com/" class="btn-trends-memo" aria-label="View details for Ultrahuman">
+                                <span>View Details</span>
+                                <span class="material-symbols-outlined" style="font-size: 13px;">arrow_outward</span>
+                            </a>
+                        </div>
+                    </div>
+                
+                    </div>
+                </div>
+            
+                <div class="trends-drill-sub-item">
+                    <div class="trends-drill-sub-header" role="button" tabindex="0" onclick="toggleTrendsDrilldown(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleTrendsDrilldown(this);}">
+                        <button type="button" class="trends-drill-chevron" aria-label="Toggle Core / General" tabindex="-1">
+                            <span class="material-symbols-outlined">chevron_right</span>
+                        </button>
+                        <div class="trends-drill-info">
+                            <div class="trends-progress-labels">
+                                <span class="trends-sub-name" title="Core / General">Core / General</span>
+                                <span class="trends-progress-val">$4.5M • 3 deals (6%)</span>
+                            </div>
+                            <div class="trends-progress-track sub-track">
+                                <div class="trends-progress-fill" style="width: 6%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="trends-drill-company-list">
+                        
+                    <div class="trends-drill-company-row">
+                        <div class="trends-deal-left">
+                            <a href="../../company/medulance.com/" class="avatar-link" aria-label="View Medulance"><img src="https://www.google.com/s2/favicons?domain=medulance.com&sz=128" alt="Medulance" class="modal-hero-avatar" style="width: 32px; height: 32px; border-radius: 8px;" onerror="this.outerHTML='<div class=\'modal-hero-monogram\' style=\'width:32px; height:32px; font-size:12px; border-radius:8px; background:#FEF2F2; color:#DC2626; border:1px solid #FECACA;\'>ME</div>'"></a>
+                            <div style="min-width: 0;">
+                                <a href="../../company/medulance.com/" class="company-title-link" style="text-decoration: none; color: inherit;">
+                                    <div class="trends-deal-title">Medulance</div>
+                                </a>
+                                <div class="trends-deal-meta">Series A-2 • Auxano Capital</div>
+                            </div>
+                        </div>
+                        <div class="trends-deal-right">
+                            <div class="trends-deal-amount">$2.5M</div>
+                            <a href="../../company/medulance.com/" class="btn-trends-memo" aria-label="View details for Medulance">
+                                <span>View Details</span>
+                                <span class="material-symbols-outlined" style="font-size: 13px;">arrow_outward</span>
+                            </a>
+                        </div>
+                    </div>
+                
+                    <div class="trends-drill-company-row">
+                        <div class="trends-deal-left">
+                            <a href="../../company/docpharma.in/" class="avatar-link" aria-label="View DocPharma"><img src="https://www.google.com/s2/favicons?domain=docpharma.in&sz=128" alt="DocPharma" class="modal-hero-avatar" style="width: 32px; height: 32px; border-radius: 8px;" onerror="this.outerHTML='<div class=\'modal-hero-monogram\' style=\'width:32px; height:32px; font-size:12px; border-radius:8px; background:#F0FDFA; color:#0D9488; border:1px solid #CCFBF1;\'>DO</div>'"></a>
+                            <div style="min-width: 0;">
+                                <a href="../../company/docpharma.in/" class="company-title-link" style="text-decoration: none; color: inherit;">
+                                    <div class="trends-deal-title">DocPharma</div>
+                                </a>
+                                <div class="trends-deal-meta">Pre-Series A • Equentis</div>
+                            </div>
+                        </div>
+                        <div class="trends-deal-right">
+                            <div class="trends-deal-amount">$2M</div>
+                            <a href="../../company/docpharma.in/" class="btn-trends-memo" aria-label="View details for DocPharma">
+                                <span>View Details</span>
+                                <span class="material-symbols-outlined" style="font-size: 13px;">arrow_outward</span>
+                            </a>
+                        </div>
+                    </div>
+                
+                    <div class="trends-drill-company-row">
+                        <div class="trends-deal-left">
+                            <a href="../../company/xstep.co/" class="avatar-link" aria-label="View xStep"><img src="https://www.google.com/s2/favicons?domain=xstep.co&sz=128" alt="xStep" class="modal-hero-avatar" style="width: 32px; height: 32px; border-radius: 8px;" onerror="this.outerHTML='<div class=\'modal-hero-monogram\' style=\'width:32px; height:32px; font-size:12px; border-radius:8px; background:#F0FDF4; color:#16A34A; border:1px solid #BBF7D0;\'>XS</div>'"></a>
+                            <div style="min-width: 0;">
+                                <a href="../../company/xstep.co/" class="company-title-link" style="text-decoration: none; color: inherit;">
+                                    <div class="trends-deal-title">xStep</div>
+                                </a>
+                                <div class="trends-deal-meta">Round • Titan Capital</div>
+                            </div>
+                        </div>
+                        <div class="trends-deal-right">
+                            <div class="trends-deal-amount">Undisclosed</div>
+                            <a href="../../company/xstep.co/" class="btn-trends-memo" aria-label="View details for xStep">
+                                <span>View Details</span>
+                                <span class="material-symbols-outlined" style="font-size: 13px;">arrow_outward</span>
+                            </a>
+                        </div>
+                    </div>
+                
+                    </div>
+                </div>
+            
+                </div>
+            </div>
+        
+            <div class="trends-drill-item">
+                <div class="trends-drill-header" role="button" tabindex="0" onclick="toggleTrendsDrilldown(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleTrendsDrilldown(this);}">
+                    <button type="button" class="trends-drill-chevron" aria-label="Toggle Ecommerce" tabindex="-1">
+                        <span class="material-symbols-outlined">chevron_right</span>
+                    </button>
+                    <div class="trends-drill-info">
+                        <div class="trends-progress-labels">
+                            <span class="trends-progress-name" title="Ecommerce">Ecommerce</span>
+                            <span class="trends-progress-val">$55.9M • 4 deals (29%)</span>
+                        </div>
+                        <div class="trends-progress-track">
+                            <div class="trends-progress-fill" style="width: 29%;"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="trends-drill-sub-list">
+                    
+                <div class="trends-drill-sub-item">
+                    <div class="trends-drill-sub-header" role="button" tabindex="0" onclick="toggleTrendsDrilldown(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleTrendsDrilldown(this);}">
+                        <button type="button" class="trends-drill-chevron" aria-label="Toggle D2C" tabindex="-1">
+                            <span class="material-symbols-outlined">chevron_right</span>
+                        </button>
+                        <div class="trends-drill-info">
+                            <div class="trends-progress-labels">
+                                <span class="trends-sub-name" title="D2C">D2C</span>
+                                <span class="trends-progress-val">$55.9M • 4 deals (100%)</span>
+                            </div>
+                            <div class="trends-progress-track sub-track">
+                                <div class="trends-progress-fill" style="width: 100%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="trends-drill-company-list">
+                        
+                    <div class="trends-drill-company-row">
+                        <div class="trends-deal-left">
+                            <a href="../../company/mokobara.com/" class="avatar-link" aria-label="View Mokobara"><img src="https://www.google.com/s2/favicons?domain=mokobara.com&sz=128" alt="Mokobara" class="modal-hero-avatar" style="width: 32px; height: 32px; border-radius: 8px;" onerror="this.outerHTML='<div class=\'modal-hero-monogram\' style=\'width:32px; height:32px; font-size:12px; border-radius:8px; background:#FAF5FF; color:#9333EA; border:1px solid #E9D5FF;\'>MO</div>'"></a>
+                            <div style="min-width: 0;">
+                                <a href="../../company/mokobara.com/" class="company-title-link" style="text-decoration: none; color: inherit;">
+                                    <div class="trends-deal-title">Mokobara</div>
+                                </a>
+                                <div class="trends-deal-meta">Series C • Sauce.vc</div>
+                            </div>
+                        </div>
+                        <div class="trends-deal-right">
+                            <div class="trends-deal-amount">$18M</div>
+                            <a href="../../company/mokobara.com/" class="btn-trends-memo" aria-label="View details for Mokobara">
+                                <span>View Details</span>
+                                <span class="material-symbols-outlined" style="font-size: 13px;">arrow_outward</span>
+                            </a>
+                        </div>
+                    </div>
+                
+                    <div class="trends-drill-company-row">
+                        <div class="trends-deal-left">
+                            <a href="../../company/sugarcosmetics.com/" class="avatar-link" aria-label="View SUGAR Cosmetics"><img src="https://www.google.com/s2/favicons?domain=sugarcosmetics.com&sz=128" alt="SUGAR Cosmetics" class="modal-hero-avatar" style="width: 32px; height: 32px; border-radius: 8px;" onerror="this.outerHTML='<div class=\'modal-hero-monogram\' style=\'width:32px; height:32px; font-size:12px; border-radius:8px; background:#F0FDFA; color:#0D9488; border:1px solid #CCFBF1;\'>SC</div>'"></a>
+                            <div style="min-width: 0;">
+                                <a href="../../company/sugarcosmetics.com/" class="company-title-link" style="text-decoration: none; color: inherit;">
+                                    <div class="trends-deal-title">SUGAR Cosmetics</div>
+                                </a>
+                                <div class="trends-deal-meta">Series D • A91 Partners</div>
+                            </div>
+                        </div>
+                        <div class="trends-deal-right">
+                            <div class="trends-deal-amount">$15.3M</div>
+                            <a href="../../company/sugarcosmetics.com/" class="btn-trends-memo" aria-label="View details for SUGAR Cosmetics">
+                                <span>View Details</span>
+                                <span class="material-symbols-outlined" style="font-size: 13px;">arrow_outward</span>
+                            </a>
+                        </div>
+                    </div>
+                
+                    <div class="trends-drill-company-row">
+                        <div class="trends-deal-left">
+                            <a href="../../company/cradlewise.com/" class="avatar-link" aria-label="View Cradlewise"><img src="https://www.google.com/s2/favicons?domain=cradlewise.com&sz=128" alt="Cradlewise" class="modal-hero-avatar" style="width: 32px; height: 32px; border-radius: 8px;" onerror="this.outerHTML='<div class=\'modal-hero-monogram\' style=\'width:32px; height:32px; font-size:12px; border-radius:8px; background:#F0FDF4; color:#16A34A; border:1px solid #BBF7D0;\'>CR</div>'"></a>
+                            <div style="min-width: 0;">
+                                <a href="../../company/cradlewise.com/" class="company-title-link" style="text-decoration: none; color: inherit;">
+                                    <div class="trends-deal-title">Cradlewise</div>
+                                </a>
+                                <div class="trends-deal-meta">Series A • 3one4 Capital, Prudent Investment Management</div>
+                            </div>
+                        </div>
+                        <div class="trends-deal-right">
+                            <div class="trends-deal-amount">$12M</div>
+                            <a href="../../company/cradlewise.com/" class="btn-trends-memo" aria-label="View details for Cradlewise">
+                                <span>View Details</span>
+                                <span class="material-symbols-outlined" style="font-size: 13px;">arrow_outward</span>
+                            </a>
+                        </div>
+                    </div>
+                
+                    <div class="trends-drill-company-row">
+                        <div class="trends-deal-left">
+                            <a href="../../company/wearcomet.com/" class="avatar-link" aria-label="View Comet"><img src="https://www.google.com/s2/favicons?domain=wearcomet.com&sz=128" alt="Comet" class="modal-hero-avatar" style="width: 32px; height: 32px; border-radius: 8px;" onerror="this.outerHTML='<div class=\'modal-hero-monogram\' style=\'width:32px; height:32px; font-size:12px; border-radius:8px; background:#FFF7ED; color:#EA580C; border:1px solid #FFEDD5;\'>CO</div>'"></a>
+                            <div style="min-width: 0;">
+                                <a href="../../company/wearcomet.com/" class="company-title-link" style="text-decoration: none; color: inherit;">
+                                    <div class="trends-deal-title">Comet</div>
+                                </a>
+                                <div class="trends-deal-meta">Series B • Verlinvest</div>
+                            </div>
+                        </div>
+                        <div class="trends-deal-right">
+                            <div class="trends-deal-amount">$10.6M</div>
+                            <a href="../../company/wearcomet.com/" class="btn-trends-memo" aria-label="View details for Comet">
+                                <span>View Details</span>
+                                <span class="material-symbols-outlined" style="font-size: 13px;">arrow_outward</span>
+                            </a>
+                        </div>
+                    </div>
+                
+                    </div>
+                </div>
+            
+                </div>
+            </div>
+        
+            <div class="trends-drill-item">
+                <div class="trends-drill-header" role="button" tabindex="0" onclick="toggleTrendsDrilldown(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleTrendsDrilldown(this);}">
+                    <button type="button" class="trends-drill-chevron" aria-label="Toggle Clean Tech" tabindex="-1">
+                        <span class="material-symbols-outlined">chevron_right</span>
+                    </button>
+                    <div class="trends-drill-info">
+                        <div class="trends-progress-labels">
+                            <span class="trends-progress-name" title="Clean Tech">Clean Tech</span>
+                            <span class="trends-progress-val">$46.3M • 5 deals (24%)</span>
+                        </div>
+                        <div class="trends-progress-track">
+                            <div class="trends-progress-fill" style="width: 24%;"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="trends-drill-sub-list">
+                    
+                <div class="trends-drill-sub-item">
+                    <div class="trends-drill-sub-header" role="button" tabindex="0" onclick="toggleTrendsDrilldown(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleTrendsDrilldown(this);}">
+                        <button type="button" class="trends-drill-chevron" aria-label="Toggle Electric Vehicles" tabindex="-1">
+                            <span class="material-symbols-outlined">chevron_right</span>
+                        </button>
+                        <div class="trends-drill-info">
+                            <div class="trends-progress-labels">
+                                <span class="trends-sub-name" title="Electric Vehicles">Electric Vehicles</span>
+                                <span class="trends-progress-val">$41M • 3 deals (89%)</span>
+                            </div>
+                            <div class="trends-progress-track sub-track">
+                                <div class="trends-progress-fill" style="width: 89%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="trends-drill-company-list">
+                        
+                    <div class="trends-drill-company-row">
+                        <div class="trends-deal-left">
+                            <a href="../../company/yumaenergy.in/" class="avatar-link" aria-label="View Yuma Energy"><img src="https://www.google.com/s2/favicons?domain=yumaenergy.in&sz=128" alt="Yuma Energy" class="modal-hero-avatar" style="width: 32px; height: 32px; border-radius: 8px;" onerror="this.outerHTML='<div class=\'modal-hero-monogram\' style=\'width:32px; height:32px; font-size:12px; border-radius:8px; background:#F0FDFA; color:#0D9488; border:1px solid #CCFBF1;\'>YE</div>'"></a>
+                            <div style="min-width: 0;">
+                                <a href="../../company/yumaenergy.in/" class="company-title-link" style="text-decoration: none; color: inherit;">
+                                    <div class="trends-deal-title">Yuma Energy</div>
+                                </a>
+                                <div class="trends-deal-meta">Series A • Magna International Inc.</div>
+                            </div>
+                        </div>
+                        <div class="trends-deal-right">
+                            <div class="trends-deal-amount">$35M</div>
+                            <a href="../../company/yumaenergy.in/" class="btn-trends-memo" aria-label="View details for Yuma Energy">
+                                <span>View Details</span>
+                                <span class="material-symbols-outlined" style="font-size: 13px;">arrow_outward</span>
+                            </a>
+                        </div>
+                    </div>
+                
+                    <div class="trends-drill-company-row">
+                        <div class="trends-deal-left">
+                            <a href="../../company/zenergize.in/" class="avatar-link" aria-label="View Zenergize"><img src="https://www.google.com/s2/favicons?domain=zenergize.in&sz=128" alt="Zenergize" class="modal-hero-avatar" style="width: 32px; height: 32px; border-radius: 8px;" onerror="this.outerHTML='<div class=\'modal-hero-monogram\' style=\'width:32px; height:32px; font-size:12px; border-radius:8px; background:#EBF5FF; color:#0066CC; border:1px solid #B8DBFF;\'>ZE</div>'"></a>
+                            <div style="min-width: 0;">
+                                <a href="../../company/zenergize.in/" class="company-title-link" style="text-decoration: none; color: inherit;">
+                                    <div class="trends-deal-title">Zenergize</div>
+                                </a>
+                                <div class="trends-deal-meta">Pre-Series A • Giraffe Studios</div>
+                            </div>
+                        </div>
+                        <div class="trends-deal-right">
+                            <div class="trends-deal-amount">$4M</div>
+                            <a href="../../company/zenergize.in/" class="btn-trends-memo" aria-label="View details for Zenergize">
+                                <span>View Details</span>
+                                <span class="material-symbols-outlined" style="font-size: 13px;">arrow_outward</span>
+                            </a>
+                        </div>
+                    </div>
+                
+                    <div class="trends-drill-company-row">
+                        <div class="trends-deal-left">
+                            <a href="../../company/leanwatts.com/" class="avatar-link" aria-label="View Leanwatts"><img src="https://www.google.com/s2/favicons?domain=leanwatts.com&sz=128" alt="Leanwatts" class="modal-hero-avatar" style="width: 32px; height: 32px; border-radius: 8px;" onerror="this.outerHTML='<div class=\'modal-hero-monogram\' style=\'width:32px; height:32px; font-size:12px; border-radius:8px; background:#FEF2F2; color:#DC2626; border:1px solid #FECACA;\'>LE</div>'"></a>
+                            <div style="min-width: 0;">
+                                <a href="../../company/leanwatts.com/" class="company-title-link" style="text-decoration: none; color: inherit;">
+                                    <div class="trends-deal-title">Leanwatts</div>
+                                </a>
+                                <div class="trends-deal-meta">Seed • Trivest Partners</div>
+                            </div>
+                        </div>
+                        <div class="trends-deal-right">
+                            <div class="trends-deal-amount">$2M</div>
+                            <a href="../../company/leanwatts.com/" class="btn-trends-memo" aria-label="View details for Leanwatts">
+                                <span>View Details</span>
+                                <span class="material-symbols-outlined" style="font-size: 13px;">arrow_outward</span>
+                            </a>
+                        </div>
+                    </div>
+                
+                    </div>
+                </div>
+            
+                <div class="trends-drill-sub-item">
+                    <div class="trends-drill-sub-header" role="button" tabindex="0" onclick="toggleTrendsDrilldown(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleTrendsDrilldown(this);}">
+                        <button type="button" class="trends-drill-chevron" aria-label="Toggle Climate Tech" tabindex="-1">
+                            <span class="material-symbols-outlined">chevron_right</span>
+                        </button>
+                        <div class="trends-drill-info">
+                            <div class="trends-progress-labels">
+                                <span class="trends-sub-name" title="Climate Tech">Climate Tech</span>
+                                <span class="trends-progress-val">$5.3M • 2 deals (11%)</span>
+                            </div>
+                            <div class="trends-progress-track sub-track">
+                                <div class="trends-progress-fill" style="width: 11%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="trends-drill-company-list">
+                        
+                    <div class="trends-drill-company-row">
+                        <div class="trends-deal-left">
+                            <a href="../../company/minimacsystems.com/" class="avatar-link" aria-label="View Minimac Systems"><img src="https://www.google.com/s2/favicons?domain=minimacsystems.com&sz=128" alt="Minimac Systems" class="modal-hero-avatar" style="width: 32px; height: 32px; border-radius: 8px;" onerror="this.outerHTML='<div class=\'modal-hero-monogram\' style=\'width:32px; height:32px; font-size:12px; border-radius:8px; background:#EBF5FF; color:#0066CC; border:1px solid #B8DBFF;\'>MS</div>'"></a>
+                            <div style="min-width: 0;">
+                                <a href="../../company/minimacsystems.com/" class="company-title-link" style="text-decoration: none; color: inherit;">
+                                    <div class="trends-deal-title">Minimac Systems</div>
+                                </a>
+                                <div class="trends-deal-meta">Pre-Series A • Rainmatter</div>
+                            </div>
+                        </div>
+                        <div class="trends-deal-right">
+                            <div class="trends-deal-amount">$3.2M</div>
+                            <a href="../../company/minimacsystems.com/" class="btn-trends-memo" aria-label="View details for Minimac Systems">
+                                <span>View Details</span>
+                                <span class="material-symbols-outlined" style="font-size: 13px;">arrow_outward</span>
+                            </a>
+                        </div>
+                    </div>
+                
+                    <div class="trends-drill-company-row">
+                        <div class="trends-deal-left">
+                            <a href="../../company/yogacleanair.com/" class="avatar-link" aria-label="View Y.O.G.A. Clean Air"><img src="https://www.google.com/s2/favicons?domain=yogacleanair.com&sz=128" alt="Y.O.G.A. Clean Air" class="modal-hero-avatar" style="width: 32px; height: 32px; border-radius: 8px;" onerror="this.outerHTML='<div class=\'modal-hero-monogram\' style=\'width:32px; height:32px; font-size:12px; border-radius:8px; background:#EBF5FF; color:#0066CC; border:1px solid #B8DBFF;\'>YC</div>'"></a>
+                            <div style="min-width: 0;">
+                                <a href="../../company/yogacleanair.com/" class="company-title-link" style="text-decoration: none; color: inherit;">
+                                    <div class="trends-deal-title">Y.O.G.A. Clean Air</div>
+                                </a>
+                                <div class="trends-deal-meta">Series A • Info Edge Ventures</div>
+                            </div>
+                        </div>
+                        <div class="trends-deal-right">
+                            <div class="trends-deal-amount">$2.1M</div>
+                            <a href="../../company/yogacleanair.com/" class="btn-trends-memo" aria-label="View details for Y.O.G.A. Clean Air">
+                                <span>View Details</span>
+                                <span class="material-symbols-outlined" style="font-size: 13px;">arrow_outward</span>
+                            </a>
+                        </div>
+                    </div>
+                
+                    </div>
+                </div>
+            
+                </div>
+            </div>
+        
+            <div class="trends-drill-item">
+                <div class="trends-drill-header" role="button" tabindex="0" onclick="toggleTrendsDrilldown(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleTrendsDrilldown(this);}">
+                    <button type="button" class="trends-drill-chevron" aria-label="Toggle Advanced Hardware &amp; Technology" tabindex="-1">
+                        <span class="material-symbols-outlined">chevron_right</span>
+                    </button>
+                    <div class="trends-drill-info">
+                        <div class="trends-progress-labels">
+                            <span class="trends-progress-name" title="Advanced Hardware &amp; Technology">Advanced Hardware &amp; Technology</span>
+                            <span class="trends-progress-val">$16.3M • 4 deals (8%)</span>
+                        </div>
+                        <div class="trends-progress-track">
+                            <div class="trends-progress-fill" style="width: 8%;"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="trends-drill-sub-list">
+                    
+                <div class="trends-drill-sub-item">
+                    <div class="trends-drill-sub-header" role="button" tabindex="0" onclick="toggleTrendsDrilldown(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleTrendsDrilldown(this);}">
+                        <button type="button" class="trends-drill-chevron" aria-label="Toggle Space Tech" tabindex="-1">
+                            <span class="material-symbols-outlined">chevron_right</span>
+                        </button>
+                        <div class="trends-drill-info">
+                            <div class="trends-progress-labels">
+                                <span class="trends-sub-name" title="Space Tech">Space Tech</span>
+                                <span class="trends-progress-val">$12.7M • 2 deals (78%)</span>
+                            </div>
+                            <div class="trends-progress-track sub-track">
+                                <div class="trends-progress-fill" style="width: 78%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="trends-drill-company-list">
+                        
+                    <div class="trends-drill-company-row">
+                        <div class="trends-deal-left">
+                            <a href="../../company/kepleraerospace.com/" class="avatar-link" aria-label="View Kepler Aerospace"><img src="https://www.google.com/s2/favicons?domain=kepleraerospace.com&sz=128" alt="Kepler Aerospace" class="modal-hero-avatar" style="width: 32px; height: 32px; border-radius: 8px;" onerror="this.outerHTML='<div class=\'modal-hero-monogram\' style=\'width:32px; height:32px; font-size:12px; border-radius:8px; background:#F0FDFA; color:#0D9488; border:1px solid #CCFBF1;\'>KA</div>'"></a>
+                            <div style="min-width: 0;">
+                                <a href="../../company/kepleraerospace.com/" class="company-title-link" style="text-decoration: none; color: inherit;">
+                                    <div class="trends-deal-title">Kepler Aerospace</div>
+                                </a>
+                                <div class="trends-deal-meta">Seed • Blue Ashva Capital</div>
+                            </div>
+                        </div>
+                        <div class="trends-deal-right">
+                            <div class="trends-deal-amount">$8M</div>
+                            <a href="../../company/kepleraerospace.com/" class="btn-trends-memo" aria-label="View details for Kepler Aerospace">
+                                <span>View Details</span>
+                                <span class="material-symbols-outlined" style="font-size: 13px;">arrow_outward</span>
+                            </a>
+                        </div>
+                    </div>
+                
+                    <div class="trends-drill-company-row">
+                        <div class="trends-deal-left">
+                            <a href="../../company/aeronsystems.com/" class="avatar-link" aria-label="View Aeron Systems"><img src="https://www.google.com/s2/favicons?domain=aeronsystems.com&sz=128" alt="Aeron Systems" class="modal-hero-avatar" style="width: 32px; height: 32px; border-radius: 8px;" onerror="this.outerHTML='<div class=\'modal-hero-monogram\' style=\'width:32px; height:32px; font-size:12px; border-radius:8px; background:#FEF2F2; color:#DC2626; border:1px solid #FECACA;\'>AS</div>'"></a>
+                            <div style="min-width: 0;">
+                                <a href="../../company/aeronsystems.com/" class="company-title-link" style="text-decoration: none; color: inherit;">
+                                    <div class="trends-deal-title">Aeron Systems</div>
+                                </a>
+                                <div class="trends-deal-meta">Pre-Series B • Riverwalk Holdings, MGF-Kavachh</div>
+                            </div>
+                        </div>
+                        <div class="trends-deal-right">
+                            <div class="trends-deal-amount">$4.7M</div>
+                            <a href="../../company/aeronsystems.com/" class="btn-trends-memo" aria-label="View details for Aeron Systems">
+                                <span>View Details</span>
+                                <span class="material-symbols-outlined" style="font-size: 13px;">arrow_outward</span>
+                            </a>
+                        </div>
+                    </div>
+                
+                    </div>
+                </div>
+            
+                <div class="trends-drill-sub-item">
+                    <div class="trends-drill-sub-header" role="button" tabindex="0" onclick="toggleTrendsDrilldown(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleTrendsDrilldown(this);}">
+                        <button type="button" class="trends-drill-chevron" aria-label="Toggle Aerial Vehicles" tabindex="-1">
+                            <span class="material-symbols-outlined">chevron_right</span>
+                        </button>
+                        <div class="trends-drill-info">
+                            <div class="trends-progress-labels">
+                                <span class="trends-sub-name" title="Aerial Vehicles">Aerial Vehicles</span>
+                                <span class="trends-progress-val">$2.5M • 1 deal (15%)</span>
+                            </div>
+                            <div class="trends-progress-track sub-track">
+                                <div class="trends-progress-fill" style="width: 15%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="trends-drill-company-list">
+                        
+                    <div class="trends-drill-company-row">
+                        <div class="trends-deal-left">
+                            <a href="../../company/alteon.io/" class="avatar-link" aria-label="View Alteon"><img src="https://www.google.com/s2/favicons?domain=alteon.io&sz=128" alt="Alteon" class="modal-hero-avatar" style="width: 32px; height: 32px; border-radius: 8px;" onerror="this.outerHTML='<div class=\'modal-hero-monogram\' style=\'width:32px; height:32px; font-size:12px; border-radius:8px; background:#F0FDFA; color:#0D9488; border:1px solid #CCFBF1;\'>AL</div>'"></a>
+                            <div style="min-width: 0;">
+                                <a href="../../company/alteon.io/" class="company-title-link" style="text-decoration: none; color: inherit;">
+                                    <div class="trends-deal-title">Alteon</div>
+                                </a>
+                                <div class="trends-deal-meta">Pre-Seed • Lachy Groom</div>
+                            </div>
+                        </div>
+                        <div class="trends-deal-right">
+                            <div class="trends-deal-amount">$2.5M</div>
+                            <a href="../../company/alteon.io/" class="btn-trends-memo" aria-label="View details for Alteon">
+                                <span>View Details</span>
+                                <span class="material-symbols-outlined" style="font-size: 13px;">arrow_outward</span>
+                            </a>
+                        </div>
+                    </div>
+                
+                    </div>
+                </div>
+            
+                <div class="trends-drill-sub-item">
+                    <div class="trends-drill-sub-header" role="button" tabindex="0" onclick="toggleTrendsDrilldown(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleTrendsDrilldown(this);}">
+                        <button type="button" class="trends-drill-chevron" aria-label="Toggle Semiconductor" tabindex="-1">
+                            <span class="material-symbols-outlined">chevron_right</span>
+                        </button>
+                        <div class="trends-drill-info">
+                            <div class="trends-progress-labels">
+                                <span class="trends-sub-name" title="Semiconductor">Semiconductor</span>
+                                <span class="trends-progress-val">$1.1M • 1 deal (7%)</span>
+                            </div>
+                            <div class="trends-progress-track sub-track">
+                                <div class="trends-progress-fill" style="width: 7%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="trends-drill-company-list">
+                        
+                    <div class="trends-drill-company-row">
+                        <div class="trends-deal-left">
+                            <a href="../../company/makrmicro.com/" class="avatar-link" aria-label="View Makr Microsystems"><img src="https://www.google.com/s2/favicons?domain=makrmicro.com&sz=128" alt="Makr Microsystems" class="modal-hero-avatar" style="width: 32px; height: 32px; border-radius: 8px;" onerror="this.outerHTML='<div class=\'modal-hero-monogram\' style=\'width:32px; height:32px; font-size:12px; border-radius:8px; background:#F0FDF4; color:#16A34A; border:1px solid #BBF7D0;\'>MM</div>'"></a>
+                            <div style="min-width: 0;">
+                                <a href="../../company/makrmicro.com/" class="company-title-link" style="text-decoration: none; color: inherit;">
+                                    <div class="trends-deal-title">Makr Microsystems</div>
+                                </a>
+                                <div class="trends-deal-meta">Seed • Bluehill VC</div>
+                            </div>
+                        </div>
+                        <div class="trends-deal-right">
+                            <div class="trends-deal-amount">$1.1M</div>
+                            <a href="../../company/makrmicro.com/" class="btn-trends-memo" aria-label="View details for Makr Microsystems">
+                                <span>View Details</span>
+                                <span class="material-symbols-outlined" style="font-size: 13px;">arrow_outward</span>
+                            </a>
+                        </div>
+                    </div>
+                
+                    </div>
+                </div>
+            
+                </div>
+            </div>
+        
+            <div class="trends-drill-item">
+                <div class="trends-drill-header" role="button" tabindex="0" onclick="toggleTrendsDrilldown(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleTrendsDrilldown(this);}">
+                    <button type="button" class="trends-drill-chevron" aria-label="Toggle AI" tabindex="-1">
+                        <span class="material-symbols-outlined">chevron_right</span>
+                    </button>
+                    <div class="trends-drill-info">
+                        <div class="trends-progress-labels">
+                            <span class="trends-progress-name" title="AI">AI</span>
+                            <span class="trends-progress-val">$879K • 2 deals (0%)</span>
+                        </div>
+                        <div class="trends-progress-track">
+                            <div class="trends-progress-fill" style="width: 3%;"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="trends-drill-sub-list">
+                    
+                <div class="trends-drill-sub-item">
+                    <div class="trends-drill-sub-header" role="button" tabindex="0" onclick="toggleTrendsDrilldown(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleTrendsDrilldown(this);}">
+                        <button type="button" class="trends-drill-chevron" aria-label="Toggle Application Layer" tabindex="-1">
+                            <span class="material-symbols-outlined">chevron_right</span>
+                        </button>
+                        <div class="trends-drill-info">
+                            <div class="trends-progress-labels">
+                                <span class="trends-sub-name" title="Application Layer">Application Layer</span>
+                                <span class="trends-progress-val">$879K • 2 deals (100%)</span>
+                            </div>
+                            <div class="trends-progress-track sub-track">
+                                <div class="trends-progress-fill" style="width: 100%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="trends-drill-company-list">
+                        
+                    <div class="trends-drill-company-row">
+                        <div class="trends-deal-left">
+                            <a href="../../company/oppex.ai/" class="avatar-link" aria-label="View Oppex AI"><img src="https://www.google.com/s2/favicons?domain=oppex.ai&sz=128" alt="Oppex AI" class="modal-hero-avatar" style="width: 32px; height: 32px; border-radius: 8px;" onerror="this.outerHTML='<div class=\'modal-hero-monogram\' style=\'width:32px; height:32px; font-size:12px; border-radius:8px; background:#EBF5FF; color:#0066CC; border:1px solid #B8DBFF;\'>OA</div>'"></a>
+                            <div style="min-width: 0;">
+                                <a href="../../company/oppex.ai/" class="company-title-link" style="text-decoration: none; color: inherit;">
+                                    <div class="trends-deal-title">Oppex AI</div>
+                                </a>
+                                <div class="trends-deal-meta">Pre-Seed • Info Edge Ventures</div>
+                            </div>
+                        </div>
+                        <div class="trends-deal-right">
+                            <div class="trends-deal-amount">$445K</div>
+                            <a href="../../company/oppex.ai/" class="btn-trends-memo" aria-label="View details for Oppex AI">
+                                <span>View Details</span>
+                                <span class="material-symbols-outlined" style="font-size: 13px;">arrow_outward</span>
+                            </a>
+                        </div>
+                    </div>
+                
+                    <div class="trends-drill-company-row">
+                        <div class="trends-deal-left">
+                            <a href="../../company/creedom.ai/" class="avatar-link" aria-label="View Creedom"><img src="https://www.google.com/s2/favicons?domain=creedom.ai&sz=128" alt="Creedom" class="modal-hero-avatar" style="width: 32px; height: 32px; border-radius: 8px;" onerror="this.outerHTML='<div class=\'modal-hero-monogram\' style=\'width:32px; height:32px; font-size:12px; border-radius:8px; background:#FDF2F8; color:#DB2777; border:1px solid #FCE7F3;\'>CR</div>'"></a>
+                            <div style="min-width: 0;">
+                                <a href="../../company/creedom.ai/" class="company-title-link" style="text-decoration: none; color: inherit;">
+                                    <div class="trends-deal-title">Creedom</div>
+                                </a>
+                                <div class="trends-deal-meta">Seed • Leigh Hopkins, Raghunandan G, Ravi Iyer, Kartheeswaran KK</div>
+                            </div>
+                        </div>
+                        <div class="trends-deal-right">
+                            <div class="trends-deal-amount">$434K</div>
+                            <a href="../../company/creedom.ai/" class="btn-trends-memo" aria-label="View details for Creedom">
+                                <span>View Details</span>
+                                <span class="material-symbols-outlined" style="font-size: 13px;">arrow_outward</span>
+                            </a>
+                        </div>
+                    </div>
+                
+                    </div>
+                </div>
+            
+                </div>
+            </div>
+        
+                        </div>
                     </div>
                 </div>
 
@@ -1288,15 +1940,15 @@
                         
                                 <div class="trends-deal-row">
                                     <div class="trends-deal-left">
-                                        <a href="../../company/ultrahuman/" class="avatar-link" aria-label="View Ultrahuman"><div class="modal-hero-monogram" style="width:32px; height:32px; font-size:12px; border-radius:8px; background:#EBF5FF; color:#0066CC; border:1px solid #B8DBFF;">UL</div></a>
+                                        <a href="../../company/ultrahuman.com/" class="avatar-link" aria-label="View Ultrahuman"><img src="https://www.google.com/s2/favicons?domain=ultrahuman.com&sz=128" alt="Ultrahuman" class="modal-hero-avatar" style="width: 32px; height: 32px; border-radius: 8px;" onerror="this.outerHTML='<div class=\'modal-hero-monogram\' style=\'width:32px; height:32px; font-size:12px; border-radius:8px; background:#EBF5FF; color:#0066CC; border:1px solid #B8DBFF;\'>UL</div>'"></a>
                                         <div style="min-width: 0;">
-                                            <a href="../../company/ultrahuman/" class="company-title-link" style="text-decoration: none; color: inherit;"><div class="trends-deal-title">Ultrahuman</div></a>
+                                            <a href="../../company/ultrahuman.com/" class="company-title-link" style="text-decoration: none; color: inherit;"><div class="trends-deal-title">Ultrahuman</div></a>
                                             <div class="trends-deal-meta">Series C • Qualcomm Ventures</div>
                                         </div>
                                     </div>
                                     <div class="trends-deal-right">
                                         <div class="trends-deal-amount">$70M</div>
-                                        <a href="../../company/ultrahuman/" class="btn-trends-memo" aria-label="View details for Ultrahuman">
+                                        <a href="../../company/ultrahuman.com/" class="btn-trends-memo" aria-label="View details for Ultrahuman">
                                             <span>View Details</span>
                                             <span class="material-symbols-outlined" style="font-size: 13px;">arrow_outward</span>
                                         </a>
@@ -1305,15 +1957,15 @@
                             
                                 <div class="trends-deal-row">
                                     <div class="trends-deal-left">
-                                        <a href="../../company/yuma-energy/" class="avatar-link" aria-label="View Yuma Energy"><div class="modal-hero-monogram" style="width:32px; height:32px; font-size:12px; border-radius:8px; background:#F0FDFA; color:#0D9488; border:1px solid #CCFBF1;">YE</div></a>
+                                        <a href="../../company/yumaenergy.in/" class="avatar-link" aria-label="View Yuma Energy"><img src="https://www.google.com/s2/favicons?domain=yumaenergy.in&sz=128" alt="Yuma Energy" class="modal-hero-avatar" style="width: 32px; height: 32px; border-radius: 8px;" onerror="this.outerHTML='<div class=\'modal-hero-monogram\' style=\'width:32px; height:32px; font-size:12px; border-radius:8px; background:#F0FDFA; color:#0D9488; border:1px solid #CCFBF1;\'>YE</div>'"></a>
                                         <div style="min-width: 0;">
-                                            <a href="../../company/yuma-energy/" class="company-title-link" style="text-decoration: none; color: inherit;"><div class="trends-deal-title">Yuma Energy</div></a>
+                                            <a href="../../company/yumaenergy.in/" class="company-title-link" style="text-decoration: none; color: inherit;"><div class="trends-deal-title">Yuma Energy</div></a>
                                             <div class="trends-deal-meta">Series A • Magna International Inc.</div>
                                         </div>
                                     </div>
                                     <div class="trends-deal-right">
                                         <div class="trends-deal-amount">$35M</div>
-                                        <a href="../../company/yuma-energy/" class="btn-trends-memo" aria-label="View details for Yuma Energy">
+                                        <a href="../../company/yumaenergy.in/" class="btn-trends-memo" aria-label="View details for Yuma Energy">
                                             <span>View Details</span>
                                             <span class="material-symbols-outlined" style="font-size: 13px;">arrow_outward</span>
                                         </a>
@@ -1415,14 +2067,19 @@
                     </h3>
                     <div class="sidebar-weeks-list">
                         
+                                <a href="../week-39-2026/" class="sidebar-week-item ">
+                                    <span>Week 39 (2026)</span>
+                                    <span style="font-size: 11px; opacity: 0.8;">$5.7M • 2d</span>
+                                </a>
+                            
                                 <a href="../week-38-2026/" class="sidebar-week-item ">
                                     <span>Week 38 (2026)</span>
-                                    <span style="font-size: 11px; opacity: 0.8;">$210.7M • 18d</span>
+                                    <span style="font-size: 11px; opacity: 0.8;">$212.1M • 18d</span>
                                 </a>
                             
                                 <a href="../week-37-2026/" class="sidebar-week-item ">
                                     <span>Week 37 (2026)</span>
-                                    <span style="font-size: 11px; opacity: 0.8;">$304M • 20d</span>
+                                    <span style="font-size: 11px; opacity: 0.8;">$304M • 21d</span>
                                 </a>
                             
                                 <a href="../week-36-2026/" class="sidebar-week-item active">
@@ -1608,7 +2265,7 @@
         }
 
         // Copy Weekly Markdown Digest
-        const weeklyDigestMarkdown = "📊 *Weekly Venture Intelligence: Week 36 of 2026 (Aug 31 – Sep 6, 2026)*\n• Total Capital Deployed: $194.4M across 22 deals\n• Median Check Size: $3.2M | Avg Round: $10.2M\n• Capital Velocity: -5% WoW vs prior week\n• Top Funded Deal: Ultrahuman ($70M, Series C)\n\n💼 *Capital Allocation by Stage:*\n• Seed / Angel: $15M (7 deals • 8%)\n• Series A: $60.8M (7 deals • 31%)\n• Series B / C: $103.3M (4 deals • 53%)\n• Growth / Late: $15.3M (1 deals • 8%)\n• Debt / Other: Undisclosed (3 deals • 0%)\n\n🚀 *Industry Hotspots:*\n1. Health Tech: $74.5M (4 deals)\n2. Ecommerce: $55.9M (4 deals)\n3. Clean Tech: $46.3M (5 deals)\n4. Advanced Hardware & Technology: $16.3M (4 deals)\n5. AI: $879K (2 deals)\n\n📍 *Top Regional Hubs:*\n• Bengaluru: 12 deals (55%)\n• Pune: 2 deals (9%)\n• Mumbai: 2 deals (9%)\n• Undisclosed: 2 deals (9%)\n• Hyderabad: 1 deals (5%)\n\n🏆 *Top Showcase Deals:*\n• Ultrahuman — $70M (Series C) | Lead: Qualcomm Ventures\n• Yuma Energy — $35M (Series A) | Lead: Magna International Inc.\n• Mokobara — $18M (Series C) | Lead: Sauce.vc [https://mokobara.com]";
+        const weeklyDigestMarkdown = "📊 *Weekly Venture Intelligence: Week 36 of 2026 (Aug 31 – Sep 6, 2026)*\n• Total Capital Deployed: $194.4M across 22 deals\n• Median Check Size: $3.2M | Avg Round: $10.2M\n• Capital Velocity: -5% WoW vs prior week\n• Top Funded Deal: Ultrahuman ($70M, Series C)\n\n💼 *Capital Allocation by Stage:*\n• Seed / Angel: $15M (7 deals • 8%)\n• Series A: $60.8M (7 deals • 31%)\n• Series B / C: $103.3M (4 deals • 53%)\n• Growth / Late: $15.3M (1 deals • 8%)\n• Debt / Other: Undisclosed (3 deals • 0%)\n\n🚀 *Industry Hotspots:*\n1. Health Tech: $74.5M (4 deals)\n2. Ecommerce: $55.9M (4 deals)\n3. Clean Tech: $46.3M (5 deals)\n4. Advanced Hardware & Technology: $16.3M (4 deals)\n5. AI: $879K (2 deals)\n\n📍 *Top Regional Hubs:*\n• Bengaluru: 12 deals (55%)\n• Pune: 2 deals (9%)\n• Mumbai: 2 deals (9%)\n• Undisclosed: 2 deals (9%)\n• Hyderabad: 1 deals (5%)\n\n🏆 *Top Showcase Deals:*\n• Ultrahuman — $70M (Series C) | Lead: Qualcomm Ventures [https://www.ultrahuman.com/]\n• Yuma Energy — $35M (Series A) | Lead: Magna International Inc. [https://yumaenergy.in/]\n• Mokobara — $18M (Series C) | Lead: Sauce.vc [https://mokobara.com]";
         function copyWeeklyDigest() {
             const btn = document.getElementById('btnTrendsCopyDigest');
             const showSuccess = () => {
@@ -1654,6 +2311,37 @@
             const parent = headerEl.closest('.trends-drill-item, .trends-drill-sub-item');
             if (parent) {
                 parent.classList.toggle('expanded');
+            }
+        }
+
+        // Dual-view switch between Vertical and Segment in Industry Hotspots
+        function switchHotspotsView(view) {
+            const vertBtn = document.getElementById('btnViewVertical');
+            const segBtn = document.getElementById('btnViewSegment');
+            const vertView = document.getElementById('trendsVerticalView');
+            const segView = document.getElementById('trendsSegmentView');
+            if (view === 'segment') {
+                if (vertBtn) {
+                    vertBtn.classList.remove('active');
+                    vertBtn.setAttribute('aria-selected', 'false');
+                }
+                if (segBtn) {
+                    segBtn.classList.add('active');
+                    segBtn.setAttribute('aria-selected', 'true');
+                }
+                if (vertView) vertView.style.display = 'none';
+                if (segView) segView.style.display = 'flex';
+            } else {
+                if (segBtn) {
+                    segBtn.classList.remove('active');
+                    segBtn.setAttribute('aria-selected', 'false');
+                }
+                if (vertBtn) {
+                    vertBtn.classList.add('active');
+                    vertBtn.setAttribute('aria-selected', 'true');
+                }
+                if (segView) segView.style.display = 'none';
+                if (vertView) vertView.style.display = 'flex';
             }
         }
     </script>

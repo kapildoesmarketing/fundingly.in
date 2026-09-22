@@ -563,13 +563,20 @@
                     </div>
                 </div>
 
-                <!-- Module C: Industry Hotspots (3-Tier Hierarchical Drilldown) -->
+                <!-- Module C: Industry Hotspots (3-Tier Hierarchical Drilldown with Dual View Toggle) -->
                 <div class="trends-section-card">
-                    <div class="trends-section-title">
-                        <span>Industry Hotspots</span>
+                    <div class="trends-section-header-row">
+                        <div class="trends-section-title" style="margin-bottom: 0;">
+                            <span>Industry Hotspots</span>
+                        </div>
+                        <div class="trends-toggle-group" role="tablist" aria-label="Hotspots View Selection">
+                            <button type="button" class="trends-toggle-btn active" id="btnViewVertical" data-view="vertical" role="tab" aria-selected="true" onclick="switchHotspotsView('vertical')">Vertical</button>
+                            <button type="button" class="trends-toggle-btn" id="btnViewSegment" data-view="segment" role="tab" aria-selected="false" onclick="switchHotspotsView('segment')">Segment</button>
+                        </div>
                     </div>
-                    <div id="trendsIndustryView" class="trends-progress-list">
-                        
+                    <div id="trendsIndustryView">
+                        <div id="trendsVerticalView" class="trends-progress-list">
+                            
             <div class="trends-drill-item">
                 <div class="trends-drill-header" role="button" tabindex="0" onclick="toggleTrendsDrilldown(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleTrendsDrilldown(this);}">
                     <button type="button" class="trends-drill-chevron" aria-label="Toggle Ecommerce" tabindex="-1">
@@ -629,6 +636,69 @@
                 </div>
             </div>
         
+                        </div>
+                        <div id="trendsSegmentView" class="trends-progress-list" style="display: none;">
+                            
+            <div class="trends-drill-item">
+                <div class="trends-drill-header" role="button" tabindex="0" onclick="toggleTrendsDrilldown(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleTrendsDrilldown(this);}">
+                    <button type="button" class="trends-drill-chevron" aria-label="Toggle Ecommerce" tabindex="-1">
+                        <span class="material-symbols-outlined">chevron_right</span>
+                    </button>
+                    <div class="trends-drill-info">
+                        <div class="trends-progress-labels">
+                            <span class="trends-progress-name" title="Ecommerce">Ecommerce</span>
+                            <span class="trends-progress-val">$174K • 1 deal (100%)</span>
+                        </div>
+                        <div class="trends-progress-track">
+                            <div class="trends-progress-fill" style="width: 100%;"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="trends-drill-sub-list">
+                    
+                <div class="trends-drill-sub-item">
+                    <div class="trends-drill-sub-header" role="button" tabindex="0" onclick="toggleTrendsDrilldown(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleTrendsDrilldown(this);}">
+                        <button type="button" class="trends-drill-chevron" aria-label="Toggle D2C" tabindex="-1">
+                            <span class="material-symbols-outlined">chevron_right</span>
+                        </button>
+                        <div class="trends-drill-info">
+                            <div class="trends-progress-labels">
+                                <span class="trends-sub-name" title="D2C">D2C</span>
+                                <span class="trends-progress-val">$174K • 1 deal (100%)</span>
+                            </div>
+                            <div class="trends-progress-track sub-track">
+                                <div class="trends-progress-fill" style="width: 100%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="trends-drill-company-list">
+                        
+                    <div class="trends-drill-company-row">
+                        <div class="trends-deal-left">
+                            <a href="../../company/chini-kum/" class="avatar-link" aria-label="View CHINI KUM"><div class="modal-hero-monogram" style="width:32px; height:32px; font-size:12px; border-radius:8px; background:#FAF5FF; color:#9333EA; border:1px solid #E9D5FF;">CK</div></a>
+                            <div style="min-width: 0;">
+                                <a href="../../company/chini-kum/" class="company-title-link" style="text-decoration: none; color: inherit;">
+                                    <div class="trends-deal-title">CHINI KUM</div>
+                                </a>
+                                <div class="trends-deal-meta">Pre-Seed • Angel Investors</div>
+                            </div>
+                        </div>
+                        <div class="trends-deal-right">
+                            <div class="trends-deal-amount">$174K</div>
+                            <a href="../../company/chini-kum/" class="btn-trends-memo" aria-label="View details for CHINI KUM">
+                                <span>View Details</span>
+                                <span class="material-symbols-outlined" style="font-size: 13px;">arrow_outward</span>
+                            </a>
+                        </div>
+                    </div>
+                
+                    </div>
+                </div>
+            
+                </div>
+            </div>
+        
+                        </div>
                     </div>
                 </div>
 
@@ -757,14 +827,19 @@
                     </h3>
                     <div class="sidebar-weeks-list">
                         
+                                <a href="../week-39-2026/" class="sidebar-week-item ">
+                                    <span>Week 39 (2026)</span>
+                                    <span style="font-size: 11px; opacity: 0.8;">$5.7M • 2d</span>
+                                </a>
+                            
                                 <a href="../week-38-2026/" class="sidebar-week-item ">
                                     <span>Week 38 (2026)</span>
-                                    <span style="font-size: 11px; opacity: 0.8;">$210.7M • 18d</span>
+                                    <span style="font-size: 11px; opacity: 0.8;">$212.1M • 18d</span>
                                 </a>
                             
                                 <a href="../week-37-2026/" class="sidebar-week-item ">
                                     <span>Week 37 (2026)</span>
-                                    <span style="font-size: 11px; opacity: 0.8;">$304M • 20d</span>
+                                    <span style="font-size: 11px; opacity: 0.8;">$304M • 21d</span>
                                 </a>
                             
                                 <a href="../week-36-2026/" class="sidebar-week-item ">
@@ -996,6 +1071,37 @@
             const parent = headerEl.closest('.trends-drill-item, .trends-drill-sub-item');
             if (parent) {
                 parent.classList.toggle('expanded');
+            }
+        }
+
+        // Dual-view switch between Vertical and Segment in Industry Hotspots
+        function switchHotspotsView(view) {
+            const vertBtn = document.getElementById('btnViewVertical');
+            const segBtn = document.getElementById('btnViewSegment');
+            const vertView = document.getElementById('trendsVerticalView');
+            const segView = document.getElementById('trendsSegmentView');
+            if (view === 'segment') {
+                if (vertBtn) {
+                    vertBtn.classList.remove('active');
+                    vertBtn.setAttribute('aria-selected', 'false');
+                }
+                if (segBtn) {
+                    segBtn.classList.add('active');
+                    segBtn.setAttribute('aria-selected', 'true');
+                }
+                if (vertView) vertView.style.display = 'none';
+                if (segView) segView.style.display = 'flex';
+            } else {
+                if (segBtn) {
+                    segBtn.classList.remove('active');
+                    segBtn.setAttribute('aria-selected', 'false');
+                }
+                if (vertBtn) {
+                    vertBtn.classList.add('active');
+                    vertBtn.setAttribute('aria-selected', 'true');
+                }
+                if (segView) segView.style.display = 'none';
+                if (vertView) vertView.style.display = 'flex';
             }
         }
     </script>

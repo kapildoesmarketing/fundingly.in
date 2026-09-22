@@ -2538,6 +2538,8 @@
         .inspector-row {
             display: flex;
             flex-direction: column;
+            min-width: 0;
+            overflow: hidden;
         }
 
         .inspector-label {
@@ -2556,6 +2558,8 @@
             /* Rule 4: 400 regular */
             color: var(--color-text-primary);
             word-break: break-word;
+            overflow-wrap: anywhere;
+            min-width: 0;
         }
 
         .inspector-val.highlight {
@@ -2569,6 +2573,8 @@
             text-decoration: none;
             font-weight: 600;
             /* Rule 4: 600 semiBold */
+            word-break: break-word;
+            overflow-wrap: anywhere;
         }
 
         .inspector-val a:hover {
@@ -2856,13 +2862,112 @@
             animation: bgSpinnerRotate 1.2s linear infinite;
         }
 
-        /* Print-Optimized Styling: Strictly isolate one-pager memo (Hides sidebar and timeline) */
+        /* ==========================================================================
+           VERIFIED & REVIEW STATUS CHIP (Apple Pill Intelligence Badge)
+           ========================================================================== */
+        .verified-status-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 4px 10px;
+            border-radius: var(--radius-pill);
+            font-size: 11.5px;
+            font-weight: 600;
+            line-height: 1;
+            white-space: nowrap;
+            user-select: none;
+            transition: all 0.15s ease;
+            text-decoration: none;
+        }
+
+        .verified-status-chip.verified {
+            background: rgba(52, 199, 89, 0.12);
+            color: #28a745;
+            border: 1px solid rgba(52, 199, 89, 0.35);
+        }
+
+        [data-theme="dark"] .verified-status-chip.verified {
+            background: rgba(48, 209, 88, 0.16);
+            color: #30d158;
+            border-color: rgba(48, 209, 88, 0.38);
+        }
+
+        .verified-status-chip.pending {
+            background: rgba(255, 149, 0, 0.12);
+            color: #d97706;
+            border: 1px solid rgba(255, 149, 0, 0.35);
+        }
+
+        [data-theme="dark"] .verified-status-chip.pending {
+            background: rgba(255, 159, 10, 0.16);
+            color: #ff9f0a;
+            border-color: rgba(255, 159, 10, 0.38);
+        }
+
+        /* ==========================================================================
+           INDUSTRY HOTSPOTS DUAL-VIEW TOGGLE (Vertical vs Segment)
+           ========================================================================== */
+        .trends-section-header-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .trends-toggle-group {
+            display: inline-flex;
+            align-items: center;
+            background: var(--color-surface-secondary);
+            border: 1px solid var(--color-hairline);
+            border-radius: var(--radius-pill);
+            padding: 2px;
+            gap: 2px;
+        }
+
+        .trends-toggle-btn {
+            background: transparent;
+            border: none;
+            color: var(--color-text-secondary);
+            font-family: var(--font-stack);
+            font-size: 11.5px;
+            font-weight: 500;
+            padding: 4px 12px;
+            border-radius: var(--radius-pill);
+            cursor: pointer;
+            transition: background-color 0.15s ease, color 0.15s ease, box-shadow 0.15s ease;
+            outline: none;
+            user-select: none;
+        }
+
+        .trends-toggle-btn:hover {
+            color: var(--color-text-primary);
+        }
+
+        .trends-toggle-btn.active {
+            background: var(--color-surface);
+            color: var(--color-text-primary);
+            font-weight: 600;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+        }
+
+        [data-theme="dark"] .trends-toggle-btn.active {
+            background: var(--color-surface-elevated);
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+        }
+
+        /* ==========================================================================
+           PRINT-OPTIMIZED STYLING ENGINE (Clean Output for Dossiers & Trends)
+           ========================================================================== */
         @media print {
+            @page {
+                margin: 12mm;
+                size: auto;
+            }
 
             header,
             .app-header,
-            main,
-            .app-layout,
             .app-sidebar,
             .sidebar-edge-toggle,
             #mobileFilterToggleBtn,
@@ -2874,6 +2979,7 @@
             .btn-detail,
             .close-btn,
             .modal-action-row,
+            .modal-action-bar,
             .modal-hero-toolbar,
             .modal-hero-action-row,
             .modal-hero-utility-row,
@@ -2881,12 +2987,23 @@
             .search-micro-btn,
             #tourBtn,
             #themeToggleBtn,
+            .btn-theme-toggle,
             #aboutBtn,
             #dateTriggerBtn,
             #clearDateBtn,
             #backToTopBtn,
             .trends-header-actions,
             .btn-trends-memo,
+            .trends-top-nav,
+            .dossier-top-nav,
+            .dossier-sidebar,
+            .trends-sidebar,
+            .share-bar,
+            .ad-container-wrapper,
+            ins.adsbygoogle,
+            .app-main-footer,
+            .main-footer,
+            .btn-suggest-correction,
             #aboutModal {
                 display: none !important;
             }
@@ -2896,9 +3013,28 @@
                 color: #000000 !important;
                 margin: 0 !important;
                 padding: 0 !important;
+                font-size: 11pt !important;
             }
 
-            /* Deal Memo Print */
+            /* Preserve static dossier and trends containers */
+            main,
+            .dossier-page-wrapper,
+            .trends-page-wrapper,
+            .modal-dossier-card,
+            .trends-container,
+            .trends-sheet-card {
+                display: block !important;
+                width: 100% !important;
+                max-width: 100% !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                background: transparent !important;
+                box-shadow: none !important;
+                border: none !important;
+                overflow: visible !important;
+            }
+
+            /* Deal Memo Print in SPA Modal */
             body:not(.printing-trends) #trendsModal {
                 display: none !important;
             }
@@ -2919,12 +3055,12 @@
                 border: none !important;
                 border-radius: 0 !important;
                 box-shadow: none !important;
-                padding: 24px !important;
+                padding: 12px !important;
                 margin: 0 !important;
                 overflow: visible !important;
             }
 
-            /* Weekly Trends Print */
+            /* Weekly Trends Print in SPA Modal */
             body.printing-trends #modalOverlay {
                 display: none !important;
             }
@@ -2945,7 +3081,7 @@
                 border: none !important;
                 border-radius: 0 !important;
                 box-shadow: none !important;
-                padding: 24px !important;
+                padding: 12px !important;
                 margin: 0 !important;
                 overflow: visible !important;
             }
@@ -2957,6 +3093,18 @@
                 background: #fafafa !important;
                 page-break-inside: avoid !important;
                 break-inside: avoid !important;
+                box-shadow: none !important;
+            }
+
+            /* Ensure text is dark and readable */
+            .company-name,
+            .modal-title,
+            .trends-title,
+            .inspector-val,
+            .description,
+            p, span, div, h1, h2, h3, h4 {
+                color: #000000 !important;
+                text-shadow: none !important;
             }
         }
 

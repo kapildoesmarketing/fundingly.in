@@ -58,8 +58,9 @@ function slugify(text) {
 
 // Helper: Format USD currency
 function formatUSD(amount) {
-    if (!amount || isNaN(amount) || amount === 0) return 'Undisclosed';
+    if (amount === null || amount === undefined || amount === '' || amount === 'Undisclosed' || amount === 'undisclosed') return 'Undisclosed';
     const num = Number(amount);
+    if (isNaN(num) || num <= 0) return 'Undisclosed';
     if (num >= 1000000000) return '$' + (num / 1000000000).toFixed(1).replace(/\.0$/, '') + 'B';
     if (num >= 1000000) return '$' + (num / 1000000).toFixed(1).replace(/\.0$/, '') + 'M';
     if (num >= 1000) return '$' + (num / 1000).toFixed(0) + 'K';
@@ -461,24 +462,24 @@ function buildStaticTrendPages() {
             st.pct = baseForStagePct > 0 ? Math.round(((totalCapital > 0 ? st.amount : st.count) / baseForStagePct) * 100) : 0;
         });
 
-        // 3-Tier Industry Drilldown
-        const indMap = new Map();
+        // 3-Tier Vertical Drilldown
+        const vertMap = new Map();
         weekDeals.forEach(c => {
-            const ind = (c.industry && c.industry.trim()) || 'General / Other';
-            const subInd = (c.sub_industry && c.sub_industry.trim()) || 'Core / General';
+            const vert = (c.vertical && c.vertical.trim()) || (c.industry && c.industry.trim()) || 'General / Other';
+            const subVert = (c.sub_vertical && c.sub_vertical.trim()) || (c.sub_industry && c.sub_industry.trim()) || 'Core / General';
             const amt = Number(c.funding_amount_usd) || 0;
-            if (!indMap.has(ind)) indMap.set(ind, { name: ind, amount: 0, count: 0, subMap: new Map() });
-            const item = indMap.get(ind);
+            if (!vertMap.has(vert)) vertMap.set(vert, { name: vert, amount: 0, count: 0, subMap: new Map() });
+            const item = vertMap.get(vert);
             item.amount += amt;
             item.count += 1;
-            if (!item.subMap.has(subInd)) item.subMap.set(subInd, { name: subInd, amount: 0, count: 0, companies: [] });
-            const subItem = item.subMap.get(subInd);
+            if (!item.subMap.has(subVert)) item.subMap.set(subVert, { name: subVert, amount: 0, count: 0, companies: [] });
+            const subItem = item.subMap.get(subVert);
             subItem.amount += amt;
             subItem.count += 1;
             subItem.companies.push(c);
         });
 
-        const topIndustries = Array.from(indMap.values())
+        const topVerticals = Array.from(vertMap.values())
             .sort((a, b) => b.amount - a.amount || b.count - a.count)
             .slice(0, 5)
             .map(ind => ({
@@ -496,6 +497,44 @@ function buildStaticTrendPages() {
                         companies: [...sub.companies].sort((a, b) => (Number(b.funding_amount_usd) || 0) - (Number(a.funding_amount_usd) || 0))
                     }))
             }));
+
+        // 3-Tier Segment Drilldown
+        const segMap = new Map();
+        weekDeals.forEach(c => {
+            const seg = (c.segment && c.segment.trim()) || (c.industry && c.industry.trim()) || 'General / Other';
+            const subSeg = (c.sub_segment && c.sub_segment.trim()) || (c.sub_industry && c.sub_industry.trim()) || 'Core / General';
+            const amt = Number(c.funding_amount_usd) || 0;
+            if (!segMap.has(seg)) segMap.set(seg, { name: seg, amount: 0, count: 0, subMap: new Map() });
+            const item = segMap.get(seg);
+            item.amount += amt;
+            item.count += 1;
+            if (!item.subMap.has(subSeg)) item.subMap.set(subSeg, { name: subSeg, amount: 0, count: 0, companies: [] });
+            const subItem = item.subMap.get(subSeg);
+            subItem.amount += amt;
+            subItem.count += 1;
+            subItem.companies.push(c);
+        });
+
+        const topSegments = Array.from(segMap.values())
+            .sort((a, b) => b.amount - a.amount || b.count - a.count)
+            .slice(0, 5)
+            .map(ind => ({
+                name: ind.name,
+                amount: ind.amount,
+                count: ind.count,
+                pct: totalCapital > 0 ? Math.round((ind.amount / totalCapital) * 100) : (dealCount > 0 ? Math.round((ind.count / dealCount) * 100) : 0),
+                subCategories: Array.from(ind.subMap.values())
+                    .sort((a, b) => b.amount - a.amount || b.count - a.count)
+                    .map(sub => ({
+                        name: sub.name,
+                        amount: sub.amount,
+                        count: sub.count,
+                        pctOfParent: ind.amount > 0 ? Math.round((sub.amount / ind.amount) * 100) : (ind.count > 0 ? Math.round((sub.count / ind.count) * 100) : 0),
+                        companies: [...sub.companies].sort((a, b) => (Number(b.funding_amount_usd) || 0) - (Number(a.funding_amount_usd) || 0))
+                    }))
+            }));
+
+        const topIndustries = topVerticals;
 
         // Regional Hubs
         const hubMap = new Map();
@@ -548,6 +587,8 @@ function buildStaticTrendPages() {
             prevGroup,
             topDeal,
             stageStats,
+            topVerticals,
+            topSegments,
             topIndustries,
             topHubs,
             topInvestors,
@@ -1192,13 +1233,24 @@ ${jsonLdString}
                     </div>
                 </div>
 
-                <!-- Module C: Industry Hotspots (3-Tier Hierarchical Drilldown) -->
+                <!-- Module C: Industry Hotspots (3-Tier Hierarchical Drilldown with Dual View Toggle) -->
                 <div class="trends-section-card">
-                    <div class="trends-section-title">
-                        <span>Industry Hotspots</span>
+                    <div class="trends-section-header-row">
+                        <div class="trends-section-title" style="margin-bottom: 0;">
+                            <span>Industry Hotspots</span>
+                        </div>
+                        <div class="trends-toggle-group" role="tablist" aria-label="Hotspots View Selection">
+                            <button type="button" class="trends-toggle-btn active" id="btnViewVertical" data-view="vertical" role="tab" aria-selected="true" onclick="switchHotspotsView('vertical')">Vertical</button>
+                            <button type="button" class="trends-toggle-btn" id="btnViewSegment" data-view="segment" role="tab" aria-selected="false" onclick="switchHotspotsView('segment')">Segment</button>
+                        </div>
                     </div>
-                    <div id="trendsIndustryView" class="trends-progress-list">
-                        ${renderDrilldownListHTML(trends.topIndustries)}
+                    <div id="trendsIndustryView">
+                        <div id="trendsVerticalView" class="trends-progress-list">
+                            ${renderDrilldownListHTML(trends.topVerticals)}
+                        </div>
+                        <div id="trendsSegmentView" class="trends-progress-list" style="display: none;">
+                            ${renderDrilldownListHTML(trends.topSegments)}
+                        </div>
                     </div>
                 </div>
 
@@ -1545,6 +1597,37 @@ ${jsonLdString}
             const parent = headerEl.closest('.trends-drill-item, .trends-drill-sub-item');
             if (parent) {
                 parent.classList.toggle('expanded');
+            }
+        }
+
+        // Dual-view switch between Vertical and Segment in Industry Hotspots
+        function switchHotspotsView(view) {
+            const vertBtn = document.getElementById('btnViewVertical');
+            const segBtn = document.getElementById('btnViewSegment');
+            const vertView = document.getElementById('trendsVerticalView');
+            const segView = document.getElementById('trendsSegmentView');
+            if (view === 'segment') {
+                if (vertBtn) {
+                    vertBtn.classList.remove('active');
+                    vertBtn.setAttribute('aria-selected', 'false');
+                }
+                if (segBtn) {
+                    segBtn.classList.add('active');
+                    segBtn.setAttribute('aria-selected', 'true');
+                }
+                if (vertView) vertView.style.display = 'none';
+                if (segView) segView.style.display = 'flex';
+            } else {
+                if (segBtn) {
+                    segBtn.classList.remove('active');
+                    segBtn.setAttribute('aria-selected', 'false');
+                }
+                if (vertBtn) {
+                    vertBtn.classList.add('active');
+                    vertBtn.setAttribute('aria-selected', 'true');
+                }
+                if (segView) segView.style.display = 'none';
+                if (vertView) vertView.style.display = 'flex';
             }
         }
     </script>

@@ -33,8 +33,8 @@ jobs:
         with:
           node-version: '24'
 
-      - name: Generate static company deal pages & sitemap
-        run: node scripts/build-deal-pages.js
+      - name: Generate static company deal pages, weekly trends & sitemap
+        run: npm run build
 
       - name: Setup Pages
         uses: actions/configure-pages@v5

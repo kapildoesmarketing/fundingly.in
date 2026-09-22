@@ -219,9 +219,9 @@
         })();
     </script>
 
-    <!-- Deisgned by Kapil Pidhwani: Strict domain-based deep link router for GitHub Pages. Ceiling: Client-side fetch lookup. Upgrade path: Static page pre-generation. -->
+    <!-- Deisgned by Kapil Pidhwani: Smart deep link router for GitHub Pages (Company & Trends). Ceiling: Client-side fetch lookup. Upgrade path: Static pre-generation. -->
     <script>
-        (async function resolveDomainRoute() {
+        (async function resolveDeepRoute() {
             const rawPath = window.location.pathname.replace(/^\/+|\/+$/g, '').trim().toLowerCase();
             const ignored = [
                 'index.html', 'about', 'about.html', 'contact', 'contact.html', 'privacy-policy', 'privacy-policy.html', 'terms', 'terms.html', '404.html',
@@ -232,7 +232,28 @@
                 return;
             }
 
-            const cleanDomainQuery = rawPath.replace(/^https?:\/\//, '').replace(/^www\./, '').split('/')[0];
+            // Handle Trends Route 404
+            if (rawPath === 'trends' || rawPath.startsWith('trends/')) {
+                const trendSlug = rawPath.replace(/^trends\/?/, '').split('/')[0];
+                const badgeEl = document.querySelector('.notfound-badge span:last-child');
+                const titleEl = document.querySelector('.notfound-title');
+                const descEl = document.querySelector('.notfound-description');
+                
+                if (badgeEl) badgeEl.textContent = 'Weekly Report Pending';
+                if (titleEl) titleEl.textContent = 'Weekly Trends Not Found';
+                if (descEl) {
+                    descEl.innerHTML = trendSlug 
+                        ? `We could not locate the venture trends report for <strong>${escapeHtml(trendSlug)}</strong> in our dataset. It may be an upcoming week or under active data compilation.`
+                        : `Please select a specific week from our Live Feed to view its weekly venture trends report.`;
+                }
+                return;
+            }
+
+            // Handle Company Domain Routing
+            const cleanDomainQuery = (rawPath.startsWith('company/') ? rawPath.replace(/^company\//, '') : rawPath)
+                .replace(/^https?:\/\//, '').replace(/^www\./, '').split('/')[0];
+
+            if (!cleanDomainQuery) return;
 
             try {
                 const manifestRes = await fetch('/data/manifest.json?t=' + Date.now(), { cache: 'no-cache' });

@@ -569,13 +569,20 @@
                     </div>
                 </div>
 
-                <!-- Module C: Industry Hotspots (3-Tier Hierarchical Drilldown) -->
+                <!-- Module C: Industry Hotspots (3-Tier Hierarchical Drilldown with Dual View Toggle) -->
                 <div class="trends-section-card">
-                    <div class="trends-section-title">
-                        <span>Industry Hotspots</span>
+                    <div class="trends-section-header-row">
+                        <div class="trends-section-title" style="margin-bottom: 0;">
+                            <span>Industry Hotspots</span>
+                        </div>
+                        <div class="trends-toggle-group" role="tablist" aria-label="Hotspots View Selection">
+                            <button type="button" class="trends-toggle-btn active" id="btnViewVertical" data-view="vertical" role="tab" aria-selected="true" onclick="switchHotspotsView('vertical')">Vertical</button>
+                            <button type="button" class="trends-toggle-btn" id="btnViewSegment" data-view="segment" role="tab" aria-selected="false" onclick="switchHotspotsView('segment')">Segment</button>
+                        </div>
                     </div>
-                    <div id="trendsIndustryView" class="trends-progress-list">
-                        
+                    <div id="trendsIndustryView">
+                        <div id="trendsVerticalView" class="trends-progress-list">
+                            
             <div class="trends-drill-item">
                 <div class="trends-drill-header" role="button" tabindex="0" onclick="toggleTrendsDrilldown(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleTrendsDrilldown(this);}">
                     <button type="button" class="trends-drill-chevron" aria-label="Toggle Financial Services" tabindex="-1">
@@ -871,6 +878,305 @@
                 </div>
             </div>
         
+                        </div>
+                        <div id="trendsSegmentView" class="trends-progress-list" style="display: none;">
+                            
+            <div class="trends-drill-item">
+                <div class="trends-drill-header" role="button" tabindex="0" onclick="toggleTrendsDrilldown(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleTrendsDrilldown(this);}">
+                    <button type="button" class="trends-drill-chevron" aria-label="Toggle Financial Services" tabindex="-1">
+                        <span class="material-symbols-outlined">chevron_right</span>
+                    </button>
+                    <div class="trends-drill-info">
+                        <div class="trends-progress-labels">
+                            <span class="trends-progress-name" title="Financial Services">Financial Services</span>
+                            <span class="trends-progress-val">$100M • 1 deal (42%)</span>
+                        </div>
+                        <div class="trends-progress-track">
+                            <div class="trends-progress-fill" style="width: 42%;"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="trends-drill-sub-list">
+                    
+                <div class="trends-drill-sub-item">
+                    <div class="trends-drill-sub-header" role="button" tabindex="0" onclick="toggleTrendsDrilldown(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleTrendsDrilldown(this);}">
+                        <button type="button" class="trends-drill-chevron" aria-label="Toggle Digital Financial Services" tabindex="-1">
+                            <span class="material-symbols-outlined">chevron_right</span>
+                        </button>
+                        <div class="trends-drill-info">
+                            <div class="trends-progress-labels">
+                                <span class="trends-sub-name" title="Digital Financial Services">Digital Financial Services</span>
+                                <span class="trends-progress-val">$100M • 1 deal (100%)</span>
+                            </div>
+                            <div class="trends-progress-track sub-track">
+                                <div class="trends-progress-fill" style="width: 100%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="trends-drill-company-list">
+                        
+                    <div class="trends-drill-company-row">
+                        <div class="trends-deal-left">
+                            <a href="../../company/navi/" class="avatar-link" aria-label="View Navi"><div class="modal-hero-monogram" style="width:32px; height:32px; font-size:12px; border-radius:8px; background:#F0FDF4; color:#16A34A; border:1px solid #BBF7D0;">NA</div></a>
+                            <div style="min-width: 0;">
+                                <a href="../../company/navi/" class="company-title-link" style="text-decoration: none; color: inherit;">
+                                    <div class="trends-deal-title">Navi</div>
+                                </a>
+                                <div class="trends-deal-meta">Round • Prosus</div>
+                            </div>
+                        </div>
+                        <div class="trends-deal-right">
+                            <div class="trends-deal-amount">$100M</div>
+                            <a href="../../company/navi/" class="btn-trends-memo" aria-label="View details for Navi">
+                                <span>View Details</span>
+                                <span class="material-symbols-outlined" style="font-size: 13px;">arrow_outward</span>
+                            </a>
+                        </div>
+                    </div>
+                
+                    </div>
+                </div>
+            
+                </div>
+            </div>
+        
+            <div class="trends-drill-item">
+                <div class="trends-drill-header" role="button" tabindex="0" onclick="toggleTrendsDrilldown(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleTrendsDrilldown(this);}">
+                    <button type="button" class="trends-drill-chevron" aria-label="Toggle Media &amp; Entertainment" tabindex="-1">
+                        <span class="material-symbols-outlined">chevron_right</span>
+                    </button>
+                    <div class="trends-drill-info">
+                        <div class="trends-progress-labels">
+                            <span class="trends-progress-name" title="Media &amp; Entertainment">Media &amp; Entertainment</span>
+                            <span class="trends-progress-val">$40M • 1 deal (17%)</span>
+                        </div>
+                        <div class="trends-progress-track">
+                            <div class="trends-progress-fill" style="width: 17%;"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="trends-drill-sub-list">
+                    
+                <div class="trends-drill-sub-item">
+                    <div class="trends-drill-sub-header" role="button" tabindex="0" onclick="toggleTrendsDrilldown(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleTrendsDrilldown(this);}">
+                        <button type="button" class="trends-drill-chevron" aria-label="Toggle Ticketing and Live Entertainment" tabindex="-1">
+                            <span class="material-symbols-outlined">chevron_right</span>
+                        </button>
+                        <div class="trends-drill-info">
+                            <div class="trends-progress-labels">
+                                <span class="trends-sub-name" title="Ticketing and Live Entertainment">Ticketing and Live Entertainment</span>
+                                <span class="trends-progress-val">$40M • 1 deal (100%)</span>
+                            </div>
+                            <div class="trends-progress-track sub-track">
+                                <div class="trends-progress-fill" style="width: 100%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="trends-drill-company-list">
+                        
+                    <div class="trends-drill-company-row">
+                        <div class="trends-deal-left">
+                            <a href="../../company/bookmyshow/" class="avatar-link" aria-label="View BookMyShow"><div class="modal-hero-monogram" style="width:32px; height:32px; font-size:12px; border-radius:8px; background:#FDF2F8; color:#DB2777; border:1px solid #FCE7F3;">BO</div></a>
+                            <div style="min-width: 0;">
+                                <a href="../../company/bookmyshow/" class="company-title-link" style="text-decoration: none; color: inherit;">
+                                    <div class="trends-deal-title">BookMyShow</div>
+                                </a>
+                                <div class="trends-deal-meta">Round • KKR</div>
+                            </div>
+                        </div>
+                        <div class="trends-deal-right">
+                            <div class="trends-deal-amount">$40M</div>
+                            <a href="../../company/bookmyshow/" class="btn-trends-memo" aria-label="View details for BookMyShow">
+                                <span>View Details</span>
+                                <span class="material-symbols-outlined" style="font-size: 13px;">arrow_outward</span>
+                            </a>
+                        </div>
+                    </div>
+                
+                    </div>
+                </div>
+            
+                </div>
+            </div>
+        
+            <div class="trends-drill-item">
+                <div class="trends-drill-header" role="button" tabindex="0" onclick="toggleTrendsDrilldown(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleTrendsDrilldown(this);}">
+                    <button type="button" class="trends-drill-chevron" aria-label="Toggle IT Infrastructure" tabindex="-1">
+                        <span class="material-symbols-outlined">chevron_right</span>
+                    </button>
+                    <div class="trends-drill-info">
+                        <div class="trends-progress-labels">
+                            <span class="trends-progress-name" title="IT Infrastructure">IT Infrastructure</span>
+                            <span class="trends-progress-val">$26.1M • 1 deal (11%)</span>
+                        </div>
+                        <div class="trends-progress-track">
+                            <div class="trends-progress-fill" style="width: 11%;"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="trends-drill-sub-list">
+                    
+                <div class="trends-drill-sub-item">
+                    <div class="trends-drill-sub-header" role="button" tabindex="0" onclick="toggleTrendsDrilldown(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleTrendsDrilldown(this);}">
+                        <button type="button" class="trends-drill-chevron" aria-label="Toggle Data Centers" tabindex="-1">
+                            <span class="material-symbols-outlined">chevron_right</span>
+                        </button>
+                        <div class="trends-drill-info">
+                            <div class="trends-progress-labels">
+                                <span class="trends-sub-name" title="Data Centers">Data Centers</span>
+                                <span class="trends-progress-val">$26.1M • 1 deal (100%)</span>
+                            </div>
+                            <div class="trends-progress-track sub-track">
+                                <div class="trends-progress-fill" style="width: 100%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="trends-drill-company-list">
+                        
+                    <div class="trends-drill-company-row">
+                        <div class="trends-deal-left">
+                            <a href="../../company/ctrls-datacenters/" class="avatar-link" aria-label="View CtrlS Datacenters"><div class="modal-hero-monogram" style="width:32px; height:32px; font-size:12px; border-radius:8px; background:#F0FDFA; color:#0D9488; border:1px solid #CCFBF1;">CD</div></a>
+                            <div style="min-width: 0;">
+                                <a href="../../company/ctrls-datacenters/" class="company-title-link" style="text-decoration: none; color: inherit;">
+                                    <div class="trends-deal-title">CtrlS Datacenters</div>
+                                </a>
+                                <div class="trends-deal-meta">Round • Nikhil Kamath</div>
+                            </div>
+                        </div>
+                        <div class="trends-deal-right">
+                            <div class="trends-deal-amount">$26.1M</div>
+                            <a href="../../company/ctrls-datacenters/" class="btn-trends-memo" aria-label="View details for CtrlS Datacenters">
+                                <span>View Details</span>
+                                <span class="material-symbols-outlined" style="font-size: 13px;">arrow_outward</span>
+                            </a>
+                        </div>
+                    </div>
+                
+                    </div>
+                </div>
+            
+                </div>
+            </div>
+        
+            <div class="trends-drill-item">
+                <div class="trends-drill-header" role="button" tabindex="0" onclick="toggleTrendsDrilldown(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleTrendsDrilldown(this);}">
+                    <button type="button" class="trends-drill-chevron" aria-label="Toggle Information Technology" tabindex="-1">
+                        <span class="material-symbols-outlined">chevron_right</span>
+                    </button>
+                    <div class="trends-drill-info">
+                        <div class="trends-progress-labels">
+                            <span class="trends-progress-name" title="Information Technology">Information Technology</span>
+                            <span class="trends-progress-val">$20M • 1 deal (8%)</span>
+                        </div>
+                        <div class="trends-progress-track">
+                            <div class="trends-progress-fill" style="width: 8%;"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="trends-drill-sub-list">
+                    
+                <div class="trends-drill-sub-item">
+                    <div class="trends-drill-sub-header" role="button" tabindex="0" onclick="toggleTrendsDrilldown(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleTrendsDrilldown(this);}">
+                        <button type="button" class="trends-drill-chevron" aria-label="Toggle Geospatial Intelligence" tabindex="-1">
+                            <span class="material-symbols-outlined">chevron_right</span>
+                        </button>
+                        <div class="trends-drill-info">
+                            <div class="trends-progress-labels">
+                                <span class="trends-sub-name" title="Geospatial Intelligence">Geospatial Intelligence</span>
+                                <span class="trends-progress-val">$20M • 1 deal (100%)</span>
+                            </div>
+                            <div class="trends-progress-track sub-track">
+                                <div class="trends-progress-fill" style="width: 100%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="trends-drill-company-list">
+                        
+                    <div class="trends-drill-company-row">
+                        <div class="trends-deal-left">
+                            <a href="../../company/neogeoinfo-technologies/" class="avatar-link" aria-label="View NeoGeoInfo Technologies"><div class="modal-hero-monogram" style="width:32px; height:32px; font-size:12px; border-radius:8px; background:#EBF5FF; color:#0066CC; border:1px solid #B8DBFF;">NT</div></a>
+                            <div style="min-width: 0;">
+                                <a href="../../company/neogeoinfo-technologies/" class="company-title-link" style="text-decoration: none; color: inherit;">
+                                    <div class="trends-deal-title">NeoGeoInfo Technologies</div>
+                                </a>
+                                <div class="trends-deal-meta">Series A • Neev Fund II, Aavishkaar Capital</div>
+                            </div>
+                        </div>
+                        <div class="trends-deal-right">
+                            <div class="trends-deal-amount">$20M</div>
+                            <a href="../../company/neogeoinfo-technologies/" class="btn-trends-memo" aria-label="View details for NeoGeoInfo Technologies">
+                                <span>View Details</span>
+                                <span class="material-symbols-outlined" style="font-size: 13px;">arrow_outward</span>
+                            </a>
+                        </div>
+                    </div>
+                
+                    </div>
+                </div>
+            
+                </div>
+            </div>
+        
+            <div class="trends-drill-item">
+                <div class="trends-drill-header" role="button" tabindex="0" onclick="toggleTrendsDrilldown(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleTrendsDrilldown(this);}">
+                    <button type="button" class="trends-drill-chevron" aria-label="Toggle Financial Technology" tabindex="-1">
+                        <span class="material-symbols-outlined">chevron_right</span>
+                    </button>
+                    <div class="trends-drill-info">
+                        <div class="trends-progress-labels">
+                            <span class="trends-progress-name" title="Financial Technology">Financial Technology</span>
+                            <span class="trends-progress-val">$12.5M • 1 deal (5%)</span>
+                        </div>
+                        <div class="trends-progress-track">
+                            <div class="trends-progress-fill" style="width: 5%;"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="trends-drill-sub-list">
+                    
+                <div class="trends-drill-sub-item">
+                    <div class="trends-drill-sub-header" role="button" tabindex="0" onclick="toggleTrendsDrilldown(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleTrendsDrilldown(this);}">
+                        <button type="button" class="trends-drill-chevron" aria-label="Toggle Lending Technology" tabindex="-1">
+                            <span class="material-symbols-outlined">chevron_right</span>
+                        </button>
+                        <div class="trends-drill-info">
+                            <div class="trends-progress-labels">
+                                <span class="trends-sub-name" title="Lending Technology">Lending Technology</span>
+                                <span class="trends-progress-val">$12.5M • 1 deal (100%)</span>
+                            </div>
+                            <div class="trends-progress-track sub-track">
+                                <div class="trends-progress-fill" style="width: 100%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="trends-drill-company-list">
+                        
+                    <div class="trends-drill-company-row">
+                        <div class="trends-deal-left">
+                            <a href="../../company/rezolv/" class="avatar-link" aria-label="View Rezolv"><div class="modal-hero-monogram" style="width:32px; height:32px; font-size:12px; border-radius:8px; background:#FEF2F2; color:#DC2626; border:1px solid #FECACA;">RE</div></a>
+                            <div style="min-width: 0;">
+                                <a href="../../company/rezolv/" class="company-title-link" style="text-decoration: none; color: inherit;">
+                                    <div class="trends-deal-title">Rezolv</div>
+                                </a>
+                                <div class="trends-deal-meta">Series A • Norwest</div>
+                            </div>
+                        </div>
+                        <div class="trends-deal-right">
+                            <div class="trends-deal-amount">$12.5M</div>
+                            <a href="../../company/rezolv/" class="btn-trends-memo" aria-label="View details for Rezolv">
+                                <span>View Details</span>
+                                <span class="material-symbols-outlined" style="font-size: 13px;">arrow_outward</span>
+                            </a>
+                        </div>
+                    </div>
+                
+                    </div>
+                </div>
+            
+                </div>
+            </div>
+        
+                        </div>
                     </div>
                 </div>
 
@@ -1069,14 +1375,19 @@
                     </h3>
                     <div class="sidebar-weeks-list">
                         
+                                <a href="../week-39-2026/" class="sidebar-week-item ">
+                                    <span>Week 39 (2026)</span>
+                                    <span style="font-size: 11px; opacity: 0.8;">$5.7M • 2d</span>
+                                </a>
+                            
                                 <a href="../week-38-2026/" class="sidebar-week-item ">
                                     <span>Week 38 (2026)</span>
-                                    <span style="font-size: 11px; opacity: 0.8;">$210.7M • 18d</span>
+                                    <span style="font-size: 11px; opacity: 0.8;">$212.1M • 18d</span>
                                 </a>
                             
                                 <a href="../week-37-2026/" class="sidebar-week-item ">
                                     <span>Week 37 (2026)</span>
-                                    <span style="font-size: 11px; opacity: 0.8;">$304M • 20d</span>
+                                    <span style="font-size: 11px; opacity: 0.8;">$304M • 21d</span>
                                 </a>
                             
                                 <a href="../week-36-2026/" class="sidebar-week-item ">
@@ -1308,6 +1619,37 @@
             const parent = headerEl.closest('.trends-drill-item, .trends-drill-sub-item');
             if (parent) {
                 parent.classList.toggle('expanded');
+            }
+        }
+
+        // Dual-view switch between Vertical and Segment in Industry Hotspots
+        function switchHotspotsView(view) {
+            const vertBtn = document.getElementById('btnViewVertical');
+            const segBtn = document.getElementById('btnViewSegment');
+            const vertView = document.getElementById('trendsVerticalView');
+            const segView = document.getElementById('trendsSegmentView');
+            if (view === 'segment') {
+                if (vertBtn) {
+                    vertBtn.classList.remove('active');
+                    vertBtn.setAttribute('aria-selected', 'false');
+                }
+                if (segBtn) {
+                    segBtn.classList.add('active');
+                    segBtn.setAttribute('aria-selected', 'true');
+                }
+                if (vertView) vertView.style.display = 'none';
+                if (segView) segView.style.display = 'flex';
+            } else {
+                if (segBtn) {
+                    segBtn.classList.remove('active');
+                    segBtn.setAttribute('aria-selected', 'false');
+                }
+                if (vertBtn) {
+                    vertBtn.classList.add('active');
+                    vertBtn.setAttribute('aria-selected', 'true');
+                }
+                if (segView) segView.style.display = 'none';
+                if (vertView) vertView.style.display = 'flex';
             }
         }
     </script>
