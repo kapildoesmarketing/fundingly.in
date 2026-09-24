@@ -838,6 +838,11 @@ ${jsonLdString}
             padding: 32px;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
             position: relative;
+            min-width: 0;
+            width: 100%;
+            max-width: 100%;
+            overflow: hidden;
+            box-sizing: border-box;
         }
 
         .trends-hero-header {
@@ -899,20 +904,17 @@ ${jsonLdString}
             border-radius: var(--radius-sheet);
             padding: 16px;
             text-align: center;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
             overflow: hidden;
-            min-height: 250px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
+            width: 100%;
+            box-sizing: border-box;
         }
 
         .ad-label {
             font-size: 10px;
-            font-weight: 700;
+            font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 0.08em;
+            letter-spacing: 0.06em;
             color: var(--color-text-tertiary);
             margin-bottom: 8px;
             display: block;
@@ -1079,12 +1081,112 @@ ${jsonLdString}
         @media (max-width: 960px) {
             .trends-layout-grid {
                 grid-template-columns: 1fr;
+                gap: 20px;
             }
             .trends-sidebar {
                 position: static;
             }
             .trends-standalone-card {
                 padding: 24px 18px;
+            }
+        }
+
+        @media (max-width: 680px) {
+            .trends-page-wrapper {
+                margin: 10px auto 40px auto;
+                padding: 0 10px;
+                max-width: 100vw;
+                overflow-x: hidden;
+            }
+
+            .trends-standalone-card {
+                padding: 16px 12px;
+                border-radius: 18px;
+                max-width: 100%;
+                overflow: hidden;
+            }
+
+            .trends-hero-title {
+                font-size: 20px !important;
+                line-height: 1.3;
+            }
+
+            .trends-hero-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+
+            .trends-hero-header > div:last-child {
+                width: 100%;
+                display: flex;
+                gap: 6px;
+            }
+
+            .trends-hero-header > div:last-child .btn-pill-action {
+                flex: 1 1 auto;
+                justify-content: center;
+            }
+
+            .trends-kpi-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 8px;
+            }
+
+            .trends-split-grid {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+
+            .trends-deal-row {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+                padding: 10px;
+            }
+
+            .trends-deal-left {
+                width: 100%;
+            }
+
+            .trends-deal-right {
+                width: 100%;
+                justify-content: space-between;
+                padding-top: 4px;
+                border-top: 1px dashed var(--color-hairline);
+            }
+
+            .modal-action-bar {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 10px;
+            }
+
+            .modal-action-bar > div {
+                width: 100%;
+                justify-content: space-between;
+            }
+
+            .modal-action-bar .btn-suggest-correction,
+            .modal-action-bar .btn-detail {
+                flex: 1 1 auto;
+                justify-content: center;
+            }
+
+            .share-buttons-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 6px;
+            }
+
+            .bottom-ad-wrapper {
+                margin-top: 20px;
+                padding: 14px 10px;
+                border-radius: 18px;
+            }
+
+            .ad-container-wrapper {
+                padding: 14px 10px;
+                border-radius: 18px;
             }
         }
 

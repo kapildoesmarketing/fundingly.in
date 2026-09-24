@@ -559,6 +559,62 @@ ${jsonLdString}
             padding: 32px;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
             position: relative;
+            min-width: 0;
+            width: 100%;
+            max-width: 100%;
+            overflow: hidden;
+            box-sizing: border-box;
+        }
+
+        .modal-stats-strip {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 10px;
+            background: var(--color-surface-secondary);
+            border: 1px solid var(--color-hairline);
+            border-radius: var(--radius-inner);
+            padding: 12px 14px;
+            margin-top: 12px;
+            width: 100%;
+            max-width: 100%;
+            box-sizing: border-box;
+            min-width: 0;
+        }
+
+        .stat-pill-block {
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
+            max-width: 100%;
+            overflow-wrap: break-word;
+            word-break: break-word;
+        }
+
+        .stat-pill-block.full-span {
+            grid-column: 1 / -1;
+            padding-top: 8px;
+            margin-top: 4px;
+            border-top: 1px solid var(--color-hairline);
+        }
+
+        .stat-pill-label {
+            font-size: 9.5px;
+            font-weight: 600;
+            color: var(--color-text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            margin-bottom: 2px;
+        }
+
+        .stat-pill-value {
+            font-size: 13.5px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            overflow-wrap: break-word;
+            word-break: break-word;
+            min-width: 0;
+            letter-spacing: -0.01em;
+            line-height: 1.4;
         }
 
         /* Deal Keywords / Tags */
@@ -884,12 +940,107 @@ ${jsonLdString}
         @media (max-width: 960px) {
             .dossier-layout-grid {
                 grid-template-columns: 1fr;
+                gap: 20px;
             }
             .dossier-sidebar {
                 position: static;
             }
             .dossier-standalone-card {
                 padding: 24px 18px;
+            }
+        }
+
+        @media (max-width: 680px) {
+            .dossier-page-wrapper {
+                margin: 10px auto 40px auto;
+                padding: 0 10px;
+                max-width: 100vw;
+                overflow-x: hidden;
+            }
+
+            .dossier-standalone-card {
+                padding: 16px 12px;
+                border-radius: 18px;
+                max-width: 100%;
+                overflow: hidden;
+            }
+
+            .modal-hero-title {
+                font-size: 20px !important;
+                line-height: 1.3;
+            }
+
+            .modal-stats-strip {
+                grid-template-columns: 1fr 1fr;
+                gap: 8px;
+                padding: 8px 10px;
+            }
+
+            .stat-pill-block.full-span {
+                grid-column: 1 / -1;
+            }
+
+            .stat-pill-value {
+                font-size: 13px;
+            }
+
+            .inspector-grid {
+                grid-template-columns: 1fr;
+                gap: 8px;
+            }
+
+            .inspector-row[style*="span 2"] {
+                grid-column: span 1 !important;
+            }
+
+            .executive-intel-actions {
+                grid-template-columns: 1fr;
+                gap: 8px;
+            }
+
+            .modal-action-bar {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 10px;
+            }
+
+            .modal-action-bar > div {
+                width: 100%;
+                justify-content: space-between;
+            }
+
+            .modal-action-bar .btn-suggest-correction,
+            .modal-action-bar .btn-detail {
+                flex: 1 1 auto;
+                justify-content: center;
+            }
+
+            .share-buttons-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 6px;
+            }
+
+            .bottom-ad-wrapper {
+                margin-top: 20px;
+                padding: 14px 10px;
+                border-radius: 18px;
+            }
+
+            .ad-container-wrapper {
+                padding: 14px 10px;
+                border-radius: 18px;
+            }
+
+            .history-round-row {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 6px;
+            }
+
+            .history-round-left,
+            .history-round-center {
+                width: 100%;
+                justify-content: space-between;
             }
         }
 
@@ -986,7 +1137,7 @@ ${jsonLdString}
                     <!-- Tier 2: 100% Full-Width Identity Block -->
                     <div class="modal-hero-identity">
                         <div class="modal-hero-title-wrap">
-                            <h1 class="modal-hero-title" style="font-size: 26px;">${escapeHtml(companyName)}</h1>
+                            <h1 class="modal-hero-title">${escapeHtml(companyName)}</h1>
                         </div>
                         <div class="modal-hero-subtitle">
                             ${escapeHtml(deal.vertical || deal.industry || 'General')}${deal.sub_vertical || deal.sub_industry ? ' • ' + escapeHtml(deal.sub_vertical || deal.sub_industry) : ''}
@@ -1038,9 +1189,9 @@ ${jsonLdString}
                             <span class="stat-pill-value">${escapeHtml(dateFormatted)}</span>
                             ${quarterDisplay ? `<span style="font-size: 11px; color: var(--color-text-secondary); margin-top: 2px;">${escapeHtml(quarterDisplay)}</span>` : ''}
                         </div>
-                        <div class="stat-pill-block">
+                        <div class="stat-pill-block full-span">
                             <span class="stat-pill-label">Lead Investor</span>
-                            <span class="stat-pill-value" style="font-size: 13.5px; font-weight: 600;">${escapeHtml(deal.lead_investor || 'Undisclosed')}</span>
+                            <span class="stat-pill-value">${escapeHtml(deal.lead_investor || 'Undisclosed')}</span>
                         </div>
                     </div>
                 </div>

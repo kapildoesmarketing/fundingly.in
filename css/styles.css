@@ -132,8 +132,11 @@
             padding: 0;
         }
 
-        button:not(.sidebar-edge-toggle):active {
-            transform: scale(0.97);
+        html,
+        body {
+            max-width: 100%;
+            overflow-x: hidden;
+            -webkit-text-size-adjust: 100%;
         }
 
         body {
@@ -2242,13 +2245,16 @@
         }
 
         .modal-hero-title {
-            font-size: 22px;
+            font-size: clamp(20px, 4vw, 24px);
             font-weight: 600;
             /* Rule 4: 600 semiBold */
             letter-spacing: -0.02em;
             color: var(--color-text-primary);
             line-height: 1.25;
             margin: 0;
+            overflow-wrap: break-word;
+            word-break: break-word;
+            min-width: 0;
         }
 
         .modal-hero-subtitle {
@@ -2258,6 +2264,9 @@
             /* Rule 4: 400 regular */
             margin-top: 3px;
             line-height: 1.4;
+            overflow-wrap: break-word;
+            word-break: break-word;
+            min-width: 0;
         }
 
         /* Tier 3: Unified Actions Toolbar */
@@ -2273,18 +2282,33 @@
         /* Tier 4: Deal Snapshot Meta Tile (Matching .card-meta-box in closed card) */
         .modal-stats-strip {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(3, minmax(0, 1fr));
             gap: 10px;
             background: var(--color-surface-secondary);
             border: 1px solid var(--color-hairline);
             border-radius: var(--radius-inner);
-            padding: 10px 14px;
-            margin-top: 0;
+            padding: 12px 14px;
+            margin-top: 12px;
+            width: 100%;
+            max-width: 100%;
+            box-sizing: border-box;
+            min-width: 0;
         }
 
         .stat-pill-block {
             display: flex;
             flex-direction: column;
+            min-width: 0;
+            max-width: 100%;
+            overflow-wrap: break-word;
+            word-break: break-word;
+        }
+
+        .stat-pill-block.full-span {
+            grid-column: 1 / -1;
+            padding-top: 8px;
+            margin-top: 4px;
+            border-top: 1px solid var(--color-hairline);
         }
 
         .stat-pill-label {
@@ -2294,18 +2318,19 @@
             color: var(--color-text-secondary);
             text-transform: uppercase;
             letter-spacing: 0.04em;
+            margin-bottom: 2px;
         }
 
         .stat-pill-value {
-            font-size: 14px;
+            font-size: 13.5px;
             font-weight: 600;
             /* Rule 4: 600 semiBold */
             color: var(--color-text-primary);
-            margin-top: 2px;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
+            overflow-wrap: break-word;
+            word-break: break-word;
+            min-width: 0;
             letter-spacing: -0.01em;
+            line-height: 1.4;
         }
 
         .modal-action-row {
@@ -2955,6 +2980,130 @@
         [data-theme="dark"] .trends-toggle-btn.active {
             background: var(--color-surface-elevated);
             box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+        }
+
+        /* ==========================================================================
+           GOOGLE ADSENSE & SPONSORED INTELLIGENCE CONTAINER STYLING
+           ========================================================================== */
+        .ad-container-wrapper {
+            background: var(--color-surface);
+            border: 1px solid var(--color-hairline);
+            border-radius: var(--radius-sheet);
+            padding: 16px;
+            text-align: center;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .ad-label {
+            font-size: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: var(--color-text-tertiary);
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .bottom-ad-wrapper {
+            margin-top: 32px;
+            background: var(--color-surface);
+            border: 1px solid var(--color-hairline);
+            border-radius: var(--radius-sheet);
+            padding: 20px;
+            text-align: center;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        /* Global Text & Value Overflow Prevention Rules */
+        .modal-hero-title,
+        .modal-hero-subtitle,
+        .stat-pill-value,
+        .inspector-val,
+        .inspector-label,
+        .feature-callout-box,
+        .modal-desc-body,
+        .deal-keyword-tag,
+        .source-chip-tag,
+        .trends-hero-title,
+        .trends-hero-sub,
+        .trends-kpi-val,
+        .trends-kpi-sub,
+        .trends-progress-name,
+        .trends-sub-name,
+        .trends-investor-name,
+        .trends-deal-title,
+        .trends-deal-meta,
+        .trends-hub-pill,
+        .sidebar-deal-name,
+        .sidebar-deal-meta,
+        .executive-intel-btn-title,
+        .executive-intel-btn-sub,
+        .history-round-lead,
+        .history-round-left,
+        .company-name,
+        .company-desc {
+            overflow-wrap: break-word;
+            word-break: break-word;
+            min-width: 0;
+        }
+
+        .inspector-val a,
+        .feature-callout-box a,
+        .modal-domain-chip {
+            overflow-wrap: anywhere;
+            word-break: break-word;
+            min-width: 0;
+        }
+
+        /* Standalone Dossier & Trends Static Page Styles */
+        .dossier-page-wrapper,
+        .trends-page-wrapper {
+            max-width: 1140px;
+            margin: 20px auto 80px auto;
+            padding: 0 16px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .dossier-layout-grid,
+        .trends-layout-grid {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) 320px;
+            gap: 24px;
+            align-items: start;
+            width: 100%;
+        }
+
+        .dossier-standalone-card,
+        .trends-standalone-card {
+            background: var(--color-surface);
+            border: 1px solid var(--color-hairline);
+            border-radius: var(--radius-sheet);
+            padding: 32px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+            position: relative;
+            min-width: 0;
+            width: 100%;
+            max-width: 100%;
+            overflow: hidden;
+            box-sizing: border-box;
+        }
+
+        .dossier-sidebar,
+        .trends-sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            position: sticky;
+            top: 76px;
+            min-width: 0;
+            width: 100%;
         }
 
         /* ==========================================================================
@@ -5306,4 +5455,163 @@
         .page-nav-back:hover {
             color: var(--color-primary-hover);
             transform: translateX(-3px);
+        }
+
+        /* 9. Standalone Dossier & Trends Responsive Polish */
+        @media (max-width: 960px) {
+            .dossier-layout-grid,
+            .trends-layout-grid {
+                grid-template-columns: 1fr !important;
+                gap: 20px !important;
+            }
+            .dossier-sidebar,
+            .trends-sidebar {
+                position: static !important;
+            }
+            .dossier-standalone-card,
+            .trends-standalone-card {
+                padding: 24px 18px;
+            }
+        }
+
+        @media (max-width: 680px) {
+            .dossier-page-wrapper,
+            .trends-page-wrapper {
+                margin: 10px auto 40px auto !important;
+                padding: 0 10px !important;
+                max-width: 100vw !important;
+                overflow-x: hidden !important;
+            }
+
+            .dossier-standalone-card,
+            .trends-standalone-card {
+                padding: 16px 12px !important;
+                border-radius: 18px !important;
+                max-width: 100% !important;
+                overflow: hidden !important;
+            }
+
+            .modal-hero-title,
+            .trends-hero-title {
+                font-size: 20px !important;
+                line-height: 1.3 !important;
+            }
+
+            .modal-stats-strip {
+                grid-template-columns: 1fr 1fr !important;
+                gap: 8px !important;
+                padding: 8px 10px !important;
+            }
+
+            .stat-pill-block.full-span {
+                grid-column: 1 / -1 !important;
+            }
+
+            .stat-pill-value {
+                font-size: 13px !important;
+            }
+
+            .inspector-grid {
+                grid-template-columns: 1fr !important;
+                gap: 8px !important;
+            }
+
+            .inspector-row[style*="span 2"] {
+                grid-column: span 1 !important;
+            }
+
+            .executive-intel-actions {
+                grid-template-columns: 1fr !important;
+                gap: 8px !important;
+            }
+
+            .trends-kpi-grid {
+                grid-template-columns: 1fr 1fr !important;
+                gap: 8px !important;
+            }
+
+            .trends-split-grid {
+                grid-template-columns: 1fr !important;
+                gap: 10px !important;
+            }
+
+            .trends-hero-header {
+                flex-direction: column !important;
+                align-items: flex-start !important;
+                gap: 10px !important;
+            }
+
+            .trends-hero-header > div:last-child {
+                width: 100% !important;
+                display: flex !important;
+                gap: 6px !important;
+            }
+
+            .trends-hero-header > div:last-child .btn-pill-action {
+                flex: 1 1 auto !important;
+                justify-content: center !important;
+            }
+
+            .trends-deal-row {
+                flex-direction: column !important;
+                align-items: flex-start !important;
+                gap: 8px !important;
+                padding: 10px !important;
+            }
+
+            .trends-deal-left {
+                width: 100% !important;
+            }
+
+            .trends-deal-right {
+                width: 100% !important;
+                justify-content: space-between !important;
+                padding-top: 4px !important;
+                border-top: 1px dashed var(--color-hairline) !important;
+            }
+
+            .modal-action-bar {
+                flex-direction: column !important;
+                align-items: stretch !important;
+                gap: 10px !important;
+            }
+
+            .modal-action-bar > div {
+                width: 100% !important;
+                justify-content: space-between !important;
+            }
+
+            .modal-action-bar .btn-suggest-correction,
+            .modal-action-bar .btn-detail {
+                flex: 1 1 auto !important;
+                justify-content: center !important;
+            }
+
+            .share-buttons-grid {
+                grid-template-columns: 1fr 1fr !important;
+                gap: 6px !important;
+            }
+
+            .bottom-ad-wrapper {
+                margin-top: 20px !important;
+                padding: 14px 10px !important;
+                border-radius: 18px !important;
+            }
+
+            .ad-container-wrapper {
+                padding: 14px 10px !important;
+                border-radius: 18px !important;
+            }
+
+            .history-round-row {
+                flex-direction: column !important;
+                align-items: flex-start !important;
+                gap: 6px !important;
+            }
+
+            .history-round-left,
+            .history-round-center {
+                width: 100% !important;
+                justify-content: space-between !important;
+            }
         }
