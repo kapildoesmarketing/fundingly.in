@@ -10,6 +10,7 @@ const pagesToCheck = [
     path.join(REPO_ROOT, 'index.html'),
     path.join(REPO_ROOT, 'founders-note', 'index.html'),
     path.join(REPO_ROOT, 'about', 'index.html'),
+    path.join(REPO_ROOT, 'support', 'index.html'),
     path.join(REPO_ROOT, 'contact', 'index.html'),
     path.join(REPO_ROOT, 'privacy-policy', 'index.html'),
     path.join(REPO_ROOT, 'terms', 'index.html'),
@@ -55,6 +56,7 @@ pagesToCheck.forEach(filePath => {
 
     // 4. Semantic Footer
     assert(html.includes('class="app-main-footer"'), `Missing app-main-footer in ${relPath}`);
+    assert(html.includes('https://buymeacoffee.com/fundingly.in'), `Missing Buy Me a Coffee support link in ${relPath}`);
     assert(html.includes('https://www.linkedin.com/company/fundingly-in'), `Missing LinkedIn social link in ${relPath}`);
     assert(html.includes('https://www.instagram.com/fundingly.in/'), `Missing Instagram social link in ${relPath}`);
 

@@ -1532,6 +1532,10 @@ ${jsonLdString}
                 <span class="main-footer-tagline">Indian Startup Funding Intelligence</span>
             </div>
             <div class="main-footer-social">
+                <a href="https://buymeacoffee.com/fundingly.in" target="_blank" rel="noopener noreferrer" class="footer-support-btn" title="Support Fundingly Research">
+                    <span class="material-symbols-outlined">volunteer_activism</span>
+                    <span>Support Our Research</span>
+                </a>
                 <a href="https://www.linkedin.com/company/fundingly-in" target="_blank"
                     rel="noopener noreferrer" class="footer-social-link" title="Fundingly.in on LinkedIn"
                     aria-label="LinkedIn">
@@ -1556,6 +1560,8 @@ ${jsonLdString}
                 <a href="../../founders-note/" class="main-footer-link">Founder's Note</a>
                 <span class="main-footer-dot">•</span>
                 <a href="../../about/" class="main-footer-link">About Us</a>
+                <span class="main-footer-dot">•</span>
+                <a href="../../support/" class="main-footer-link">Support</a>
                 <span class="main-footer-dot">•</span>
                 <a href="../../contact/" class="main-footer-link">Contact</a>
                 <span class="main-footer-dot">•</span>
@@ -1744,6 +1750,7 @@ function updateGlobalSitemap(trendUrls, nowISO) {
     const staticPages = [
         { url: 'https://fundingly.in/', priority: '1.0', changefreq: 'daily' },
         { url: 'https://fundingly.in/about/', priority: '0.6', changefreq: 'monthly' },
+        { url: 'https://fundingly.in/support/', priority: '0.7', changefreq: 'monthly' },
         { url: 'https://fundingly.in/contact/', priority: '0.6', changefreq: 'monthly' },
         { url: 'https://fundingly.in/privacy-policy/', priority: '0.5', changefreq: 'monthly' },
         { url: 'https://fundingly.in/terms/', priority: '0.5', changefreq: 'monthly' },
