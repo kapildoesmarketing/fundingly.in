@@ -854,7 +854,8 @@ let rawDataset = [];
             const sunStr = `${monthNames[sunday.getUTCMonth()]} ${sunday.getUTCDate()}, ${sunday.getUTCFullYear()}`;
             const rangeStr = `${monStr} – ${sunStr}`;
 
-            const qNum = Math.floor(monday.getUTCMonth() / 3) + 1;
+            // Dominant quarter is defined by Thursday (d) in ISO-8601
+            const qNum = Math.floor(d.getUTCMonth() / 3) + 1;
             const qKey = `${isoYear}_q${qNum}`;
             const qTitle = `${isoYear} Q${qNum}`;
             const qRanges = ['Jan – Mar', 'Apr – Jun', 'Jul – Sep', 'Oct – Dec'];
@@ -1503,19 +1504,18 @@ let rawDataset = [];
             return qMap;
         }
 
-        // Deisgned by Kapil Pidhwani: Automated in-stream Quarter Divider element factory.
+        // Deisgned by Kapil Pidhwani: Automated in-stream Quarter Divider element factory (100% visual parity with top toolbar quarter chip).
         function createQuarterDividerElement(qInfo) {
             const banner = document.createElement('div');
             banner.className = 'quarter-divider-banner';
             banner.dataset.quarterKey = qInfo.key;
             const metricsText = `${qInfo.count} ${qInfo.count === 1 ? 'deal' : 'deals'}` + (qInfo.totalUSD > 0 ? ` • ${formatUSD(qInfo.totalUSD)} total` : '');
             banner.innerHTML = `
-                <div class="quarter-divider-pill">
-                    <span class="material-symbols-outlined quarter-divider-icon" aria-hidden="true">calendar_month</span>
-                    <span class="quarter-divider-title">${escapeHtml(qInfo.title)}</span>
-                    <span class="quarter-divider-dot" aria-hidden="true">•</span>
-                    <span class="quarter-divider-range">${escapeHtml(qInfo.range)}</span>
-                    <span class="quarter-divider-metrics">${metricsText}</span>
+                <div class="toolbar-quarter-badge quarter-divider-chip">
+                    <span class="material-symbols-outlined quarter-badge-icon" aria-hidden="true">calendar_month</span>
+                    <span class="quarter-badge-title">${escapeHtml(qInfo.title)}</span>
+                    <span class="quarter-badge-sub">${escapeHtml(qInfo.range)}</span>
+                    <span class="quarter-badge-metrics">${metricsText}</span>
                 </div>
             `;
             return banner;
