@@ -84,18 +84,18 @@
             --color-primary-subtle: rgba(10, 132, 255, 0.15);
             --color-primary-tint: rgba(10, 132, 255, 0.22);
 
-            --color-bg: #09090b;
-            --color-surface: #121215;
-            --color-surface-secondary: #1a1a1e;
-            --color-surface-tertiary: #26262b;
-            --color-nav-bg: rgba(18, 18, 21, 0.85);
+            --color-bg: #000000;
+            --color-surface: #121214;
+            --color-surface-secondary: #1c1c1e;
+            --color-surface-tertiary: #2c2c2e;
+            --color-nav-bg: rgba(18, 18, 20, 0.85);
 
             --color-text-primary: #f5f5f7;
             --color-text-secondary: #98989d;
             --color-text-tertiary: #636366;
 
-            --color-hairline: #2a2a2e;
-            --color-divider-soft: #1f1f23;
+            --color-hairline: rgba(255, 255, 255, 0.09);
+            --color-divider-soft: rgba(255, 255, 255, 0.05);
             color-scheme: dark;
         }
 
@@ -108,19 +108,30 @@
                 --color-primary-tint: rgba(10, 132, 255, 0.22);
 
                 --color-bg: #000000;
-                --color-surface: #1c1c1e;
-                --color-surface-secondary: #2c2c2e;
-                --color-surface-tertiary: #3a3a3c;
-                --color-nav-bg: rgba(28, 28, 30, 0.82);
+                --color-surface: #121214;
+                --color-surface-secondary: #1c1c1e;
+                --color-surface-tertiary: #2c2c2e;
+                --color-nav-bg: rgba(18, 18, 20, 0.85);
 
                 --color-text-primary: #f5f5f7;
                 --color-text-secondary: #98989d;
                 --color-text-tertiary: #636366;
 
-                --color-hairline: #38383a;
-                --color-divider-soft: #2c2c2e;
+                --color-hairline: rgba(255, 255, 255, 0.09);
+                --color-divider-soft: rgba(255, 255, 255, 0.05);
                 color-scheme: dark;
             }
+        }
+
+        /* View Transitions API (Item 1.4 - Smooth native transitions) */
+        @view-transition {
+            navigation: auto;
+        }
+
+        ::view-transition-old(root),
+        ::view-transition-new(root) {
+            animation-duration: 0.18s;
+            animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         /* Reset & Base */
@@ -2788,6 +2799,11 @@
             background-size: 200% 100%;
             animation: skeletonShimmer 1.4s infinite ease-in-out;
             border-radius: 4px;
+        }
+
+        [data-theme="dark"] .skeleton-line {
+            background: linear-gradient(90deg, #18181b 0%, #27272a 50%, #18181b 100%);
+            background-size: 200% 100%;
         }
 
         @keyframes skeletonShimmer {

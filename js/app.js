@@ -10,11 +10,23 @@ let rawDataset = [];
         const initializedWeekKeys = new Set(); // Tracks weeks that have received initial default collapse state
         let quarterManifest = null;
         const loadedQuarterFiles = new Set();
+        const prefetchedQuartersMap = new Map(); // Suggestion 4.3: In-memory cache for 0ms quarter pagination
         let isFetchingQuarter = false;
         let activeViewMode = 'cards'; // 'cards' | 'table'
         let tableSortColumn = 'date'; // 'date' | 'amount' | 'company'
         let tableSortDirection = 'desc'; // 'asc' | 'desc'
         let searchDebounceTimer = null;
+
+        // Suggestion 1.4: Native View Transitions API helper with graceful fallback
+        function withViewTransition(callback) {
+            if (document.startViewTransition && typeof document.startViewTransition === 'function') {
+                document.startViewTransition(() => {
+                    callback();
+                });
+            } else {
+                callback();
+            }
+        }
 
         // User Session Tracking (persisted across tab reloads via sessionStorage)
         let sessionId = '';
@@ -655,6 +667,7 @@ let rawDataset = [];
             applyFilters(false);
             handleDomainDeepLink();
             updateQuarterPaginationUI();
+            scheduleBackgroundQuarterPrefetch();
 
             if (hasMoreFromBackend && typeof google !== 'undefined' && google.script && google.script.run) {
                 const nextOffset = typeof data.nextOffset === 'number' ? data.nextOffset : dataset.length;
@@ -667,6 +680,34 @@ let rawDataset = [];
                     })
                     .getFundingData({ mode: 'remaining', offset: nextOffset });
             }
+        }
+
+        // Deisgned by Kapil Pidhwani: Predictive idle prefetcher. Preloads and parses older quarter JSON files during browser idle time so loadMoreDeals() executes in 0ms.
+        function scheduleBackgroundQuarterPrefetch() {
+            if (!quarterManifest || !quarterManifest.quarters) return;
+            const idleFn = (typeof window !== 'undefined' && window.requestIdleCallback) 
+                ? window.requestIdleCallback 
+                : function(cb) { setTimeout(cb, 1200); };
+            
+            idleFn(() => {
+                quarterManifest.quarters.forEach(q => {
+                    if (!q || !q.file || loadedQuarterFiles.has(q.file) || prefetchedQuartersMap.has(q.file)) return;
+                    const quarterBuster = '?v=' + encodeURIComponent(quarterManifest.updated_at || Date.now());
+                    fetch('data/' + q.file + quarterBuster)
+                        .then(res => {
+                            if (!res.ok) return fetch('./data/' + q.file + quarterBuster);
+                            return res;
+                        })
+                        .then(res => res.ok ? res.json() : null)
+                        .then(data => {
+                            if (data) {
+                                prefetchedQuartersMap.set(q.file, data);
+                                console.log(`[Fundingly Prefetch] Cached ${q.file} in memory for instant 0ms quarter pagination.`);
+                            }
+                        })
+                        .catch(() => {});
+                });
+            });
         }
 
         // Deisgned by Kapil Pidhwani: Strict domain deep-link handler. Ceiling: Matches against extractDomain(company_website). Upgrade path: Multi-domain alias mapping.
@@ -1674,10 +1715,29 @@ let rawDataset = [];
             }
         }
 
-        // Deisgned by Kapil Pidhwani: Quarter-wise pagination loader. Fetches next historical quarter JSON and merges non-duplicate records into feed. Ceiling: Sequential fetch. Upgrade path: Service Worker background cache.
+        // Deisgned by Kapil Pidhwani: Quarter-wise pagination loader with instant in-memory prefetch cache & View Transitions. Ceiling: Sequential fetch fallback. Upgrade path: Service Worker background cache.
         function loadMoreDeals() {
             const nextQuarter = getNextAvailableQuarter();
             if (nextQuarter && !isFetchingQuarter) {
+                // Suggestion 4.3: If already prefetched in memory, resolve in 0ms!
+                if (prefetchedQuartersMap.has(nextQuarter.file)) {
+                    const newRecords = prefetchedQuartersMap.get(nextQuarter.file);
+                    loadedQuarterFiles.add(nextQuarter.file);
+                    const recordsToAdd = Array.isArray(newRecords) ? newRecords : (newRecords && Array.isArray(newRecords.records) ? newRecords.records : []);
+                    const existingSignatures = new Set(rawDataset.map(d => `${(d.company_name||'').trim().toLowerCase()}_${d.date_of_funding||''}`));
+                    const filteredNew = recordsToAdd.filter(d => !existingSignatures.has(`${(d.company_name||'').trim().toLowerCase()}_${d.date_of_funding||''}`));
+                    
+                    rawDataset = rawDataset.concat(filteredNew);
+                    populateSectorDropdown(rawDataset);
+                    withViewTransition(() => {
+                        applyFilters(false);
+                        updateQuarterPaginationUI();
+                    });
+                    console.log(`[Fundingly] ⚡ Instant 0ms load from prefetch cache: ${nextQuarter.file} (+${filteredNew.length} deals). Total deals: ${rawDataset.length}`);
+                    scheduleBackgroundQuarterPrefetch();
+                    return;
+                }
+
                 isFetchingQuarter = true;
                 const bgIndicator = document.getElementById('bgLoadingIndicator');
                 const bgText = document.getElementById('bgLoadingText');
@@ -1711,9 +1771,12 @@ let rawDataset = [];
                         
                         rawDataset = rawDataset.concat(filteredNew);
                         populateSectorDropdown(rawDataset);
-                        applyFilters(false);
-                        updateQuarterPaginationUI();
+                        withViewTransition(() => {
+                            applyFilters(false);
+                            updateQuarterPaginationUI();
+                        });
                         console.log(`[Fundingly] Loaded quarter ${nextQuarter.file}: added ${filteredNew.length} deals. Total deals: ${rawDataset.length}`);
+                        scheduleBackgroundQuarterPrefetch();
                     })
                     .catch(err => {
                         console.error('Error loading previous quarter:', err);
