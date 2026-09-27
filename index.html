@@ -379,10 +379,16 @@
                 </div>
                 <p class="empty-title">No matching deals found</p>
                 <p class="empty-subtitle">No matching investments found for this filter combination.</p>
-                <button type="button" class="btn-clear-all-filters" id="emptyStateClearBtn" onclick="clearAllFilters()">
-                    <span class="material-symbols-outlined">filter_alt_off</span>
-                    <span>Reset All Filters</span>
-                </button>
+                <div class="empty-state-actions" style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 18px;">
+                    <button type="button" class="btn-clear-all-filters" id="emptyStateClearBtn" onclick="clearAllFilters()" style="margin-top: 0;">
+                        <span class="material-symbols-outlined">filter_alt_off</span>
+                        <span>Reset All Filters</span>
+                    </button>
+                    <button type="button" class="btn-load-earlier-quarters" id="emptyStateLoadEarlierBtn" style="display: none;" onclick="loadMoreDeals()">
+                        <span class="material-symbols-outlined">history</span>
+                        <span id="emptyStateLoadEarlierText">Search Earlier Quarters</span>
+                    </button>
+                </div>
             </div>
 
             <!-- Weekly Grouped Timeline Container -->

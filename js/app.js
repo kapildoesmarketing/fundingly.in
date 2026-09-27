@@ -1034,10 +1034,16 @@ let rawDataset = [];
             const loadMoreBtn = document.getElementById('loadMoreBtn');
             if (!loadMoreContainer) return;
 
-            if (loadMoreBtn) loadMoreBtn.style.display = 'none';
+            if (isFetchingQuarter) {
+                loadMoreContainer.style.display = 'flex';
+                if (loadMoreBtn) loadMoreBtn.style.display = 'none';
+                if (bgIndicator) bgIndicator.style.display = 'inline-flex';
+                return;
+            }
 
             if (pendingWeekCount > 0 || isFetchingRemainingFromBackend) {
                 loadMoreContainer.style.display = 'flex';
+                if (loadMoreBtn) loadMoreBtn.style.display = 'none';
                 if (bgIndicator) bgIndicator.style.display = 'inline-flex';
                 if (bgText) {
                     bgText.textContent = pendingWeekCount > 0
@@ -1045,8 +1051,9 @@ let rawDataset = [];
                         : 'Loading earlier weeks in background...';
                 }
             } else {
-                loadMoreContainer.style.display = 'none';
                 if (bgIndicator) bgIndicator.style.display = 'none';
+                // Deisgned by Kapil Pidhwani: Trigger quarter pagination re-evaluation once intra-quarter background week rendering completes.
+                updateQuarterPaginationUI();
             }
         }
 
@@ -1393,15 +1400,28 @@ let rawDataset = [];
                 });
             }
 
-            if (allWeekGroups && allWeekGroups.length > 0 && allWeekGroups[0].weekInfo) {
+            if (quarterManifest && quarterManifest.quarters && quarterManifest.quarters.length > 0) {
+                const loadedQuarters = quarterManifest.quarters.filter(q => loadedQuarterFiles.has(q.file));
+                if (loadedQuarters.length > 1) {
+                    const qLabels = loadedQuarters.map(q => `Q${q.quarter}`).sort();
+                    const yearSet = Array.from(new Set(loadedQuarters.map(q => q.year)));
+                    titleEl.textContent = `${yearSet.join('/')} ${qLabels[0]} – ${qLabels[qLabels.length - 1]}`;
+                    subEl.textContent = `${loadedQuarters.length} Quarters Active`;
+                } else if (allWeekGroups && allWeekGroups.length > 0 && allWeekGroups[0].weekInfo) {
+                    const info = allWeekGroups[0].weekInfo;
+                    titleEl.textContent = info.quarterTitle;
+                    const parts = info.quarterDateRange.split(' ');
+                    subEl.textContent = `${parts[0]} ${parts[1]} ${parts[2]}`;
+                } else {
+                    const latest = loadedQuarters[0] || quarterManifest.quarters[0];
+                    titleEl.textContent = `${latest.year} Q${latest.quarter}`;
+                    subEl.textContent = latest.label ? latest.label.replace(/^Q\d \d{4}\s*\((.+)\)$/, '$1') : 'Jul – Sep';
+                }
+            } else if (allWeekGroups && allWeekGroups.length > 0 && allWeekGroups[0].weekInfo) {
                 const info = allWeekGroups[0].weekInfo;
                 titleEl.textContent = info.quarterTitle;
                 const parts = info.quarterDateRange.split(' ');
                 subEl.textContent = `${parts[0]} ${parts[1]} ${parts[2]}`;
-            } else if (quarterManifest && quarterManifest.quarters && quarterManifest.quarters.length > 0) {
-                const latest = quarterManifest.quarters[0];
-                titleEl.textContent = `${latest.year} Q${latest.quarter}`;
-                subEl.textContent = latest.label ? latest.label.replace(/^Q\d \d{4}\s*\((.+)\)$/, '$1') : 'Jul – Sep';
             } else {
                 titleEl.textContent = '2026 Q3';
                 subEl.textContent = 'Jul – Sep';
@@ -1484,16 +1504,30 @@ let rawDataset = [];
             cancelBackgroundWeekRender();
             const container = document.getElementById('gridContainer');
             const emptyState = document.getElementById('emptyState');
+            const emptyLoadEarlierBtn = document.getElementById('emptyStateLoadEarlierBtn');
+            const emptyLoadEarlierText = document.getElementById('emptyStateLoadEarlierText');
 
             if (!data || data.length === 0) {
                 container.innerHTML = '';
                 emptyState.style.display = 'block';
+                const nextQuarter = getNextAvailableQuarter();
+                if (emptyLoadEarlierBtn) {
+                    if (nextQuarter) {
+                        emptyLoadEarlierBtn.style.display = 'inline-flex';
+                        if (emptyLoadEarlierText) {
+                            emptyLoadEarlierText.textContent = `Search in Earlier Deals (${nextQuarter.label || nextQuarter.file})`;
+                        }
+                    } else {
+                        emptyLoadEarlierBtn.style.display = 'none';
+                    }
+                }
                 updateBackgroundLoadingUI(0);
                 updateQuarterToolbarBadge([]);
                 return;
             }
 
             emptyState.style.display = 'none';
+            if (emptyLoadEarlierBtn) emptyLoadEarlierBtn.style.display = 'none';
             const allWeekGroups = groupDealsByWeek(data);
             updateQuarterToolbarBadge(allWeekGroups);
 
@@ -1607,6 +1641,13 @@ let rawDataset = [];
             const bgIndicator = document.getElementById('bgLoadingIndicator');
             if (!container || !btn) return;
 
+            if (isFetchingQuarter) {
+                container.style.display = 'flex';
+                btn.style.display = 'none';
+                if (bgIndicator) bgIndicator.style.display = 'inline-flex';
+                return;
+            }
+
             const nextQuarter = getNextAvailableQuarter();
             if (nextQuarter) {
                 container.style.display = 'flex';
@@ -1623,12 +1664,13 @@ let rawDataset = [];
                 btn.disabled = true;
                 btn.innerHTML = `
                     <span class="material-symbols-outlined">check_circle</span>
-                    <span>All Historical Quarters Loaded</span>
+                    <span>All Historical Quarters Loaded (${rawDataset.length} Deals)</span>
                 `;
                 if (bgIndicator) bgIndicator.style.display = 'none';
             } else {
                 container.style.display = 'none';
                 btn.style.display = 'none';
+                if (bgIndicator) bgIndicator.style.display = 'none';
             }
         }
 
@@ -1640,7 +1682,9 @@ let rawDataset = [];
                 const bgIndicator = document.getElementById('bgLoadingIndicator');
                 const bgText = document.getElementById('bgLoadingText');
                 const btn = document.getElementById('loadMoreBtn');
+                const emptyLoadEarlierBtn = document.getElementById('emptyStateLoadEarlierBtn');
                 if (btn) btn.disabled = true;
+                if (emptyLoadEarlierBtn) emptyLoadEarlierBtn.disabled = true;
                 if (bgIndicator) {
                     bgIndicator.style.display = 'inline-flex';
                     if (bgText) bgText.textContent = `Loading ${nextQuarter.label || nextQuarter.file}...`;
@@ -1658,6 +1702,7 @@ let rawDataset = [];
                     })
                     .then(newRecords => {
                         isFetchingQuarter = false;
+                        if (emptyLoadEarlierBtn) emptyLoadEarlierBtn.disabled = false;
                         loadedQuarterFiles.add(nextQuarter.file);
                         const recordsToAdd = Array.isArray(newRecords) ? newRecords : (newRecords && Array.isArray(newRecords.records) ? newRecords.records : []);
                         
@@ -1674,8 +1719,10 @@ let rawDataset = [];
                         console.error('Error loading previous quarter:', err);
                         isFetchingQuarter = false;
                         if (btn) btn.disabled = false;
+                        if (emptyLoadEarlierBtn) emptyLoadEarlierBtn.disabled = false;
                         if (bgIndicator) bgIndicator.style.display = 'none';
                         alert(`Unable to load ${nextQuarter.label || nextQuarter.file}. Please check your connection.`);
+                        updateQuarterPaginationUI();
                     });
                 return;
             }
