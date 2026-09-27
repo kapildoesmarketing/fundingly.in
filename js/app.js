@@ -1509,12 +1509,13 @@ let rawDataset = [];
             const banner = document.createElement('div');
             banner.className = 'quarter-divider-banner';
             banner.dataset.quarterKey = qInfo.key;
+            const subText = qInfo.range ? qInfo.range.replace(/\s+\d{4}$/, '') : '';
             const metricsText = `${qInfo.count} ${qInfo.count === 1 ? 'deal' : 'deals'}` + (qInfo.totalUSD > 0 ? ` • ${formatUSD(qInfo.totalUSD)} total` : '');
             banner.innerHTML = `
                 <div class="toolbar-quarter-badge quarter-divider-chip">
                     <span class="material-symbols-outlined quarter-badge-icon" aria-hidden="true">calendar_month</span>
                     <span class="quarter-badge-title">${escapeHtml(qInfo.title)}</span>
-                    <span class="quarter-badge-sub">${escapeHtml(qInfo.range)}</span>
+                    <span class="quarter-badge-sub">${escapeHtml(subText)}</span>
                     <span class="quarter-badge-metrics">${metricsText}</span>
                 </div>
             `;
