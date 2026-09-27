@@ -177,10 +177,10 @@
             margin: 0 0 24px 0;
         }
 
-        /* Row 1: UPI Layout (Split Form & QR) */
+        /* Row 1: Symmetrical 2-Column UPI Layout */
         .upi-card-body {
             display: grid;
-            grid-template-columns: 1.2fr 1fr;
+            grid-template-columns: 1fr 1fr;
             gap: 32px;
             align-items: center;
         }
@@ -309,7 +309,68 @@
             color: #ffffff;
         }
 
-        /* QR Preview Column */
+        /* UPI Action Buttons placed under the email option */
+        .upi-actions-row {
+            display: flex;
+            gap: 10px;
+            margin-top: 4px;
+            width: 100%;
+            align-items: center;
+        }
+
+        .btn-upi-mobile {
+            flex: 1 1 50%;
+            height: 44px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: var(--color-primary);
+            color: #ffffff;
+            font-size: 14px;
+            font-weight: 600;
+            padding: 0 14px;
+            border-radius: var(--radius-pill);
+            text-decoration: none;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 14px rgba(0, 102, 204, 0.24);
+            white-space: nowrap;
+            box-sizing: border-box;
+        }
+
+        .btn-upi-mobile:hover {
+            background: var(--color-primary-hover);
+            transform: translateY(-1px);
+            box-shadow: 0 6px 18px rgba(0, 102, 204, 0.32);
+        }
+
+        .btn-copy-vpa {
+            flex: 1 1 50%;
+            height: 44px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            background: var(--color-surface);
+            border: 1px solid var(--color-hairline);
+            color: var(--color-text-primary);
+            font-size: 13.5px;
+            font-weight: 600;
+            padding: 0 14px;
+            border-radius: var(--radius-pill);
+            cursor: pointer;
+            transition: all 0.15s ease;
+            white-space: nowrap;
+            box-sizing: border-box;
+        }
+
+        .btn-copy-vpa:hover {
+            background: var(--color-surface-secondary);
+            border-color: var(--color-primary);
+            color: var(--color-primary);
+        }
+
+        /* QR Preview Column (Symmetrical height & balanced alignment) */
         .upi-qr-column {
             display: flex;
             flex-direction: column;
@@ -324,15 +385,18 @@
             justify-content: center;
             background: #ffffff;
             border: 1px solid #e5e5ea;
-            border-radius: var(--radius-inner);
-            padding: 16px;
+            border-radius: var(--radius-card);
+            padding: 18px;
             box-shadow: 0 4px 18px rgba(0, 0, 0, 0.06);
-            position: relative;
+            width: 100%;
+            max-width: 270px;
+            box-sizing: border-box;
+            margin: 0 auto;
         }
 
         .upi-qr-canvas-container {
-            width: 200px;
-            height: 200px;
+            width: 220px;
+            height: 220px;
             position: relative;
             display: flex;
             align-items: center;
@@ -341,73 +405,20 @@
 
         .upi-qr-image {
             display: block;
-            width: 200px;
-            height: 200px;
+            width: 220px;
+            height: 220px;
             border-radius: 8px;
         }
 
         .upi-qr-caption {
-            font-size: 12px;
+            font-size: 12.5px;
             font-weight: 500;
-            color: #666666;
+            color: #555555;
             margin-top: 10px;
             text-align: center;
             display: flex;
             align-items: center;
-            gap: 4px;
-        }
-
-        /* UPI Action Buttons */
-        .upi-actions-row {
-            display: flex;
-            gap: 10px;
-            margin-top: 14px;
-            width: 100%;
-            max-width: 240px;
-            justify-content: center;
-        }
-
-        .btn-upi-mobile {
-            flex: 1;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 6px;
-            background: var(--color-primary);
-            color: #ffffff;
-            font-size: 13.5px;
-            font-weight: 600;
-            padding: 10px 14px;
-            border-radius: var(--radius-pill);
-            text-decoration: none;
-            transition: all 0.2s ease;
-            box-shadow: 0 4px 14px rgba(0, 102, 204, 0.24);
-        }
-
-        .btn-upi-mobile:hover {
-            background: var(--color-primary-hover);
-            transform: translateY(-1px);
-        }
-
-        .btn-copy-vpa {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 6px;
-            background: var(--color-surface);
-            border: 1px solid var(--color-hairline);
-            color: var(--color-text-primary);
-            font-size: 13px;
-            font-weight: 600;
-            padding: 9px 14px;
-            border-radius: var(--radius-pill);
-            cursor: pointer;
-            transition: all 0.15s ease;
-        }
-
-        .btn-copy-vpa:hover {
-            background: var(--color-surface-secondary);
-            border-color: #d1d1d6;
+            gap: 5px;
         }
 
         /* Row 2: Card Support Layout */
@@ -613,6 +624,7 @@
         @media (max-width: 768px) {
             .upi-card-body {
                 grid-template-columns: 1fr;
+                gap: 24px;
             }
 
             .page-card {
@@ -624,7 +636,20 @@
             }
 
             .support-method-card {
-                padding: 24px 20px;
+                padding: 24px 18px;
+            }
+
+            .upi-actions-row {
+                width: 100%;
+                display: flex;
+                flex-direction: row;
+                gap: 10px;
+                margin-top: 4px;
+            }
+
+            .upi-qr-card-wrap {
+                max-width: 260px;
+                margin: 0 auto;
             }
 
             .card-cta-row {
@@ -635,6 +660,43 @@
             .btn-bmac-cta {
                 width: 100%;
                 box-sizing: border-box;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .upi-actions-row {
+                flex-direction: row;
+                gap: 8px;
+            }
+
+            .btn-upi-mobile {
+                font-size: 13px;
+                padding: 0 10px;
+                gap: 6px;
+            }
+
+            .btn-copy-vpa {
+                font-size: 13px;
+                padding: 0 10px;
+                gap: 5px;
+            }
+
+            .btn-upi-mobile span.material-symbols-outlined,
+            .btn-copy-vpa span.material-symbols-outlined {
+                font-size: 16px;
+            }
+        }
+
+        @media (max-width: 380px) {
+            .btn-upi-mobile,
+            .btn-copy-vpa {
+                font-size: 12px;
+                padding: 0 6px;
+            }
+
+            .btn-upi-mobile span.material-symbols-outlined,
+            .btn-copy-vpa span.material-symbols-outlined {
+                font-size: 15px;
             }
         }
     </style>
@@ -721,7 +783,7 @@
                         </p>
 
                         <div class="upi-card-body">
-                            <!-- Left: Form Controls -->
+                            <!-- Left: Form Controls + Actions Below Email -->
                             <div class="upi-form-column">
                                 <!-- Amount Input with Prefix & Preset Chips -->
                                 <div class="support-form-group">
@@ -731,7 +793,7 @@
                                     <div class="input-amount-wrapper">
                                         <span class="currency-symbol-prefix">₹</span>
                                         <input type="number" id="upiAmountInput" class="support-text-input with-prefix"
-                                            placeholder="5000" min="1" step="100" inputmode="numeric">
+                                            placeholder="5000" min="1" step="any" inputmode="numeric">
                                     </div>
                                     <div class="preset-amount-chips">
                                         <button type="button" class="preset-chip-btn" data-amt="500">₹500</button>
@@ -754,9 +816,21 @@
                                         <span>Please enter a valid email address (e.g. name@domain.com)</span>
                                     </div>
                                 </div>
+
+                                <!-- UPI Action Buttons (Pay via App + Copy ID) -->
+                                <div class="upi-actions-row">
+                                    <a href="upi://pay?pa=kpx@slc&pn=Kapil%20Pidhwani&cu=INR&tn=Support%20Fundingly" id="upiIntentMobileBtn" class="btn-upi-mobile">
+                                        <span class="material-symbols-outlined" style="font-size: 18px;">smartphone</span>
+                                        <span>Pay via UPI App</span>
+                                    </a>
+                                    <button type="button" id="copyVpaBtn" class="btn-copy-vpa" title="Copy UPI VPA">
+                                        <span class="material-symbols-outlined" id="copyVpaIcon" style="font-size: 16px;">content_copy</span>
+                                        <span>Copy UPI ID</span>
+                                    </button>
+                                </div>
                             </div>
 
-                            <!-- Right: Dynamic QR Code Card with Mascot Overlay -->
+                            <!-- Right: Symmetrical Dynamic QR Code Card -->
                             <div class="upi-qr-column">
                                 <div class="upi-qr-card-wrap">
                                     <div class="upi-qr-canvas-container" id="upiQrCanvasWrap">
@@ -766,18 +840,6 @@
                                         <span class="material-symbols-outlined" style="font-size: 16px; color: var(--color-primary);">qr_code_scanner</span>
                                         <span>UPI ID: <strong>kpx@slc</strong></span>
                                     </div>
-                                </div>
-
-                                <!-- Actions (Mobile 1-Tap Pay + Copy VPA) -->
-                                <div class="upi-actions-row">
-                                    <a href="upi://pay?pa=kpx@slc&pn=Kapil%20Pidhwani&cu=INR&tn=Support%20Fundingly" id="upiIntentMobileBtn" class="btn-upi-mobile">
-                                        <span class="material-symbols-outlined" style="font-size: 17px;">smartphone</span>
-                                        <span>Pay in UPI App</span>
-                                    </a>
-                                    <button type="button" id="copyVpaBtn" class="btn-copy-vpa" title="Copy UPI VPA">
-                                        <span class="material-symbols-outlined" id="copyVpaIcon" style="font-size: 15px;">content_copy</span>
-                                        <span>Copy ID</span>
-                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -1042,8 +1104,8 @@
                 const tempDiv = document.createElement('div');
                 new QRCode(tempDiv, {
                     text: text,
-                    width: 200,
-                    height: 200,
+                    width: 220,
+                    height: 220,
                     colorDark: '#000000',
                     colorLight: '#ffffff',
                     correctLevel: QRCode.CorrectLevel.H // 30% error correction tolerance
@@ -1055,18 +1117,18 @@
                     if (!srcCanvas) return;
 
                     const finalCanvas = document.createElement('canvas');
-                    finalCanvas.width = 200;
-                    finalCanvas.height = 200;
+                    finalCanvas.width = 220;
+                    finalCanvas.height = 220;
                     finalCanvas.className = 'upi-qr-image';
                     finalCanvas.setAttribute('alt', 'Scan to pay via UPI');
 
                     const ctx = finalCanvas.getContext('2d');
-                    ctx.drawImage(srcCanvas, 0, 0, 200, 200);
+                    ctx.drawImage(srcCanvas, 0, 0, 220, 220);
 
                     // Draw celebrate mascot badge in the center
                     if (mascotLoaded) {
-                        const badgeSize = 48;
-                        const center = 200 / 2;
+                        const badgeSize = 52;
+                        const center = 220 / 2;
                         const x = center - (badgeSize / 2);
                         const y = center - (badgeSize / 2);
 
