@@ -52,7 +52,13 @@ let rawDataset = [];
             initMobileDock();
             fetchMasterData();
 
-            document.getElementById('searchInput').addEventListener('input', handleSearchDebounced);
+            const searchInputEl = document.getElementById('searchInput');
+            if (searchInputEl) {
+                searchInputEl.addEventListener('input', handleSearchDebounced);
+                searchInputEl.addEventListener('focus', () => {
+                    ensureAllQuartersLoaded();
+                });
+            }
             document.getElementById('bulkAccordionBtn').addEventListener('click', toggleBulkAccordion);
             document.getElementById('loadMoreBtn').addEventListener('click', loadMoreDeals);
             document.getElementById('emptyStateClearBtn').addEventListener('click', clearAllFilters);
@@ -1473,8 +1479,50 @@ let rawDataset = [];
             }
         }
 
-        // Deisgned by Kapil Pidhwani: Idle-slice progressive DOM renderer. Appends 1 week section per idle frame after initial 2 weeks render so main thread stays 60fps. Ceiling: DOM node count for >5,000 deals. Upgrade path: Virtualized viewport windowing.
-        function scheduleBackgroundWeekRender(groupsQueue) {
+        // Deisgned by Kapil Pidhwani: Dynamically computes quarterly aggregated metrics map across any dataset. Ceiling: In-memory single pass. Upgrade path: Pre-aggregated JSON metadata.
+        function getQuarterAggregatesMap(data) {
+            const qMap = new Map();
+            if (!Array.isArray(data)) return qMap;
+            data.forEach(item => {
+                const info = getWeekInfo(item.date_of_funding);
+                if (!info || !info.quarterKey) return;
+                if (!qMap.has(info.quarterKey)) {
+                    qMap.set(info.quarterKey, {
+                        key: info.quarterKey,
+                        title: info.quarterTitle,
+                        range: info.quarterDateRange,
+                        count: 0,
+                        totalUSD: 0
+                    });
+                }
+                const q = qMap.get(info.quarterKey);
+                q.count++;
+                const amt = Number(item.funding_amount_usd);
+                if (!isNaN(amt) && amt > 0) q.totalUSD += amt;
+            });
+            return qMap;
+        }
+
+        // Deisgned by Kapil Pidhwani: Automated in-stream Quarter Divider element factory.
+        function createQuarterDividerElement(qInfo) {
+            const banner = document.createElement('div');
+            banner.className = 'quarter-divider-banner';
+            banner.dataset.quarterKey = qInfo.key;
+            const metricsText = `${qInfo.count} ${qInfo.count === 1 ? 'deal' : 'deals'}` + (qInfo.totalUSD > 0 ? ` • ${formatUSD(qInfo.totalUSD)} total` : '');
+            banner.innerHTML = `
+                <div class="quarter-divider-pill">
+                    <span class="material-symbols-outlined quarter-divider-icon" aria-hidden="true">calendar_month</span>
+                    <span class="quarter-divider-title">${escapeHtml(qInfo.title)}</span>
+                    <span class="quarter-divider-dot" aria-hidden="true">•</span>
+                    <span class="quarter-divider-range">${escapeHtml(qInfo.range)}</span>
+                    <span class="quarter-divider-metrics">${metricsText}</span>
+                </div>
+            `;
+            return banner;
+        }
+
+        // Deisgned by Kapil Pidhwani: Idle-slice progressive DOM renderer with automated in-stream quarter dividers. Appends 1 week section per idle frame after initial 2 weeks render so main thread stays 60fps. Ceiling: DOM node count for >5,000 deals. Upgrade path: Virtualized viewport windowing.
+        function scheduleBackgroundWeekRender(groupsQueue, quarterAggregates) {
             cancelBackgroundWeekRender();
             if (!groupsQueue || groupsQueue.length === 0) {
                 updateBackgroundLoadingUI(0);
@@ -1484,6 +1532,7 @@ let rawDataset = [];
                 return;
             }
 
+            const qAggs = quarterAggregates || getQuarterAggregatesMap(activeFilteredDataset);
             updateBackgroundLoadingUI(groupsQueue.length);
 
             const runStep = () => {
@@ -1496,6 +1545,19 @@ let rawDataset = [];
                 if (nextGroup) {
                     const existing = container.querySelector(`.week-group[data-week-key="${nextGroup.key}"]`);
                     if (!existing) {
+                        // Insert quarter divider before this week section if transitioning to an older quarter
+                        if (nextGroup.weekInfo && nextGroup.weekInfo.quarterKey) {
+                            const qKey = nextGroup.weekInfo.quarterKey;
+                            const topQuarterKey = activeFilteredDataset.length > 0 && getWeekInfo(activeFilteredDataset[0].date_of_funding)?.quarterKey;
+                            
+                            if (topQuarterKey && qKey !== topQuarterKey && !container.querySelector(`.quarter-divider-banner[data-quarter-key="${qKey}"]`)) {
+                                const qAgg = qAggs.get(qKey);
+                                if (qAgg) {
+                                    container.appendChild(createQuarterDividerElement(qAgg));
+                                }
+                            }
+                        }
+
                         const sectionEl = createWeekSectionElement(nextGroup, false);
                         container.appendChild(sectionEl);
                     }
@@ -1546,22 +1608,11 @@ let rawDataset = [];
             const container = document.getElementById('gridContainer');
             const emptyState = document.getElementById('emptyState');
             const emptyLoadEarlierBtn = document.getElementById('emptyStateLoadEarlierBtn');
-            const emptyLoadEarlierText = document.getElementById('emptyStateLoadEarlierText');
 
             if (!data || data.length === 0) {
                 container.innerHTML = '';
                 emptyState.style.display = 'block';
-                const nextQuarter = getNextAvailableQuarter();
-                if (emptyLoadEarlierBtn) {
-                    if (nextQuarter) {
-                        emptyLoadEarlierBtn.style.display = 'inline-flex';
-                        if (emptyLoadEarlierText) {
-                            emptyLoadEarlierText.textContent = `Search in Earlier Deals (${nextQuarter.label || nextQuarter.file})`;
-                        }
-                    } else {
-                        emptyLoadEarlierBtn.style.display = 'none';
-                    }
-                }
+                if (emptyLoadEarlierBtn) emptyLoadEarlierBtn.style.display = 'none';
                 updateBackgroundLoadingUI(0);
                 updateQuarterToolbarBadge([]);
                 return;
@@ -1571,6 +1622,8 @@ let rawDataset = [];
             if (emptyLoadEarlierBtn) emptyLoadEarlierBtn.style.display = 'none';
             const allWeekGroups = groupDealsByWeek(data);
             updateQuarterToolbarBadge(allWeekGroups);
+            const quarterAggregates = getQuarterAggregatesMap(data);
+            const topQuarterKey = allWeekGroups.length > 0 && allWeekGroups[0].weekInfo ? allWeekGroups[0].weekInfo.quarterKey : null;
 
             // Deisgned by Kapil Pidhwani: Initialize default collapse state. Only the single latest week across the whole dataset remains expanded by default (collapsed = false); all older weeks start collapsed unless explicitly toggled by the user. Ceiling: In-memory session state. Upgrade path: LocalStorage persistence.
             if (allWeekGroups.length > 0) {
@@ -1603,7 +1656,7 @@ let rawDataset = [];
                     }
                 });
                 updateBulkAccordionBtn();
-                scheduleBackgroundWeekRender(unrenderedGroups);
+                scheduleBackgroundWeekRender(unrenderedGroups, quarterAggregates);
                 return;
             }
 
@@ -1612,6 +1665,15 @@ let rawDataset = [];
             const remainingGroups = allWeekGroups.slice(INITIAL_WEEKS_TO_RENDER);
 
             initialGroups.forEach(group => {
+                if (group.weekInfo && group.weekInfo.quarterKey) {
+                    const qKey = group.weekInfo.quarterKey;
+                    if (topQuarterKey && qKey !== topQuarterKey && !container.querySelector(`.quarter-divider-banner[data-quarter-key="${qKey}"]`)) {
+                        const qAgg = quarterAggregates.get(qKey);
+                        if (qAgg) {
+                            container.appendChild(createQuarterDividerElement(qAgg));
+                        }
+                    }
+                }
                 const sectionEl = createWeekSectionElement(group, true);
                 container.appendChild(sectionEl);
             });
@@ -1633,7 +1695,7 @@ let rawDataset = [];
                 initialCards.forEach(c => c.style.opacity = '1');
             }
 
-            scheduleBackgroundWeekRender(remainingGroups);
+            scheduleBackgroundWeekRender(remainingGroups, quarterAggregates);
         }
 
         // Item 4.2: Bulk Accordion Controls
@@ -1715,7 +1777,7 @@ let rawDataset = [];
             }
         }
 
-        // Deisgned by Kapil Pidhwani: Quarter-wise pagination loader with instant in-memory prefetch cache & View Transitions. Ceiling: Sequential fetch fallback. Upgrade path: Service Worker background cache.
+        // Deisgned by Kapil Pidhwani: Quarter-wise pagination loader with instant in-memory prefetch cache & in-place DOM preservation (zero scroll jump). Ceiling: Sequential fetch fallback. Upgrade path: Service Worker background cache.
         function loadMoreDeals() {
             const nextQuarter = getNextAvailableQuarter();
             if (nextQuarter && !isFetchingQuarter) {
@@ -1729,10 +1791,14 @@ let rawDataset = [];
                     
                     rawDataset = rawDataset.concat(filteredNew);
                     populateSectorDropdown(rawDataset);
-                    withViewTransition(() => {
-                        applyFilters(false);
-                        updateQuarterPaginationUI();
-                    });
+
+                    const savedScrollY = window.scrollY;
+                    applyFilters(true);
+                    updateQuarterPaginationUI();
+                    if (window.scrollY !== savedScrollY) {
+                        window.scrollTo({ top: savedScrollY, behavior: 'instant' });
+                    }
+
                     console.log(`[Fundingly] ⚡ Instant 0ms load from prefetch cache: ${nextQuarter.file} (+${filteredNew.length} deals). Total deals: ${rawDataset.length}`);
                     scheduleBackgroundQuarterPrefetch();
                     return;
@@ -1771,10 +1837,14 @@ let rawDataset = [];
                         
                         rawDataset = rawDataset.concat(filteredNew);
                         populateSectorDropdown(rawDataset);
-                        withViewTransition(() => {
-                            applyFilters(false);
-                            updateQuarterPaginationUI();
-                        });
+
+                        const savedScrollY = window.scrollY;
+                        applyFilters(true);
+                        updateQuarterPaginationUI();
+                        if (window.scrollY !== savedScrollY) {
+                            window.scrollTo({ top: savedScrollY, behavior: 'instant' });
+                        }
+
                         console.log(`[Fundingly] Loaded quarter ${nextQuarter.file}: added ${filteredNew.length} deals. Total deals: ${rawDataset.length}`);
                         scheduleBackgroundQuarterPrefetch();
                     })
@@ -1914,10 +1984,70 @@ let rawDataset = [];
             renderGrid(filtered, shouldPreserveDOM);
         }
 
+        // Deisgned by Kapil Pidhwani: Universal Multi-Quarter Search Engine. Seamlessly merges all un-fetched quarters from manifest.json into memory so searching always queries 100% of the entire database across all historical years and quarters automatically. Ceiling: Multi-quarter memory footprint (~1.2MB for 3,000 deals). Upgrade path: Web Worker indexed search.
+        function ensureAllQuartersLoaded(callback) {
+            if (!quarterManifest || !Array.isArray(quarterManifest.quarters)) {
+                if (typeof callback === 'function') callback();
+                return;
+            }
+
+            const unmergedQuarters = quarterManifest.quarters.filter(q => q && q.file && !loadedQuarterFiles.has(q.file));
+            if (unmergedQuarters.length === 0) {
+                if (typeof callback === 'function') callback();
+                return;
+            }
+
+            let pending = unmergedQuarters.length;
+            let newlyAdded = false;
+
+            const onQuarterProcessed = (q, records) => {
+                loadedQuarterFiles.add(q.file);
+                const recordsToAdd = Array.isArray(records) ? records : (records && Array.isArray(records.records) ? records.records : []);
+                const existingSignatures = new Set(rawDataset.map(d => `${(d.company_name||'').trim().toLowerCase()}_${d.date_of_funding||''}`));
+                const filteredNew = recordsToAdd.filter(d => !existingSignatures.has(`${(d.company_name||'').trim().toLowerCase()}_${d.date_of_funding||''}`));
+                if (filteredNew.length > 0) {
+                    rawDataset = rawDataset.concat(filteredNew);
+                    newlyAdded = true;
+                }
+                pending--;
+                if (pending <= 0) {
+                    if (newlyAdded) {
+                        populateSectorDropdown(rawDataset);
+                    }
+                    updateQuarterPaginationUI();
+                    if (typeof callback === 'function') callback();
+                }
+            };
+
+            unmergedQuarters.forEach(q => {
+                if (prefetchedQuartersMap.has(q.file)) {
+                    onQuarterProcessed(q, prefetchedQuartersMap.get(q.file));
+                } else {
+                    const quarterBuster = '?v=' + encodeURIComponent(quarterManifest.updated_at || Date.now());
+                    fetch('data/' + q.file + quarterBuster)
+                        .then(res => res.ok ? res : fetch('./data/' + q.file + quarterBuster))
+                        .then(res => res.ok ? res.json() : null)
+                        .then(data => {
+                            if (data) prefetchedQuartersMap.set(q.file, data);
+                            onQuarterProcessed(q, data || []);
+                        })
+                        .catch(() => onQuarterProcessed(q, []));
+                }
+            });
+        }
+
         function handleSearchDebounced() {
             clearTimeout(searchDebounceTimer);
             searchDebounceTimer = setTimeout(() => {
-                applyFilters();
+                const searchInput = document.getElementById('searchInput');
+                const query = searchInput ? searchInput.value.trim() : '';
+                if (query.length > 0) {
+                    ensureAllQuartersLoaded(() => {
+                        applyFilters();
+                    });
+                } else {
+                    applyFilters();
+                }
             }, 100);
         }
 
