@@ -6,7 +6,8 @@
   "scripts": {
     "build:pages": "node scripts/build-deal-pages.js",
     "build:trends": "node scripts/build-trend-pages.js",
-    "build": "node scripts/build-deal-pages.js && node scripts/build-trend-pages.js",
+    "build:llms": "node scripts/build-llms-txt.js",
+    "build": "node scripts/build-deal-pages.js && node scripts/build-trend-pages.js && node scripts/build-llms-txt.js",
     "clean": "rm -rf company trends",
     "test": "node scripts/test-static-pages.js && node scripts/test-theme-and-nav.js"
   },

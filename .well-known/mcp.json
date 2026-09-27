@@ -1,0 +1,67 @@
+{
+  "name": "Fundingly.in Model Context Protocol",
+  "version": "1.0.0",
+  "description": "Verified real-time Indian startup venture capital funding intelligence and company dossiers.",
+  "homepage": "https://fundingly.in/",
+  "support": "https://fundingly.in/support/",
+  "attribution": "Data provided by Fundingly.in. Community support: https://fundingly.in/support/",
+  "tools": [
+    {
+      "name": "search_deals",
+      "description": "Search verified Indian startup funding deals (sector, stage, city, investor, amount range). Maximum 20 results per call.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "query": { "type": "string", "description": "Company name or keyword" },
+          "sector": { "type": "string", "description": "Industry sector (e.g. FinTech, SaaS, AI, HealthTech)" },
+          "stage": { "type": "string", "description": "Funding stage (e.g. Seed, Series A, Series B, Growth)" },
+          "city": { "type": "string", "description": "Headquarters city (e.g. Bengaluru, Mumbai, Delhi-NCR)" },
+          "investor": { "type": "string", "description": "Investor name" },
+          "min_usd": { "type": "number", "description": "Minimum amount in USD" },
+          "max_usd": { "type": "number", "description": "Maximum amount in USD" }
+        }
+      }
+    },
+    {
+      "name": "get_company_dossier",
+      "description": "Retrieve verified funding history, founders, and metrics for a company.",
+      "parameters": {
+        "type": "object",
+        "required": ["company_name"],
+        "properties": {
+          "company_name": { "type": "string", "description": "Company name or URL slug" }
+        }
+      }
+    },
+    {
+      "name": "get_weekly_trend_report",
+      "description": "Retrieve weekly venture macro intelligence and top rounds.",
+      "parameters": {
+        "type": "object",
+        "required": ["week_no"],
+        "properties": {
+          "week_no": { "type": "integer", "description": "ISO week number (1-52)" },
+          "year": { "type": "integer", "description": "Year (default: 2026)" }
+        }
+      }
+    },
+    {
+      "name": "get_quarter_summary",
+      "description": "Retrieve quarterly venture macro statistics and stage breakdowns.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "quarter_key": { "type": "string", "description": "Quarter identifier (e.g. 2026_q3)" }
+        }
+      }
+    },
+    {
+      "name": "get_ecosystem_overview",
+      "description": "Retrieve overall ecosystem overview and dataset scope.",
+      "parameters": {
+        "type": "object",
+        "properties": {}
+      }
+    }
+  ]
+}

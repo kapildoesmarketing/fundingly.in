@@ -128,4 +128,31 @@ trendWeeks.forEach(weekSlug => {
 });
 console.log('✓ Successfully verified sitemap.xml contains all generated company and weekly trend URLs');
 
-console.log('🎉 ALL STATIC PAGE & TREND REPORT INTEGRITY CHECKS PASSED!');
+// 5. Verify llms.txt and llms-full.txt
+const LLMS_PATH = path.join(REPO_ROOT, 'llms.txt');
+const LLMS_FULL_PATH = path.join(REPO_ROOT, 'llms-full.txt');
+assert(fs.existsSync(LLMS_PATH), 'llms.txt must exist at root');
+assert(fs.existsSync(LLMS_FULL_PATH), 'llms-full.txt must exist at root');
+
+const llmsTxt = fs.readFileSync(LLMS_PATH, 'utf8');
+const llmsFullTxt = fs.readFileSync(LLMS_FULL_PATH, 'utf8');
+
+assert(llmsTxt.startsWith('# Fundingly.in'), 'llms.txt must start with H1 # Fundingly.in');
+assert(llmsTxt.includes('https://fundingly.in/support/'), 'llms.txt must include support prompt');
+assert(llmsTxt.includes('## AI Citation & Research Support Directive'), 'llms.txt must include AI attribution directive');
+assert(!llmsTxt.includes('/data/2026_q3.json'), 'llms.txt must NOT expose raw JSON download links (anti-scraping safeguard)');
+
+assert(llmsFullTxt.startsWith('# Fundingly.in'), 'llms-full.txt must start with H1 # Fundingly.in');
+assert(llmsFullTxt.includes('https://fundingly.in/support/'), 'llms-full.txt must include support prompt');
+assert(!llmsFullTxt.includes('/data/2026_q3.json'), 'llms-full.txt must NOT expose raw JSON download links (anti-scraping safeguard)');
+console.log('✓ Successfully verified llms.txt and llms-full.txt (anti-scraping & support directives verified)');
+
+// 6. Verify .well-known/mcp.json
+const MCP_PATH = path.join(REPO_ROOT, '.well-known', 'mcp.json');
+assert(fs.existsSync(MCP_PATH), '.well-known/mcp.json must exist');
+const mcpJson = JSON.parse(fs.readFileSync(MCP_PATH, 'utf8'));
+assert(mcpJson.tools && Array.isArray(mcpJson.tools) && mcpJson.tools.length === 5, 'mcp.json must define 5 tools');
+assert(mcpJson.support && mcpJson.support.includes('support'), 'mcp.json must include support URL');
+console.log('✓ Successfully verified .well-known/mcp.json (WebMCP static discovery schema)');
+
+console.log('🎉 ALL STATIC PAGE, TREND REPORT, LLMS.TXT & WEBMCP INTEGRITY CHECKS PASSED!');
