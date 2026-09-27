@@ -1433,47 +1433,41 @@ let rawDataset = [];
             requestAnimationFrame(tick);
         }
 
+        // Deisgned by Kapil Pidhwani: Updates top toolbar quarter badge for the topmost active quarter in view (Q3 at top, older quarters summarized in-stream). Ceiling: Single quarter focus. Upgrade path: Scroll-spy indicator.
         function updateQuarterToolbarBadge(allWeekGroups) {
             const titleEl = document.getElementById('toolbarQuarterTitle');
             const subEl = document.getElementById('toolbarQuarterSub');
             const metricsEl = document.getElementById('toolbarQuarterMetrics');
             if (!titleEl || !subEl) return;
 
-            let totalDeals = 0;
-            let totalUSD = 0;
-            if (allWeekGroups && allWeekGroups.length > 0) {
-                allWeekGroups.forEach(g => {
-                    totalDeals += g.items.length;
-                    totalUSD += g.totalUSD;
-                });
-            }
-
-            if (quarterManifest && quarterManifest.quarters && quarterManifest.quarters.length > 0) {
-                const loadedQuarters = quarterManifest.quarters.filter(q => loadedQuarterFiles.has(q.file));
-                if (loadedQuarters.length > 1) {
-                    const qLabels = loadedQuarters.map(q => `Q${q.quarter}`).sort();
-                    const yearSet = Array.from(new Set(loadedQuarters.map(q => q.year)));
-                    titleEl.textContent = `${yearSet.join('/')} ${qLabels[0]} – ${qLabels[qLabels.length - 1]}`;
-                    subEl.textContent = `${loadedQuarters.length} Quarters Active`;
-                } else if (allWeekGroups && allWeekGroups.length > 0 && allWeekGroups[0].weekInfo) {
-                    const info = allWeekGroups[0].weekInfo;
-                    titleEl.textContent = info.quarterTitle;
-                    const parts = info.quarterDateRange.split(' ');
-                    subEl.textContent = `${parts[0]} ${parts[1]} ${parts[2]}`;
-                } else {
-                    const latest = loadedQuarters[0] || quarterManifest.quarters[0];
+            if (!allWeekGroups || allWeekGroups.length === 0 || !allWeekGroups[0].weekInfo) {
+                if (quarterManifest && quarterManifest.quarters && quarterManifest.quarters.length > 0) {
+                    const latest = quarterManifest.quarters[0];
                     titleEl.textContent = `${latest.year} Q${latest.quarter}`;
                     subEl.textContent = latest.label ? latest.label.replace(/^Q\d \d{4}\s*\((.+)\)$/, '$1') : 'Jul – Sep';
+                } else {
+                    titleEl.textContent = '2026 Q3';
+                    subEl.textContent = 'Jul – Sep';
                 }
-            } else if (allWeekGroups && allWeekGroups.length > 0 && allWeekGroups[0].weekInfo) {
-                const info = allWeekGroups[0].weekInfo;
-                titleEl.textContent = info.quarterTitle;
-                const parts = info.quarterDateRange.split(' ');
-                subEl.textContent = `${parts[0]} ${parts[1]} ${parts[2]}`;
-            } else {
-                titleEl.textContent = '2026 Q3';
-                subEl.textContent = 'Jul – Sep';
+                if (metricsEl) animateOdometerMetrics(metricsEl, 0, 0);
+                return;
             }
+
+            const topInfo = allWeekGroups[0].weekInfo;
+            const topQuarterKey = topInfo.quarterKey;
+            let totalDeals = 0;
+            let totalUSD = 0;
+
+            allWeekGroups.forEach(g => {
+                if (g.weekInfo && g.weekInfo.quarterKey === topQuarterKey) {
+                    totalDeals += g.items.length;
+                    totalUSD += g.totalUSD;
+                }
+            });
+
+            titleEl.textContent = topInfo.quarterTitle;
+            const subText = topInfo.quarterDateRange ? topInfo.quarterDateRange.replace(/\s+\d{4}$/, '') : 'Jul – Sep';
+            subEl.textContent = subText;
 
             if (metricsEl) {
                 animateOdometerMetrics(metricsEl, totalDeals, totalUSD);

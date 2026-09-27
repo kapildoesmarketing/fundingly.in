@@ -1612,37 +1612,29 @@
             gap: 16px;
         }
 
-        /* Deisgned by Kapil Pidhwani: Automated in-stream Quarter Divider Header. Ceiling: Inter-week flow. Upgrade path: Sticky multi-quarter scroll-spy. */
+        /* Deisgned by Kapil Pidhwani: Automated in-stream Quarter Header Chip. Ceiling: Inter-week flow. Upgrade path: Sticky multi-quarter scroll-spy. */
         .quarter-divider-banner {
             display: flex;
             align-items: center;
-            justify-content: center;
+            justify-content: flex-start;
             width: 100%;
-            margin: 32px 0 14px 0;
+            margin: 28px 0 12px 0;
             position: relative;
         }
 
         .quarter-divider-banner::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            right: 0;
-            top: 50%;
-            height: 1px;
-            background: var(--color-hairline);
-            z-index: 1;
+            display: none;
         }
 
         .quarter-divider-banner .toolbar-quarter-badge {
             position: relative;
-            z-index: 2;
-            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
             background: var(--color-surface);
         }
 
         @media (max-width: 600px) {
             .quarter-divider-banner {
-                margin: 22px 0 8px 0;
+                margin: 20px 0 8px 0;
             }
         }
 
