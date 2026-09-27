@@ -56,7 +56,7 @@ pagesToCheck.forEach(filePath => {
 
     // 4. Semantic Footer
     assert(html.includes('class="app-main-footer"'), `Missing app-main-footer in ${relPath}`);
-    assert(html.includes('https://buymeacoffee.com/fundingly.in'), `Missing Buy Me a Coffee support link in ${relPath}`);
+    assert(html.includes('footer-support-btn'), `Missing footer-support-btn link in ${relPath}`);
     assert(html.includes('https://www.linkedin.com/company/fundingly-in'), `Missing LinkedIn social link in ${relPath}`);
     assert(html.includes('https://www.instagram.com/fundingly.in/'), `Missing Instagram social link in ${relPath}`);
 

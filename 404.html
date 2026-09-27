@@ -225,10 +225,10 @@
             const rawPath = window.location.pathname.replace(/^\/+|\/+$/g, '').trim().toLowerCase();
             const ignored = [
                 'index.html', 'about', 'about.html', 'contact', 'contact.html', 'privacy-policy', 'privacy-policy.html', 'terms', 'terms.html', '404.html',
-                'sitemap.xml', 'robots.txt', 'ads.txt', 'manifest.json', '.nojekyll', 'cname', 'founders-note', 'founders-note.html'
+                'sitemap.xml', 'robots.txt', 'ads.txt', 'manifest.json', '.nojekyll', 'cname', 'founders-note', 'founders-note.html', 'support', 'support.html'
             ];
             
-            if (!rawPath || ignored.includes(rawPath) || rawPath.startsWith('css/') || rawPath.startsWith('js/') || rawPath.startsWith('data/') || rawPath.startsWith('assets/')) {
+            if (!rawPath || ignored.includes(rawPath) || rawPath === 'support' || rawPath.startsWith('support/') || rawPath.startsWith('css/') || rawPath.startsWith('js/') || rawPath.startsWith('data/') || rawPath.startsWith('assets/')) {
                 return;
             }
 
@@ -378,7 +378,7 @@
                 <span class="main-footer-tagline">Indian Startup Funding Intelligence</span>
             </div>
             <div class="main-footer-social">
-                <a href="https://buymeacoffee.com/fundingly.in" target="_blank" rel="noopener noreferrer" class="footer-support-btn" title="Support Fundingly Research">
+                <a href="/support/" class="footer-support-btn" title="Support Fundingly Research">
                     <span class="material-symbols-outlined">volunteer_activism</span>
                     <span>Support Our Research</span>
                 </a>

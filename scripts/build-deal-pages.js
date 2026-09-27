@@ -1466,7 +1466,7 @@ ${jsonLdString}
                 <span class="main-footer-tagline">Indian Startup Funding Intelligence</span>
             </div>
             <div class="main-footer-social">
-                <a href="https://buymeacoffee.com/fundingly.in" target="_blank" rel="noopener noreferrer" class="footer-support-btn" title="Support Fundingly Research">
+                <a href="../../support/" class="footer-support-btn" title="Support Fundingly Research">
                     <span class="material-symbols-outlined">volunteer_activism</span>
                     <span>Support Our Research</span>
                 </a>

@@ -39,9 +39,13 @@
         rel="stylesheet" />
 
     <link rel="stylesheet" href="../css/styles.css">
+
+    <!-- QRCode Generator Script (Lightweight, Zero-Dependency) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
     <style>
         .page-container {
-            max-width: 860px;
+            max-width: 900px;
             margin: 40px auto 80px auto;
             padding: 0 24px;
         }
@@ -72,7 +76,7 @@
         .page-meta {
             font-size: 15px;
             color: var(--color-text-secondary);
-            max-width: 600px;
+            max-width: 620px;
             margin: 0 auto;
             line-height: 1.6;
         }
@@ -112,64 +116,400 @@
             transform: scale(1.08) translateY(-2px);
         }
 
-        /* Support Hero Card */
-        .support-cta-card {
-            background: linear-gradient(145deg, var(--color-surface), var(--color-surface-secondary));
-            border: 1.5px solid var(--color-primary-tint);
-            border-radius: var(--radius-card);
-            padding: 32px;
-            text-align: center;
-            margin: 28px 0 36px 0;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 8px 30px rgba(0, 102, 204, 0.06);
+        /* Stacked 2-Row Layout */
+        .support-options-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 28px;
+            margin: 32px 0 40px 0;
         }
 
-        .support-cta-title {
+        /* Support Method Card (Apple Glassmorphism) */
+        .support-method-card {
+            background: linear-gradient(145deg, var(--color-surface), var(--color-surface-secondary));
+            border: 1.5px solid var(--color-hairline);
+            border-radius: var(--radius-card);
+            padding: 32px;
+            position: relative;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .support-method-card.featured-upi {
+            border-color: rgba(0, 102, 204, 0.35);
+            background: linear-gradient(155deg, var(--color-surface), var(--color-primary-subtle));
+            box-shadow: 0 8px 30px rgba(0, 102, 204, 0.08);
+        }
+
+        .support-badge-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 12px;
+            border-radius: var(--radius-pill);
+            font-size: 12px;
+            font-weight: 600;
+            background: var(--color-primary);
+            color: #ffffff;
+            margin-bottom: 12px;
+        }
+
+        .support-badge-pill.secondary {
+            background: var(--color-surface-secondary);
+            color: var(--color-text-secondary);
+            border: 1px solid var(--color-hairline);
+        }
+
+        .method-title {
             font-size: 22px;
             font-weight: 700;
             color: var(--color-text-primary);
-            margin: 0 0 10px 0;
+            margin: 0 0 6px 0;
             display: flex;
             align-items: center;
-            justify-content: center;
             gap: 8px;
         }
 
-        .support-cta-desc {
-            font-size: 15px;
-            line-height: 1.6;
+        .method-subtitle {
+            font-size: 14px;
             color: var(--color-text-secondary);
-            max-width: 580px;
-            margin: 0 auto 24px auto;
+            line-height: 1.5;
+            margin: 0 0 24px 0;
         }
 
-        .btn-support-primary {
+        /* Row 1: UPI Layout (Split Form & QR) */
+        .upi-card-body {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 32px;
+            align-items: center;
+        }
+
+        .upi-form-column {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .support-form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .support-form-label {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            margin-bottom: 6px;
+        }
+
+        .support-form-label span.optional {
+            font-size: 11.5px;
+            font-weight: 400;
+            color: var(--color-text-tertiary);
+        }
+
+        .input-amount-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .currency-symbol-prefix {
+            position: absolute;
+            left: 14px;
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            pointer-events: none;
+            user-select: none;
+        }
+
+        .support-text-input {
+            width: 100%;
+            height: 44px;
+            padding: 0 14px;
+            font-family: var(--font-stack);
+            font-size: 15px;
+            color: var(--color-text-primary);
+            background: var(--color-surface);
+            border: 1px solid var(--color-hairline);
+            border-radius: var(--radius-inner);
+            outline: none;
+            box-sizing: border-box;
+            transition: border-color 0.15s ease, box-shadow 0.15s ease;
+        }
+
+        .support-text-input.with-prefix {
+            padding-left: 32px;
+            font-weight: 600;
+        }
+
+        .support-text-input:focus {
+            border-color: var(--color-primary);
+            box-shadow: 0 0 0 3px var(--color-primary-tint);
+        }
+
+        .support-text-input.is-invalid {
+            border-color: #FF9500;
+            box-shadow: 0 0 0 3px rgba(255, 149, 0, 0.2);
+        }
+
+        .support-text-input.is-valid {
+            border-color: #34C759;
+        }
+
+        .email-validation-msg {
+            font-size: 11.5px;
+            margin-top: 5px;
+            display: none;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .email-validation-msg.error {
+            color: #D97706;
+            display: flex;
+        }
+
+        [data-theme="dark"] .email-validation-msg.error {
+            color: #FBBF24;
+        }
+
+        /* Preset Amount Chips */
+        .preset-amount-chips {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+            margin-top: 8px;
+        }
+
+        .preset-chip-btn {
+            background: var(--color-surface);
+            border: 1px solid var(--color-hairline);
+            color: var(--color-text-primary);
+            padding: 5px 12px;
+            font-family: var(--font-stack);
+            font-size: 12px;
+            font-weight: 600;
+            border-radius: var(--radius-pill);
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }
+
+        .preset-chip-btn:hover {
+            background: var(--color-primary-subtle);
+            border-color: var(--color-primary);
+            color: var(--color-primary);
+        }
+
+        .preset-chip-btn.active {
+            background: var(--color-primary);
+            border-color: var(--color-primary);
+            color: #ffffff;
+        }
+
+        /* QR Preview Column */
+        .upi-qr-column {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .upi-qr-card-wrap {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: #ffffff;
+            border: 1px solid #e5e5ea;
+            border-radius: var(--radius-inner);
+            padding: 16px;
+            box-shadow: 0 4px 18px rgba(0, 0, 0, 0.06);
+            position: relative;
+        }
+
+        .upi-qr-canvas-container {
+            width: 200px;
+            height: 200px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .upi-qr-image {
+            display: block;
+            width: 200px;
+            height: 200px;
+            border-radius: 8px;
+        }
+
+        .upi-qr-caption {
+            font-size: 12px;
+            font-weight: 500;
+            color: #666666;
+            margin-top: 10px;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        /* UPI Action Buttons */
+        .upi-actions-row {
+            display: flex;
+            gap: 10px;
+            margin-top: 14px;
+            width: 100%;
+            max-width: 240px;
+            justify-content: center;
+        }
+
+        .btn-upi-mobile {
+            flex: 1;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            background: var(--color-primary);
+            color: #ffffff;
+            font-size: 13.5px;
+            font-weight: 600;
+            padding: 10px 14px;
+            border-radius: var(--radius-pill);
+            text-decoration: none;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 14px rgba(0, 102, 204, 0.24);
+        }
+
+        .btn-upi-mobile:hover {
+            background: var(--color-primary-hover);
+            transform: translateY(-1px);
+        }
+
+        .btn-copy-vpa {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            background: var(--color-surface);
+            border: 1px solid var(--color-hairline);
+            color: var(--color-text-primary);
+            font-size: 13px;
+            font-weight: 600;
+            padding: 9px 14px;
+            border-radius: var(--radius-pill);
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }
+
+        .btn-copy-vpa:hover {
+            background: var(--color-surface-secondary);
+            border-color: #d1d1d6;
+        }
+
+        /* Row 2: Card Support Layout */
+        .card-support-row {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .card-cta-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .card-cta-text {
+            font-size: 14.5px;
+            line-height: 1.6;
+            color: var(--color-text-secondary);
+            max-width: 520px;
+            margin: 0;
+        }
+
+        .btn-bmac-cta {
             display: inline-flex;
             align-items: center;
             justify-content: center;
             gap: 10px;
-            background: var(--color-primary);
-            color: #ffffff;
-            font-size: 16px;
-            font-weight: 600;
-            padding: 14px 32px;
+            background: #FFDD00;
+            color: #000000;
+            font-size: 15px;
+            font-weight: 700;
+            padding: 12px 28px;
             border-radius: var(--radius-pill);
             text-decoration: none;
-            transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-            box-shadow: 0 6px 20px rgba(0, 102, 204, 0.28);
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 14px rgba(255, 221, 0, 0.35);
+            white-space: nowrap;
         }
 
-        .btn-support-primary:hover {
-            background: var(--color-primary-hover);
+        .btn-bmac-cta:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(0, 102, 204, 0.38);
+            box-shadow: 0 6px 18px rgba(255, 221, 0, 0.5);
         }
 
-        .support-cta-note {
+        /* Card Donor Advisory Notice */
+        .international-advisory-box {
+            background: var(--color-surface);
+            border: 1px solid rgba(255, 149, 0, 0.35);
+            border-left: 4px solid #FF9500;
+            border-radius: var(--radius-inner);
+            padding: 14px 18px;
+        }
+
+        .advisory-title {
             font-size: 12.5px;
-            color: var(--color-text-tertiary);
-            margin-top: 14px;
+            font-weight: 700;
+            color: #D97706;
+            margin: 0 0 4px 0;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        [data-theme="dark"] .advisory-title {
+            color: #FBBF24;
+        }
+
+        .advisory-text {
+            font-size: 12.5px;
+            line-height: 1.55;
+            color: var(--color-text-secondary);
+            margin: 0;
+        }
+
+        /* Toast feedback */
+        .copy-toast {
+            position: fixed;
+            bottom: 24px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: #1d1d1f;
+            color: #ffffff;
+            padding: 10px 20px;
+            border-radius: var(--radius-pill);
+            font-size: 13.5px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 6px 24px rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+            z-index: 1000;
+        }
+
+        .copy-toast.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
         }
 
         /* Pillars Grid */
@@ -270,20 +610,29 @@
             transform: translateY(-1px);
         }
 
-        @media (max-width: 640px) {
+        @media (max-width: 768px) {
+            .upi-card-body {
+                grid-template-columns: 1fr;
+            }
+
             .page-card {
                 padding: 24px 20px;
             }
 
             .page-title {
-                font-size: 24px;
+                font-size: 26px;
             }
 
-            .support-cta-card {
-                padding: 24px 16px;
+            .support-method-card {
+                padding: 24px 20px;
             }
 
-            .btn-support-primary {
+            .card-cta-row {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .btn-bmac-cta {
                 width: 100%;
                 box-sizing: border-box;
             }
@@ -350,32 +699,129 @@
                 </div>
                 <h1 class="page-title">Support Our Research</h1>
                 <div class="page-meta">
-                    Fundingly.in is a 100% free, zero-paywall intelligence tool tracking Indian startup funding. Help us keep venture data open, accurate, and accessible to every builder.
+                    Fundingly.in is a 100% free, zero-paywall intelligence platform tracking Indian startup funding. Your voluntary support keeps our venture intelligence open, accurate, and accessible to every builder.
                 </div>
             </header>
 
             <div class="page-content">
-                <!-- Highlighted Action Box -->
-                <div class="support-cta-card">
-                    <div class="support-cta-title">
-                        <span class="material-symbols-outlined" style="color: var(--color-primary); font-size: 24px;">volunteer_activism</span>
-                        <span>Back Independent Venture Research</span>
+                <!-- Stacked 2-Row Options -->
+                <div class="support-options-stack">
+                    
+                    <!-- Row 1: Direct UPI Support (Featured Full-Width Row) -->
+                    <div class="support-method-card featured-upi">
+                        <div class="support-badge-pill">
+                            <span class="material-symbols-outlined" style="font-size: 14px;">bolt</span>
+                            <span>Direct UPI (Zero Platform Fees)</span>
+                        </div>
+                        <h2 class="method-title">
+                            <span>Option 1: Support via UPI</span>
+                        </h2>
+                        <p class="method-subtitle">
+                            Scan with PhonePe, Google Pay, Paytm, BHIM, Cred, Navi, or any UPI app for instant contribution.
+                        </p>
+
+                        <div class="upi-card-body">
+                            <!-- Left: Form Controls -->
+                            <div class="upi-form-column">
+                                <!-- Amount Input with Prefix & Preset Chips -->
+                                <div class="support-form-group">
+                                    <label class="support-form-label" for="upiAmountInput">
+                                        Contribution Amount (INR)
+                                    </label>
+                                    <div class="input-amount-wrapper">
+                                        <span class="currency-symbol-prefix">₹</span>
+                                        <input type="number" id="upiAmountInput" class="support-text-input with-prefix"
+                                            placeholder="5000" min="1" step="100" inputmode="numeric">
+                                    </div>
+                                    <div class="preset-amount-chips">
+                                        <button type="button" class="preset-chip-btn" data-amt="500">₹500</button>
+                                        <button type="button" class="preset-chip-btn" data-amt="1000">₹1,000</button>
+                                        <button type="button" class="preset-chip-btn" data-amt="2500">₹2,500</button>
+                                        <button type="button" class="preset-chip-btn" data-amt="5000">₹5,000</button>
+                                        <button type="button" class="preset-chip-btn" data-amt="10000">₹10,000</button>
+                                    </div>
+                                </div>
+
+                                <!-- Optional Email Input with Syntax Check -->
+                                <div class="support-form-group">
+                                    <label class="support-form-label" for="upiEmailInput">
+                                        Your Email <span class="optional">(Optional)</span>
+                                    </label>
+                                    <input type="email" id="upiEmailInput" class="support-text-input"
+                                        placeholder="founder@example.com">
+                                    <div id="emailErrorMsg" class="email-validation-msg error">
+                                        <span class="material-symbols-outlined" style="font-size: 13px;">warning</span>
+                                        <span>Please enter a valid email address (e.g. name@domain.com)</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Right: Dynamic QR Code Card with Mascot Overlay -->
+                            <div class="upi-qr-column">
+                                <div class="upi-qr-card-wrap">
+                                    <div class="upi-qr-canvas-container" id="upiQrCanvasWrap">
+                                        <!-- Rendered dynamically by JavaScript -->
+                                    </div>
+                                    <div class="upi-qr-caption">
+                                        <span class="material-symbols-outlined" style="font-size: 16px; color: var(--color-primary);">qr_code_scanner</span>
+                                        <span>UPI ID: <strong>kpx@slc</strong></span>
+                                    </div>
+                                </div>
+
+                                <!-- Actions (Mobile 1-Tap Pay + Copy VPA) -->
+                                <div class="upi-actions-row">
+                                    <a href="upi://pay?pa=kpx@slc&pn=Kapil%20Pidhwani&cu=INR&tn=Support%20Fundingly" id="upiIntentMobileBtn" class="btn-upi-mobile">
+                                        <span class="material-symbols-outlined" style="font-size: 17px;">smartphone</span>
+                                        <span>Pay in UPI App</span>
+                                    </a>
+                                    <button type="button" id="copyVpaBtn" class="btn-copy-vpa" title="Copy UPI VPA">
+                                        <span class="material-symbols-outlined" id="copyVpaIcon" style="font-size: 15px;">content_copy</span>
+                                        <span>Copy ID</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <p class="support-cta-desc">
-                        If Fundingly.in has saved you research hours, helped your investor outreach, or inspired your next project, consider supporting our independent data curation and infrastructure.
-                    </p>
-                    <a href="https://buymeacoffee.com/fundingly.in" target="_blank" rel="noopener noreferrer" class="btn-support-primary">
-                        <span class="material-symbols-outlined" style="font-size: 20px;">volunteer_activism</span>
-                        <span>Support Our Research</span>
-                    </a>
-                    <div class="support-cta-note">
-                        Secure transaction via Buy Me a Coffee • Supports Cards, Apple Pay & Google Pay
+
+                    <!-- Row 2: Credit/Debit Cards & International Donors (Buy Me a Coffee) -->
+                    <div class="support-method-card">
+                        <div class="support-badge-pill secondary">
+                            <span class="material-symbols-outlined" style="font-size: 14px;">credit_card</span>
+                            <span>Credit & Debit Cards (International)</span>
+                        </div>
+                        <h2 class="method-title">
+                            <span>Option 2: Support via Card</span>
+                        </h2>
+
+                        <div class="card-support-row">
+                            <div class="card-cta-row">
+                                <p class="card-cta-text">
+                                    Prefer contributing via credit card, debit card, or Google Pay? You can support our research through our verified Buy Me a Coffee page.
+                                </p>
+                                <a href="https://buymeacoffee.com/fundingly.in" target="_blank" rel="noopener noreferrer" class="btn-bmac-cta">
+                                    <span class="material-symbols-outlined" style="font-size: 19px;">local_cafe</span>
+                                    <span>Support on Buy Me a Coffee</span>
+                                </a>
+                            </div>
+
+                            <!-- Important Card Payment Advisory -->
+                            <div class="international-advisory-box">
+                                <div class="advisory-title">
+                                    <span class="material-symbols-outlined" style="font-size: 16px;">info</span>
+                                    <span>Tip for Indian Card Donors</span>
+                                </div>
+                                <p class="advisory-text">
+                                    Buy Me a Coffee is an international platform. Please ensure <strong>International Payments / Online Transactions</strong> are enabled on your debit or credit card in your banking app before proceeding.
+                                </p>
+                            </div>
+                        </div>
                     </div>
+
                 </div>
 
-                <h2 style="font-size: 20px; font-weight: 600; color: var(--color-text-primary); margin: 32px 0 8px 0;">Why Your Support Matters</h2>
+                <h2 style="font-size: 20px; font-weight: 600; color: var(--color-text-primary); margin: 36px 0 12px 0;">Why Your Voluntary Support Matters</h2>
                 <p style="font-size: 15px; line-height: 1.7; color: var(--color-text-primary); margin-bottom: 16px;">
-                    Enterprise financial databases charge upwards of $5,000/year to view basic venture funding announcements. We believe Indian startup market intelligence should remain accessible to everyone building the future — from student founders in hostel rooms to active angel syndicates.
+                    Enterprise financial intelligence databases charge upwards of $5,000/year for basic venture funding announcements. We believe Indian startup market intelligence should remain open and accessible to everyone building the future — from student founders in hostel rooms to active angel syndicates.
                 </p>
 
                 <!-- 3 Pillars Grid -->
@@ -400,7 +846,7 @@
                         <div class="pillar-icon-box">
                             <span class="material-symbols-outlined" style="font-size: 20px;">bolt</span>
                         </div>
-                        <h3 class="pillar-title">High-Speed Platform</h3>
+                        <h3 class="pillar-title">Zero-Server High Speed</h3>
                         <p class="pillar-text">Sub-300ms static load times, zero bloat, and continuous weekly trend synthesis.</p>
                     </div>
                 </div>
@@ -434,6 +880,12 @@
         </main>
     </div>
 
+    <!-- Copy feedback toast -->
+    <div id="copyToast" class="copy-toast" role="status" aria-live="polite">
+        <span class="material-symbols-outlined" style="color: #34C759; font-size: 18px;">check_circle</span>
+        <span id="copyToastMsg">UPI ID copied to clipboard</span>
+    </div>
+
     <!-- Semantic Footer -->
     <footer class="app-main-footer" role="contentinfo" style="margin-top: 40px;">
         <div class="main-footer-top">
@@ -443,7 +895,7 @@
                 <span class="main-footer-tagline">Indian Startup Funding Intelligence</span>
             </div>
             <div class="main-footer-social">
-                <a href="https://buymeacoffee.com/fundingly.in" target="_blank" rel="noopener noreferrer" class="footer-support-btn" title="Support Fundingly Research">
+                <a href="./" class="footer-support-btn" title="Support Fundingly Research">
                     <span class="material-symbols-outlined">volunteer_activism</span>
                     <span>Support Our Research</span>
                 </a>
@@ -486,7 +938,226 @@
         </div>
     </footer>
 
+    <!-- Dynamic UPI Logic & QR Generator -->
     <script>
+        // Deisgned by Kapil Pidhwani: Dynamic UPI Intent & QR Canvas Generator with Mascot Overlay and Real-time Email Syntax Validation.
+        (function() {
+            const VPA = 'kpx@slc';
+            const PAYEE_NAME = 'Kapil Pidhwani';
+
+            const amountInput = document.getElementById('upiAmountInput');
+            const emailInput = document.getElementById('upiEmailInput');
+            const emailErrorMsg = document.getElementById('emailErrorMsg');
+            const qrWrap = document.getElementById('upiQrCanvasWrap');
+            const mobileIntentBtn = document.getElementById('upiIntentMobileBtn');
+            const copyBtn = document.getElementById('copyVpaBtn');
+            const copyIcon = document.getElementById('copyVpaIcon');
+            const toast = document.getElementById('copyToast');
+            const chipBtns = document.querySelectorAll('.preset-chip-btn');
+
+            const EMAIL_REGEX = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+            let mascotImg = new Image();
+            let mascotLoaded = false;
+            mascotImg.src = '../assets/fundingly_celebrate.png';
+            mascotImg.onload = function() {
+                mascotLoaded = true;
+                updateUPIPaymentState();
+            };
+
+            function isValidEmail(email) {
+                if (!email) return true; // empty is allowed as optional
+                return EMAIL_REGEX.test(email.trim());
+            }
+
+            function buildUPIUri(amount, email) {
+                const rawEmail = (email || '').trim();
+                let note = 'Support Fundingly';
+                
+                if (rawEmail) {
+                    if (isValidEmail(rawEmail)) {
+                        note = `Support to Fundingly by ${rawEmail}`;
+                    }
+                }
+
+                let uri = `upi://pay?pa=${encodeURIComponent(VPA)}&pn=${encodeURIComponent(PAYEE_NAME)}&cu=INR&tn=${encodeURIComponent(note)}`;
+                
+                const amtNum = parseFloat(amount);
+                if (!isNaN(amtNum) && amtNum > 0) {
+                    const amtStr = amtNum % 1 === 0 ? amtNum.toString() : amtNum.toFixed(2);
+                    uri += `&am=${encodeURIComponent(amtStr)}`;
+                }
+
+                return { uri, note };
+            }
+
+            function validateEmailInputUI() {
+                if (!emailInput) return true;
+                const rawEmail = emailInput.value.trim();
+                
+                if (!rawEmail) {
+                    emailInput.classList.remove('is-invalid', 'is-valid');
+                    if (emailErrorMsg) emailErrorMsg.style.display = 'none';
+                    return true;
+                }
+
+                const valid = EMAIL_REGEX.test(rawEmail);
+                if (valid) {
+                    emailInput.classList.remove('is-invalid');
+                    emailInput.classList.add('is-valid');
+                    if (emailErrorMsg) emailErrorMsg.style.display = 'none';
+                } else {
+                    emailInput.classList.remove('is-valid');
+                    emailInput.classList.add('is-invalid');
+                    if (emailErrorMsg) emailErrorMsg.style.display = 'flex';
+                }
+                return valid;
+            }
+
+            function updateUPIPaymentState() {
+                const amountVal = amountInput ? amountInput.value.trim() : '';
+                const emailVal = emailInput ? emailInput.value.trim() : '';
+                
+                validateEmailInputUI();
+
+                const { uri } = buildUPIUri(amountVal, emailVal);
+
+                if (mobileIntentBtn) {
+                    mobileIntentBtn.setAttribute('href', uri);
+                }
+
+                renderDynamicQR(uri);
+            }
+
+            function renderDynamicQR(text) {
+                if (!qrWrap) return;
+                qrWrap.innerHTML = '';
+
+                if (typeof QRCode === 'undefined') {
+                    qrWrap.innerHTML = '<div style="font-size:12px;color:red;">Loading QR...</div>';
+                    return;
+                }
+
+                // Temporary div to let QRCode library generate matrix
+                const tempDiv = document.createElement('div');
+                new QRCode(tempDiv, {
+                    text: text,
+                    width: 200,
+                    height: 200,
+                    colorDark: '#000000',
+                    colorLight: '#ffffff',
+                    correctLevel: QRCode.CorrectLevel.H // 30% error correction tolerance
+                });
+
+                // Retrieve generated canvas from qrcodejs
+                setTimeout(() => {
+                    const srcCanvas = tempDiv.querySelector('canvas');
+                    if (!srcCanvas) return;
+
+                    const finalCanvas = document.createElement('canvas');
+                    finalCanvas.width = 200;
+                    finalCanvas.height = 200;
+                    finalCanvas.className = 'upi-qr-image';
+                    finalCanvas.setAttribute('alt', 'Scan to pay via UPI');
+
+                    const ctx = finalCanvas.getContext('2d');
+                    ctx.drawImage(srcCanvas, 0, 0, 200, 200);
+
+                    // Draw celebrate mascot badge in the center
+                    if (mascotLoaded) {
+                        const badgeSize = 48;
+                        const center = 200 / 2;
+                        const x = center - (badgeSize / 2);
+                        const y = center - (badgeSize / 2);
+
+                        // Clean white circular badge background for high contrast & reliable scanning
+                        ctx.beginPath();
+                        ctx.arc(center, center, (badgeSize / 2) + 2.5, 0, Math.PI * 2);
+                        ctx.fillStyle = '#ffffff';
+                        ctx.fill();
+                        ctx.strokeStyle = '#e5e5ea';
+                        ctx.lineWidth = 1.5;
+                        ctx.stroke();
+
+                        // Mascot image centered
+                        ctx.drawImage(mascotImg, x, y, badgeSize, badgeSize);
+                    }
+
+                    qrWrap.innerHTML = '';
+                    qrWrap.appendChild(finalCanvas);
+                }, 30);
+            }
+
+            // Input Event Listeners
+            if (amountInput) {
+                amountInput.addEventListener('input', () => {
+                    const curAmt = amountInput.value.trim();
+                    chipBtns.forEach(btn => {
+                        btn.classList.toggle('active', btn.dataset.amt === curAmt);
+                    });
+                    updateUPIPaymentState();
+                });
+            }
+
+            if (emailInput) {
+                emailInput.addEventListener('input', updateUPIPaymentState);
+            }
+
+            // Preset Amount Chips
+            chipBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const amt = btn.dataset.amt;
+                    if (amountInput.value === amt) {
+                        amountInput.value = '';
+                        btn.classList.remove('active');
+                    } else {
+                        amountInput.value = amt;
+                        chipBtns.forEach(b => b.classList.remove('active'));
+                        btn.classList.add('active');
+                    }
+                    updateUPIPaymentState();
+                });
+            });
+
+            // Copy UPI ID to clipboard
+            if (copyBtn) {
+                copyBtn.addEventListener('click', () => {
+                    if (navigator.clipboard && navigator.clipboard.writeText) {
+                        navigator.clipboard.writeText(VPA).then(showToast).catch(() => fallbackCopy(VPA));
+                    } else {
+                        fallbackCopy(VPA);
+                    }
+                });
+            }
+
+            function fallbackCopy(text) {
+                const ta = document.createElement('textarea');
+                ta.value = text;
+                ta.style.position = 'fixed';
+                ta.style.opacity = '0';
+                document.body.appendChild(ta);
+                ta.select();
+                try {
+                    document.execCommand('copy');
+                    showToast();
+                } catch (e) {}
+                document.body.removeChild(ta);
+            }
+
+            function showToast() {
+                if (!toast) return;
+                if (copyIcon) copyIcon.textContent = 'check';
+                toast.classList.add('show');
+                setTimeout(() => {
+                    toast.classList.remove('show');
+                    if (copyIcon) copyIcon.textContent = 'content_copy';
+                }, 2500);
+            }
+
+            // Initial render
+            updateUPIPaymentState();
+        })();
+
         // Deisgned by Kapil Pidhwani: Unified Theme Switcher & Persistence Controller
         (function () {
             const btn = document.getElementById('themeToggleBtn');
