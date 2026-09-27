@@ -1161,6 +1161,9 @@ ${jsonLdString}
             </a>
         </div>
         <div class="nav-controls">
+            <button id="themeToggleBtn" type="button" class="btn-theme-toggle" aria-label="Toggle Color Theme" title="Toggle Appearance">
+                <span class="material-symbols-outlined" id="themeIcon">dark_mode</span>
+            </button>
             <a href="../../" class="btn-nav-about" style="text-decoration: none;" title="Venture Deals Feed">
                 <span class="material-symbols-outlined">dashboard</span>
                 <span class="btn-nav-text">Live Feed</span>
@@ -1169,9 +1172,6 @@ ${jsonLdString}
                 <span class="material-symbols-outlined">volunteer_activism</span>
                 <span class="btn-nav-text">Support</span>
             </a>
-            <button id="themeToggleBtn" type="button" class="btn-theme-toggle" aria-label="Toggle Color Theme" title="Toggle Appearance">
-                <span class="material-symbols-outlined" id="themeIcon">dark_mode</span>
-            </button>
         </div>
     </header>
 
