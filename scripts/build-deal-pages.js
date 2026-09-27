@@ -777,6 +777,79 @@ ${jsonLdString}
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
         }
 
+        /* Support Our Research Sidebar Widget */
+        .support-sidebar-widget {
+            background: linear-gradient(145deg, var(--color-surface), var(--color-primary-subtle));
+            border: 1px solid rgba(0, 102, 204, 0.22);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .support-widget-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .support-widget-icon-wrap {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            background: var(--color-primary-subtle);
+            color: var(--color-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .support-widget-heading {
+            font-size: 13.5px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            margin: 0;
+            line-height: 1.3;
+        }
+
+        .support-widget-subheading {
+            font-size: 11px;
+            color: var(--color-text-secondary);
+            margin: 2px 0 0 0;
+            line-height: 1.2;
+        }
+
+        .support-widget-desc {
+            font-size: 12px;
+            line-height: 1.5;
+            color: var(--color-text-secondary);
+            margin: 0 0 12px 0;
+        }
+
+        .btn-sidebar-support {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            width: 100%;
+            padding: 9px 14px;
+            border-radius: var(--radius-pill);
+            background: var(--color-primary);
+            color: #ffffff;
+            font-size: 12.5px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            box-shadow: 0 3px 10px rgba(0, 102, 204, 0.2);
+            box-sizing: border-box;
+        }
+
+        .btn-sidebar-support:hover {
+            background: var(--color-primary-hover);
+            transform: translateY(-1px);
+            box-shadow: 0 5px 14px rgba(0, 102, 204, 0.28);
+        }
+
         .sidebar-widget-title {
             font-size: 14px;
             font-weight: 700;
@@ -1092,9 +1165,9 @@ ${jsonLdString}
                 <span class="material-symbols-outlined">dashboard</span>
                 <span class="btn-nav-text">Live Feed</span>
             </a>
-            <a href="../../founders-note/" class="btn-nav-about" style="text-decoration: none;" title="Founder's Note">
-                <span class="material-symbols-outlined">edit_note</span>
-                <span class="btn-nav-text">Founder's Note</span>
+            <a href="../../support/" class="btn-nav-about" style="text-decoration: none;" title="Support Our Research">
+                <span class="material-symbols-outlined">volunteer_activism</span>
+                <span class="btn-nav-text">Support</span>
             </a>
             <button id="themeToggleBtn" type="button" class="btn-theme-toggle" aria-label="Toggle Color Theme" title="Toggle Appearance">
                 <span class="material-symbols-outlined" id="themeIcon">dark_mode</span>
@@ -1373,6 +1446,26 @@ ${jsonLdString}
                     <script>
                          (adsbygoogle = window.adsbygoogle || []).push({});
                     </script>
+                </div>
+
+                <!-- Support Our Research Widget -->
+                <div class="sidebar-widget support-sidebar-widget">
+                    <div class="support-widget-header">
+                        <div class="support-widget-icon-wrap">
+                            <span class="material-symbols-outlined" style="font-size: 18px;">volunteer_activism</span>
+                        </div>
+                        <div class="support-widget-title-group">
+                            <h3 class="support-widget-heading">Support Our Research</h3>
+                            <p class="support-widget-subheading">100% Free & Open Intelligence</p>
+                        </div>
+                    </div>
+                    <p class="support-widget-desc">
+                        Help keep Indian startup funding data and dossiers open for all builders without paywalls.
+                    </p>
+                    <a href="../../support/" class="btn-sidebar-support" title="Support Fundingly Research">
+                        <span class="material-symbols-outlined" style="font-size: 15px;">bolt</span>
+                        <span>Support via UPI / Card</span>
+                    </a>
                 </div>
 
                 <!-- Share & Export Widget -->
