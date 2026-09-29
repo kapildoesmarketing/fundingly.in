@@ -761,6 +761,14 @@ ${jsonLdString}
             text-align: center;
             overflow: hidden;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .ad-container-wrapper:empty,
+        .ad-container-wrapper.ad-unfilled,
+        .ad-container-wrapper:not(:has(iframe)):not(:has(ins > *)) {
+            display: none !important;
         }
 
         .ad-label {
@@ -978,6 +986,14 @@ ${jsonLdString}
             text-align: center;
             overflow: hidden;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .bottom-ad-wrapper:empty,
+        .bottom-ad-wrapper.ad-unfilled,
+        .bottom-ad-wrapper:not(:has(iframe)):not(:has(ins > *)) {
+            display: none !important;
         }
 
         /* Reusable Floating Toast Notification */
@@ -1738,6 +1754,19 @@ ${jsonLdString}
                 showToast('Could not copy deal memo');
             });
         }
+
+        // Auto-collapse empty ad containers if unfilled
+        window.addEventListener('DOMContentLoaded', function() {
+            setTimeout(function() {
+                document.querySelectorAll('.ad-container-wrapper, .bottom-ad-wrapper').forEach(function(el) {
+                    var ins = el.querySelector('ins.adsbygoogle');
+                    if (ins && (!ins.hasChildNodes() || ins.offsetHeight === 0 || ins.getAttribute('data-ad-status') === 'unfilled')) {
+                        el.classList.add('ad-unfilled');
+                        el.style.display = 'none';
+                    }
+                });
+            }, 1200);
+        });
     </script>
 </body>
 

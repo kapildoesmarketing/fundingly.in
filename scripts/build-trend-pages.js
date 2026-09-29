@@ -199,7 +199,8 @@ function getWeekInfo(dateStr) {
     const sunStr = `${monthNames[sunday.getUTCMonth()]} ${sunday.getUTCDate()}, ${sunday.getUTCFullYear()}`;
     const rangeStr = `${monStr} – ${sunStr}`;
 
-    const qNum = Math.floor(monday.getUTCMonth() / 3) + 1;
+    // Majority day (Thursday, d) determines the dominant ISO quarter
+    const qNum = Math.floor(d.getUTCMonth() / 3) + 1;
     const qKey = `${isoYear}_q${qNum}`;
     const qTitle = `${isoYear} Q${qNum}`;
     const qRanges = ['Jan – Mar', 'Apr – Jun', 'Jul – Sep', 'Oct – Dec'];
@@ -232,6 +233,41 @@ function renderCompanyAvatarHTML(deal) {
         return `<img src="https://www.google.com/s2/favicons?domain=${encodeURIComponent(domain)}&sz=128" alt="${escapeHtml(companyName)}" class="modal-hero-avatar" style="width: 32px; height: 32px; border-radius: 8px;" onerror="this.outerHTML='<div class=\\'modal-hero-monogram\\' style=\\'width:32px; height:32px; font-size:12px; border-radius:8px; background:${monoStyle.bg}; color:${monoStyle.color}; border:1px solid ${monoStyle.border};\\'>${mono}</div>'">`;
     }
     return `<div class="modal-hero-monogram" style="width:32px; height:32px; font-size:12px; border-radius:8px; background:${monoStyle.bg}; color:${monoStyle.color}; border:1px solid ${monoStyle.border};">${mono}</div>`;
+}
+
+// Helper: Clean company name for compact display while preserving full legal name in tooltip
+function cleanCompanyName(name) {
+    if (!name || typeof name !== 'string') return 'Enterprise';
+    const cleaned = name.replace(/\s*\([^)]*(?:Pvt|Private|Limited|Ltd|Solutions|Enviro|Holdings|Group|Incorporated|Inc)[^)]*\)/i, '').trim();
+    return cleaned || name;
+}
+
+// Helper: Parse and clean lead investor names from narrative PR strings
+function parseLeadInvestors(invStr) {
+    if (!invStr || typeof invStr !== 'string') return [];
+    const trimmed = invStr.trim();
+    if (!trimmed || trimmed === 'Undisclosed' || trimmed === 'N/A' || trimmed === '-' || trimmed === '–') return [];
+
+    // 1. Remove leading narrative noise
+    let clean = trimmed.replace(/^(?:co-led by|led by|jointly anchored by|anchored by|participated by)\s+/i, '');
+    // 2. Remove trailing periods or punctuation
+    clean = clean.replace(/[.\s]+$/, '');
+
+    // 3. Split on separators: commas, semicolons, ampersands, or " and ", " alongside ", " with "
+    const rawTokens = clean.split(/[,;&]|\s+(?:and|alongside|with)\s+/i);
+
+    const results = [];
+    rawTokens.forEach(token => {
+        let t = token.trim();
+        t = t.replace(/^(?:co-led by|led by|jointly anchored by|anchored by|alongside|with)\s+/i, '').trim();
+        t = t.replace(/\.+$/, '').trim();
+        // Remove trailing or nested PR parentheticals
+        t = t.replace(/\s*\([^)]*(?:co-led|alongside|participated)[^)]*\)/i, '').trim();
+        if (t.length > 1 && !/^(?:undisclosed|n\/a|-|–)$/i.test(t)) {
+            results.push(t);
+        }
+    });
+    return results;
 }
 
 // Helper: Render Drilldown HTML
@@ -556,13 +592,11 @@ function buildStaticTrendPages() {
         const invMap = new Map();
         weekDeals.forEach(c => {
             const invStr = c.lead_investor || c.funded_by || '';
-            if (invStr && invStr !== 'Undisclosed' && invStr !== 'N/A' && invStr !== '-') {
-                const list = invStr.split(/[,;&]+/).map(s => s.trim()).filter(s => s.length > 1 && s.toLowerCase() !== 'undisclosed');
-                list.forEach(name => {
-                    if (!invMap.has(name)) invMap.set(name, { name: name, count: 0 });
-                    invMap.get(name).count += 1;
-                });
-            }
+            const list = parseLeadInvestors(invStr);
+            list.forEach(name => {
+                if (!invMap.has(name)) invMap.set(name, { name: name, count: 0 });
+                invMap.get(name).count += 1;
+            });
         });
         const topInvestors = Array.from(invMap.values())
             .sort((a, b) => b.count - a.count)
@@ -626,7 +660,9 @@ function generateTrendPageHtml(trends, allWeekMetricsList) {
     const rangeStr = wInfo.rangeStr;
     const weekTitle = `Week ${weekNo} of ${year}`;
     const totalCapitalFormatted = formatUSD(trends.totalCapital);
-    const topDealName = trends.topDeal ? escapeHtml(trends.topDeal.company_name || 'Enterprise') : 'N/A';
+    const rawTopDealName = trends.topDeal ? (trends.topDeal.company_name || 'Enterprise') : 'N/A';
+    const topDealName = trends.topDeal ? escapeHtml(cleanCompanyName(trends.topDeal.company_name)) : 'N/A';
+    const fullTopDealName = escapeHtml(rawTopDealName);
     const topDealAmount = trends.topDeal ? formatUSD(trends.topDeal.funding_amount_usd) : 'N/A';
     const topDealSub = trends.topDeal ? `${topDealAmount} • ${escapeHtml(trends.topDeal.funding_round || 'Round')}` : 'N/A';
 
@@ -914,6 +950,12 @@ ${jsonLdString}
             box-sizing: border-box;
         }
 
+        .ad-container-wrapper:empty,
+        .ad-container-wrapper.ad-unfilled,
+        .ad-container-wrapper:not(:has(iframe)):not(:has(ins > *)) {
+            display: none !important;
+        }
+
         .ad-label {
             font-size: 10px;
             font-weight: 600;
@@ -1119,6 +1161,12 @@ ${jsonLdString}
             text-align: center;
             overflow: hidden;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
+        }
+
+        .bottom-ad-wrapper:empty,
+        .bottom-ad-wrapper.ad-unfilled,
+        .bottom-ad-wrapper:not(:has(iframe)):not(:has(ins > *)) {
+            display: none !important;
         }
 
         /* Reusable Floating Toast Notification */
@@ -1389,7 +1437,7 @@ ${jsonLdString}
                     </div>
                     <div class="trends-kpi-card">
                         <span class="trends-kpi-label">Largest Deal</span>
-                        <span class="trends-kpi-val" title="${topDealName}">${topDealName}</span>
+                        <span class="trends-kpi-val" title="${fullTopDealName}">${topDealName}</span>
                         <span class="trends-kpi-sub" title="${escapeHtml(topDealSub)}">${topDealSub}</span>
                     </div>
                 </div>
@@ -1835,6 +1883,19 @@ ${jsonLdString}
                 if (vertView) vertView.style.display = 'flex';
             }
         }
+
+        // Auto-collapse empty ad containers if unfilled
+        window.addEventListener('DOMContentLoaded', function() {
+            setTimeout(function() {
+                document.querySelectorAll('.ad-container-wrapper, .bottom-ad-wrapper').forEach(function(el) {
+                    var ins = el.querySelector('ins.adsbygoogle');
+                    if (ins && (!ins.hasChildNodes() || ins.offsetHeight === 0 || ins.getAttribute('data-ad-status') === 'unfilled')) {
+                        el.classList.add('ad-unfilled');
+                        el.style.display = 'none';
+                    }
+                });
+            }, 1200);
+        });
     </script>
 </body>
 

@@ -2566,6 +2566,41 @@ let rawDataset = [];
             // Modal retired: deal interactions route directly to static deal pages
         }
 
+        // Helper: Clean company name for compact display while preserving full legal name in tooltip
+        function cleanCompanyName(name) {
+            if (!name || typeof name !== 'string') return 'Enterprise';
+            const cleaned = name.replace(/\s*\([^)]*(?:Pvt|Private|Limited|Ltd|Solutions|Enviro|Holdings|Group|Incorporated|Inc)[^)]*\)/i, '').trim();
+            return cleaned || name;
+        }
+
+        // Helper: Parse and clean lead investor names from narrative PR strings
+        function parseLeadInvestors(invStr) {
+            if (!invStr || typeof invStr !== 'string') return [];
+            const trimmed = invStr.trim();
+            if (!trimmed || trimmed === 'Undisclosed' || trimmed === 'N/A' || trimmed === '-' || trimmed === '–') return [];
+
+            // 1. Remove leading narrative noise
+            let clean = trimmed.replace(/^(?:co-led by|led by|jointly anchored by|anchored by|participated by)\s+/i, '');
+            // 2. Remove trailing periods or punctuation
+            clean = clean.replace(/[.\s]+$/, '');
+
+            // 3. Split on separators: commas, semicolons, ampersands, or " and ", " alongside ", " with "
+            const rawTokens = clean.split(/[,;&]|\s+(?:and|alongside|with)\s+/i);
+
+            const results = [];
+            rawTokens.forEach(token => {
+                let t = token.trim();
+                t = t.replace(/^(?:co-led by|led by|jointly anchored by|anchored by|alongside|with)\s+/i, '').trim();
+                t = t.replace(/\.+$/, '').trim();
+                // Remove trailing or nested PR parentheticals
+                t = t.replace(/\s*\([^)]*(?:co-led|alongside|participated)[^)]*\)/i, '').trim();
+                if (t.length > 1 && !/^(?:undisclosed|n\/a|-|–)$/i.test(t)) {
+                    results.push(t);
+                }
+            });
+            return results;
+        }
+
         // Deisgned by Kapil Pidhwani: Weekly Venture Intelligence aggregation engine. Ceiling: In-memory single-week aggregation of rawDataset. Upgrade path: Multi-week comparative cohort analysis.
         function calculateWeekTrends(weekKey) {
             if (!rawDataset || rawDataset.length === 0) return null;
@@ -2793,13 +2828,11 @@ let rawDataset = [];
             const invMap = new Map();
             weekDeals.forEach(c => {
                 const invStr = c.lead_investor || c.funded_by || '';
-                if (invStr && invStr !== 'Undisclosed' && invStr !== 'N/A' && invStr !== '-') {
-                    const list = invStr.split(/[,;&]+/).map(s => s.trim()).filter(s => s.length > 1 && s.toLowerCase() !== 'undisclosed');
-                    list.forEach(name => {
-                        if (!invMap.has(name)) invMap.set(name, { name: name, count: 0 });
-                        invMap.get(name).count += 1;
-                    });
-                }
+                const list = parseLeadInvestors(invStr);
+                list.forEach(name => {
+                    if (!invMap.has(name)) invMap.set(name, { name: name, count: 0 });
+                    invMap.get(name).count += 1;
+                });
             });
             const topInvestors = Array.from(invMap.values())
                 .sort((a, b) => b.count - a.count)
@@ -2982,7 +3015,9 @@ let rawDataset = [];
                 dealSub = `<span class="trends-kpi-sub">${dealSign}${trends.dealDeltaCount} deals vs prior week</span>`;
             }
 
-            const topDealName = trends.topDeal ? escapeHtml(trends.topDeal.company_name || 'Enterprise') : 'N/A';
+            const rawTopDealName = trends.topDeal ? (trends.topDeal.company_name || 'Enterprise') : 'N/A';
+            const topDealName = trends.topDeal ? escapeHtml(cleanCompanyName(trends.topDeal.company_name)) : 'N/A';
+            const fullTopDealName = escapeHtml(rawTopDealName);
             const topDealSub = trends.topDeal ? `${formatUSD(trends.topDeal.funding_amount_usd)} • ${escapeHtml(trends.topDeal.funding_round || 'Round')}` : 'N/A';
 
             bodyEl.innerHTML = `
@@ -3005,7 +3040,7 @@ let rawDataset = [];
           </div>
           <div class="trends-kpi-card">
             <span class="trends-kpi-label">Largest Deal</span>
-            <span class="trends-kpi-val" title="${topDealName}">${topDealName}</span>
+            <span class="trends-kpi-val" title="${fullTopDealName}">${topDealName}</span>
             <span class="trends-kpi-sub" title="${escapeHtml(topDealSub)}">${topDealSub}</span>
           </div>
         </div>
@@ -3540,3 +3575,16 @@ let rawDataset = [];
                 badgeEl.style.display = 'none';
             }
         }
+
+        // Auto-collapse empty ad containers if unfilled
+        window.addEventListener('DOMContentLoaded', function() {
+            setTimeout(function() {
+                document.querySelectorAll('.ad-container-wrapper, .bottom-ad-wrapper').forEach(function(el) {
+                    var ins = el.querySelector('ins.adsbygoogle');
+                    if (ins && (!ins.hasChildNodes() || ins.offsetHeight === 0 || ins.getAttribute('data-ad-status') === 'unfilled')) {
+                        el.classList.add('ad-unfilled');
+                        el.style.display = 'none';
+                    }
+                });
+            }, 1200);
+        });
