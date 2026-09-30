@@ -215,13 +215,15 @@ function buildStaticDealPages() {
             if (!raw || raw.trim() === '' || raw.trim() === '[]') return;
             const data = JSON.parse(raw);
             const deals = Array.isArray(data) ? data : (data && Array.isArray(data.records) ? data.records : []);
-            allDeals.push(...deals);
+            // Strictly enforce verified deals filter
+            const verifiedDeals = deals.filter(d => d && (d.verified === true || String(d.verified).toUpperCase() === 'TRUE'));
+            allDeals.push(...verifiedDeals);
         } catch (e) {
             console.warn(`⚠️ Error reading ${file}:`, e.message);
         }
     });
 
-    console.log(`📊 Loaded ${allDeals.length} total deal records.`);
+    console.log(`📊 Loaded ${allDeals.length} verified deal records.`);
 
     // Group deals by company domain (or name if no domain)
     const companyMap = new Map();
@@ -239,8 +241,12 @@ function buildStaticDealPages() {
         companyMap.get(domain).deals.push(deal);
     });
 
-    console.log(`🏢 Grouped into ${companyMap.size} unique company dossiers.`);
+    console.log(`🏢 Grouped into ${companyMap.size} unique verified company dossiers.`);
 
+    // Clean stale company directory before generating verified-only pages
+    if (fs.existsSync(COMPANY_DIR)) {
+        fs.rmSync(COMPANY_DIR, { recursive: true, force: true });
+    }
     ensureDir(COMPANY_DIR);
 
     const generatedUrls = [];

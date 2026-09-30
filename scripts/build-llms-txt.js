@@ -53,7 +53,8 @@ function loadAllDeals() {
             const raw = fs.readFileSync(path.join(DATA_DIR, file), 'utf8');
             const data = JSON.parse(raw);
             if (Array.isArray(data)) {
-                deals.push(...data);
+                const verifiedDeals = data.filter(d => d && (d.verified === true || String(d.verified).toUpperCase() === 'TRUE'));
+                deals.push(...verifiedDeals);
             }
         } catch (e) {
             console.error(`Error reading ${file}:`, e.message);

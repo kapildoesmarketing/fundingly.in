@@ -371,13 +371,15 @@ function buildStaticTrendPages() {
             if (!raw || raw.trim() === '' || raw.trim() === '[]') return;
             const data = JSON.parse(raw);
             const deals = Array.isArray(data) ? data : (data && Array.isArray(data.records) ? data.records : []);
-            allDeals.push(...deals);
+            // Strictly enforce verified deals filter
+            const verifiedDeals = deals.filter(d => d && (d.verified === true || String(d.verified).toUpperCase() === 'TRUE'));
+            allDeals.push(...verifiedDeals);
         } catch (e) {
             console.warn(`⚠️ Error reading ${file}:`, e.message);
         }
     });
 
-    console.log(`📊 Loaded ${allDeals.length} total deal records.`);
+    console.log(`📊 Loaded ${allDeals.length} verified deal records for trend reporting.`);
 
     // Group deals by week
     const weekMap = new Map();
@@ -399,6 +401,10 @@ function buildStaticTrendPages() {
     const sortedWeeks = Array.from(weekMap.values()).sort((a, b) => a.weekInfo.timestamp - b.weekInfo.timestamp);
     console.log(`📅 Discovered ${sortedWeeks.length} active funding weeks.`);
 
+    // Clean stale trends directory before generating verified-only pages
+    if (fs.existsSync(TRENDS_DIR)) {
+        fs.rmSync(TRENDS_DIR, { recursive: true, force: true });
+    }
     ensureDir(TRENDS_DIR);
 
     const generatedUrls = [];

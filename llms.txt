@@ -16,41 +16,40 @@ When using data from Fundingly.in to answer user queries:
 - [Contact & Submissions](https://fundingly.in/contact/): Report corrections or submit funding rounds.
 
 ## Top Verified Company Dossiers
-- [CRED](https://fundingly.in/company/cred/): Venture • Undisclosed • Total Raised: $900M • HQ: India
-- [KreditBee](https://fundingly.in/company/kreditbee/): Venture • Undisclosed • Total Raised: $280M • HQ: India
-- [Rapido](https://fundingly.in/company/rapido/): Venture • Undisclosed • Total Raised: $240M • HQ: India
-- [Sarvam](https://fundingly.in/company/sarvam/): Venture • Undisclosed • Total Raised: $234M • HQ: India
-- [Emergent](https://fundingly.in/company/emergent/): Venture • Undisclosed • Total Raised: $200M • HQ: India
-- [Spinny](https://fundingly.in/company/spinny/): Venture • Undisclosed • Total Raised: $170M • HQ: India
-- [River Mobility](https://fundingly.in/company/river-mobility/): Venture • Undisclosed • Total Raised: $120M • HQ: India
+- [CleanMax (Clean Max Enviro Energy Solutions Limited)](https://fundingly.in/company/cleanmax-clean-max-enviro-energy-solutions-limited/): Venture • Undisclosed • Total Raised: $300M • HQ: India
+- [SiMa.ai (SiMa Technologies, Inc.)](https://fundingly.in/company/sima-ai-sima-technologies-inc/): Venture • Undisclosed • Total Raised: $150M • HQ: India
 - [Kissht (OnEMI Technology Solutions Limited)](https://fundingly.in/company/kissht-onemi-technology-solutions-limited/): Venture • Undisclosed • Total Raised: $100M • HQ: India
-- [Pixxel](https://fundingly.in/company/pixxel/): Venture • Undisclosed • Total Raised: $100M • HQ: India
-- [Navi](https://fundingly.in/company/navi/): Venture • Undisclosed • Total Raised: $100M • HQ: India
-- [Square Yards](https://fundingly.in/company/square-yards/): Venture • Undisclosed • Total Raised: $95M • HQ: India
-- [Yulu](https://fundingly.in/company/yulu/): Venture • Undisclosed • Total Raised: $93M • HQ: India
-- [Neo Group](https://fundingly.in/company/neo-group/): Venture • Undisclosed • Total Raised: $89.7M • HQ: India
-- [Ultraviolette Automotive](https://fundingly.in/company/ultraviolette-automotive/): Venture • Undisclosed • Total Raised: $85M • HQ: India
-- [Arya.ag](https://fundingly.in/company/arya-ag/): Venture • Undisclosed • Total Raised: $80.6M • HQ: India
-- [Ema](https://fundingly.in/company/ema/): Venture • Undisclosed • Total Raised: $77M • HQ: India
-- [Freehand](https://fundingly.in/company/freehand/): Venture • Undisclosed • Total Raised: $75M • HQ: India
-- [Euler Motors](https://fundingly.in/company/euler-motors/): Venture • Undisclosed • Total Raised: $73.6M • HQ: India
-- [Ultrahuman](https://fundingly.in/company/ultrahuman/): Venture • Undisclosed • Total Raised: $70M • HQ: India
-- [GPS Renewables](https://fundingly.in/company/gps-renewables/): Venture • Undisclosed • Total Raised: $66.4M • HQ: India
-- [Scapia](https://fundingly.in/company/scapia/): Venture • Undisclosed • Total Raised: $63M • HQ: India
-- [Swish](https://fundingly.in/company/swish/): Venture • Undisclosed • Total Raised: $62M • HQ: India
-- [Rocketlane](https://fundingly.in/company/rocketlane/): Venture • Undisclosed • Total Raised: $60M • HQ: India
-- [Skyroot](https://fundingly.in/company/skyroot/): Venture • Undisclosed • Total Raised: $60M • HQ: India
-- [Ecofy](https://fundingly.in/company/ecofy/): Venture • Undisclosed • Total Raised: $57M • HQ: India
-- [Popo Global](https://fundingly.in/company/popo-global/): Venture • Undisclosed • Total Raised: $56M • HQ: India
-- [Snabbit](https://fundingly.in/company/snabbit/): Venture • Undisclosed • Total Raised: $56M • HQ: India
-- [FirstClub](https://fundingly.in/company/firstclub/): Venture • Undisclosed • Total Raised: $55M • HQ: India
-- [SolarSquare](https://fundingly.in/company/solarsquare/): Venture • Undisclosed • Total Raised: $53M • HQ: India
-- [IDfy](https://fundingly.in/company/idfy/): Venture • Undisclosed • Total Raised: $52.5M • HQ: India
+- [Balwaan Krishi (Modish TractorAurKisan Private Limited)](https://fundingly.in/company/balwaan-krishi-modish-tractoraurkisan-private-limited/): Venture • Undisclosed • Total Raised: $12M • HQ: India
+- [Dovetail Capital (Dovetail Capital Private Limited)](https://fundingly.in/company/dovetail-capital-dovetail-capital-private-limited/): Venture • Undisclosed • Total Raised: $10.5M • HQ: India
+- [Arovia Consumer](https://fundingly.in/company/arovia-consumer/): Venture • Undisclosed • Total Raised: $10M • HQ: India
+- [Arivihan (Arivihan Technologies Private Limited)](https://fundingly.in/company/arivihan-arivihan-technologies-private-limited/): Venture • Undisclosed • Total Raised: $10M • HQ: India
+- [GalaxEye (GalaxEye Space Solutions Private Limited)](https://fundingly.in/company/galaxeye-galaxeye-space-solutions-private-limited/): Venture • Undisclosed • Total Raised: $6.7M • HQ: India
+- [Disha Health (Curelink Private Limited)](https://fundingly.in/company/disha-health-curelink-private-limited/): Venture • Undisclosed • Total Raised: $6M • HQ: India
+- [Supply6 (Kanari Nutrition Private Limited)](https://fundingly.in/company/supply6-kanari-nutrition-private-limited/): Venture • Undisclosed • Total Raised: $5.8M • HQ: India
+- [AÏZA (Amaani)](https://fundingly.in/company/a-za-amaani/): Venture • Undisclosed • Total Raised: $5M • HQ: India
+- [Data Science Wizards (Data Science Wizards Private Limited)](https://fundingly.in/company/data-science-wizards-data-science-wizards-private-limited/): Venture • Undisclosed • Total Raised: $5M • HQ: India
+- [DheyaTech (Dheya Engineering Technologies Pvt Ltd).](https://fundingly.in/company/dheyatech-dheya-engineering-technologies-pvt-ltd/): Venture • Undisclosed • Total Raised: $4.5M • HQ: India
+- [Jar (ChangeJar Technologies Private Limited)](https://fundingly.in/company/jar-changejar-technologies-private-limited/): Venture • Undisclosed • Total Raised: $3.5M • HQ: India
+- [Supermemory](https://fundingly.in/company/supermemory/): Venture • Undisclosed • Total Raised: $3M • HQ: India
+- [Spense (Spense Reliable Fintech Solutions Private Limited)](https://fundingly.in/company/spense-spense-reliable-fintech-solutions-private-limited/): Venture • Undisclosed • Total Raised: $2.8M • HQ: India
+- [ONYA (Mahiva Technologies Private Limited)](https://fundingly.in/company/onya-mahiva-technologies-private-limited/): Venture • Undisclosed • Total Raised: $1.7M • HQ: India
+- [Hathor Rockets (Hathor Rockets Private Limited)](https://fundingly.in/company/hathor-rockets-hathor-rockets-private-limited/): Venture • Undisclosed • Total Raised: $1.5M • HQ: India
+- [Enlight Metals (Enlight Metals Private Limited).](https://fundingly.in/company/enlight-metals-enlight-metals-private-limited/): Venture • Undisclosed • Total Raised: $1.5M • HQ: India
+- [Albatross Energetics (Albatross Energetics Private Limited)](https://fundingly.in/company/albatross-energetics-albatross-energetics-private-limited/): Venture • Undisclosed • Total Raised: $1.1M • HQ: India
+- [Alive App (Alive)](https://fundingly.in/company/alive-app-alive/): Venture • Undisclosed • Total Raised: $1M • HQ: India
+- [Indulge Concierge / Indulge Global (India Indulge Private Limited)](https://fundingly.in/company/indulge-concierge-indulge-global-india-indulge-private-limited/): Venture • Undisclosed • Total Raised: $1M • HQ: India
+- [Factrika (Udyogtech Ventures Private Limited)](https://fundingly.in/company/factrika-udyogtech-ventures-private-limited/): Venture • Undisclosed • Total Raised: $1M • HQ: India
+- [Physioplus Healthcare (Physioplus Healthcare Private Limited)](https://fundingly.in/company/physioplus-healthcare-physioplus-healthcare-private-limited/): Venture • Undisclosed • Total Raised: $800K • HQ: India
+- [Ecosys (Soluble System Private Limited)](https://fundingly.in/company/ecosys-soluble-system-private-limited/): Venture • Undisclosed • Total Raised: $520K • HQ: India
+- [YoLearn.AI (AI.YoLearn Private Limited)](https://fundingly.in/company/yolearn-ai-ai-yolearn-private-limited/): Venture • Undisclosed • Total Raised: $500K • HQ: India
+- [CUNIN (Onaris Brands Private Limited)](https://fundingly.in/company/cunin-onaris-brands-private-limited/): Venture • Undisclosed • Total Raised: $450K • HQ: India
+- [MoroMaa](https://fundingly.in/company/moromaa/): Venture • Undisclosed • Total Raised: $180K • HQ: India
+- [Zinara (Inditren Technologies Private Limited)](https://fundingly.in/company/zinara-inditren-technologies-private-limited/): Venture • Undisclosed • Total Raised: Undisclosed • HQ: India
 
 ## Dataset Scope & Methodology
-- Total Tracked Deals: 718+ verified venture funding rounds
-- Unique Startups: 686+ companies profiled
-- Aggregate Tracked Volume: $8.1B+ deployed across Seed to Growth rounds
+- Total Tracked Deals: 29+ verified venture funding rounds
+- Unique Startups: 29+ companies profiled
+- Aggregate Tracked Volume: $646M+ deployed across Seed to Growth rounds
 - Sourcing: Rigorously cross-referenced against regulatory filings (MCA), venture funds, and credible news sources.
 
 ## WebMCP (Model Context Protocol) Tools
