@@ -45,23 +45,31 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;600;700&family=Roboto:wght@400;500;700&display=swap"
         rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..24,400,0,0"
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..24,400,0,0&display=swap"
         rel="stylesheet" />
 
     <link rel="stylesheet" href="../css/styles.css">
+    <!-- Three.js Library for 3D Background Metaballs -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <style>
         .page-container {
             max-width: 860px;
-            margin: 40px auto 80px auto;
+            margin: 88px auto 80px auto;
             padding: 0 24px;
+            position: relative;
+            z-index: 1;
         }
 
         .page-card {
             background: var(--color-surface);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
             border: 1px solid var(--color-hairline);
             border-radius: var(--radius-sheet);
             padding: 40px 48px;
             box-shadow: 0 4px 24px rgba(0, 0, 0, 0.04);
+            position: relative;
+            z-index: 1;
         }
 
         .page-header {
@@ -302,27 +310,55 @@
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
 
-    <!-- Navigation Header (Frosted Glass) -->
-    <header class="app-header" role="banner">
-        <div class="header-left">
-            <a href="../" class="brand-title" style="text-decoration: none; color: inherit;">
-                <img src="../assets/fundingly_logo.png" alt="Fundingly.in" class="brand-logo"
-                    width="46" height="46">
-                <span>Fundingly.in</span>
-            </a>
+    <!-- 3D WebGL Background Metaballs Canvas -->
+    <div id="hero-metaballs" class="site-metaballs-bg" aria-hidden="true"></div>
+
+    <!-- Navigation Header (Policy Guard Inspired Glassmorphism) -->
+    <header class="app-header" id="appHeader" role="banner">
+        <div class="nav-container">
+            <!-- Left: Brand Logo & Title -->
+            <div class="nav-left">
+                <a href="../" class="brand-link" aria-label="Fundingly.in Home">
+                    <div class="brand-icon-wrapper">
+                        <img src="../assets/fundingly_logo.png" alt="Fundingly.in" class="brand-logo" width="34" height="34">
+                    </div>
+                    <span class="brand-name">Fundingly<span class="brand-tld">.in</span></span>
+                </a>
+            </div>
+
+            <!-- Center: Navigation Pages (Glassmorphic Capsule) -->
+            <nav class="nav-center" aria-label="Main Navigation">
+                <div class="nav-glass-capsule">
+                    <ul class="nav-links">
+                        <li><a href="../" class="nav-link">Home</a></li>
+                        <li><a href="../deals/" class="nav-link">Deals</a></li>
+                        <li><a href="../trends/" class="nav-link">Trends</a></li>
+                        <li><a href="../support/" class="nav-link">Support</a></li>
+                        <li><a href="../about/" class="nav-link">About</a></li>
+                    </ul>
+                </div>
+            </nav>
+
+            <!-- Right: Dark Mode Toggle & Mobile Hamburger Menu -->
+            <div class="nav-right">
+                <button type="button" class="btn-icon-pill" id="themeToggleBtn" title="Toggle light/dark theme" aria-label="Toggle theme appearance">
+                    <span class="material-symbols-outlined" id="themeIcon">dark_mode</span>
+                </button>
+                <button type="button" class="btn-icon-pill btn-mobile-menu" id="mobileMenuBtn" title="Open navigation menu" aria-label="Toggle navigation menu" aria-expanded="false">
+                    <span class="material-symbols-outlined" id="mobileMenuIcon">menu</span>
+                </button>
+            </div>
         </div>
-        <div class="nav-controls">
-            <button type="button" class="btn-theme-toggle" id="themeToggleBtn" title="Toggle Appearance" aria-label="Toggle theme appearance">
-                <span class="material-symbols-outlined" id="themeIcon">dark_mode</span>
-            </button>
-            <a href="../" class="btn-nav-about" style="text-decoration: none;" title="Venture Deals Feed">
-                <span class="material-symbols-outlined">dashboard</span>
-                <span class="btn-nav-text">Live Feed</span>
-            </a>
-            <a href="../support/" class="btn-nav-about" style="text-decoration: none;" title="Support Our Research">
-                <span class="material-symbols-outlined">volunteer_activism</span>
-                <span class="btn-nav-text">Support</span>
-            </a>
+
+        <!-- Mobile Navigation Drawer Overlay (Glassmorphism Slide-Down) -->
+        <div class="mobile-nav-drawer" id="mobileNavDrawer" aria-hidden="true">
+            <ul class="mobile-nav-links">
+                <li><a href="../" class="mobile-nav-link"><span class="material-symbols-outlined">home</span><span>Home</span></a></li>
+                <li><a href="../deals/" class="mobile-nav-link"><span class="material-symbols-outlined">payments</span><span>Deals</span></a></li>
+                <li><a href="../trends/" class="mobile-nav-link"><span class="material-symbols-outlined">monitoring</span><span>Trends</span></a></li>
+                <li><a href="../support/" class="mobile-nav-link"><span class="material-symbols-outlined">volunteer_activism</span><span>Support</span></a></li>
+                <li><a href="../about/" class="mobile-nav-link"><span class="material-symbols-outlined">info</span><span>About</span></a></li>
+            </ul>
         </div>
     </header>
 
@@ -498,8 +534,43 @@
                     }
                 });
             } catch (err) {}
+
+            // Mobile Navigation Drawer Toggle Controller
+            const menuBtn = document.getElementById('mobileMenuBtn');
+            const drawer = document.getElementById('mobileNavDrawer');
+            const menuIcon = document.getElementById('mobileMenuIcon');
+            if (menuBtn && drawer) {
+                const toggleDrawer = (open) => {
+                    const isOpen = typeof open === 'boolean' ? open : !drawer.classList.contains('open');
+                    if (isOpen) {
+                        drawer.classList.add('open');
+                        drawer.setAttribute('aria-hidden', 'false');
+                        menuBtn.setAttribute('aria-expanded', 'true');
+                        if (menuIcon) menuIcon.textContent = 'close';
+                    } else {
+                        drawer.classList.remove('open');
+                        drawer.setAttribute('aria-hidden', 'true');
+                        menuBtn.setAttribute('aria-expanded', 'false');
+                        if (menuIcon) menuIcon.textContent = 'menu';
+                    }
+                };
+                menuBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    toggleDrawer();
+                });
+                document.addEventListener('click', (e) => {
+                    if (!drawer.contains(e.target) && !menuBtn.contains(e.target)) {
+                        toggleDrawer(false);
+                    }
+                });
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === 'Escape') toggleDrawer(false);
+                });
+            }
         })();
     </script>
+    <!-- 3D Metaballs Canvas Script -->
+    <script src="../js/metaballs.js"></script>
 </body>
 
 </html>

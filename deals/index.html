@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Google Tag Manager -->
+    <script>(function (w, d, s, l, i) {
+            w[l] = w[l] || []; w[l].push({
+                'gtm.start':
+                    new Date().getTime(), event: 'gtm.js'
+            }); var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-M5MPWNCX');</script>
+    <!-- End Google Tag Manager -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Instant Theme Synchronization (Anti-Flicker) -->
+    <script>
+        (function() {
+            try {
+                const saved = localStorage.getItem('fundingly_theme');
+                const isSystemDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+                const theme = (saved === 'dark' || saved === 'light') ? saved : (isSystemDark ? 'dark' : 'light');
+                document.documentElement.setAttribute('data-theme', theme);
+            } catch (e) {}
+        })();
+    </script>
+    <title>Indian Startup Deals & Venture Intelligence Feed | Fundingly.in</title>
+    <meta name="description"
+        content="Explore live Indian startup funding rounds, verified venture deals, angel syndicates, and quarterly capital deployment on Fundingly.in.">
+    <!-- Google AdSense Script -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6148655095183291"
+         crossorigin="anonymous"></script>
+
+    <!-- Favicons & App Icons -->
+    <link rel="icon" type="image/png" href="../assets/fundingly_hello.png">
+    <link rel="apple-touch-icon" href="../assets/fundingly_hello.png">
+    <link rel="manifest" href="../manifest.json">
+    <link rel="preload" href="../data/manifest.json" as="fetch" crossorigin="anonymous">
+    <link rel="preload" href="../assets/fundingly_logo.png" as="image">
+    <meta name="keywords"
+        content="Indian startup funding, venture capital India, startup investment tracker, Seed funding, Series A, VC deals India, Startup India intelligence, fundingly">
+    <meta name="author" content="Fundingly.in">
+    <link rel="canonical" href="https://fundingly.in/deals/">
+
+    <!-- Open Graph / Social Meta -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Fundingly.in">
+    <meta property="og:url" content="https://fundingly.in/deals/">
+    <meta property="og:title" content="Indian Startup Deals & Venture Intelligence Feed | Fundingly.in">
+    <meta property="og:description"
+        content="Live intelligence on Indian startup funding rounds, venture capital investments, and market trends. Free, instant, and updated continuously.">
+    <meta property="og:image" content="https://fundingly.in/assets/og-preview.png">
+    <meta property="og:image:secure_url" content="https://fundingly.in/assets/og-preview.png">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Fundingly.in — Indian Startup Funding Intelligence">
+
+    <!-- Twitter Card Meta -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Indian Startup Deals & Venture Intelligence Feed | Fundingly.in">
+    <meta name="twitter:description"
+        content="Track live Indian startup funding rounds, venture trends, active investors, and stage metrics aggregated automatically.">
+    <meta name="twitter:image" content="https://fundingly.in/assets/og-preview.png">
+
+    <!-- Fonts & Material Symbols (Google Sans & Roboto) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;600;700&family=Roboto:wght@400;500;700&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..24,400,0,0&display=swap"
+        rel="stylesheet" />
+
+    <!-- Anime.js for Animations -->
+    <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+
+    <!-- Custom Stylesheet -->
+    <link rel="stylesheet" href="../css/styles.css">
+
+    <!-- Three.js Library for 3D Background Metaballs -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M5MPWNCX" height="0" width="0"
+            style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <!-- 3D WebGL Background Metaballs Canvas -->
+    <div id="hero-metaballs" class="site-metaballs-bg" aria-hidden="true"></div>
+
+    <!-- Navigation Header (Policy Guard Inspired Glassmorphism) -->
+    <header class="app-header" id="appHeader" role="banner">
+        <div class="nav-container">
+            <!-- Left: Brand Logo & Title -->
+            <div class="nav-left">
+                <a href="../" class="brand-link" aria-label="Fundingly.in Home">
+                    <div class="brand-icon-wrapper">
+                        <img src="../assets/fundingly_logo.png" alt="Fundingly.in" class="brand-logo" width="34" height="34">
+                    </div>
+                    <span class="brand-name">Fundingly<span class="brand-tld">.in</span></span>
+                </a>
+            </div>
+
+            <!-- Center: Navigation Pages (Glassmorphic Capsule) -->
+            <nav class="nav-center" aria-label="Main Navigation">
+                <div class="nav-glass-capsule">
+                    <ul class="nav-links">
+                        <li><a href="../" class="nav-link">Home</a></li>
+                        <li><a href="../deals/" class="nav-link active">Deals</a></li>
+                        <li><a href="../trends/" class="nav-link">Trends</a></li>
+                        <li><a href="../support/" class="nav-link">Support</a></li>
+                        <li><a href="../about/" class="nav-link">About</a></li>
+                    </ul>
+                </div>
+            </nav>
+
+            <!-- Right: Dark Mode Toggle & Mobile Hamburger Menu -->
+            <div class="nav-right">
+                <button type="button" class="btn-icon-pill" id="themeToggleBtn" title="Toggle light/dark theme" aria-label="Toggle theme appearance">
+                    <span class="material-symbols-outlined" id="themeIcon">dark_mode</span>
+                </button>
+                <button type="button" class="btn-icon-pill btn-mobile-menu" id="mobileMenuBtn" title="Open navigation menu" aria-label="Toggle navigation menu" aria-expanded="false">
+                    <span class="material-symbols-outlined" id="mobileMenuIcon">menu</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Drawer Overlay (Glassmorphism Slide-Down) -->
+        <div class="mobile-nav-drawer" id="mobileNavDrawer" aria-hidden="true">
+            <ul class="mobile-nav-links">
+                <li><a href="../" class="mobile-nav-link"><span class="material-symbols-outlined">home</span><span>Home</span></a></li>
+                <li><a href="../deals/" class="mobile-nav-link active"><span class="material-symbols-outlined">work</span><span>Deals</span></a></li>
+                <li><a href="../trends/" class="mobile-nav-link"><span class="material-symbols-outlined">insights</span><span>Trends</span></a></li>
+                <li><a href="../support/" class="mobile-nav-link"><span class="material-symbols-outlined">volunteer_activism</span><span>Support</span></a></li>
+                <li><a href="../about/" class="mobile-nav-link"><span class="material-symbols-outlined">info</span><span>About</span></a></li>
+            </ul>
+        </div>
+    </header>
+
+    <div class="app-layout">
+        <!-- Unified Filter & Search Box (Permanent Sticky Box on Desktop) -->
+        <aside class="app-sidebar deals-sidebar-box" id="appSidebar" aria-label="Filters and Search">
+            <div class="modal-drag-handle" aria-hidden="true"></div>
+
+            <div class="filter-box-header">
+                <div class="filter-box-title-group">
+                    <span class="material-symbols-outlined filter-icon">tune</span>
+                    <span class="filter-box-title">Controls</span>
+                </div>
+                <div style="display: flex; align-items: center; gap: 8px;">
+                    <button type="button" class="btn-reset-filters" id="resetFiltersBtn" title="Reset all filters">
+                        <span class="material-symbols-outlined">restart_alt</span>
+                        <span>Reset</span>
+                    </button>
+                    <button type="button" class="btn-close-filter-mobile" id="sidebarMobileCloseBtn" title="Close filters" aria-label="Close filters">
+                        <span class="material-symbols-outlined">close</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="filter-box-body">
+                <!-- 1. Search Bar -->
+                <div class="filter-group">
+                    <label for="searchInput" class="filter-group-label">
+                        <span class="material-symbols-outlined group-icon">search</span>
+                        <span>Search</span>
+                    </label>
+                    <div class="filter-search-wrap" id="tourSearch">
+                        <input type="search" id="searchInput" placeholder="Search deals, founders, sectors..."
+                            aria-label="Search companies, founders, investors, sectors"
+                            autocomplete="off" spellcheck="false">
+                        <kbd class="search-kbd-badge" id="searchKbdBadge" title="Press ⌘K or / to search">⌘K</kbd>
+                    </div>
+                </div>
+
+                <!-- 2. Date Horizon Range Filter (From / To) -->
+                <div class="filter-group filter-date-group">
+                    <div class="filter-date-header">
+                        <label class="filter-group-label">
+                            <span class="material-symbols-outlined group-icon">calendar_today</span>
+                            <span>Date Range</span>
+                        </label>
+                        <button type="button" class="btn-clear-date-inline" id="clearDateBtn" title="Reset date range" style="display: none;">
+                            <span class="material-symbols-outlined">close</span>
+                        </button>
+                    </div>
+                    <div class="filter-custom-dates-row">
+                        <div class="filter-date-input-col">
+                            <label for="startDateInput" class="date-sublabel">From</label>
+                            <input type="date" id="startDateInput" class="filter-date-input" aria-label="Start Date">
+                        </div>
+                        <div class="filter-date-input-col">
+                            <label for="endDateInput" class="date-sublabel">To</label>
+                            <input type="date" id="endDateInput" class="filter-date-input" aria-label="End Date">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. Sort Dropdown -->
+                <div class="filter-group">
+                    <label for="dealSortSelect" class="filter-group-label">
+                        <span class="material-symbols-outlined group-icon">swap_vert</span>
+                        <span>Sort</span>
+                    </label>
+                    <div class="filter-select-wrap">
+                        <select id="dealSortSelect" class="filter-select" aria-label="Sort deals">
+                            <option value="latest">Latest First</option>
+                            <option value="amount-desc">Amount: High to Low</option>
+                            <option value="amount-asc">Amount: Low to High</option>
+                            <option value="company-asc">Company: A to Z</option>
+                        </select>
+                        <span class="material-symbols-outlined select-chevron">unfold_more</span>
+                    </div>
+                </div>
+
+                <!-- 4. Stage Dropdown -->
+                <div class="filter-group">
+                    <label for="stageFilterSelect" class="filter-group-label">
+                        <span class="material-symbols-outlined group-icon">flag</span>
+                        <span>Stage</span>
+                    </label>
+                    <div class="filter-select-wrap">
+                        <select id="stageFilterSelect" class="filter-select" aria-label="Filter by funding stage">
+                            <option value="all">All Stages</option>
+                            <option value="Seed">Pre-Seed / Seed</option>
+                            <option value="Series A">Series A</option>
+                            <option value="Series B">Series B</option>
+                            <option value="Growth">Growth</option>
+                            <option value="Debt">Debt / Bridge</option>
+                        </select>
+                        <span class="material-symbols-outlined select-chevron">unfold_more</span>
+                    </div>
+                </div>
+
+                <!-- 5. Vertical / Sector Dropdown -->
+                <div class="filter-group">
+                    <label for="sectorFilterSelect" class="filter-group-label">
+                        <span class="material-symbols-outlined group-icon">category</span>
+                        <span>Vertical</span>
+                    </label>
+                    <div class="filter-select-wrap">
+                        <select id="sectorFilterSelect" class="filter-select" aria-label="Filter by sector">
+                            <option value="all">All Verticals</option>
+                        </select>
+                        <span class="material-symbols-outlined select-chevron">unfold_more</span>
+                    </div>
+                </div>
+
+                <!-- 6. Geography Dropdown -->
+                <div class="filter-group">
+                    <label for="geoFilterSelect" class="filter-group-label">
+                        <span class="material-symbols-outlined group-icon">location_on</span>
+                        <span>Geography</span>
+                    </label>
+                    <div class="filter-select-wrap">
+                        <select id="geoFilterSelect" class="filter-select" aria-label="Filter by headquarters location">
+                            <option value="all">All Geographies</option>
+                            <option value="india">India (Bengaluru, Delhi, Mumbai)</option>
+                            <option value="us">United States</option>
+                            <option value="global">Global / International</option>
+                        </select>
+                        <span class="material-symbols-outlined select-chevron">unfold_more</span>
+                    </div>
+                </div>
+
+                <!-- 7. Amount Dropdown -->
+                <div class="filter-group">
+                    <label for="amountFilterSelect" class="filter-group-label">
+                        <span class="material-symbols-outlined group-icon">payments</span>
+                        <span>Amount</span>
+                    </label>
+                    <div class="filter-select-wrap">
+                        <select id="amountFilterSelect" class="filter-select" aria-label="Filter by investment amount">
+                            <option value="all">All Amounts</option>
+                            <option value="under-1m">&lt; $1M (Angel / Pre-Seed)</option>
+                            <option value="1m-5m">$1M – $5M (Early / Seed)</option>
+                            <option value="5m-20m">$5M – $20M (Series A / B)</option>
+                            <option value="over-20m">$20M+ (Growth / Mega)</option>
+                            <option value="undisclosed">Undisclosed Amount</option>
+                        </select>
+                        <span class="material-symbols-outlined select-chevron">unfold_more</span>
+                    </div>
+                </div>
+                <!-- View Mode: Cards / Table -->
+                <div class="filter-group" id="filterGroupView">
+                    <label class="filter-group-label">
+                        <span class="material-symbols-outlined group-icon">dashboard</span>
+                        <span>View</span>
+                    </label>
+                    <div class="view-switcher-group sidebar-view-switcher" role="radiogroup" aria-label="View layout mode">
+                        <button type="button" class="btn-view-toggle active" id="viewCardsBtn" role="radio"
+                            aria-checked="true" title="Card stream view">
+                            <span class="material-symbols-outlined">grid_view</span>
+                            <span class="view-toggle-text">Cards</span>
+                        </button>
+                        <button type="button" class="btn-view-toggle" id="viewTableBtn" role="radio"
+                            aria-checked="false" title="Dense Table view">
+                            <span class="material-symbols-outlined">table_rows</span>
+                            <span class="view-toggle-text">Table</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Expand All Toggle -->
+                <div class="filter-group filter-expand-toggle-group">
+                    <div class="filter-expand-toggle-row">
+                        <label class="filter-group-label" for="expandAllToggle">
+                            <span class="material-symbols-outlined group-icon">unfold_more</span>
+                            <span id="expandToggleLabel">Expand all</span>
+                        </label>
+                        <button type="button"
+                            id="bulkAccordionBtn"
+                            class="toggle-switch is-checked"
+                            role="switch"
+                            aria-checked="true"
+                            title="Collapse or Expand all weeks"
+                            aria-label="Expand all weeks">
+                            <span class="toggle-thumb"></span>
+                        </button>
+                    </div>
+                    <!-- hidden label/icon elements the JS still reads -->
+                    <span id="bulkAccordionLabel" style="display:none">Collapse All</span>
+                    <span id="bulkAccordionIcon" style="display:none">unfold_less</span>
+                </div>
+            </div>
+
+            <!-- Mobile Drawer Bottom Actions -->
+            <div class="sidebar-mobile-actions">
+                <button type="button" class="btn-sidebar-apply" id="sidebarApplyMobileBtn">
+                    <span class="material-symbols-outlined" style="font-size: 18px;">check</span>
+                    <span>Apply Filters</span>
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content Layout -->
+        <main class="app-main" id="appMain">
+            <!-- Timeline Control Bar: Mobile Filter Trigger Only (quarter chip + toolbar removed) -->
+            <div class="timeline-toolbar" id="timelineToolbar">
+                <div class="toolbar-left">
+                    <!-- Mobile Filter Trigger Pill (visible only on mobile viewports) -->
+                    <button type="button" class="btn-mobile-filter-trigger" id="mobileFilterToggleBtn" aria-label="Open Filters">
+                        <span class="material-symbols-outlined">tune</span>
+                        <span>Controls</span>
+                    </button>
+                </div>
+                <!-- Quarter badge kept in DOM (hidden) so JS can still write to it without errors -->
+                <div id="toolbarQuarterBadge" style="display:none" aria-hidden="true">
+                    <span id="toolbarQuarterTitle"></span>
+                    <span id="toolbarQuarterSub"></span>
+                    <span id="toolbarQuarterMetrics"></span>
+                </div>
+            </div>
+
+            <!-- Pre-allocated AdSense Container (Zero CLS) -->
+            <div class="ad-slot-leaderboard" id="adSlotLeaderboard" aria-hidden="true" style="display: none;">
+                <div class="ad-slot-label">Advertisement</div>
+                <div class="ad-slot-placeholder"></div>
+            </div>
+            <!-- Active Filter Chips Bar -->
+            <div class="active-filter-bar" id="activeFilterBar" style="display: none;"></div>
+
+            <!-- Loader State (Apple Shimmering Skeleton Grid) -->
+            <div id="loader" class="skeleton-container" aria-label="Loading funding deals">
+                <div class="skeleton-week-header">
+                    <div class="skeleton-line skeleton-title-line"></div>
+                    <div class="skeleton-line skeleton-pill-line"></div>
+                </div>
+                <div class="skeleton-grid">
+                    <div class="skeleton-card">
+                        <div class="skeleton-card-top">
+                            <div class="skeleton-line skeleton-round"></div>
+                            <div class="skeleton-line skeleton-amount"></div>
+                        </div>
+                        <div class="skeleton-line skeleton-company"></div>
+                        <div class="skeleton-line skeleton-row"></div>
+                        <div class="skeleton-line skeleton-row short"></div>
+                        <div class="skeleton-line skeleton-btn"></div>
+                    </div>
+                    <div class="skeleton-card">
+                        <div class="skeleton-card-top">
+                            <div class="skeleton-line skeleton-round"></div>
+                            <div class="skeleton-line skeleton-amount"></div>
+                        </div>
+                        <div class="skeleton-line skeleton-company"></div>
+                        <div class="skeleton-line skeleton-row"></div>
+                        <div class="skeleton-line skeleton-row short"></div>
+                        <div class="skeleton-line skeleton-btn"></div>
+                    </div>
+                    <div class="skeleton-card">
+                        <div class="skeleton-card-top">
+                            <div class="skeleton-line skeleton-round"></div>
+                            <div class="skeleton-line skeleton-amount"></div>
+                        </div>
+                        <div class="skeleton-line skeleton-company"></div>
+                        <div class="skeleton-line skeleton-row"></div>
+                        <div class="skeleton-line skeleton-row short"></div>
+                        <div class="skeleton-line skeleton-btn"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Empty State with One-Click Recovery -->
+            <div id="emptyState" class="empty-state" style="display: none;">
+                <div class="empty-state-avatar-wrap">
+                    <img src="../assets/fundingly_think.png" alt="No matching deals" class="empty-state-mascot" width="90" height="90">
+                </div>
+                <p class="empty-title">No matching deals found</p>
+                <p class="empty-subtitle">No matching investments found for this filter combination.</p>
+                <div class="empty-state-actions" style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 18px;">
+                    <button type="button" class="btn-clear-all-filters" id="emptyStateClearBtn" onclick="clearAllFilters()" style="margin-top: 0;">
+                        <span class="material-symbols-outlined">filter_alt_off</span>
+                        <span>Reset All Filters</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Weekly Grouped Timeline Container -->
+            <div class="timeline-container view-cards" id="gridContainer"></div>
+
+            <!-- Incremental / Background Loading Trigger & Status -->
+            <div class="load-more-container" id="loadMoreContainer" style="display: none;">
+                <div class="bg-loading-pill" id="bgLoadingIndicator" style="display: none;" role="status"
+                    aria-live="polite">
+                    <span class="material-symbols-outlined bg-loading-spinner"
+                        aria-hidden="true">progress_activity</span>
+                    <span id="bgLoadingText">Loading earlier weeks in background...</span>
+                </div>
+                <button type="button" class="btn-load-more" id="loadMoreBtn" style="display: none;">
+                    <span class="material-symbols-outlined">expand_circle_down</span>
+                    <span>Show More Deals</span>
+                    <span class="load-more-badge" id="loadMoreCount"></span>
+                </button>
+            </div>
+
+            <!-- Main Content Area Global Semantic Footer -->
+            <footer class="app-main-footer" role="contentinfo">
+                <div class="main-footer-top">
+                    <div class="main-footer-brand">
+                        <img src="../assets/fundingly_logo.png" alt="Fundingly.in" class="main-footer-logo" width="28"
+                            height="28">
+                        <span class="main-footer-brand-name">Fundingly.in</span>
+                        <span class="main-footer-tagline">Indian Startup Funding Intelligence</span>
+                    </div>
+                    <div class="main-footer-social">
+                        <a href="../support/" class="footer-support-btn" title="Support Fundingly Research">
+                            <span class="material-symbols-outlined">volunteer_activism</span>
+                            <span>Support Our Research</span>
+                        </a>
+                        <a href="https://www.linkedin.com/company/fundingly-in" target="_blank"
+                            rel="noopener noreferrer" class="footer-social-link" title="Fundingly.in on LinkedIn"
+                            aria-label="LinkedIn">
+                            <svg class="social-svg-icon" viewBox="0 0 24 24" fill="currentColor" width="16" height="16">
+                                <path
+                                    d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.2V10.9H6.46M7.83 6.64a1.64 1.64 0 1 0 1.63 1.64 1.63 1.63 0 0 0-1.63-1.64Z" />
+                            </svg>
+                            <span>LinkedIn</span>
+                        </a>
+                        <a href="https://www.instagram.com/fundingly.in/" target="_blank" rel="noopener noreferrer"
+                            class="footer-social-link" title="Fundingly.in on Instagram" aria-label="Instagram">
+                            <svg class="social-svg-icon" viewBox="0 0 24 24" fill="currentColor" width="16" height="16">
+                                <path
+                                    d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zm0 10.162a3.999 3.999 0 1 1 0-7.998 3.999 3.999 0 0 1 0 7.998zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z" />
+                            </svg>
+                            <span>Instagram</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="main-footer-bottom">
+                    <nav class="main-footer-nav" aria-label="Legal & Information">
+                        <a href="../founders-note/" class="main-footer-link" style="color: var(--color-primary); font-weight: 600;">Founder's Note</a>
+                        <span class="main-footer-dot">•</span>
+                        <a href="../about/" class="main-footer-link">About Us</a>
+                        <span class="main-footer-dot">•</span>
+                        <a href="../support/" class="main-footer-link">Support</a>
+                        <span class="main-footer-dot">•</span>
+                        <a href="../contact/" class="main-footer-link">Contact</a>
+                        <span class="main-footer-dot">•</span>
+                        <a href="../privacy-policy/" class="main-footer-link">Privacy Policy</a>
+                        <span class="main-footer-dot">•</span>
+                        <a href="../terms/" class="main-footer-link">Terms of Service</a>
+                    </nav>
+                    <div class="main-footer-copy">
+                        <span>© 2026 Fundingly.in • Created by <a href="../founders-note/"
+                                class="footer-creator-link">Kapil Pidhwani</a> • <a href="mailto:hello@fundingly.in"
+                                class="footer-creator-link">hello@fundingly.in</a></span>
+                    </div>
+                </div>
+            </footer>
+        </main>
+    </div>
+
+    <!-- Executive-Grade Weekly Trends Modal -->
+    <div class="modal-overlay" id="trendsModal" role="dialog" aria-modal="true" aria-labelledby="trendsModalTitle">
+        <div class="modal-content trends-modal-content">
+            <div class="modal-drag-handle" aria-hidden="true"></div>
+            <button class="close-btn" id="closeTrendsModalBtn" aria-label="Close trends dialog">
+                <span class="material-symbols-outlined">close</span>
+            </button>
+            <div class="trends-modal-header">
+                <div class="trends-header-left">
+                    <h2 class="trends-modal-title" id="trendsModalTitle">Weekly Trends</h2>
+                    <div class="trends-modal-subtitle" id="trendsModalSubtitle"></div>
+                </div>
+                <div class="trends-header-actions" id="trendsHeaderActions"></div>
+            </div>
+            <div class="trends-modal-body" id="trendsModalBody">
+                <div class="trends-placeholder">
+                    <span class="material-symbols-outlined trends-placeholder-icon">insights</span>
+                    <p class="trends-placeholder-title">Weekly Trend Intelligence</p>
+                    <p class="trends-placeholder-sub">Trend breakdown and stage flow graphs for this week will appear
+                        here.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- About Fundingly Modal -->
+    <div class="modal-overlay" id="aboutModal" role="dialog" aria-modal="true" aria-label="About Fundingly.in">
+        <div class="modal-content about-modal-content">
+            <div class="modal-drag-handle" aria-hidden="true"></div>
+            <button class="close-btn" id="closeAboutModalBtn" aria-label="Close about dialog">
+                <span class="material-symbols-outlined">close</span>
+            </button>
+            <div class="about-card-container" id="aboutCardContainer">
+                <!-- Blank modal content container -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Floating Back-to-Top Button (Apple Frosted Pill for Desktop) -->
+    <button type="button" class="btn-back-to-top" id="backToTopBtn" aria-label="Back to top" title="Back to top"
+        style="display: none;">
+        <span class="material-symbols-outlined">arrow_upward</span>
+        <span>Top</span>
+    </button>
+
+    <!-- Mobile Bottom Floating Glass Dock (Pillar 7.1) -->
+    <nav class="mobile-bottom-dock" id="mobileBottomDock" aria-label="Mobile Quick Navigation">
+        <button type="button" class="dock-btn" id="dockSearchBtn" aria-label="Search" title="Search">
+            <span class="material-symbols-outlined">search</span>
+            <span class="dock-label">Search</span>
+        </button>
+        <button type="button" class="dock-btn" id="dockFilterBtn" aria-label="Filters" title="Open Filters">
+            <span class="material-symbols-outlined">tune</span>
+            <span class="dock-label">Filters</span>
+            <span class="dock-badge" id="dockFilterBadge" style="display: none;">0</span>
+        </button>
+        <button type="button" class="dock-btn" id="dockViewToggleBtn" aria-label="Toggle View" title="Toggle Table/Cards View">
+            <span class="material-symbols-outlined" id="dockViewIcon">table_chart</span>
+            <span class="dock-label" id="dockViewLabel">Table</span>
+        </button>
+        <button type="button" class="dock-btn" id="dockTopBtn" aria-label="Scroll to top" title="Scroll to top">
+            <span class="material-symbols-outlined">arrow_upward</span>
+            <span class="dock-label">Top</span>
+        </button>
+    </nav>
+
+    <!-- Mobile Filter Backdrop -->
+    <div class="mobile-filter-backdrop" id="mobileFilterBackdrop" aria-hidden="true"></div>
+
+    <!-- Floating Toast Notification -->
+    <div id="globalToast" class="app-toast" role="status" aria-live="polite">
+        <span class="material-symbols-outlined" id="toastIcon" style="font-size: 18px; color: #34c759;">check_circle</span>
+        <span id="toastMessage">Copied to clipboard</span>
+    </div>
+
+    <!-- Application Script -->
+    <script src="../js/app.js"></script>
+    <script defer src="../js/webmcp.js"></script>
+    <!-- 3D Metaballs Canvas Script -->
+    <script src="../js/metaballs.js"></script>
+</body>
+
+</html>

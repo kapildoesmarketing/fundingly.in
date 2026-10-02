@@ -55,8 +55,13 @@
 
         try {
             // Load latest quarter dataset
-            const res = await fetch('data/2026_q3.json');
-            if (res.ok) {
+            const isSubfolder = window.location.pathname.includes('/deals') || window.location.pathname.includes('/about') || window.location.pathname.includes('/support');
+            const dataPath = (isSubfolder ? '../data/' : 'data/') + '2026_q3.json';
+            let res = await fetch(dataPath).catch(() => null);
+            if (!res || !res.ok) {
+                res = await fetch('data/2026_q3.json').catch(() => null);
+            }
+            if (res && res.ok) {
                 const data = await res.json();
                 if (Array.isArray(data)) {
                     cachedDataset = data;
@@ -250,7 +255,7 @@
                     stage: d.funding_stage,
                     investors: d.lead_investors || 'Undisclosed'
                 })),
-                trend_report_url: `https://fundingly.in/trends/week-${weekNo}-${year}/`,
+                trend_report_url: `https://fundingly.in/deals/week-${weekNo}-${year}/`,
                 citation: CITATION_METADATA
             };
         },

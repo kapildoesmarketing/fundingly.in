@@ -8,7 +8,7 @@
     "build:trends": "node scripts/build-trend-pages.js",
     "build:llms": "node scripts/build-llms-txt.js",
     "build": "node scripts/build-deal-pages.js && node scripts/build-trend-pages.js && node scripts/build-llms-txt.js",
-    "clean": "rm -rf company trends",
+    "clean": "node -e \"const fs=require('fs'),path=require('path');['company'].forEach(d=>{if(fs.existsSync(d))fs.rmSync(d,{recursive:true,force:true})});if(fs.existsSync('deals')){fs.readdirSync('deals').filter(f=>f.startsWith('week-')||f==='recent').forEach(f=>fs.rmSync(path.join('deals',f),{recursive:true,force:true}))};console.log('Clean complete.')\"",
     "test": "node scripts/test-static-pages.js && node scripts/test-theme-and-nav.js"
   },
   "keywords": [
