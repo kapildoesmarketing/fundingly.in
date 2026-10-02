@@ -217,7 +217,7 @@ function renderDealTagsMarkup(tagsStr) {
     return tags.map(tag => `<span class="deal-keyword-tag">#${escapeHtml(tag)}</span>`).join(' ');
 }
 
-// Helper: Format Founders List in Bullet Points with Google & LinkedIn Search Links
+// Helper: Format Founders List in Bullet Points with Google & LinkedIn Brandfetch Search Links
 function renderFoundersListMarkup(foundersStr, companyName) {
     if (!foundersStr) return '<span style="color: var(--color-text-tertiary);">Undisclosed</span>';
     const names = String(foundersStr).split(/[,&|\n]/).map(n => n.trim()).filter(Boolean);
@@ -229,17 +229,16 @@ function renderFoundersListMarkup(foundersStr, companyName) {
             const linkedinSearchUrl = `https://www.linkedin.com/search/results/all/?keywords=${encodeURIComponent(name + ' ' + companyName)}`;
             return `
             <li class="founder-bullet-item">
+                <span class="founder-bullet-dot">•</span>
                 <span class="founder-name">${escapeHtml(name)}</span>
-                <div class="founder-search-actions">
-                    <a href="${googleSearchUrl}" target="_blank" rel="noopener noreferrer" class="founder-search-btn google" title="Search ${escapeHtml(name)} on Google" aria-label="Search ${escapeHtml(name)} on Google">
-                        <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12.48 10.92v3.28h7.84c-.24 1.84-.853 3.187-1.787 4.133-1.147 1.147-2.933 2.4-6.053 2.4-4.827 0-8.6-3.893-8.6-8.72s3.773-8.72 8.6-8.72c2.6 0 4.507 1.027 5.907 2.347l2.307-2.307C18.747 1.44 16.133 0 12.48 0 5.867 0 .307 5.387.307 12s5.56 12 12.173 12c3.573 0 6.267-1.173 8.373-3.36 2.16-2.16 2.84-5.213 2.84-7.667 0-.76-.053-1.467-.173-2.053H12.48z"/></svg>
-                        <span>Google</span>
+                <span class="founder-inline-icons">
+                    <a href="${googleSearchUrl}" target="_blank" rel="noopener noreferrer" class="founder-brand-icon-btn google" title="Search ${escapeHtml(name)} on Google" aria-label="Search ${escapeHtml(name)} on Google">
+                        <img src="https://cdn.brandfetch.io/google.com/icon" alt="Google" width="13" height="13" class="brand-search-icon" loading="lazy">
                     </a>
-                    <a href="${linkedinSearchUrl}" target="_blank" rel="noopener noreferrer" class="founder-search-btn linkedin" title="Search ${escapeHtml(name)} on LinkedIn" aria-label="Search ${escapeHtml(name)} on LinkedIn">
-                        <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.2V10.9H6.46M7.83 6.64a1.64 1.64 0 1 0 1.63 1.64 1.63 1.63 0 0 0-1.63-1.64Z"/></svg>
-                        <span>LinkedIn</span>
+                    <a href="${linkedinSearchUrl}" target="_blank" rel="noopener noreferrer" class="founder-brand-icon-btn linkedin" title="Search ${escapeHtml(name)} on LinkedIn" aria-label="Search ${escapeHtml(name)} on LinkedIn">
+                        <img src="https://cdn.brandfetch.io/linkedin.com/icon" alt="LinkedIn" width="13" height="13" class="brand-search-icon" loading="lazy">
                     </a>
-                </div>
+                </span>
             </li>`;
         }).join('')}
     </ul>`;
@@ -401,8 +400,11 @@ function generateCompanyPageHtml(compData, deal, totalRaisedUsd, relatedDeals) {
     const chatgptPrompt = `Research the current C-level and senior executive leadership of ${companyName}. Identify the CEO, CTO, CFO, COO, CMO, founders, and other key decision-makers where publicly verifiable. For each person, provide their name, current title, responsibilities, professional background, and LinkedIn profile if publicly available. Prioritize current and authoritative sources, distinguish confirmed C-suite roles from board/director positions, and flag any information that cannot be independently verified. Include the sources used and the date the information was verified.`;
     const chatgptPromptUrl = `https://chatgpt.com/?q=${encodeURIComponent(chatgptPrompt)}`;
 
-    // 4. Careers & Job Openings Search URL
-    const careersSearchUrl = `https://www.google.com/search?q=${encodeURIComponent(companyName + ' careers jobs hiring "apply"')}`;
+    // 4. Careers & Job Openings Search URL ("company name or company domain" + "careers page or job openings")
+    const careersQuery = companyDomain 
+        ? `("${companyName}" OR "${companyDomain}") ("careers page" OR "job openings" OR "careers" OR "jobs" OR "hiring")`
+        : `"${companyName}" ("careers page" OR "job openings" OR "careers" OR "jobs" OR "hiring")`;
+    const careersSearchUrl = `https://www.google.com/search?q=${encodeURIComponent(careersQuery)}`;
 
     // 5. Standardized Subtitle: vertical • sub industry
     const primaryVertical = deal.vertical || deal.industry || 'Technology';
@@ -693,6 +695,171 @@ ${jsonLdString}
             color: #ffffff;
             border-color: var(--color-primary);
         }
+
+        /* Founders Bullet List */
+        .founders-bullet-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .founder-bullet-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            color: var(--color-text-primary);
+            font-weight: 500;
+            line-height: 1.4;
+            flex-wrap: wrap;
+        }
+
+        .founder-bullet-dot {
+            color: var(--color-primary);
+            font-size: 14px;
+            line-height: 1;
+        }
+
+        .founder-name {
+            color: var(--color-text-primary);
+            font-weight: 500;
+        }
+
+        .founder-inline-icons {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            margin-left: 2px;
+        }
+
+        .founder-brand-icon-btn,
+        .company-brand-icon-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 22px;
+            height: 22px;
+            border-radius: 6px;
+            background: var(--color-surface-secondary);
+            border: 1px solid var(--color-hairline);
+            transition: all 0.15s ease;
+            text-decoration: none;
+            flex-shrink: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .company-brand-icon-btn {
+            width: 26px;
+            height: 26px;
+            border-radius: var(--radius-pill);
+        }
+
+        .founder-brand-icon-btn:hover,
+        .company-brand-icon-btn:hover {
+            background: var(--color-surface);
+            border-color: var(--color-primary);
+            transform: translateY(-1px);
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+        }
+
+        .brand-search-icon {
+            width: 13px;
+            height: 13px;
+            object-fit: contain;
+            display: block;
+        }
+
+        .company-brand-icon-btn .brand-search-icon {
+            width: 14px;
+            height: 14px;
+        }
+
+        .company-quick-search-group {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            vertical-align: middle;
+            margin-left: 8px;
+        }
+
+        /* Executive & Leadership Intelligence Actions */
+        .intelligence-actions-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 12px;
+            margin-top: 4px;
+        }
+
+        .intelligence-action-tile {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 14px;
+            background: var(--color-surface);
+            border: 1px solid var(--color-hairline);
+            border-radius: var(--radius-inner);
+            text-decoration: none;
+            transition: all 0.16s ease;
+            box-sizing: border-box;
+            min-width: 0;
+        }
+
+        .intelligence-action-tile:hover {
+            border-color: var(--color-primary);
+            background: var(--color-surface-tertiary);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+        }
+
+        .intelligence-action-icon-wrap {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            background: var(--color-surface-secondary);
+            border: 1px solid var(--color-hairline);
+            flex-shrink: 0;
+        }
+
+        .intelligence-action-content {
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
+            overflow: hidden;
+        }
+
+        .intelligence-action-title {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            line-height: 1.3;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .intelligence-action-sub {
+            font-size: 11px;
+            color: var(--color-text-secondary);
+            line-height: 1.3;
+            margin-top: 2px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        @media (max-width: 768px) {
+            .intelligence-actions-grid {
+                grid-template-columns: 1fr;
+                gap: 8px;
+            }
+        }
     </style>
 </head>
 
@@ -773,11 +940,11 @@ ${jsonLdString}
                         <div class="modal-hero-title-wrap">
                             <h1 class="modal-hero-title">${escapeHtml(companyName)}</h1>
                             <div class="company-quick-search-group">
-                                <a href="${companyGoogleSearchUrl}" target="_blank" rel="noopener noreferrer" class="company-search-icon-btn google" title="Search ${escapeHtml(companyName)} on Google" aria-label="Search ${escapeHtml(companyName)} on Google">
-                                    <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12.48 10.92v3.28h7.84c-.24 1.84-.853 3.187-1.787 4.133-1.147 1.147-2.933 2.4-6.053 2.4-4.827 0-8.6-3.893-8.6-8.72s3.773-8.72 8.6-8.72c2.6 0 4.507 1.027 5.907 2.347l2.307-2.307C18.747 1.44 16.133 0 12.48 0 5.867 0 .307 5.387.307 12s5.56 12 12.173 12c3.573 0 6.267-1.173 8.373-3.36 2.16-2.16 2.84-5.213 2.84-7.667 0-.76-.053-1.467-.173-2.053H12.48z"/></svg>
+                                <a href="${companyGoogleSearchUrl}" target="_blank" rel="noopener noreferrer" class="company-brand-icon-btn google" title="Search ${escapeHtml(companyName)} on Google" aria-label="Search ${escapeHtml(companyName)} on Google">
+                                    <img src="https://cdn.brandfetch.io/google.com/icon" alt="Google" width="14" height="14" class="brand-search-icon" loading="lazy">
                                 </a>
-                                <a href="${companyLinkedInSearchUrl}" target="_blank" rel="noopener noreferrer" class="company-search-icon-btn linkedin" title="Search ${escapeHtml(companyName)} on LinkedIn" aria-label="Search ${escapeHtml(companyName)} on LinkedIn">
-                                    <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.2V10.9H6.46M7.83 6.64a1.64 1.64 0 1 0 1.63 1.64 1.63 1.63 0 0 0-1.63-1.64Z"/></svg>
+                                <a href="${companyLinkedInSearchUrl}" target="_blank" rel="noopener noreferrer" class="company-brand-icon-btn linkedin" title="Search ${escapeHtml(companyName)} on LinkedIn" aria-label="Search ${escapeHtml(companyName)} on LinkedIn">
+                                    <img src="https://cdn.brandfetch.io/linkedin.com/icon" alt="LinkedIn" width="14" height="14" class="brand-search-icon" loading="lazy">
                                 </a>
                             </div>
                         </div>
@@ -912,35 +1079,55 @@ ${jsonLdString}
                     </div>
                 </div>
 
-                <!-- Section 6: Founders & Leadership Hierarchy -->
+                <!-- Section 6: Founders & Leadership Directory -->
                 <div class="modal-section-card">
                     <div class="modal-section-title">
                         <span class="material-symbols-outlined" style="font-size: 15px;">badge</span>
                         <span>Founders &amp; Leadership Directory</span>
                     </div>
-                    <div class="founders-container" style="margin-bottom: 16px;">
+                    <div class="founders-container">
                         ${renderFoundersMarkup(deal.founders, companyName)}
-                    </div>
-                    <div class="quick-research-actions-bar">
-                        <span class="quick-actions-label">Leadership Intelligence</span>
-                        <div class="quick-actions-btns">
-                            <a href="${linkedinSearchUrl}" target="_blank" rel="noopener noreferrer" class="btn-action-tool" title="Find C-suite on LinkedIn" aria-label="Find C-Level on LinkedIn">
-                                <span class="material-symbols-outlined">badge</span>
-                                <span>Find C-Level Execs</span>
-                            </a>
-                            <a href="${chatgptPromptUrl}" target="_blank" rel="noopener noreferrer" class="btn-action-tool" title="Deep executive background research" aria-label="Deep Leadership Intelligence via ChatGPT">
-                                <span class="material-symbols-outlined">psychology</span>
-                                <span>Leadership Research</span>
-                            </a>
-                            <a href="${careersSearchUrl}" target="_blank" rel="noopener noreferrer" class="btn-action-tool" title="Search active job openings & hiring" aria-label="Search Careers & Job Openings">
-                                <span class="material-symbols-outlined">work</span>
-                                <span>Recent Job Openings</span>
-                            </a>
-                        </div>
                     </div>
                 </div>
 
-                <!-- Section 7: Geographic Footprint & Operating Locations -->
+                <!-- Section 7: Executive & Leadership Intelligence Actions -->
+                <div class="modal-section-card intelligence-actions-card">
+                    <div class="modal-section-title">
+                        <span class="material-symbols-outlined" style="font-size: 15px;">psychology</span>
+                        <span>Executive &amp; Leadership Intelligence</span>
+                    </div>
+                    <div class="intelligence-actions-grid">
+                        <a href="${linkedinSearchUrl}" target="_blank" rel="noopener noreferrer" class="intelligence-action-tile" title="Find C-Level Executives on LinkedIn" aria-label="Find C-Level Executives on LinkedIn">
+                            <div class="intelligence-action-icon-wrap linkedin">
+                                <img src="https://cdn.brandfetch.io/linkedin.com/icon" alt="LinkedIn" width="18" height="18" class="brand-search-icon" loading="lazy">
+                            </div>
+                            <div class="intelligence-action-content">
+                                <span class="intelligence-action-title">Find C-Level Execs</span>
+                                <span class="intelligence-action-sub">Search executive team on LinkedIn ↗</span>
+                            </div>
+                        </a>
+                        <a href="${chatgptPromptUrl}" target="_blank" rel="noopener noreferrer" class="intelligence-action-tile" title="Deep executive background research via ChatGPT" aria-label="Deep Leadership Intelligence via ChatGPT">
+                            <div class="intelligence-action-icon-wrap chatgpt">
+                                <img src="https://cdn.brandfetch.io/openai.com/icon" alt="ChatGPT" width="18" height="18" class="brand-search-icon" loading="lazy">
+                            </div>
+                            <div class="intelligence-action-content">
+                                <span class="intelligence-action-title">Leadership Research</span>
+                                <span class="intelligence-action-sub">Executive deep-dive via ChatGPT ↗</span>
+                            </div>
+                        </a>
+                        <a href="${careersSearchUrl}" target="_blank" rel="noopener noreferrer" class="intelligence-action-tile" title="Search active job openings & hiring" aria-label="Search Careers & Job Openings">
+                            <div class="intelligence-action-icon-wrap careers">
+                                <span class="material-symbols-outlined" style="font-size: 18px; color: var(--color-primary);">work</span>
+                            </div>
+                            <div class="intelligence-action-content">
+                                <span class="intelligence-action-title">Recent Job Openings</span>
+                                <span class="intelligence-action-sub">Explore hiring &amp; careers ↗</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Section 8: Geographic Footprint & Operating Locations -->
                 <div class="modal-section-card">
                     <div class="modal-section-title">
                         <span class="material-symbols-outlined" style="font-size: 15px;">location_on</span>
@@ -958,7 +1145,7 @@ ${jsonLdString}
                     </div>
                 </div>
 
-                <!-- Section 8: Focus Tags -->
+                <!-- Section 9: Focus Tags -->
                 ${dealTagsHTML ? `
                 <div class="modal-section-card">
                     <div class="modal-section-title">
@@ -971,10 +1158,10 @@ ${jsonLdString}
                 </div>
                 ` : ''}
 
-                <!-- Section 9: Funding History Timeline (Interactive) -->
+                <!-- Section 10: Funding History Timeline (Interactive) -->
                 ${fundingHistorySection}
 
-                <!-- Section 10: Primary Sources -->
+                <!-- Section 11: Primary Sources -->
                 ${sourceLink}
 
                 <!-- Modal Action Bar -->
