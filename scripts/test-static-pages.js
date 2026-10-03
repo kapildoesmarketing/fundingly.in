@@ -162,7 +162,14 @@ assert(fs.existsSync(MCP_PATH), '.well-known/mcp.json must exist');
 const mcpJson = JSON.parse(fs.readFileSync(MCP_PATH, 'utf8'));
 assert(mcpJson.tools && Array.isArray(mcpJson.tools) && mcpJson.tools.length === 5, 'mcp.json must define 5 tools');
 assert(mcpJson.support && mcpJson.support.includes('support'), 'mcp.json must include support URL');
-console.log('✓ Successfully verified .well-known/mcp.json (WebMCP static discovery schema)');
+// 8. Verify Service Worker sw.js
+const SW_PATH = path.join(REPO_ROOT, 'sw.js');
+assert(fs.existsSync(SW_PATH), 'sw.js must exist at root');
+const swContent = fs.readFileSync(SW_PATH, 'utf8');
+assert(swContent.includes('fundingly-assets-v1'), 'sw.js must define assets cache');
+assert(swContent.includes('THIRTY_DAYS_MS'), 'sw.js must define 30-day cache lifetime');
+console.log('✓ Successfully verified sw.js (30-day asset caching & offline fallback)');
 
-console.log('🎉 ALL STATIC PAGE, TREND REPORT, LLMS.TXT & WEBMCP INTEGRITY CHECKS PASSED!');
+console.log('🎉 ALL STATIC PAGE, TREND REPORT, LLMS.TXT, WEBMCP & SERVICE WORKER CHECKS PASSED!');
+
 

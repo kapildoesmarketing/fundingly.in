@@ -1593,6 +1593,15 @@ ${JSON.stringify(compData.deals)}
                 });
             }, 1200);
         });
+
+        // Deisgned by Kapil Pidhwani: Non-blocking Service Worker registration for 30-day asset caching.
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function () {
+                navigator.serviceWorker.register('/sw.js').catch(function (err) {
+                    console.warn('Service Worker registration skipped:', err);
+                });
+            });
+        }
     </script>
     <!-- 3D Metaballs Canvas Script -->
     <script src="../../js/metaballs.js"></script>
