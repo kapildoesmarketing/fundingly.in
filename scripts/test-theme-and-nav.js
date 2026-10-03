@@ -115,6 +115,12 @@ pagesToCheck.forEach(filePath => {
         assert(html.includes('notfound-mascot-halo'), `404 must have mascot halo styling`);
     }
 
+    // 9. Mobile Bottom Floating Glass Dock (Option 1 Universal 4-Slot Grid on all non-homepage pages)
+    if (relPath !== 'index.html') {
+        assert(html.includes('mobile-bottom-dock') || html.includes('id="mobileBottomDock"'), `Missing mobile-bottom-dock in ${relPath}`);
+        assert(html.includes('dock-btn'), `Missing dock-btn in ${relPath}`);
+    }
+
     verifiedPages++;
     console.log(`✓ Verified: ${relPath}`);
 });

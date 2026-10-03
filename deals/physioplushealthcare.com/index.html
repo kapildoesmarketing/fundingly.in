@@ -383,6 +383,12 @@
                 grid-template-columns: 1fr;
                 gap: 8px;
             }
+            .mobile-bottom-dock {
+                display: flex !important;
+            }
+            .app-main-footer {
+                padding-bottom: calc(88px + env(safe-area-inset-bottom, 0px)) !important;
+            }
         }
     </style>
 </head>
@@ -891,6 +897,26 @@
             </div>
         </div>
     </footer>
+
+    <!-- Floating Mobile Bottom Dock (Option 1 Universal 4-Slot Grid) -->
+    <nav class="mobile-bottom-dock" id="mobileBottomDock" aria-label="Mobile Quick Navigation">
+        <a href="../../" class="dock-btn" title="Home" aria-label="Home">
+            <span class="material-symbols-outlined">home</span>
+            <span class="dock-label">Home</span>
+        </a>
+        <a href="../../deals/" class="dock-btn" title="Deals" aria-label="Deals">
+            <span class="material-symbols-outlined">payments</span>
+            <span class="dock-label">Deals</span>
+        </a>
+        <button type="button" class="dock-btn" id="dockShareBtn" onclick="shareDossier()" title="Share Deal Dossier" aria-label="Share Deal Dossier">
+            <span class="material-symbols-outlined">share</span>
+            <span class="dock-label">Share</span>
+        </button>
+        <button type="button" class="dock-btn" id="dockTopBtn" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="Scroll to top" aria-label="Scroll to top">
+            <span class="material-symbols-outlined">arrow_upward</span>
+            <span class="dock-label">Top</span>
+        </button>
+    </nav>
 
     <!-- Floating Toast Notification -->
     <div id="dossierToast" class="dossier-toast" role="status" aria-live="polite">

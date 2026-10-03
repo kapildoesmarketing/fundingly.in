@@ -2151,14 +2151,14 @@ ${jsonLdString}
         </div>
     </footer>
 
-    <!-- Floating Trends Mobile Bottom Dock (1-Thumb Ergonomics on <= 900px) -->
+    <!-- Floating Trends Mobile Bottom Dock (Option 1 Universal 4-Slot Grid) -->
     <nav class="mobile-bottom-dock" id="mobileBottomDock" aria-label="Quick mobile navigation dock">
         <a href="../../" class="dock-btn" title="Home" aria-label="Home">
             <span class="material-symbols-outlined">home</span>
             <span class="dock-label">Home</span>
         </a>
         <a href="../../deals/" class="dock-btn" title="Deals" aria-label="Deals">
-            <span class="material-symbols-outlined">work</span>
+            <span class="material-symbols-outlined">payments</span>
             <span class="dock-label">Deals</span>
         </a>
         <button type="button" class="dock-btn" id="dockTimeframeBtn" title="Timeframe" aria-label="Change timeframe">

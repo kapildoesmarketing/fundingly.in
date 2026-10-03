@@ -5597,7 +5597,13 @@
 
             .timeline-stream,
             .table-view-container,
-            .main-footer {
+            .main-footer,
+            .app-main-footer,
+            .support-container,
+            .about-container,
+            .contact-container,
+            .static-page-wrapper,
+            .dossier-page-wrapper {
                 padding-bottom: calc(88px + env(safe-area-inset-bottom, 0px)) !important;
             }
 
