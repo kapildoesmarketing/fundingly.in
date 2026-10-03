@@ -6524,22 +6524,7 @@
             color: #121215;
         }
 
-        /* 8. Subpage Back Navigation Slide Hover Effect */
-        .page-nav-back {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            color: var(--color-primary);
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 14px;
-            transition: color 0.15s ease, transform 0.18s cubic-bezier(0.16, 1, 0.3, 1);
-        }
 
-        .page-nav-back:hover {
-            color: var(--color-primary-hover);
-            transform: translateX(-3px);
-        }
 
         /* 9. Standalone Dossier & Trends Responsive Polish */
         @media (max-width: 960px) {
