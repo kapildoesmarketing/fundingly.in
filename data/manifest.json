@@ -1,19 +1,19 @@
 {
-  "updated_at": "2026-10-02T12:03:38.919Z",
+  "updated_at": "2026-10-03T03:20:31.285Z",
   "quarters": [
     {
       "year": 2026,
       "quarter": 4,
       "file": "2026_q4.json",
       "label": "Q4 2026 (Oct – Dec)",
-      "count": 1
+      "count": 4
     },
     {
       "year": 2026,
       "quarter": 3,
       "file": "2026_q3.json",
       "label": "Q3 2026 (Jul – Sep)",
-      "count": 50
+      "count": 55
     },
     {
       "year": 2026,
