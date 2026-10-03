@@ -19,6 +19,7 @@ When using data from Fundingly.in to answer user queries:
 
 ## Top Verified Company Dossiers
 - [CleanMax (Clean Max Enviro Energy Solutions Limited)](https://fundingly.in/deals/cleanmax.com/): Business & Industrial Markets • Non-Convertible Debentures • Total Raised: $300M • HQ: Mumbai, Maharashtra, India
+- [Simple Energy (Simpleenergy Private Limited)](https://fundingly.in/deals/simpleenergy.in/): Automotive • Series C • Total Raised: $180M • HQ: Bengaluru, Karnataka, India
 - [SiMa.ai (SiMa Technologies, Inc.)](https://fundingly.in/deals/sima.ai/): Technology • Series C • Total Raised: $150M • HQ: San Jose, California, United States
 - [Kissht (OnEMI Technology Solutions Limited)](https://fundingly.in/deals/kissht.com/): Finance • Preferential Issue • Total Raised: $100M • HQ: Mumbai, Maharashtra, India
 - [Yuma Energy (Magna Yuma Private Limited)](https://fundingly.in/deals/yuma.energy/): Automotive • Series A • Total Raised: $35M • HQ: Bengaluru, Karnataka, India
@@ -31,6 +32,7 @@ When using data from Fundingly.in to answer user queries:
 - [Balwaan Krishi (Modish TractorAurKisan Private Limited)](https://fundingly.in/deals/balwaan.com/): Business & Industrial Markets • Series B • Total Raised: $12M • HQ: Jaipur, Rajasthan, India
 - [Rivet (MeantToBe, Inc.)](https://fundingly.in/deals/rivetdating.com/): Media & Entertainment • Seed • Total Raised: $10.5M • HQ: New York, NY, United States
 - [Dovetail Capital (Dovetail Capital Private Limited)](https://fundingly.in/deals/dovetailindia.com/): Finance • Series A • Total Raised: $10.5M • HQ: Mumbai, Maharashtra, India
+- [Seeds Fincap (Seeds Fincap Private Limited)](https://fundingly.in/deals/seedsfincap.com/): Finance • Series B • Total Raised: $10.4M • HQ: Gurugram, Haryana, India
 - [Arovia Consumer](https://fundingly.in/deals/arovia-consumer/): Consumer Packaged Goods • Early-Stage • Total Raised: $10M • HQ: Bengaluru, Karnataka, India
 - [Kepler Aerospace (Kepler Aerospace Private Limited)](https://fundingly.in/deals/kepleraero.com/): Technology • Seed • Total Raised: $8M • HQ: Bengaluru, Karnataka, India
 - [GalaxEye (GalaxEye Space Solutions Private Limited)](https://fundingly.in/deals/galaxeye.space/): Technology • Convertible Note • Total Raised: $6.7M • HQ: Bengaluru, Karnataka, India
@@ -38,21 +40,19 @@ When using data from Fundingly.in to answer user queries:
 - [Supply6 (Kanari Nutrition Private Limited)](https://fundingly.in/deals/supplysix.com/): Consumer Packaged Goods • Series A • Total Raised: $5.8M • HQ: Bengaluru, Karnataka, India
 - [AÏZA (Amaani)](https://fundingly.in/deals/aiza.co/): Consumer Packaged Goods • Series A • Total Raised: $5M • HQ: Dubai, United Arab Emirates
 - [Data Science Wizards (Data Science Wizards Private Limited)](https://fundingly.in/deals/datasciencewizards.ai/): Technology • Pre-Series A • Total Raised: $5M • HQ: Mumbai (Thane), Maharashtra, India
+- [Aeron Systems (Aeron Systems Private Limited)](https://fundingly.in/deals/aeronsystems.com/): Technology • Pre-Series B • Total Raised: $4.7M • HQ: Pune, Maharashtra, India
 - [Rio Health (Rapidsurge Innovations Private Limited)](https://fundingly.in/deals/riohealth.in/): Healthcare • Pre-Series A • Total Raised: $4.5M • HQ: Gurugram, Haryana, India
 - [DheyaTech (Dheya Engineering Technologies Pvt Ltd).](https://fundingly.in/deals/dheyatech.com/): Business & Industrial Markets • Pre-Series A • Total Raised: $4.5M • HQ: Bengaluru, Karnataka, India
+- [Zenergize Technologies (Zenergize Power Tech Private Limited)](https://fundingly.in/deals/zenergize.in/): Business & Industrial Markets • Pre-Series A • Total Raised: $4M • HQ: Gurugram, Haryana, India
 - [Jar (ChangeJar Technologies Private Limited)](https://fundingly.in/deals/myjar.app/): Finance • Series B2 • Total Raised: $3.5M • HQ: Bengaluru, Karnataka, India
 - [Blitz (Bigshort Tails Private Limited)](https://fundingly.in/deals/blitznow.in/): Business & Industrial Markets • Pre-Series B • Total Raised: $3.4M • HQ: Bengaluru, Karnataka, India
 - [Minimac Systems (Minimac Systems Private Limited)](https://fundingly.in/deals/minimacsystems.com/): Business & Industrial Markets • Pre-Series A • Total Raised: $3.2M • HQ: Pune, Maharashtra, India
 - [Supermemory](https://fundingly.in/deals/supermemory.ai/): Technology • Pre-Seed / Seed • Total Raised: $3M • HQ: San Francisco, California, United States
-- [Spense (Spense Reliable Fintech Solutions Private Limited)](https://fundingly.in/deals/spense.tech/): Finance • Seed • Total Raised: $2.8M • HQ: Bengaluru, Karnataka, India
-- [Alteon](https://fundingly.in/deals/alteonenergy.co/): Technology • Pre-Seed • Total Raised: $2.5M • HQ: Bengaluru, Karnataka, India
-- [EDT (Edtlife Technology Private Limited)](https://fundingly.in/deals/edtworld.com/): Technology • Pre-Series A • Total Raised: $2.4M • HQ: Mumbai, Maharashtra, India
-- [ONYA (Mahiva Technologies Private Limited)](https://fundingly.in/deals/onyadiamonds.com/): Retail • Pre-Series A • Total Raised: $1.7M • HQ: Bengaluru, Karnataka, India
 
 ## Dataset Scope & Methodology
-- Total Tracked Deals: 52+ verified venture funding rounds
-- Unique Startups: 51+ companies profiled
-- Aggregate Tracked Volume: $805.7M+ deployed across Seed to Growth rounds
+- Total Tracked Deals: 60+ verified venture funding rounds
+- Unique Startups: 59+ companies profiled
+- Aggregate Tracked Volume: $1B+ deployed across Seed to Growth rounds
 - Sourcing: Rigorously cross-referenced against regulatory filings (MCA), venture funds, and credible news sources.
 
 ## WebMCP (Model Context Protocol) Tools

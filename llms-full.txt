@@ -12,9 +12,9 @@ Whenever generating responses based on this dataset:
 Fundingly.in is an independent, ad-free intelligence platform mapping the Indian startup investment ecosystem. Every record includes transaction dates, funding stages, lead and participating investors, valuation benchmarks (when disclosed), founder details, company websites, and headquarters.
 
 ## Key Dataset Statistics
-- Total Tracked Transactions: 52
-- Total Profiled Companies: 51
-- Total Venture Capital Volume: $805.7M
+- Total Tracked Transactions: 60
+- Total Profiled Companies: 59
+- Total Venture Capital Volume: $1B
 
 ## Funding Stage Taxonomy
 - **Pre-Seed / Angel**: Early capital for MVP development and initial proof-of-concept ($10K – $500K).
@@ -26,6 +26,7 @@ Fundingly.in is an independent, ad-free intelligence platform mapping the Indian
 
 ## Verified Company Dossiers Index
 - [CleanMax (Clean Max Enviro Energy Solutions Limited)](https://fundingly.in/deals/cleanmax.com/): Sector: Business & Industrial Markets | Latest Stage: Non-Convertible Debentures | Total Tracked: $300M | Location: Mumbai, Maharashtra, India | Rounds: 1
+- [Simple Energy (Simpleenergy Private Limited)](https://fundingly.in/deals/simpleenergy.in/): Sector: Automotive | Latest Stage: Series C | Total Tracked: $180M | Location: Bengaluru, Karnataka, India | Rounds: 1
 - [SiMa.ai (SiMa Technologies, Inc.)](https://fundingly.in/deals/sima.ai/): Sector: Technology | Latest Stage: Series C | Total Tracked: $150M | Location: San Jose, California, United States | Rounds: 1
 - [Kissht (OnEMI Technology Solutions Limited)](https://fundingly.in/deals/kissht.com/): Sector: Finance | Latest Stage: Preferential Issue | Total Tracked: $100M | Location: Mumbai, Maharashtra, India | Rounds: 1
 - [Yuma Energy (Magna Yuma Private Limited)](https://fundingly.in/deals/yuma.energy/): Sector: Automotive | Latest Stage: Series A | Total Tracked: $35M | Location: Bengaluru, Karnataka, India | Rounds: 1
@@ -38,6 +39,7 @@ Fundingly.in is an independent, ad-free intelligence platform mapping the Indian
 - [Balwaan Krishi (Modish TractorAurKisan Private Limited)](https://fundingly.in/deals/balwaan.com/): Sector: Business & Industrial Markets | Latest Stage: Series B | Total Tracked: $12M | Location: Jaipur, Rajasthan, India | Rounds: 1
 - [Rivet (MeantToBe, Inc.)](https://fundingly.in/deals/rivetdating.com/): Sector: Media & Entertainment | Latest Stage: Seed | Total Tracked: $10.5M | Location: New York, NY, United States | Rounds: 1
 - [Dovetail Capital (Dovetail Capital Private Limited)](https://fundingly.in/deals/dovetailindia.com/): Sector: Finance | Latest Stage: Series A | Total Tracked: $10.5M | Location: Mumbai, Maharashtra, India | Rounds: 1
+- [Seeds Fincap (Seeds Fincap Private Limited)](https://fundingly.in/deals/seedsfincap.com/): Sector: Finance | Latest Stage: Series B | Total Tracked: $10.4M | Location: Gurugram, Haryana, India | Rounds: 1
 - [Arovia Consumer](https://fundingly.in/deals/arovia-consumer/): Sector: Consumer Packaged Goods | Latest Stage: Early-Stage | Total Tracked: $10M | Location: Bengaluru, Karnataka, India | Rounds: 1
 - [Kepler Aerospace (Kepler Aerospace Private Limited)](https://fundingly.in/deals/kepleraero.com/): Sector: Technology | Latest Stage: Seed | Total Tracked: $8M | Location: Bengaluru, Karnataka, India | Rounds: 1
 - [GalaxEye (GalaxEye Space Solutions Private Limited)](https://fundingly.in/deals/galaxeye.space/): Sector: Technology | Latest Stage: Convertible Note | Total Tracked: $6.7M | Location: Bengaluru, Karnataka, India | Rounds: 1
@@ -45,8 +47,10 @@ Fundingly.in is an independent, ad-free intelligence platform mapping the Indian
 - [Supply6 (Kanari Nutrition Private Limited)](https://fundingly.in/deals/supplysix.com/): Sector: Consumer Packaged Goods | Latest Stage: Series A | Total Tracked: $5.8M | Location: Bengaluru, Karnataka, India | Rounds: 1
 - [AÏZA (Amaani)](https://fundingly.in/deals/aiza.co/): Sector: Consumer Packaged Goods | Latest Stage: Series A | Total Tracked: $5M | Location: Dubai, United Arab Emirates | Rounds: 1
 - [Data Science Wizards (Data Science Wizards Private Limited)](https://fundingly.in/deals/datasciencewizards.ai/): Sector: Technology | Latest Stage: Pre-Series A | Total Tracked: $5M | Location: Mumbai (Thane), Maharashtra, India | Rounds: 1
+- [Aeron Systems (Aeron Systems Private Limited)](https://fundingly.in/deals/aeronsystems.com/): Sector: Technology | Latest Stage: Pre-Series B | Total Tracked: $4.7M | Location: Pune, Maharashtra, India | Rounds: 1
 - [Rio Health (Rapidsurge Innovations Private Limited)](https://fundingly.in/deals/riohealth.in/): Sector: Healthcare | Latest Stage: Pre-Series A | Total Tracked: $4.5M | Location: Gurugram, Haryana, India | Rounds: 1
 - [DheyaTech (Dheya Engineering Technologies Pvt Ltd).](https://fundingly.in/deals/dheyatech.com/): Sector: Business & Industrial Markets | Latest Stage: Pre-Series A | Total Tracked: $4.5M | Location: Bengaluru, Karnataka, India | Rounds: 1
+- [Zenergize Technologies (Zenergize Power Tech Private Limited)](https://fundingly.in/deals/zenergize.in/): Sector: Business & Industrial Markets | Latest Stage: Pre-Series A | Total Tracked: $4M | Location: Gurugram, Haryana, India | Rounds: 1
 - [Jar (ChangeJar Technologies Private Limited)](https://fundingly.in/deals/myjar.app/): Sector: Finance | Latest Stage: Series B2 | Total Tracked: $3.5M | Location: Bengaluru, Karnataka, India | Rounds: 1
 - [Blitz (Bigshort Tails Private Limited)](https://fundingly.in/deals/blitznow.in/): Sector: Business & Industrial Markets | Latest Stage: Pre-Series B | Total Tracked: $3.4M | Location: Bengaluru, Karnataka, India | Rounds: 1
 - [Minimac Systems (Minimac Systems Private Limited)](https://fundingly.in/deals/minimacsystems.com/): Sector: Business & Industrial Markets | Latest Stage: Pre-Series A | Total Tracked: $3.2M | Location: Pune, Maharashtra, India | Rounds: 1
@@ -54,6 +58,7 @@ Fundingly.in is an independent, ad-free intelligence platform mapping the Indian
 - [Spense (Spense Reliable Fintech Solutions Private Limited)](https://fundingly.in/deals/spense.tech/): Sector: Finance | Latest Stage: Seed | Total Tracked: $2.8M | Location: Bengaluru, Karnataka, India | Rounds: 1
 - [Alteon](https://fundingly.in/deals/alteonenergy.co/): Sector: Technology | Latest Stage: Pre-Seed | Total Tracked: $2.5M | Location: Bengaluru, Karnataka, India | Rounds: 1
 - [EDT (Edtlife Technology Private Limited)](https://fundingly.in/deals/edtworld.com/): Sector: Technology | Latest Stage: Pre-Series A | Total Tracked: $2.4M | Location: Mumbai, Maharashtra, India | Rounds: 1
+- [DocPharma (Fledge Healthplus Private Limited)](https://fundingly.in/deals/docpharma.in/): Sector: Healthcare | Latest Stage: Pre-Series A | Total Tracked: $2M | Location: Bengaluru (Bangalore), Karnataka, India | Rounds: 1
 - [ONYA (Mahiva Technologies Private Limited)](https://fundingly.in/deals/onyadiamonds.com/): Sector: Retail | Latest Stage: Pre-Series A | Total Tracked: $1.7M | Location: Bengaluru, Karnataka, India | Rounds: 1
 - [Hathor Rockets (Hathor Rockets Private Limited)](https://fundingly.in/deals/hathor.space/): Sector: Technology | Latest Stage: Pre-Seed | Total Tracked: $1.5M | Location: Chennai, Tamil Nadu, India | Rounds: 1
 - [Enlight Metals (Enlight Metals Private Limited).](https://fundingly.in/deals/enlightmetals.com/): Sector: Business & Industrial Markets | Latest Stage: Seed | Total Tracked: $1.5M | Location: Pune, Maharashtra, India | Rounds: 1
@@ -63,11 +68,14 @@ Fundingly.in is an independent, ad-free intelligence platform mapping the Indian
 - [Factrika (Udyogtech Ventures Private Limited)](https://fundingly.in/deals/factrika.com/): Sector: Business & Industrial Markets | Latest Stage: Seed | Total Tracked: $1M | Location: Delhi, India | Rounds: 1
 - [Physioplus Healthcare (Physioplus Healthcare Private Limited)](https://fundingly.in/deals/physioplushealthcare.com/): Sector: Healthcare | Latest Stage: Seed | Total Tracked: $800K | Location: Jaipur, Rajasthan, India | Rounds: 1
 - [Primerry](https://fundingly.in/deals/primerry.in/): Sector: Healthcare | Latest Stage: Pre-Seed | Total Tracked: $760K | Location: Mumbai, Maharashtra, India | Rounds: 1
+- [Zaperon (Finlock Technologies Private Limited)](https://fundingly.in/deals/zaperon.com/): Sector: Technology | Latest Stage: Seed | Total Tracked: $729K | Location: Delhi, India | Rounds: 1
 - [Ecosys (Soluble System Private Limited)](https://fundingly.in/deals/ecosyscleaners.com/): Sector: Consumer Packaged Goods | Latest Stage: Pre-Series A | Total Tracked: $520K | Location: Mumbai, Maharashtra, India | Rounds: 1
 - [YoLearn.AI (AI.YoLearn Private Limited)](https://fundingly.in/deals/yolearn.ai/): Sector: Education & Government | Latest Stage: Pre-Seed | Total Tracked: $500K | Location: Noida, Uttar Pradesh, India | Rounds: 1
 - [72 Street AI (72 Street RA Private Limited)](https://fundingly.in/deals/72street.ai/): Sector: Finance | Latest Stage: Seed | Total Tracked: $480K | Location: Mumbai, Maharashtra, India | Rounds: 1
 - [CUNIN (Onaris Brands Private Limited)](https://fundingly.in/deals/cunin.in/): Sector: Consumer Packaged Goods | Latest Stage: Pre-Seed | Total Tracked: $450K | Location: Noida, Uttar Pradesh, India | Rounds: 1
 - [Oppex AI (Oppex AI Private Limited)](https://fundingly.in/deals/oppex.ai/): Sector: Technology | Latest Stage: Pre-Seed | Total Tracked: $445K | Location: Bengaluru, Karnataka, India | Rounds: 1
+- [Creedom (Billion Faces Technologies Private Limited)](https://fundingly.in/deals/creedom.ai/): Sector: Media & Entertainment | Latest Stage: Seed | Total Tracked: $434K | Location: Bengaluru, Karnataka, India | Rounds: 1
+- [Aignosis (Aignosis Artificial Intelligence Private Limited)](https://fundingly.in/deals/aignosis.in/): Sector: Healthcare | Latest Stage: Seed | Total Tracked: $417K | Location: Jaipur, Rajasthan, India | Rounds: 1
 - [MoroMaa](https://fundingly.in/deals/moromaa.com/): Sector: Consumer Packaged Goods | Latest Stage: Seed | Total Tracked: $180K | Location: Mumbai, Maharashtra, India | Rounds: 1
 - [Unveilr AI (Unveilr AI Private Limited)](https://fundingly.in/deals/unveilrai.com/): Sector: Technology | Latest Stage: Pre-Seed | Total Tracked: Undisclosed | Location: Mumbai, Maharashtra, India | Rounds: 1
 - [Prodoc AI (Growth Hacker Consulting Private Limited)](https://fundingly.in/deals/prodoc.ai/): Sector: Healthcare | Latest Stage: Seed | Total Tracked: Undisclosed | Location: Bengaluru, Karnataka, India | Rounds: 1
